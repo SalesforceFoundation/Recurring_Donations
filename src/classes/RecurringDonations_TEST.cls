@@ -281,5 +281,68 @@ private class RecurringDonations_TEST {
 		system.assertEquals(System.Label.RecurringDonationContactRole,installmentCRs[0].Role);
 	}
 	
+	//test that updates to the recurring donation object effect the associated opps
+    static testMethod void updateRecurringDonation(){
+    
+        Account a = new Account();
+        a.Name = 'test Individual';
+        insert a;
+        
+        Contact c = new Contact();
+        c.FirstName = 'test';
+        c.LastName = 'contact';
+        c.AccountId = a.Id;
+        insert c;       
+
+        Recurring_Donation__c r1 = new Recurring_Donation__c();
+        r1.Name = 'test';
+        r1.Installments__c = 2;
+        r1.Contact__c = c.Id;
+        r1.Amount__c = 100;
+        r1.Installment_Period__c = System.Label.RecurringDonationInstallmentPeriodWeekly;
+        r1.Date_Established__c = date.newinstance(1970,6,12);
+        r1.Schedule_Type__c = System.Label.RecurringDonationMultiplyValue;
+        r1.Open_Ended__c = true;
+        r1.Open_Ended_Status__c = System.label.RecurringDonationOpenStatus;
+        
+        insert r1;
+        map<id, Opportunity> originalOpps = new map<id, Opportunity>([select id, Name,amount,accountid,CloseDate from Opportunity where Recurring_Donation__c = :r1.id]);    	   
+	   	
+	   	system.assertEquals(originalOpps.size(), 2);
+	   	system.assertEquals(originalOpps.values()[0].Amount, 100);
+	   	
+	   	//close one opp
+	   	Opportunity o = originalOpps.values()[0];
+	   	string closedstage = [select masterlabel from opportunitystage where isActive = true and iswon = true and isClosed = true limit 1].masterlabel;
+	   	o.StageName = closedstage; 
+	   	update o;
+	   	
+		r1.Installments__c = 5;
+		r1.Amount__c = 200;
+		update r1;
+		
+		map<id, Opportunity> unchangedOpps = new map<id, Opportunity>([select id, Name,amount,accountid,CloseDate from Opportunity where Recurring_Donation__c = :r1.id and stagename = :closedstage]);
+		
+		system.assertEquals(unchangedOpps.size(), 1);
+		system.assertEquals(unchangedOpps.values()[0].Amount, 100);
+		
+		map<id, Opportunity> allOpps = new map<id, Opportunity>([select id, Name,amount,accountid,CloseDate from Opportunity where Recurring_Donation__c = :r1.id]);
+		
+		system.assertEquals(allOpps.size(), 6);
+        allOpps.remove(unchangedOpps.values()[0].id);
+        system.assertEquals(allOpps.values()[0].Amount, 200);
+        
+		
+		
+	}
+	
+	//test closing an opportunity for an open recurring donation
+	static testMethod void closeOpp(){
+		
+		
+	}
+	
+	
+	
 	
 }
