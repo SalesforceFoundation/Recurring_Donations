@@ -35,10 +35,10 @@ after insert, after update, after delete, after undelete) {
     public enum triggerAction {beforeInsert, beforeUpdate, beforeDelete, afterInsert, afterUpdate, afterDelete, afterUndelete}
  
     if(Trigger.isBefore && Trigger.isInsert){
-        RecurringDonations process = new RecurringDonations (Trigger.new, Trigger.old, triggerAction.beforeInsert);
+        RecurringDonations process = new RecurringDonations (Trigger.new, Trigger.oldMap, triggerAction.beforeInsert);
     }
     if(Trigger.isBefore && Trigger.isUpdate){
-        RecurringDonations process = new RecurringDonations (Trigger.new, Trigger.old, triggerAction.beforeUpdate);
+        RecurringDonations process = new RecurringDonations (Trigger.new, Trigger.oldMap, triggerAction.beforeUpdate);
     }
     if(Trigger.isBefore && Trigger.isDelete ){
         RecurringDonations process = new RecurringDonations (Trigger.old, null, triggerAction.beforeDelete);
@@ -63,10 +63,10 @@ after insert, after update, after delete, after undelete) {
         queryRCD=queryRCD+' from Recurring_Donation__c where Id in :ids';
         //execute query
         Recurring_Donation__c[] updatedRecurringDonations = Database.query(queryRCD);
-        RecurringDonations process = new RecurringDonations (updatedRecurringDonations, Trigger.old, triggerAction.afterInsert);
+        RecurringDonations process = new RecurringDonations (updatedRecurringDonations, Trigger.oldMap, triggerAction.afterInsert);
     }
     
     if(Trigger.isUpdate && Trigger.isAfter){
-        RecurringDonations process = new RecurringDonations (Trigger.new, Trigger.old, triggerAction.afterUpdate);
+        RecurringDonations process = new RecurringDonations (Trigger.new, Trigger.oldMap, triggerAction.afterUpdate);
     }
 }
