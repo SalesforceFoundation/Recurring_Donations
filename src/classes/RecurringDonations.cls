@@ -37,18 +37,24 @@ global class RecurringDonations {
 	/// <name> triggerAction </name>
 	/// <summary> contains possible actions for a trigger </summary>
 	public enum triggerAction {beforeInsert, beforeUpdate, beforeDelete, afterInsert, afterUpdate, afterDelete, afterUndelete}
-
+    
+    
+    
+    
 
 	/// <name> RecurringDonations </name>
 	/// <summary> Overloads the RecurringDonations object constructor to handle RecurringDonation processing </summary>
 	/// <param name="recurringDonations"> RecurringDonation objects that are being triggered </param>
 	/// <param name="oldRecurringDonations"> RecurringDonation object values before trigger event </param>
 	/// <param name="ta"> Trigger action that is occuring </param>
-	public RecurringDonations(Recurring_Donation__c[] recurringDonations, Recurring_Donation__c[] oldRecurringDonations, triggerAction ta)
+	
+	public RecurringDonations(Recurring_Donation__c[] recurringDonations, map<id, Recurring_Donation__c> oldRecurringDonations, triggerAction ta)
 	{
 		List<Recurring_Donation__c> contactRecDonations = new List<Recurring_Donation__c>();
 		List<Recurring_Donation__c> accountRecDonations = new List<Recurring_Donation__c>();
 		List<Recurring_Donation__c> recDonationDeletes = new List<Recurring_Donation__c>();
+		
+		list<Recurring_Donation__c> recDonationUpdates = new list<Recurring_Donation__c>();
 
 		for(Recurring_Donation__c r : recurringDonations)
 		{
@@ -77,6 +83,19 @@ global class RecurringDonations {
 			{
 				recDonationDeletes.add(r);
 			}
+			
+			
+			//added for 2.0
+			if (ta==triggerAction.afterUpdate){
+                recDonationUpdates.add(r);
+			}
+			
+			
+			
+			
+			
+			
+			
 		}
 
 		if ( contactRecDonations.size() > 0 )
@@ -91,6 +110,12 @@ global class RecurringDonations {
 		{
 			deleteRecDonations(recDonationDeletes);
 		}
+		
+		//added for 2.0
+		if (recDonationUpdates.size() > 0){
+			updateRecDonations(recDonationUpdates, oldRecurringDonations); 
+		}
+		
 	}
 	
 	/// <name> insertContactOpportunities </name>
@@ -300,5 +325,34 @@ global class RecurringDonations {
 			}
 		}
 	}
+	
+	
+	//handles updates to the recurring donations object
+	public static void updateRecDonations(list<Recurring_Donation__c> recurringDonations, map<id, Recurring_Donation__c> oldRecurringDonations){
+		
+        for (Recurring_Donation__c r : recurringDonations){
+        	
+        	
+        	
+        	
+        	
+        	
+        }        		
+	
+	
+	
+	
+	
+	}
+	
+	//handles updates to the opp records for a recurring donation
+	@future 
+	public static void updateRecOpps(list<id> recurringDonations){
+		
+		
+	}
+	
+	
+	
 	
 }
