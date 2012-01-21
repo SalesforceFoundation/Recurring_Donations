@@ -50,6 +50,35 @@ global class RecurringDonations {
 	/// <param name="oldRecurringDonations"> RecurringDonation object values before trigger event </param>
 	/// <param name="ta"> Trigger action that is occuring </param>
 	
+	public RecurringDonations(map<id, Opportunity> newOppMap, map<id, Opportunity> oldOppMap, triggerAction ta){
+		
+		set<id> rdIDs = new set<id>();
+		list<Recurring_Donation__c> rdList = new list<Recurring_Donation__c>();
+    
+        if (ta == triggerAction.afterUpdate){		
+            for (Opportunity o : newOppMap.values()){
+                //does it have a recurring donation reference?
+                //has it moved into a closed state?
+                if (o.Recurring_Donation__c != null && (o.isClosed && !oldOppMap.get(o.id).isClosed)){
+				    rdIds.add(o.Recurring_Donation__c);
+                }
+            }                
+    
+            //get all of the recurring donations for this set of opps
+            
+            rdList = [select id from Recurring_Donation__c where id IN :rdIDs];		  
+		}		
+	
+        //recurring donations that need to be updated	   
+        if (!rdList.isEmpty()){
+            updateRecDonations(rdList, null);                    	
+        }
+	
+	}
+	
+	
+	
+	
 	public RecurringDonations(Recurring_Donation__c[] recurringDonations, map<id, Recurring_Donation__c> oldRecurringDonations, triggerAction ta)
 	{
 		List<Recurring_Donation__c> contactRecDonations = new List<Recurring_Donation__c>();
