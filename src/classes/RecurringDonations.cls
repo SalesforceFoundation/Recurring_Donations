@@ -29,6 +29,8 @@
 */
 global class RecurringDonations {
 
+
+
 	/// <name> RecurringDonations </name>
 	/// <summary> Default Constructor </summary> 
 	public RecurringDonations(){}
@@ -39,7 +41,7 @@ global class RecurringDonations {
 	public enum triggerAction {beforeInsert, beforeUpdate, beforeDelete, afterInsert, afterUpdate, afterDelete, afterUndelete}
     
     
-    
+    public static Recurring_Donations_Settings__c recurringDonationsSettings;    
     
 
 	/// <name> RecurringDonations </name>
@@ -358,6 +360,26 @@ global class RecurringDonations {
 		
 	}
 	
+	 //get the settings. handles the case where the managed value doesn't exist yet
+    public static Recurring_Donations_Settings__c getRecurringDonationsSettings() {
+        String oldProcessor = '';
+        //if no settings exist, create defaults
+        if (recurringDonationsSettings == null) {
+            //first see if we already have settings
+            recurringDonationsSettings = Recurring_Donations_Settings__c.getOrgDefaults();
+            //system.debug(Households_Settings__c.getOrgDefaults());
+            if (recurringDonationsSettings == null) { 
+                
+                
+                recurringDonationsSettings = new Recurring_Donations_Settings__c();
+                
+ 
+                insert recurringDonationsSettings;
+            }
+        }
+        
+        return recurringDonationsSettings;
+    }
 	
 	
 	
