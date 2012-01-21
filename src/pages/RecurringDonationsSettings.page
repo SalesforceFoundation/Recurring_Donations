@@ -1,0 +1,10 @@
+<apex:page id="NPSPRecurringDonationsSettings" controller="RecurringDonationsSettings" action="{!getSettingsFirstTime}">
+    <apex:form id="form">
+        <apex:sectionHeader title="Recurring Donations Settings" subtitle="Configure Settings">
+            <description>
+                Settings that control the behavior of the Recurring Donations package. Changing these will change how your Nonprofit Starter Pack behaves.
+            </description>
+        </apex:sectionHeader>
+        <apex:pageMessages id="pageMessages" />
+    </apex:form>
+</apex:page>
