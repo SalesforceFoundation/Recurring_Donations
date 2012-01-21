@@ -35,12 +35,9 @@ trigger Donations on Opportunity (before insert, before update, after insert, af
     
     if (!rds.DISABLE_Donations_trigger__c){
     
-	   if(Trigger.isUpdate && Trigger.isAfter){
-	   //	Donations processDonation = new Donations(Trigger.new, Trigger.old, triggerAction.afterUpdate);
-	   }
-
-	   if(Trigger.isInsert && Trigger.isAfter){
-		//Donations processDonation = new Donations(Trigger.new, Trigger.old, triggerAction.afterInsert);
-	   }
+        if(Trigger.isUpdate && Trigger.isAfter){
+            RecurringDonations process = new RecurringDonations(trigger.newmap, trigger.oldmap, triggerAction.afterUpdate);
+        }
+    
     }	   
 }
