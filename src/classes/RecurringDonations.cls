@@ -118,10 +118,14 @@ global class RecurringDonations {
 		
 	}
 	
+	public static void insertOpptys(Recurring_Donation__c[] recurringDonations, String donorType){
+		insertOpptys(recurringDonations, donorType, 0);
+	}
+	
 	/// <name> insertContactOpportunities </name>
 	/// <summary> Creates new Opportunities when a RecurringDonation is inserted </summary>
 	/// <param name="recurringDonations"> RecurringDonation objects that are being triggered </param>
-	public static void insertOpptys( Recurring_Donation__c[] recurringDonations, String donorType )
+	public static void insertOpptys( Recurring_Donation__c[] recurringDonations, String donorType, integer num_of_opps )
 	{
 		//Lists used for final Insert
 		List<Opportunity> opportunityInserts = new List<Opportunity>();
@@ -169,7 +173,7 @@ global class RecurringDonations {
 				{
 					Contact c = contactMap.get(r.Contact__c);
 					opp.AccountId = c.AccountId;
-				}
+				} 
 
                 // James Melville 05/03/2011 Added to support multi-currency sfdc.  
                 // we check currency iscode before entering the loop since it's a system check
@@ -344,6 +348,8 @@ global class RecurringDonations {
 	
 	
 	}
+	
+	
 	
 	//handles updates to the opp records for a recurring donation
 	@future 
