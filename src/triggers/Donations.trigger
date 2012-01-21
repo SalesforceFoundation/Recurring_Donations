@@ -30,12 +30,17 @@
 trigger Donations on Opportunity (before insert, before update, after insert, after update) {
 
 	public enum triggerAction {beforeInsert, beforeUpdate, beforeDelete, afterInsert, afterUpdate, afterDelete, afterUndelete}
+    
+    Recurring_Donations_Settings__c rds = RecurringDonations.getRecurringDonationsSettings();
+    
+    if (!rds.DISABLE_RecurringDonations_trigger__c){
+    
+	   if(Trigger.isUpdate && Trigger.isAfter){
+	   //	Donations processDonation = new Donations(Trigger.new, Trigger.old, triggerAction.afterUpdate);
+	   }
 
-	if(Trigger.isUpdate && Trigger.isAfter){
-	//	Donations processDonation = new Donations(Trigger.new, Trigger.old, triggerAction.afterUpdate);
-	}
-
-	if(Trigger.isInsert && Trigger.isAfter){
+	   if(Trigger.isInsert && Trigger.isAfter){
 		//Donations processDonation = new Donations(Trigger.new, Trigger.old, triggerAction.afterInsert);
-	}
+	   }
+    }	   
 }
