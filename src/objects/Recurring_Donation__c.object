@@ -134,7 +134,7 @@
         <deprecated>false</deprecated>
         <externalId>false</externalId>
         <inlineHelpText>Number of installments, or number of Opportunities to remain open for open-ended recurring donations.</inlineHelpText>
-        <label>Open Installments</label>
+        <label>Installments</label>
         <precision>18</precision>
         <required>false</required>
         <scale>0</scale>
@@ -143,34 +143,36 @@
         <unique>false</unique>
     </fields>
     <fields>
+        <fullName>Next_Payment_Date__c</fullName>
+        <description>Holds the date of the next recurring payment.  Manually editing this field will recalculate all future opportunity&apos;s close dates based on the scheduled defined.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Holds the date of the next recurring payment.  Manually editing this field will recalculate all future opportunity&apos;s close dates based on the scheduled defined.</inlineHelpText>
+        <label>Next Payment Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Date</type>
+    </fields>
+    <fields>
         <fullName>Open_Ended_Status__c</fullName>
         <externalId>false</externalId>
         <label>Open Ended Status</label>
         <picklist>
-            <controllingField>Open_Ended__c</controllingField>
             <picklistValues>
                 <fullName>Open</fullName>
-                <controllingFieldValues>checked</controllingFieldValues>
-                <default>true</default>
+                <default>false</default>
             </picklistValues>
             <picklistValues>
                 <fullName>Closed</fullName>
-                <controllingFieldValues>checked</controllingFieldValues>
                 <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>None</fullName>
+                <default>true</default>
             </picklistValues>
             <sorted>false</sorted>
         </picklist>
         <trackHistory>false</trackHistory>
         <type>Picklist</type>
-    </fields>
-    <fields>
-        <fullName>Open_Ended__c</fullName>
-        <defaultValue>false</defaultValue>
-        <externalId>false</externalId>
-        <inlineHelpText>Indicates if this is an open-ended recurring donation.</inlineHelpText>
-        <label>Open Ended</label>
-        <trackHistory>false</trackHistory>
-        <type>Checkbox</type>
     </fields>
     <fields>
         <fullName>Organization__c</fullName>
