@@ -29,21 +29,24 @@
 */
 trigger RecurringDonations on Recurring_Donation__c (before insert, before update, before delete, 
 after insert, after update, after delete, after undelete) {
-
+    
     /// <name> triggerAction </name>
     /// <summary> contains possible actions for a trigger </summary>
+    Recurring_Donations_Settings__c rds = RecurringDonations.getRecurringDonationsSettings();
     public enum triggerAction {beforeInsert, beforeUpdate, beforeDelete, afterInsert, afterUpdate, afterDelete, afterUndelete}
- 
-    if(Trigger.isBefore && Trigger.isInsert){
-        RecurringDonations process = new RecurringDonations (Trigger.new, Trigger.oldMap, triggerAction.beforeInsert);
-    }
-    if(Trigger.isBefore && Trigger.isUpdate){
-        RecurringDonations process = new RecurringDonations (Trigger.new, Trigger.oldMap, triggerAction.beforeUpdate);
-    }
-    if(Trigger.isBefore && Trigger.isDelete ){
-        RecurringDonations process = new RecurringDonations (Trigger.old, null, triggerAction.beforeDelete);
-    }
-    if(Trigger.isInsert && Trigger.isAfter){
+    
+    if (!rds.DISABLE_RecurringDonations_trigger__c){
+    
+        if(Trigger.isBefore && Trigger.isInsert){
+            RecurringDonations process = new RecurringDonations (Trigger.new, Trigger.oldMap, triggerAction.beforeInsert);
+        }
+        if(Trigger.isBefore && Trigger.isUpdate){
+            RecurringDonations process = new RecurringDonations (Trigger.new, Trigger.oldMap, triggerAction.beforeUpdate);
+        }
+        if(Trigger.isBefore && Trigger.isDelete ){
+            RecurringDonations process = new RecurringDonations (Trigger.old, null, triggerAction.beforeDelete);
+        }
+        if(Trigger.isInsert && Trigger.isAfter){
     
         //James Melville 05/03/2011 Dynamically build Recurring donation query to allow currency to be included if needed.
         //build start of dynamic query
@@ -55,18 +58,21 @@ after insert, after update, after delete, after undelete) {
        
         //continue building query - dynamic apex does not allow nested binds (:Trigger.new) so we build a list
         List<Id> ids = new List<Id>();
+        
         for(Recurring_Donation__c r : Trigger.new)
         {
             ids.add(r.Id);
         }
+        
         //Trigger.new.Id;
         queryRCD=queryRCD+' from Recurring_Donation__c where Id in :ids';
         //execute query
         Recurring_Donation__c[] updatedRecurringDonations = Database.query(queryRCD);
         RecurringDonations process = new RecurringDonations (updatedRecurringDonations, Trigger.oldMap, triggerAction.afterInsert);
-    }
+        }
     
-    if(Trigger.isUpdate && Trigger.isAfter){
-        RecurringDonations process = new RecurringDonations (Trigger.new, Trigger.oldMap, triggerAction.afterUpdate);
-    }
+        if(Trigger.isUpdate && Trigger.isAfter){
+            RecurringDonations process = new RecurringDonations (Trigger.new, Trigger.oldMap, triggerAction.afterUpdate);
+        }
+    }    
 }

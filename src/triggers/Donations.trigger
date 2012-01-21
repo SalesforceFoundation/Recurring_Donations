@@ -33,7 +33,7 @@ trigger Donations on Opportunity (before insert, before update, after insert, af
     
     Recurring_Donations_Settings__c rds = RecurringDonations.getRecurringDonationsSettings();
     
-    if (!rds.DISABLE_RecurringDonations_trigger__c){
+    if (!rds.DISABLE_Donations_trigger__c){
     
 	   if(Trigger.isUpdate && Trigger.isAfter){
 	   //	Donations processDonation = new Donations(Trigger.new, Trigger.old, triggerAction.afterUpdate);
