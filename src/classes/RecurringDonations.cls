@@ -62,16 +62,12 @@ global class RecurringDonations {
                 if (o.Recurring_Donation__c != null && (o.isClosed && !oldOppMap.get(o.id).isClosed)){
 				    rdIds.add(o.Recurring_Donation__c);
                 }
-            }                
-    
-            //get all of the recurring donations for this set of opps
-            
-            rdList = [select id from Recurring_Donation__c where id IN :rdIDs];		  
+            }                  
 		}		
 	
         //recurring donations that need to be updated	   
-        if (!rdList.isEmpty()){
-            updateRecDonations(rdList, null);                    	
+        if (!rdIds.isEmpty()){
+            updateOnOppChange(rdIds);                    	
         }
 	
 	}
@@ -289,12 +285,19 @@ global class RecurringDonations {
        	    	}
        	    }
        	    
-       	    oppContactRoles(createdOppIds);
+       	    oppContactRolesFuture(createdOppIds);
 			
 		}
 	}
 	
-	@future public static void oppContactRoles( Set<Id> oppIds ){
+	//async wrapper for oppcontact role creation
+	@future 
+	public static void oppContactRolesFuture(set<id> oppIds){
+		oppContactRoles(oppIds);
+	}
+	
+	
+	public static void oppContactRoles( Set<Id> oppIds ){
 		List<OpportunityContactRole> contactRoleInserts = new List<OpportunityContactRole>();
 		map <String,Id> contactOppToContactRole = new Map <String,Id> ();
 			
@@ -365,29 +368,95 @@ global class RecurringDonations {
 	//handles updates to the recurring donations object
 	public static void updateRecDonations(list<Recurring_Donation__c> recurringDonations, map<id, Recurring_Donation__c> oldRecurringDonations){
 		
-        for (Recurring_Donation__c r : recurringDonations){
+				
+        // the change is in the opps...
+        // update the recurring donation
+        if (oldRecurringDonations == null){        
+                    	
+                    		
+        }
+
+        // determine the update type - 
+        // change to next due date?
+        // change in schedule? 
+        else{
+        	for (Recurring_Donation__c r : recurringDonations){
+            
+            
+            
+            
+            
+            
+            }
         	
-        	
-        	
-        	
-        	
-        	
-        }        		
+        }
+	}
 	
 	
+	//updating the RD based on a change in the opp stage, going from open to closed
+	@future
+	public static void updateOnOppChange(set<id> recurringDonationIDs){
+		
+        //set of RDs to be updated	       
+		map<id, Recurring_Donation__c> updateMap = new map<id, Recurring_Donation__c>();
 	
-	
-	
+        string openLabel = system.label.RecurringDonationOpenStatus;
+		
+		//get all possible rd records that may need updating, exclude ones not in an open state  
+		map<id, Recurring_Donation__c> rdMap = new map<id, Recurring_Donation__c>([select id, Paid_Amount__c, Next_Payment_Date__c 
+		                                                                          from Recurring_Donation__c 
+		                                                                          where Open_Ended_Status__c = :openLabel 
+		                                                                          and id IN :recurringDonationIDs]);
+		
+		list<sobject> sobjs = [select MIN(CloseDate) MinDate, MAX(CloseDate) MaxDate, SUM(Amount) Total,
+		                          isClosed, Recurring_Donation__c 
+		                          from Opportunity where Recurring_Donation__r.Open_Ended_Status__c = :openLabel 
+		                          and id IN :rdMap.keySet()
+		                          group by rollup(Recurring_Donation__c, isClosed)];
+		
+		//update the rc next payment date 
+		//and add new donation objects needed 
+		for (sobject obj : sobjs){
+            id rdid = (id)obj.get('Recurring_Donation__c');
+            
+            Recurring_Donation__c rd;
+            
+            if (!updateMap.containsKey(rdid)){
+                rd = rdMap.get(rdid);
+            }
+            else{
+            	rd = updateMap.get(rdid);
+            }
+            
+            //if this is the open set for this rd
+            if (!(boolean)obj.get('isClosed')){
+            	rd.Next_Payment_Date__c = (date)obj.get('MinDate');            	
+            }		
+            else{
+                rd.Last_Payment_Date__c = (date)obj.get('MaxDate');
+                rd.Paid_Amount__c = (decimal)obj.get('Total');            	            	
+            }
+            
+			updateMap.put(rdid, rd);
+		}
+		
+		if (!updateMap.values().isEmpty()){
+			update updateMap.values();
+		}
+		
+		
+		
 	}
 	
 	
 	
-	//handles updates to the opp records for a recurring donation
-	@future 
-	public static void updateRecOpps(list<id> recurringDonations){
+	@future
+	public static void changeOppSchedule(list<id> recurringDonations){
 		
 		
 	}
+	
+	
 	
 	 //get the settings. handles the case where the managed value doesn't exist yet
     public static Recurring_Donations_Settings__c getRecurringDonationsSettings() {
@@ -398,9 +467,9 @@ global class RecurringDonations {
             recurringDonationsSettings = Recurring_Donations_Settings__c.getOrgDefaults();
             //system.debug(Households_Settings__c.getOrgDefaults());
             if (recurringDonationsSettings == null) { 
-                
-                
                 recurringDonationsSettings = new Recurring_Donations_Settings__c();
+                
+                
                 
  
                 insert recurringDonationsSettings;
