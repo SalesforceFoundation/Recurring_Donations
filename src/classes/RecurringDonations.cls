@@ -97,18 +97,11 @@ global class RecurringDonations {
 					r.addError(System.Label.RecurringDonationTooManyInstallmentsError);
 				}
 			}
-			if ( ta==triggerAction.afterInsert )
-			{
+			
+			if ( ta==triggerAction.afterInsert ){
 				rdInserts.add(r);
-				
-			/*	if (r.Contact__c != null)
-				{
-					contactRecDonations.add(r);
-				} else
-				{
-					accountRecDonations.add(r);
-				}*/
 			}
+			
 			if ( ta==triggerAction.beforeDelete )
 			{
 				recDonationDeletes.add(r);
@@ -121,25 +114,9 @@ global class RecurringDonations {
 			}
 			
 			
-			
-			
-			
-			
-			
 		}
 		
-		if (rdInserts.size() > 0){
-			insertOpptys(rdInserts);
-		}
-/*
-		if ( contactRecDonations.size() > 0 )
-		{
-			insertOpptys(contactRecDonations, 'contact');
-		}
-		if ( accountRecDonations.size() > 0 )
-		{
-			insertOpptys(accountRecDonations, 'account');
-		}*/
+		
 		if ( recDonationDeletes.size() > 0 )
 		{
 			deleteRecDonations(recDonationDeletes);
@@ -149,13 +126,16 @@ global class RecurringDonations {
 		if (recDonationUpdates.size() > 0){
 			updateRecDonations(recDonationUpdates, oldRecurringDonations); 
 		}
+		if (rdInserts.size() > 0){
+            insertOpptys(rdInserts);
+        }
 		
 	}
 	
 	/// <name> insertContactOpportunities </name>
 	/// <summary> Creates new Opportunities when a RecurringDonation is inserted </summary>
 	/// <param name="recurringDonations"> RecurringDonation objects that are being triggered </param>
-	public static void insertOpptys( Recurring_Donation__c[] recurringDonations)
+	public static void insertOpptys(list<Recurring_Donation__c> recurringDonations)
 	{
 		//Lists used for final Insert
 		List<Opportunity> opportunityInserts = new List<Opportunity>();
@@ -165,8 +145,8 @@ global class RecurringDonations {
         SObjectField OppCurrencyField = Schema.sObjectType.Opportunity.fields.getMap().get('CurrencyIsoCode');
 		
 		//Create a list of ContactIds used in these RecurringDonations
-		List<Id> contactIds = new List<Id>();
-		Map<Id,Id> recConMap = new Map<Id,Id>();
+		list<Id> contactIds = new list<Id>();
+		map<Id,Id> recConMap = new map<Id,Id>();
 		for( Recurring_Donation__c r : recurringDonations )
 		{
 			if ( r.Contact__c != null )
@@ -187,90 +167,94 @@ global class RecurringDonations {
 		//Loop through the Recurring Donations and create the appropriate number of Opportunities
 		for(Recurring_Donation__c r : recurringDonations)
 		{
-			Decimal installs = Decimal.valueOf(r.Installments__c);
-			Integer installments = installs.intValue();
+		    //if we're not looking at an open-ended type donation, handle it the 'old' way		  
+            if (r.Open_Ended_Status__c != system.label.RecurringDonationOpenStatus || r.Open_Ended_Status__c != system.label.RecurringDonationClosedStatus){		  
+		
+                Decimal installs = Decimal.valueOf(r.Installments__c);
+                Integer installments = installs.intValue();
 				
-			for ( Integer j=0;j<installments;j++ )
-			{
-				Opportunity opp = new Opportunity();
-				
-				if ( r.Organization__c != null )
-				{
-					opp.AccountId = r.Organization__c;
-				}
-				else
-				if ( contactMap.containsKey(r.Contact__c) )
-				{
-					Contact c = contactMap.get(r.Contact__c);
-					opp.AccountId = c.AccountId;
-				} 
-
-                // James Melville 05/03/2011 Added to support multi-currency sfdc.  
-                // we check currency iscode before entering the loop since it's a system check
-                if(OppCurrencyField != null)
+                for ( Integer j=0;j<installments;j++ )
                 {
-                    SObjectField RDCurrencyField = Schema.sObjectType.Recurring_Donation__c.fields.getMap().get('CurrencyIsoCode');
-                    //this should never return null as we have already found multicurrency on the oppty.
-                    if(RDCurrencyField != null)
+				    Opportunity opp = new Opportunity();
+				
+				    if ( r.Organization__c != null )
+				    {
+					   opp.AccountId = r.Organization__c;
+				    }
+				    else
+				    if ( contactMap.containsKey(r.Contact__c) )
+				    {
+    					Contact c = contactMap.get(r.Contact__c);
+	   			     	opp.AccountId = c.AccountId;
+		      		} 
+
+                    // James Melville 05/03/2011 Added to support multi-currency sfdc.  
+                    // we check currency iscode before entering the loop since it's a system check
+                    if(OppCurrencyField != null)
                     {
-                        //set the donation currency field to equal the recurring donation currency
-                        opp.put(OppCurrencyField,r.get(RDCurrencyField));
+                        SObjectField RDCurrencyField = Schema.sObjectType.Recurring_Donation__c.fields.getMap().get('CurrencyIsoCode');
+                        //this should never return null as we have already found multicurrency on the oppty.
+                        if(RDCurrencyField != null)
+                        {
+                            //set the donation currency field to equal the recurring donation currency
+                            opp.put(OppCurrencyField,r.get(RDCurrencyField));
+                        }
                     }
-                }
 				
-				//add the remainder to the last installment, otherwise use the amount
-				if (j + 1 == installments && installments * r.Installment_Amount__c != r.Total__c)
-				{
-					opp.Amount = r.Total__c - (j * r.Installment_Amount__c);
-				} else {
-					opp.Amount = r.Installment_Amount__c;
-				}
+				    //add the remainder to the last installment, otherwise use the amount
+				    if (j + 1 == installments && installments * r.Installment_Amount__c != r.Total__c)
+				    {
+    					opp.Amount = r.Total__c - (j * r.Installment_Amount__c);
+	       			} else {
+			 	       	opp.Amount = r.Installment_Amount__c;
+			     	}
 				
-				if (r.Installment_Period__c == System.Label.RecurringDonationInstallmentPeriodYearly)
-				{
-					opp.CloseDate = (r.Date_Established__c).addYears(j);
-				} else
-				if (r.Installment_Period__c == System.Label.RecurringDonationInstallmentPeriodQuarterly)
-				{
-					opp.CloseDate = (r.Date_Established__c).addMonths(3*j);
-				} else
-				if (r.Installment_Period__c == System.Label.RecurringDonationInstallmentPeriodMonthly)
-				{
-					opp.CloseDate = (r.Date_Established__c).addMonths(j);
-				} else
-				if (r.Installment_Period__c == System.Label.RecurringDonationInstallmentPeriodWeekly)
-				{
-					opp.CloseDate = (r.Date_Established__c).addDays(7*j);
-				} else
-				{
-					opp.CloseDate = (r.Date_Established__c);
-				}
+				    if (r.Installment_Period__c == System.Label.RecurringDonationInstallmentPeriodYearly)
+				    {
+    					opp.CloseDate = (r.Date_Established__c).addYears(j);
+	       			} else
+			     	if (r.Installment_Period__c == System.Label.RecurringDonationInstallmentPeriodQuarterly)
+				    {
+					   opp.CloseDate = (r.Date_Established__c).addMonths(3*j);
+				    } else
+				    if (r.Installment_Period__c == System.Label.RecurringDonationInstallmentPeriodMonthly)
+				    {
+					   opp.CloseDate = (r.Date_Established__c).addMonths(j);
+				    } else
+				    if (r.Installment_Period__c == System.Label.RecurringDonationInstallmentPeriodWeekly)
+				    {
+					   opp.CloseDate = (r.Date_Established__c).addDays(7*j);
+				    } else
+				    {
+					   opp.CloseDate = (r.Date_Established__c);
+				    }
 				
-				String oName = '';
-				oName += r.Donor_Name__c; 
-				oName += ' ';
-				oName += System.Label.RecurringDonationPrefix;
-				oName += ' (';
-				oName += j+1;
-				oName += ' of ';
-				oName += installments;
-				oName += ') ';
-				oName += opp.CloseDate.format();
-				opp.Name = oName;
+				    String oName = '';
+				    oName += r.Donor_Name__c; 
+				    oName += ' ';
+				    oName += System.Label.RecurringDonationPrefix;
+				    oName += ' (';
+				    oName += j+1;
+				    oName += ' of ';
+				    oName += installments;
+				    oName += ') ';
+				    oName += opp.CloseDate.format();
+				    opp.Name = oName;
 				
-				opp.StageName = System.Label.RecurringDonationStageName;
-				opp.Recurring_Donation__c = r.Id;
-				if (r.Recurring_Donation_Campaign__c != null){
-					opp.CampaignId = r.Recurring_Donation_Campaign__c;
-				}
+				    opp.StageName = System.Label.RecurringDonationStageName;
+				    opp.Recurring_Donation__c = r.Id;
+				    if (r.Recurring_Donation_Campaign__c != null){
+					   opp.CampaignId = r.Recurring_Donation_Campaign__c;
+				    }
 				
-				opportunityInserts.add(opp);
-				if ( opportunityInserts.size() == 100 )
-				{
-					Database.SaveResult[] lsr = Database.insert(opportunityInserts, false);
-					opportunityInserts.clear();
-				}
-			}
+				    opportunityInserts.add(opp);
+				    if ( opportunityInserts.size() == 100 )
+				    {
+					   Database.SaveResult[] lsr = Database.insert(opportunityInserts, false);
+					   opportunityInserts.clear();
+				    }
+			    }
+            }			     
 		}
 		
 		if( opportunityInserts.size() > 0 )
