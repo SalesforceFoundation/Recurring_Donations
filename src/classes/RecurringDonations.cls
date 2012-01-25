@@ -80,6 +80,7 @@ global class RecurringDonations {
 		List<Recurring_Donation__c> contactRecDonations = new List<Recurring_Donation__c>();
 		List<Recurring_Donation__c> accountRecDonations = new List<Recurring_Donation__c>();
 		List<Recurring_Donation__c> recDonationDeletes = new List<Recurring_Donation__c>();
+		list<Recurring_Donation__c> rdInserts = new list<Recurring_Donation__c>(); 
 		
 		list<Recurring_Donation__c> recDonationUpdates = new list<Recurring_Donation__c>();
 
@@ -98,13 +99,15 @@ global class RecurringDonations {
 			}
 			if ( ta==triggerAction.afterInsert )
 			{
-				if (r.Contact__c != null)
+				rdInserts.add(r);
+				
+			/*	if (r.Contact__c != null)
 				{
 					contactRecDonations.add(r);
 				} else
 				{
 					accountRecDonations.add(r);
-				}
+				}*/
 			}
 			if ( ta==triggerAction.beforeDelete )
 			{
@@ -124,7 +127,11 @@ global class RecurringDonations {
 			
 			
 		}
-
+		
+		if (rdInserts.size() > 0){
+			insertOpptys(rdInserts);
+		}
+/*
 		if ( contactRecDonations.size() > 0 )
 		{
 			insertOpptys(contactRecDonations, 'contact');
@@ -132,7 +139,7 @@ global class RecurringDonations {
 		if ( accountRecDonations.size() > 0 )
 		{
 			insertOpptys(accountRecDonations, 'account');
-		}
+		}*/
 		if ( recDonationDeletes.size() > 0 )
 		{
 			deleteRecDonations(recDonationDeletes);
@@ -145,14 +152,10 @@ global class RecurringDonations {
 		
 	}
 	
-	public static void insertOpptys(Recurring_Donation__c[] recurringDonations, String donorType){
-		insertOpptys(recurringDonations, donorType, 0);
-	}
-	
 	/// <name> insertContactOpportunities </name>
 	/// <summary> Creates new Opportunities when a RecurringDonation is inserted </summary>
 	/// <param name="recurringDonations"> RecurringDonation objects that are being triggered </param>
-	public static void insertOpptys( Recurring_Donation__c[] recurringDonations, String donorType, integer num_of_opps )
+	public static void insertOpptys( Recurring_Donation__c[] recurringDonations)
 	{
 		//Lists used for final Insert
 		List<Opportunity> opportunityInserts = new List<Opportunity>();
@@ -446,7 +449,10 @@ global class RecurringDonations {
 		
 		
 		
+		
 	}
+	
+	
 	
 	
 	
@@ -454,8 +460,7 @@ global class RecurringDonations {
 	public static void changeOppSchedule(list<id> recurringDonations){
 		
 		
-	}
-	
+	}	
 	
 	
 	 //get the settings. handles the case where the managed value doesn't exist yet
