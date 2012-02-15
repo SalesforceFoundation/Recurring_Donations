@@ -144,6 +144,7 @@ global class RecurringDonations {
         // CurrencyIsoCode doesn't exist in non-multi-currency orgs
         SObjectField OppCurrencyField = Schema.sObjectType.Opportunity.fields.getMap().get('CurrencyIsoCode');
 		
+		
 		//Create a list of ContactIds used in these RecurringDonations
 		list<Id> contactIds = new list<Id>();
 		map<Id,Id> recConMap = new map<Id,Id>();
@@ -402,6 +403,14 @@ global class RecurringDonations {
 	@future
 	public static void updateOnOppChange(set<id> recurringDonationIDs){
 		
+		// James Melville 05/03/2011 Added to support multi-currency sfdc.  */
+        // CurrencyIsoCode doesn't exist in non-multi-currency orgs
+        // we check currency iscode before entering the loop since it's a system check
+        SObjectField OppCurrencyField = Schema.sObjectType.Opportunity.fields.getMap().get('CurrencyIsoCode');
+        
+        //grab the contact id for role to take advantage of NPSP C&O if it exists
+        Sobjectfield ConIDForRole = Schema.sObjectType.Opportunity.fields.getMap().get('npe01__Contact_Id_for_Role__c');
+		
         //set of RDs to be updated	       
 		map<id, Recurring_Donation__c> updateMap = new map<id, Recurring_Donation__c>();
 		list<Opportunity> oppInsertList = new list<Opportunity>();
@@ -422,12 +431,24 @@ global class RecurringDonations {
 		                          group by rollup(Recurring_Donation__c, isClosed)];
 		
 		map<id, date> maxOpenPaymentMap = new map<id, date>();
+		map<id, integer> oppCountMap = new map<id, integer>();
 		
 		
 		//update the rc next payment date 
 		//and add new donation objects needed 
 		for (sobject obj : sobjs){
             id rdid = (id)obj.get('Recurring_Donation__c');
+            
+            //get the total number of opps for usage in naming later...
+            if (!oppCountMap.containsKey(rdid)){
+                oppCountMap.put(rdid, (integer)obj.get('oppcount'));
+            }
+            else{
+            	integer x = oppCountMap.get(rdid);
+            	x = x + (integer)obj.get('oppcount');
+            	oppCountMap.put(rdid, x);
+            }
+            
             
             Recurring_Donation__c rd;
             
@@ -458,33 +479,121 @@ global class RecurringDonations {
 		//get the total number of forecast months
 		integer oppMonths = (integer)rds.Opportunity_Forecast_Months__c;
 		
+		SObjectField RDCurrencyField; 
+		// multicurrency support
+        if(OppCurrencyField != null){
+            RDCurrencyField = Schema.sObjectType.Recurring_Donation__c.fields.getMap().get('CurrencyIsoCode');
+        }
+        
+        //Create a list of ContactIds used in these RecurringDonations
+        list<id> contactIds = new list<id>();
+        map<id,id> recConMap = new map<id,id>();
+        for( Recurring_Donation__c rd : updateMap.values()){
+            if (rd.Contact__c != null ){
+                contactIds.add(rd.Contact__c);
+                recConMap.put(rd.id,rd.Contact__c);
+            }
+        }
+        //Create a Map of Contact Ids and Contact Records
+        map<id,Contact> contactMap;        
+        if (contactIds.size() > 0){
+            contactMap = new Map<Id,Contact>([Select Id, AccountId from Contact where Id in :contactIds and AccountId != null]);
+        }
+		
 		for (Recurring_Donation__c rd : updateMap.values()){
-			
+            
+            date OppCloseDate;
+            
 			//if max open payment is less than the value of hte last payment + the 
             //scheduled open timeframe, add as many opps as needed to satisfy teh criteria
             if (rd.Last_Payment_Date__c.addMonths(oppMonths) > maxOpenPaymentMap.get(rd.id)){
-            
-                                
-                        	
-            	
-            }
+                do{
+                    Opportunity o = new Opportunity();
+
+                    if(RDCurrencyField != null){
+                        //set the donation currency field to equal the recurring donation currency
+                        o.put(OppCurrencyField,rd.get(RDCurrencyField));
+                    }
+                    
+                    if (rd.Organization__c != null){
+                       o.AccountId = rd.Organization__c;
+                    }
+                    else if (contactMap.containsKey(rd.Contact__c)){
+                        Contact c = contactMap.get(rd.Contact__c);
+                        o.AccountId = c.AccountId;
+                        
+                        if (ConIDForRole != null){
+                            o.put((string)c.id, 'npe01__Contact_Id_For_Role__c');
+                        }
+                    }                           
+                                	   
+                    o.Amount = rd.Installment_Amount__c;
+                    
+                    if (rd.Installment_Period__c == System.Label.RecurringDonationInstallmentPeriodYearly){
+                        o.CloseDate = (maxOpenPaymentMap.get(rd.id)).addYears(1);
+                    } 
+                    else if (rd.Installment_Period__c == System.Label.RecurringDonationInstallmentPeriodQuarterly){
+                        o.CloseDate = (maxOpenPaymentMap.get(rd.id)).addMonths(3);
+                    } 
+                    else if (rd.Installment_Period__c == System.Label.RecurringDonationInstallmentPeriodMonthly){
+                        o.CloseDate = (maxOpenPaymentMap.get(rd.id)).addMonths(1);
+                    } 
+                    else if (rd.Installment_Period__c == System.Label.RecurringDonationInstallmentPeriodWeekly){
+                        o.CloseDate = (maxOpenPaymentMap.get(rd.id)).addDays(7);
+                    }
+                    else if (rd.Installment_Period__c == System.label.RecurringDonationInstallmentPeriodCustom){
+                        o.CloseDate = (maxOpenPaymentMap.get(rd.id).addDays((integer)rds.Custom_Days__c));
+                    }
+                    //if its not a valid value, set it to the max last payment date plus the 
+                    //the open ended value so we only create one opp max
+                    else{
+                        o.CloseDate = rd.Last_Payment_Date__c.addMonths(oppMonths);
+                    }
+                    
+                    OppCloseDate = o.CloseDate;
+                    
+                    String oName = '';
+                    oName += rd.Donor_Name__c; 
+                    oName += ' ';
+                    oName += System.Label.RecurringDonationPrefix;
+                    oName += ' (';
+                    oName += string.valueOf((oppCountMap.get(rd.id) + 1));
+                    oName += ') ';
+                    oName += o.CloseDate.format();
+                    o.Name = oName;
                 
-			
+                    o.StageName = System.Label.RecurringDonationStageName;
+                    o.Recurring_Donation__c = rd.Id;
+                    if (rd.Recurring_Donation_Campaign__c != null){
+                       o.CampaignId = rd.Recurring_Donation_Campaign__c;
+                    }
+                    oppInsertList.add(o);
+                }
+                while (OppCloseDate < rd.Last_Payment_Date__c.addMonths(oppMonths));
+            }
 		}
 		
-		
-		
-		
+		//update recurring donations
 		if (!updateMap.values().isEmpty()){
 			update updateMap.values();
 		}
 		
-		if (!oppInsertList.isEmpty()){
-			insert oppInsertList;
-		}
-		
-		
-		
+		//insert the opps
+		if(!oppInsertList.isEmpty()){
+            Database.SaveResult[] lsr = Database.insert(oppInsertList, false);
+            
+            //if we didn't find the npe01 field on the opp, we need to create OCRs manually
+            if (ConIDForRole == null){
+                Set<Id> createdOppIds = new Set<Id>();
+                for (Database.SaveResult s : lsr){
+                    if (s.isSuccess() == true){
+                    //get all the new OppIds into a list
+                        createdOppIds.add(s.getId());
+                    }
+                }
+                oppContactRoles(createdOppIds);
+            }
+        }
 	}
 
 	
@@ -494,7 +603,6 @@ global class RecurringDonations {
 		
 		
 	}	
-	
 	
 	 //get the settings. handles the case where the managed value doesn't exist yet
     public static Recurring_Donations_Settings__c getRecurringDonationsSettings() {
@@ -510,11 +618,7 @@ global class RecurringDonations {
                 recurringDonationsSettings.Opportunity_Forecast_Months__c = 12; 
                 insert recurringDonationsSettings;
             }
-        }
-        
+        }        
         return recurringDonationsSettings;
     }
-	
-	
-	
 }
