@@ -6,8 +6,9 @@
     <enableFeeds>false</enableFeeds>
     <fields>
         <fullName>Custom_Days__c</fullName>
+        <defaultValue>14</defaultValue>
         <externalId>false</externalId>
-        <inlineHelpText>Custom number of days for recurring donations installment period</inlineHelpText>
+        <inlineHelpText>Number of days for the custom Recurring Donations installment period.  This is determined by the custom label RecurringDonationInstallmentPeriodCustom.</inlineHelpText>
         <label>Custom Days</label>
         <precision>18</precision>
         <required>false</required>
@@ -39,9 +40,9 @@ DISABLES the RecurringDonations.trigger (Recurring_Donations__c, ALL).
     </fields>
     <fields>
         <fullName>Open_Opportunity_Behavior__c</fullName>
-        <description>Determines the behavior of any open Opportunities when an open-ended recurring donation is moved to a closed status.</description>
+        <description>Determines the behavior of any remaining open Opportunities when an open-ended Recurring Donation is moved to a closed status.</description>
         <externalId>false</externalId>
-        <inlineHelpText>Determines the behavior of any open Opportunities when an open-ended recurring donation is moved to a closed status.</inlineHelpText>
+        <inlineHelpText>Determines the behavior of any remaining open Opportunities when an open-ended Recurring Donation is moved to a closed status.</inlineHelpText>
         <label>Open Opportunity Behavior</label>
         <length>20</length>
         <required>false</required>
@@ -50,9 +51,10 @@ DISABLES the RecurringDonations.trigger (Recurring_Donations__c, ALL).
     </fields>
     <fields>
         <fullName>Opportunity_Forecast_Months__c</fullName>
-        <description>Number of months in the Opportunity range for an open-ended Recurring Donation.</description>
+        <defaultValue>12</defaultValue>
+        <description>Number of months worth of open Opportunities to be created when using an open-ended Recurring Donation.  Determined by the Last Payment Date field.</description>
         <externalId>false</externalId>
-        <inlineHelpText>Number of months in the Opportunity range for an open-ended Recurring Donation.</inlineHelpText>
+        <inlineHelpText>Number of months worth of open Opportunities to be created when using an open-ended Recurring Donation.  Determined by the Last Payment Date field.</inlineHelpText>
         <label>Opportunity Forecast Months</label>
         <precision>18</precision>
         <required>false</required>
