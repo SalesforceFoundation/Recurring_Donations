@@ -11,7 +11,9 @@
                         <apex:outputField value="{!rds.Opportunity_Forecast_Months__c}" rendered="{!NOT(canEditRDSettings)}" />
                         <apex:inputField value="{!rds.Opportunity_Forecast_Months__c}" rendered="{!canEditRDSettings}" />
                         <apex:outputField value="{!rds.Open_Opportunity_Behavior__c}" rendered="{!NOT(canEditRDSettings)}" />
-                        <apex:inputField value="{!rds.Open_Opportunity_Behavior__c}" rendered="{!canEditRDSettings}" />
+                        <apex:selectList value="{!rds.Open_Opportunity_Behavior__c}" size="1" multiselect="false" rendered="{!canEditRDSettings}">
+                            <apex:selectOptions value="{!closeOptions}" />
+                        </apex:selectList>
                         <apex:outputField value="{!rds.Custom_Days__c}" rendered="{!NOT(canEditRDSettings)}" />
                         <apex:inputField value="{!rds.Custom_Days__c}" rendered="{!canEditRDSettings}" />
                 </apex:PageBlockSection>
@@ -22,5 +24,5 @@
                 </apex:outputPanel>
             </apex:outputPanel>  
         </apex:form>
-    </apex:PageBlock>
+    </apex:PageBlock> 
 </apex:page>
