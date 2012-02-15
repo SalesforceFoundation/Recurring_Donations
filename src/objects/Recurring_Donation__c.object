@@ -143,6 +143,16 @@
         <unique>false</unique>
     </fields>
     <fields>
+        <fullName>Last_Payment_Date__c</fullName>
+        <description>Date of the last payment for this Recurring Donation</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Date of the last payment for this Recurring Donation</inlineHelpText>
+        <label>Last Payment Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Date</type>
+    </fields>
+    <fields>
         <fullName>Next_Payment_Date__c</fullName>
         <description>Holds the date of the next recurring payment.  Manually editing this field will recalculate all future opportunity&apos;s close dates based on the scheduled defined.</description>
         <externalId>false</externalId>
@@ -187,6 +197,18 @@
         <type>Lookup</type>
     </fields>
     <fields>
+        <fullName>Paid_Amount__c</fullName>
+        <description>Total Amount paid on this Recurring Donation</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Total Amount paid on this Recurring Donation</inlineHelpText>
+        <label>Paid Amount</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <type>Currency</type>
+    </fields>
+    <fields>
         <fullName>Recurring_Donation_Campaign__c</fullName>
         <deleteConstraint>SetNull</deleteConstraint>
         <deprecated>false</deprecated>
@@ -216,6 +238,19 @@
         </picklist>
         <trackHistory>false</trackHistory>
         <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Total_Paid_Installments__c</fullName>
+        <description>Total number of installments paid on this open-ended recurring donation.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Total number of installments paid on this open-ended recurring donation.</inlineHelpText>
+        <label>Total Paid Installments</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <type>Number</type>
+        <unique>false</unique>
     </fields>
     <fields>
         <fullName>Total__c</fullName>
