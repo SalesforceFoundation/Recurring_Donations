@@ -25,12 +25,28 @@
         <value>Donor</value>
     </labels>
     <labels>
+        <fullName>RecurringDonationCustomValidationWarning</fullName>
+        <categories>RecurringDonations</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>RecurringDonationCustomValidationWarning</shortDescription>
+        <value>Fields on your Opportunity object have Custom Validation Rules that may cause issues with your Recurring Donations package:</value>
+    </labels>
+    <labels>
         <fullName>RecurringDonationDivideValue</fullName>
         <categories>RecurringDonations</categories>
         <language>en_US</language>
         <protected>true</protected>
         <shortDescription>RecurringDonationDivideValue</shortDescription>
         <value>Divide By</value>
+    </labels>
+    <labels>
+        <fullName>RecurringDonationInstallmentPeriodCustom</fullName>
+        <categories>RecurringDonations</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>RecurringDonationInstallmentPeriodCustom</shortDescription>
+        <value>Custom</value>
     </labels>
     <labels>
         <fullName>RecurringDonationInstallmentPeriodMonthly</fullName>
@@ -95,6 +111,22 @@
         <protected>true</protected>
         <shortDescription>RecurringDonationPrefix</shortDescription>
         <value>Donation</value>
+    </labels>
+    <labels>
+        <fullName>RecurringDonationRequiredFieldsWarning</fullName>
+        <categories>RecurringDonations</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>RecurringDonationRequiredFieldsWarning</shortDescription>
+        <value>The following required fields on your Opportunity object may cause issues with your Recurring Donations package:</value>
+    </labels>
+    <labels>
+        <fullName>RecurringDonationSettingsDescription</fullName>
+        <categories>RecurringDonations</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>RecurringDonationSettingsDescription</shortDescription>
+        <value>Settings that control the behavior of the Recurring Donations package. Changing these will change how the Recurring Donations record behaves.</value>
     </labels>
     <labels>
         <fullName>RecurringDonationStageName</fullName>
