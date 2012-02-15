@@ -5,6 +5,17 @@
     <description>Settings for the Recurring Donations Package</description>
     <enableFeeds>false</enableFeeds>
     <fields>
+        <fullName>Custom_Days__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Custom number of days for recurring donations installment period</inlineHelpText>
+        <label>Custom Days</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
         <fullName>DISABLE_Donations_trigger__c</fullName>
         <defaultValue>false</defaultValue>
         <description>DISABLES the Donations.trigger (Opportunity, before insert, before update, after insert, after update)</description>
@@ -38,26 +49,15 @@ DISABLES the RecurringDonations.trigger (Recurring_Donations__c, ALL).
         <unique>false</unique>
     </fields>
     <fields>
-        <fullName>Opportunity_Forecast_Number__c</fullName>
-        <description>Number component of the open Opportunity range for an open-ended Recurring Donation.</description>
+        <fullName>Opportunity_Forecast_Months__c</fullName>
+        <description>Number of months in the Opportunity range for an open-ended Recurring Donation.</description>
         <externalId>false</externalId>
-        <inlineHelpText>Number component of the open Opportunity range for an open-ended Recurring Donation.</inlineHelpText>
-        <label>Opportunity Forecast Number</label>
+        <inlineHelpText>Number of months in the Opportunity range for an open-ended Recurring Donation.</inlineHelpText>
+        <label>Opportunity Forecast Months</label>
         <precision>18</precision>
         <required>false</required>
         <scale>0</scale>
         <type>Number</type>
-        <unique>false</unique>
-    </fields>
-    <fields>
-        <fullName>Opportunity_Forecast_Type__c</fullName>
-        <description>Type component of the open Opportunity range for an open-ended Recurring Donation.</description>
-        <externalId>false</externalId>
-        <inlineHelpText>Type component of the open Opportunity range for an open-ended Recurring Donation.</inlineHelpText>
-        <label>Opportunity Forecast Type</label>
-        <length>20</length>
-        <required>false</required>
-        <type>Text</type>
         <unique>false</unique>
     </fields>
     <label>Recurring Donations Settings</label>
