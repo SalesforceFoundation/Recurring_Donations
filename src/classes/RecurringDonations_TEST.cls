@@ -30,14 +30,6 @@
 @isTest
 private class RecurringDonations_TEST {
 
-	/// <name> RecurringDonations_Test </name>
-	/// <summary> test default constructor </summary>
-	static testMethod void RecurringDonations()
-	{
-  		RecurringDonations testRecurringDonations = new RecurringDonations();
-	}
-
-
 	/// <name> insertOpportunities_Test </name>
 	/// <summary> test method for insertOpportunities function </summary>
 	static testMethod void insertOpportunities()
@@ -307,8 +299,8 @@ private class RecurringDonations_TEST {
         insert r1;
         map<id, Opportunity> originalOpps = new map<id, Opportunity>([select id, Name,amount,accountid,CloseDate from Opportunity where Recurring_Donation__c = :r1.id]);    	   
 	   	
-	   	system.assertEquals(originalOpps.size(), 2);
-	   	system.assertEquals(originalOpps.values()[0].Amount, 100);
+	   	system.assertEquals(2, originalOpps.size());
+	   	system.assertEquals(100, originalOpps.values()[0].Amount);
 	   	
 	   	//close one opp
 	   	Opportunity o = originalOpps.values()[0];
