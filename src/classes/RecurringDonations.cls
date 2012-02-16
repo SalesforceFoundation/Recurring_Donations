@@ -30,12 +30,13 @@
 global class RecurringDonations {
 
 
-
+    
 	/// <name> RecurringDonations </name>
 	/// <summary> Default Constructor </summary> 
 	public RecurringDonations(){}
 
-
+    public enum RecurringDonationCloseOptions {Delete_Open_Opportunities, Mark_Opportunities_Closed_Lost, No_Action}
+	
 	/// <name> triggerAction </name>
 	/// <summary> contains possible actions for a trigger </summary>
 	public enum triggerAction {beforeInsert, beforeUpdate, beforeDelete, afterInsert, afterUpdate, afterDelete, afterUndelete}
@@ -621,4 +622,7 @@ global class RecurringDonations {
         }        
         return recurringDonationsSettings;
     }
+    
+    
+    
 }
