@@ -9,11 +9,24 @@ public with sharing class RecurringDonationsSettings {
     
     //clear open opps when donation is closed
     
-    
-    
     public boolean canEditRDSettings {get; set;}
     public Recurring_Donations_Settings__c rds {get; set;}
     
+    
+        
+    public list<SelectOption> closeOptions{
+    	get{
+            list<RecurringDonations.RecurringDonationCloseOptions> CloseOptionValues = RecurringDonations.RecurringDonationCloseOptions.values();		
+    		list<SelectOption> options = new list<SelectOption>();
+            for (RecurringDonations.RecurringDonationCloseOptions rdco : CloseOptionValues){
+                options.add(new SelectOption(rdco.name(), rdco.name()));
+            }
+            return options;
+        }                
+                        
+        
+    }        
+        
     //called from action method for page 
     public PageReference getSettingsFirstTime() {
         rds = RecurringDonations.getRecurringDonationsSettings();                   
@@ -26,7 +39,6 @@ public with sharing class RecurringDonationsSettings {
 
     public RecurringDonationsSettings(){
         canEditRDSettings = false;
-        
     }
     
     public pagereference editRDsettings(){
@@ -35,6 +47,7 @@ public with sharing class RecurringDonationsSettings {
     }
     public pagereference cancel(){
         canEditRDSettings = false;
+        rds = RecurringDonations.getRecurringDonationsSettings();
         return null;
     }
 
@@ -54,6 +67,17 @@ public with sharing class RecurringDonationsSettings {
     //test an opp insert as done in the class
     //and provide a warning if it fails
     private void testPackageIntegrity(){
+        
+        //test closed lost opp settings        
+        string closedoppstage = system.label.RecurringDonationClosedLostOpportunityStage;
+        integer x = 0;
+        x = [select count() from OpportunityStage where MasterLabel = :closedoppstage and isClosed = true and isActive = true and isWon = false];
+        
+        if (x < 1){
+            ApexPages.Message myMsg = new ApexPages.Message(ApexPages.Severity.WARNING, system.label.RecurringDonationBadLabelWarning);
+            ApexPages.addMessage(myMsg);
+        }            
+        
         
         string page_message = '';
         Savepoint sp = Database.setSavepoint();
