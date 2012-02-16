@@ -92,7 +92,7 @@ public with sharing class RecurringDonationsSettings {
         //use one if we got one, otherwise, create one for testing
         Recurring_Donation__c rd = [select id from Recurring_Donation__c limit 1];
         if (rd != null){
-            testOpp.npe03__Recurring_Donation__c = rd.id;
+            testOpp.Recurring_Donation__c = rd.id;
         }
         database.saveresult[] sr = database.insert(new list<Opportunity>{testopp}, false);
         database.rollback(sp); 
