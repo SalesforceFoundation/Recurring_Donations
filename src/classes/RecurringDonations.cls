@@ -93,8 +93,7 @@ global class RecurringDonations {
             }
         }
         
-        if ( recDonationDeletes.size() > 0 )
-        {
+        if (recDonationDeletes.size() > 0){
             deleteRecDonations(recDonationDeletes);
         }
         
@@ -104,8 +103,7 @@ global class RecurringDonations {
         }
         if (rdInserts.size() > 0){
             insertOpptys(rdInserts);
-        }
-        
+        }        
     }
     
     /// <name> insertContactOpportunities </name>
@@ -637,11 +635,10 @@ global class RecurringDonations {
     public static void changeOppSchedule(list<id> recurringDonations){
         
         
-    }   
+    }
     
      //get the settings. handles the case where the managed value doesn't exist yet
     public static Recurring_Donations_Settings__c getRecurringDonationsSettings() {
-        String oldProcessor = '';
         //if no settings exist, create defaults
         if (recurringDonationsSettings == null) {
             //first see if we already have settings
@@ -651,9 +648,24 @@ global class RecurringDonations {
                 recurringDonationsSettings = new Recurring_Donations_Settings__c();
                 recurringDonationsSettings.Open_Opportunity_Behavior__c = '';
                 recurringDonationsSettings.Opportunity_Forecast_Months__c = 12; 
+                recurringDonationsSettings.Maximum_Donations__c = 50;
                 insert recurringDonationsSettings;
             }
         }         
+        return recurringDonationsSettings;
+    }
+    
+    public static Recurring_Donations_Settings__c getRecurringDonationsSettingsForTest(Recurring_Donations_Settings__c rds){
+        //clear out the old ones and insert this
+        delete [select id from Recurring_Donations_Settings__c];
+        if (rds != null){
+            insert rds;
+            recurringDonationsSettings = rds;
+        }
+        //use default vals
+        else{
+        	recurringDonationsSettings = getRecurringDonationsSettings();
+        }   	
         return recurringDonationsSettings;
     }
     
