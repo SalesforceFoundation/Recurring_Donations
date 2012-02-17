@@ -90,9 +90,10 @@ public with sharing class RecurringDonationsSettings {
         testOpp.StageName = [select MasterLabel from OpportunityStage where isWon = true and isClosed = true and isActive = true].MasterLabel;
         
         //use one if we got one, otherwise, create one for testing
-        Recurring_Donation__c rd = [select id from Recurring_Donation__c limit 1];
-        if (rd != null){
-            testOpp.Recurring_Donation__c = rd.id;
+        list<Recurring_Donation__c> rd = new list<Recurring_Donation__c>();
+        rd = [select id from Recurring_Donation__c];
+        if (!rd.isEmpty()){
+            testOpp.Recurring_Donation__c = rd[0].id;
         }
         database.saveresult[] sr = database.insert(new list<Opportunity>{testopp}, false);
         database.rollback(sp); 
