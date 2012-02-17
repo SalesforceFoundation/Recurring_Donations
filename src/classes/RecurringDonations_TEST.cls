@@ -299,7 +299,7 @@ private class RecurringDonations_TEST {
         insert r1;
         map<id, Opportunity> originalOpps = new map<id, Opportunity>([select id, Name,amount,accountid,CloseDate from Opportunity where Recurring_Donation__c = :r1.id]);    	   
 	   	
-	   	system.assertEquals(2, originalOpps.size());
+	   	system.assertEquals(54, originalOpps.size());
 	   	system.assertEquals(100, originalOpps.values()[0].Amount);
 	   	
 	   	//close one opp
@@ -308,8 +308,8 @@ private class RecurringDonations_TEST {
 	   	o.StageName = closedstage; 
 	   	update o;
 	   	
-	   	//should still be two opps
-	   	system.assertEquals(2, [select count() from Opportunity where Recurring_Donation__c = :r1.id and isClosed != true]);
+	   	//should still be fiftyfour opps
+	   	system.assertEquals(54, [select count() from Opportunity where Recurring_Donation__c = :r1.id and isClosed != true]);
 	   		   	
 		r1.Installments__c = 5;
 		r1.Amount__c = 200;
