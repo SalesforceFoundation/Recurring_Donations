@@ -40,7 +40,7 @@ global with sharing class RecurringDonations {
     public enum triggerAction {beforeInsert, beforeUpdate, beforeDelete, afterInsert, afterUpdate, afterDelete, afterUndelete}
     
     public static Recurring_Donations_Settings__c recurringDonationsSettings;    
-        
+            
     //Handles the opportunity update scenario
     public RecurringDonations(map<id, Opportunity> newOppMap, map<id, Opportunity> oldOppMap, triggerAction ta){
         set<id> rdIDs = new set<id>();        
@@ -55,7 +55,7 @@ global with sharing class RecurringDonations {
         }           
         //recurring donations that need to be updated      
         if (!rdIds.isEmpty()){
-            updateOnOppChange(rdIds);                       
+            updateOnChange(rdIds, false);                       
         }
     }
     
@@ -417,32 +417,58 @@ global with sharing class RecurringDonations {
     
     //handles updates to the recurring donations object
     public static void updateRecDonations(list<Recurring_Donation__c> recurringDonations, map<id, Recurring_Donation__c> oldRecurringDonations){
-        
-        if (oldRecurringDonations == null){        
-                        
-                            
-        }
-
         // determine the update type - 
-        // change to next due date?
-        // change in schedule? 
-        else{
-            for (Recurring_Donation__c r : recurringDonations){
-            
-            
-            
-            
-            
-            
+        Recurring_Donations_Settings__c rds = getRecurringDonationsSettings();
+        // opening a closed recurring donation
+        set<id> reevaluateOpps = new set<id>(); 
+        
+        // closed an open recurring donation
+        list<Recurring_Donation__c> newlycloseddonations = new list<Recurring_Donation__c>();
+        
+        // change to next due date? - will force a recalculation of all remaining open opps
+        // change in schedule? - will force a recalcuation of all remaining open opps
+        list<Recurring_Donation__c> evaluateRDs = new list<Recurring_Donation__c>();
+         
+        string openlabel = system.label.RecurringDonationOpenStatus;
+        string closedlabel = system.label.RecurringDonationClosedStatus;        
+        
+        for (Recurring_Donation__c r : recurringDonations){
+            Recurring_Donation__c oldRD = oldRecurringDonations.get(r.id);
+            if (r.Open_Ended_Status__c == closedlabel && oldRD.Open_Ended_Status__c != r.Open_Ended_Status__c){
+                newlycloseddonations.add(r);
             }
-              
+            else if (r.Open_Ended_Status__c == openlabel){
+                reevaluateopps.add(r.id);   
+            }
+        }        
+        
+        if (!newlycloseddonations.isEmpty() && rds.Open_Opportunity_Behavior__c != 'No_Action'){
+        	list<Opportunity> olist = [select StageName, Recurring_Donation__r.id from Opportunity where Recurring_Donation__r.id IN :newlycloseddonations and isClosed = false];
+        	
+        	if (rds.Open_Opportunity_Behavior__c == 'Delete_Open_Opportunities'){
+        	   database.delete(olist);
+        	}        	   
+        	else if (rds.Open_Opportunity_Behavior__c == 'Mark_Opportunities_Closed_Lost'){
+                for (Opportunity o : olist){
+                	o.StageName = system.label.RecurringDonationClosedLostOpportunityStage;
+                }
+                update olist;
+        	}
+        }
+        
+        if (!reevaluateopps.isEmpty()){
+        	updateOnChange(reevaluateopps, true);
         }
     }
     
-    
     //updating the RD based on a change in the opp stage, going from open to closed
     @future
-    public static void updateOnOppChange(set<id> recurringDonationIDs){
+    public static void updateOnChange(set<id> recurringDonationIDs, boolean clearOpenOpps){
+        
+        //if we need to clear out existing opps before evaluating, do so here
+        if (clearOpenOpps){
+            delete [select id from Opportunity where isClosed = false and Recurring_Donation__r.id IN :recurringDonationIDs];
+        }
         
         // James Melville 05/03/2011 Added to support multi-currency sfdc.  */
         // CurrencyIsoCode doesn't exist in non-multi-currency orgs
@@ -463,7 +489,7 @@ global with sharing class RecurringDonations {
         map<id, Recurring_Donation__c> rdMap = new map<id, Recurring_Donation__c>([select id, Paid_Amount__c, Next_Payment_Date__c, 
                                                                                     Contact__c, Organization__c, Amount__c, 
                                                                                     Date_Established__c, Recurring_Donation_Campaign__c,
-                                                                                     INstallment_Period__c, Installments__c,
+                                                                                     Installment_Period__c, Installments__c,
                                                                                      Last_Payment_Date__c, Open_Ended_Status__c,
                                                                                      Schedule_Type__c, Total_Paid_Installments__c,
                                                                                      Donor_Name__c
@@ -634,13 +660,7 @@ global with sharing class RecurringDonations {
             }
         }
     }
-    
-    
-    @future
-    public static void changeOppSchedule(list<id> recurringDonations){
-        
-        
-    }
+
     
      //get the settings. handles the case where the managed value doesn't exist yet
     public static Recurring_Donations_Settings__c getRecurringDonationsSettings() {
