@@ -1,5 +1,5 @@
 /*
-    Copyright (c) 2011, Salesforce.com Foundation
+    Copyright (c) 2012, Salesforce.com Foundation
     All rights reserved.
     
     Redistribution and use in source and binary forms, with or without
@@ -29,7 +29,7 @@
 */
 /**
 * @author Salesforce.com Foundation
-* @date 2011 (2.3)
+* @date 2012 (2.0)
 * @description The main class for controlling the behavior of Recurring Donations, both open ended and standard 
 */
 global with sharing class RecurringDonations {
