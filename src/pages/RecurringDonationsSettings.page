@@ -7,7 +7,7 @@
         </apex:PageBlockSection>
         <apex:form id="theform">
             <apex:outputPanel id="SettingsOutputPanel">  
-                <apex:PageBlockSection columns="1" title="Settings" collapsible="false">
+                <apex:PageBlockSection columns="2" title="Settings" collapsible="false">
                         <apex:outputField value="{!rds.Opportunity_Forecast_Months__c}" rendered="{!NOT(canEditRDSettings)}" />
                         <apex:inputField value="{!rds.Opportunity_Forecast_Months__c}" rendered="{!canEditRDSettings}" />
                         <apex:outputField value="{!rds.Open_Opportunity_Behavior__c}" rendered="{!NOT(canEditRDSettings)}" />
@@ -16,6 +16,8 @@
                         </apex:selectList>
                         <apex:outputField value="{!rds.Custom_Days__c}" rendered="{!NOT(canEditRDSettings)}" />
                         <apex:inputField value="{!rds.Custom_Days__c}" rendered="{!canEditRDSettings}" />
+                        <apex:outputField value="{!rds.Maximum_Donations__c}" rendered="{!NOT(canEditRDSettings)}" />
+                        <apex:inputField value="{!rds.Maximum_Donations__c}" rendered="{!canEditRDSettings}" />
                 </apex:PageBlockSection>
                 <apex:outputPanel style="text-align: center; display: block; margin-left:auto; margin-right:auto;">
                     <apex:commandButton value="Save" rendered="{!canEditRDSettings}" action="{!saveRDSettings}"/>  
