@@ -29,7 +29,7 @@
 */
 /**
 * @author Salesforce.com Foundation
-* @date 2012 (2.3)
+* @date 2012 (2.0)
 * @description Test class for the RecurringDonations class
 */
 @isTest
