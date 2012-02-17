@@ -61,9 +61,9 @@ global class RecurringDonations {
         List<Recurring_Donation__c> accountRecDonations = new List<Recurring_Donation__c>();
         List<Recurring_Donation__c> recDonationDeletes = new List<Recurring_Donation__c>();
         list<Recurring_Donation__c> rdInserts = new list<Recurring_Donation__c>(); 
-        
         list<Recurring_Donation__c> recDonationUpdates = new list<Recurring_Donation__c>();
-
+        Recurring_Donations_Settings__c rds = getRecurringDonationsSettings();
+        
         for(Recurring_Donation__c r : recurringDonations)
         {
             if (ta==triggerAction.beforeInsert)
@@ -72,7 +72,7 @@ global class RecurringDonations {
                 {
                     r.addError(System.Label.RecurringDonationMissingDataError);
                 }
-                if ( r.Installments__c > 50 )
+                if (r.Installments__c > rds.Maximum_Donations__c)
                 {
                     r.addError(System.Label.RecurringDonationTooManyInstallmentsError);
                 }
@@ -85,8 +85,7 @@ global class RecurringDonations {
             if ( ta==triggerAction.beforeDelete )
             {
                 recDonationDeletes.add(r);
-            }
-            
+            }            
             
             //added for 2.0
             if (ta==triggerAction.afterUpdate){
@@ -486,16 +485,7 @@ global class RecurringDonations {
         //and add new donation objects needed 
         for (sobject obj : sobjs){
             id rdid = (id)obj.get('rdid'); 
-        /*    
-            //get the total number of opps for usage in naming later...
-            if (!oppCountMap.containsKey(rdid)){
-                oppCountMap.put(rdid, (integer)obj.get('oppcount'));
-            }
-            else{
-                integer x = oppCountMap.get(rdid);
-                x = x + (integer)obj.get('oppcount');
-                oppCountMap.put(rdid, x);
-            }*/
+
             Recurring_Donation__c rd;
             
             if (!updateMap.containsKey(rdid)){
