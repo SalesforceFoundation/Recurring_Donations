@@ -39,12 +39,24 @@ DISABLES the RecurringDonations.trigger (Recurring_Donations__c, ALL).
         <type>Checkbox</type>
     </fields>
     <fields>
+        <fullName>Maximum_Donations__c</fullName>
+        <defaultValue>50</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Restricts the total number of donations created for non-open-ended Recurring Donations. Default is 50.</inlineHelpText>
+        <label>Maximum Donations</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
         <fullName>Open_Opportunity_Behavior__c</fullName>
         <description>Determines the behavior of any remaining open Opportunities when an open-ended Recurring Donation is moved to a closed status.</description>
         <externalId>false</externalId>
         <inlineHelpText>Determines the behavior of any remaining open Opportunities when an open-ended Recurring Donation is moved to a closed status.</inlineHelpText>
         <label>Open Opportunity Behavior</label>
-        <length>20</length>
+        <length>255</length>
         <required>false</required>
         <type>Text</type>
         <unique>false</unique>
