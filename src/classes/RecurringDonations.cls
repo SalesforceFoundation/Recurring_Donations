@@ -498,10 +498,10 @@ global with sharing class RecurringDonations {
                                                                                   and id IN :recurringDonationIDs]);
         
         list<sobject> sobjs = [select count(id) oppcount, MIN(CloseDate) MinDate, MAX(CloseDate) MaxDate, SUM(Amount) Total,
-                                  isClosed, Recurring_Donation__r.id rdid
+                                  isClosed, Recurring_Donation__r.id rdid, isWon
                                   from Opportunity where Recurring_Donation__r.Open_Ended_Status__c = :openLabel 
                                   and Recurring_Donation__r.id IN :rdMap.keySet()
-                                  group by rollup(Recurring_Donation__r.id, isClosed)]; 
+                                  group by rollup(Recurring_Donation__r.id, isClosed, isWon)]; 
         
         map<id, date> maxOpenPaymentMap = new map<id, date>();
         map<id, integer> oppCountMap = new map<id, integer>();
@@ -529,6 +529,7 @@ global with sharing class RecurringDonations {
             //this rdid as having had the nonsummary false isclosed value 
             //already used, so we don't accidentally use the summary row below
             boolean isClosed = (boolean)obj.get('isClosed');
+            boolean isWon = (boolean)obj.get('isWon');
             
             if (rdid != null){
             	
@@ -537,23 +538,24 @@ global with sharing class RecurringDonations {
                 }
                 
                 //if this is the open set for this rd
-                if (!isClosed && !isClosedEvaluatedSet.contains(rdid)){
+                if (!isClosed && !isWon && !isClosedEvaluatedSet.contains(rdid)){
                     rd.Next_Payment_Date__c = (date)obj.get('MinDate');
                     isClosedEvaluatedSet.add(rdid);
                     updateMap.put(rdid, rd);
                     maxOpenPaymentMap.put(rdid, (date)obj.get('MaxDate'));                              
                 }
                 //if this is the closed set     
-                else if (isClosed){
+                else if (isClosed && isWon){
                 	rd.Last_Payment_Date__c = (date)obj.get('MaxDate');
                     rd.Paid_Amount__c = (decimal)obj.get('Total');     
                     rd.Total_Paid_Installments__c = (integer)obj.get('oppcount');
                     updateMap.put(rdid, rd);                        
                 }
-                //get the summary row total
-                else{
-                	 oppCountMap.put(rdid, (integer)obj.get('oppcount'));                	
-                }
+                
+                if (!isClosed && isWon == null && isClosedEvaluatedSet.contains(rdid)){
+                    //get the summary row total of opens                    
+                    oppCountMap.put(rdid, (integer)obj.get('oppcount'));
+                }                    
             }                
         }
         
