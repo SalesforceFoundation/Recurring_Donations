@@ -671,14 +671,11 @@ global with sharing class RecurringDonations {
         if (recurringDonationsSettings == null) {
             //first see if we already have settings
             recurringDonationsSettings = Recurring_Donations_Settings__c.getOrgDefaults();
-            //system.debug(Households_Settings__c.getOrgDefaults());
-            if (recurringDonationsSettings == null) { 
-                recurringDonationsSettings = new Recurring_Donations_Settings__c();
+            //if the save behavior is null, then we'll need to upsert new settings, otherwise, we have valid settings as its 
+            //the only field w/o a default defined
+            if (recurringDonationsSettings.Open_Opportunity_Behavior__c == null){  
                 recurringDonationsSettings.Open_Opportunity_Behavior__c = RecurringDonations.RecurringDonationCloseOptions.Mark_Opportunities_Closed_Lost.name();
-                recurringDonationsSettings.Opportunity_Forecast_Months__c = 12; 
-                recurringDonationsSettings.Maximum_Donations__c = 50;
-                recurringDonationsSettings.Custom_Days__c = 14;
-                insert recurringDonationsSettings;
+                upsert recurringDonationsSettings;                
             }
         }         
         return recurringDonationsSettings;
