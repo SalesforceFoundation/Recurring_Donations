@@ -308,20 +308,52 @@ public class RecurringDonations_TEST {
         c.LastName = 'contact';
         c.AccountId = a.Id;
         insert c;       
+        
+        Campaign camp = new Campaign(name = 'Campaign', isActive = true);
+        insert camp;
 		
-		Recurring_Donation__c RDWeekly = new Recurring_Donation__c();
-        RDWeekly.Name = 'test';
-        RDWeekly.Contact__c = c.Id;
-        RDWeekly.Amount__c = 100;
-        RDWeekly.Installment_Period__c = System.Label.RecurringDonationInstallmentPeriodWeekly;
-        RDWeekly.Date_Established__c = date.newinstance(1970,6,12);
-        RDWeekly.Schedule_Type__c = System.Label.RecurringDonationMultiplyValue;
-        RDWeekly.Open_Ended_Status__c = System.label.RecurringDonationOpenStatus;
-        insert RDWeekly;
+		Recurring_Donation__c RD = new Recurring_Donation__c();
+        RD.Name = 'testweekly';
+        RD.Contact__c = c.Id;
+        RD.Amount__c = 100;
+        RD.Installment_Period__c = System.Label.RecurringDonationInstallmentPeriodWeekly;
+        RD.Date_Established__c = date.newinstance(1970,6,12);
+        RD.Schedule_Type__c = System.Label.RecurringDonationMultiplyValue;
+        RD.Open_Ended_Status__c = System.label.RecurringDonationOpenStatus;
+        insert RD;
         
         
-		
-		
+        RD = RD.clone(false);
+        RD.Name = 'testmonthly';
+        RD.Installment_Period__c = System.Label.RecurringDonationInstallmentPeriodMonthly;
+        RD.Contact__c = null;
+        RD.Organization__c = a.id;
+        RD.Recurring_Donation_Campaign__c = camp.id;
+        insert RD;
+        
+        RD = RD.clone(false);
+        RD.Name = 'testquarterly';
+        RD.Installment_Period__c = System.Label.RecurringDonationInstallmentPeriodQuarterly;
+        insert RD;    
+        
+        RD = RD.clone(false);
+        RD.Name = 'testyearly';
+        RD.Installment_Period__c = System.Label.RecurringDonationInstallmentPeriodYearly;
+        insert RD;
+        
+        RD = RD.clone(false);
+        RD.Name = 'testcustom';
+        RD.Installment_Period__c = System.Label.RecurringDonationInstallmentPeriodCustom;
+        RD.Next_Payment_Date__c = system.today();
+        insert RD;
+        
+        RD = RD.clone(false);
+        RD.Name = 'testbadinstallment';
+        RD.Installment_Period__c = 'GarbageValue';
+        insert RD;
+        
+        /***** SOME ASSERTIONS HERE!!!!!!!!!!!!!!!!!!!!  **********************/
+  
 		
 	}
 	//test that updates to the openended recurring donation object effect the associated opps
