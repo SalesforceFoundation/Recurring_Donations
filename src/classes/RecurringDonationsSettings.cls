@@ -144,7 +144,7 @@ public with sharing class RecurringDonationsSettings {
         }
     }
     
-    /** Test Method **/
+    /** Test Method **/ 
     public static testMethod void TEST_RecurringDonationsSettings() {
         Account a = new Account(Name='TestAccount');
         insert a;
@@ -152,7 +152,7 @@ public with sharing class RecurringDonationsSettings {
         
         Test.setCurrentPageReference(new PageReference('Page.RecurringDonationsSettings'));
         
-        Recurring_Donations_Settings__c rds = RecurringDonations.getRecurringDonationsSettingsForTest(new Recurring_Donations_Settings__c());
+        RecurringDonations_TEST.getRecurringDonationsSettingsForTest(new Recurring_Donations_Settings__c());
         
         //pass the controller into the extension
         RecurringDonationsSettings controller = new RecurringDonationsSettings(); 
