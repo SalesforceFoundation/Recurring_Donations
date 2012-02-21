@@ -33,7 +33,7 @@
 * @description Test class for the RecurringDonations class
 */
 @isTest
-private class RecurringDonations_TEST {
+public class RecurringDonations_TEST {
 
 	/// <name> insertOpportunities_Test </name>
 	/// <summary> test method for insertOpportunities function </summary>
@@ -281,10 +281,10 @@ private class RecurringDonations_TEST {
 	static testMethod void testSettingsCreation(){
 		delete [select id from Recurring_Donations_Settings__c];
 		Recurring_Donations_Settings__c rds = RecurringDonations.getRecurringDonationsSettings();
-		system.assertEquals(rds.Open_Opportunity_Behavior__c, RecurringDonations.RecurringDonationCloseOptions.Mark_Opportunities_Closed_Lost.name());
-		system.assertEquals(rds.Opportunity_Forecast_Months__c, 12);
-		system.assertEquals(rds.Maximum_Donations__c, 50);
-		system.assertEquals(rds.Custom_Days__c, 14);		     
+		system.assertEquals(12, rds.Opportunity_Forecast_Months__c);
+		system.assertEquals(50, rds.Maximum_Donations__c);
+		system.assertEquals(14, rds.Custom_Days__c);
+		system.assertEquals(RecurringDonations.RecurringDonationCloseOptions.Mark_Opportunities_Closed_Lost.name(), rds.Open_Opportunity_Behavior__c);		     
 	}
 	
 	//test that updates to the openended recurring donation object effect the associated opps
@@ -356,7 +356,13 @@ private class RecurringDonations_TEST {
 		
 	}
 	
-	
+	    
+    public static void getRecurringDonationsSettingsForTest(Recurring_Donations_Settings__c rds){
+        //clear out the old ones and insert this
+        delete [select id from Recurring_Donations_Settings__c];
+        insert rds;
+    }
+    
 	
 	
 }
