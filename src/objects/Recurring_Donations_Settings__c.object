@@ -6,6 +6,7 @@
     <enableFeeds>false</enableFeeds>
     <fields>
         <fullName>Custom_Days__c</fullName>
+        <defaultValue>14</defaultValue>
         <externalId>false</externalId>
         <inlineHelpText>Number of days for the custom Recurring Donations installment period.  The installment period picklist value on the Recurring Donation object is determined by custom labels.</inlineHelpText>
         <label>Custom Days</label>
@@ -39,6 +40,7 @@ DISABLES the RecurringDonations.trigger (Recurring_Donations__c, ALL).
     </fields>
     <fields>
         <fullName>Maximum_Donations__c</fullName>
+        <defaultValue>50</defaultValue>
         <externalId>false</externalId>
         <inlineHelpText>Restricts the total number of donations created for non-open-ended Recurring Donations. Default is 50.  Larger values may result in DML errors.</inlineHelpText>
         <label>Maximum Donations</label>
@@ -61,6 +63,7 @@ DISABLES the RecurringDonations.trigger (Recurring_Donations__c, ALL).
     </fields>
     <fields>
         <fullName>Opportunity_Forecast_Months__c</fullName>
+        <defaultValue>12</defaultValue>
         <description>Number of months worth of open Opportunities to be created when using an open-ended Recurring Donation.  Determined by the Last Payment Date field.</description>
         <externalId>false</externalId>
         <inlineHelpText>Number of months worth of open Opportunities to be created when using an open-ended Recurring Donation.  Determined by the Last Payment Date field.</inlineHelpText>
