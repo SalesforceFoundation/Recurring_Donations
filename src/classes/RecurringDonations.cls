@@ -442,13 +442,13 @@ global with sharing class RecurringDonations {
             }
         }        
         
-        if (!newlycloseddonations.isEmpty() && rds.Open_Opportunity_Behavior__c != 'No_Action'){
+        if (!newlycloseddonations.isEmpty() && rds.Open_Opportunity_Behavior__c != RecurringDonationCloseOptions.No_Action.name()){
         	list<Opportunity> olist = [select StageName, Recurring_Donation__r.id from Opportunity where Recurring_Donation__r.id IN :newlycloseddonations and isClosed = false];
         	
-        	if (rds.Open_Opportunity_Behavior__c == 'Delete_Open_Opportunities'){
+        	if (rds.Open_Opportunity_Behavior__c == RecurringDonationCloseOptions.Delete_Open_Opportunities.name()){
         	   database.delete(olist);
         	}        	   
-        	else if (rds.Open_Opportunity_Behavior__c == 'Mark_Opportunities_Closed_Lost'){
+        	else if (rds.Open_Opportunity_Behavior__c == RecurringDonationCloseOptions.Mark_Opportunities_Closed_Lost.name()){
                 for (Opportunity o : olist){
                 	o.StageName = system.label.RecurringDonationClosedLostOpportunityStage;
                 }
@@ -484,6 +484,7 @@ global with sharing class RecurringDonations {
         
         Recurring_Donations_Settings__c rds = getRecurringDonationsSettings();     
         string openLabel = system.label.RecurringDonationOpenStatus;
+        list<string> openLabels = openLabel.split(',');
         
         //get all possible rd records that may need updating, exclude ones not in an open state  
         map<id, Recurring_Donation__c> rdMap = new map<id, Recurring_Donation__c>([select id, Paid_Amount__c, Next_Payment_Date__c, 
@@ -494,7 +495,7 @@ global with sharing class RecurringDonations {
                                                                                      Schedule_Type__c, Total_Paid_Installments__c,
                                                                                      Donor_Name__c
                                                                                   from Recurring_Donation__c 
-                                                                                  where Open_Ended_Status__c = :openLabel 
+                                                                                  where Open_Ended_Status__c IN :openLabels 
                                                                                   and id IN :recurringDonationIDs]);
         
         list<sobject> sobjs = [select count(id) oppcount, MIN(CloseDate) MinDate, MAX(CloseDate) MaxDate, SUM(Amount) Total,
