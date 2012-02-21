@@ -278,9 +278,20 @@ private class RecurringDonations_TEST {
 		system.assertEquals(System.Label.RecurringDonationContactRole,installmentCRs[0].Role);
 	}
 	
+	static testMethod void testSettingsCreation(){
+		delete [select id from Recurring_Donations_Settings__c];
+		Recurring_Donations_Settings__c rds = RecurringDonations.getRecurringDonationsSettings();
+		system.assertEquals(rds.Open_Opportunity_Behavior__c, RecurringDonations.RecurringDonationCloseOptions.Mark_Opportunities_Closed_Lost.name());
+		system.assertEquals(rds.Opportunity_Forecast_Months__c, 12);
+		system.assertEquals(rds.Maximum_Donations__c, 50);
+		system.assertEquals(rds.Custom_Days__c, 14);		     
+	}
+	
 	//test that updates to the openended recurring donation object effect the associated opps
     static testMethod void updateRecurringDonation(){
-    
+        
+        //Recurring_Donations_Settings rds__c = new Recurring_Donations_Settings();
+        
         Account a = new Account();
         a.Name = 'test Individual';
         insert a;
@@ -322,12 +333,9 @@ private class RecurringDonations_TEST {
 		
 		map<id, Opportunity> allOpps = new map<id, Opportunity>([select id, Name,amount,accountid,CloseDate from Opportunity where Recurring_Donation__c = :r1.id]);
 		Opportunity unchangedOpp = allOpps.get(o.id);
-		
 		system.assertEquals(unchangedOpp.Amount, 100);		
 		
         allOpps.remove(o.id);
-   
-        
         
         //now, close the recurring donation 
         r1.Open_Ended_Status__c = system.label.RecurringDonationClosedStatus;
