@@ -287,10 +287,53 @@ public class RecurringDonations_TEST {
 		system.assertEquals(RecurringDonations.RecurringDonationCloseOptions.Mark_Opportunities_Closed_Lost.name(), rds.Open_Opportunity_Behavior__c);		     
 	}
 	
+	
+	//tests inserts of various types of open ended donations
+	static testMethod void insertOpenEndedRecurringDonations(){
+        RecurringDonations_TEST.getRecurringDonationsSettingsForTest(
+        new Recurring_Donations_Settings__c(
+        Opportunity_Forecast_Months__c = 12,
+        Maximum_Donations__c = 50,
+        Custom_Days__c = 14,
+        Open_Opportunity_Behavior__c = RecurringDonations.RecurringDonationCloseOptions.Mark_Opportunities_Closed_Lost.name()        
+        ));		
+		
+		
+		Account a = new Account();
+        a.Name = 'test Individual';
+        insert a;
+        
+        Contact c = new Contact();
+        c.FirstName = 'test';
+        c.LastName = 'contact';
+        c.AccountId = a.Id;
+        insert c;       
+		
+		Recurring_Donation__c RDWeekly = new Recurring_Donation__c();
+        RDWeekly.Name = 'test';
+        RDWeekly.Contact__c = c.Id;
+        RDWeekly.Amount__c = 100;
+        RDWeekly.Installment_Period__c = System.Label.RecurringDonationInstallmentPeriodWeekly;
+        RDWeekly.Date_Established__c = date.newinstance(1970,6,12);
+        RDWeekly.Schedule_Type__c = System.Label.RecurringDonationMultiplyValue;
+        RDWeekly.Open_Ended_Status__c = System.label.RecurringDonationOpenStatus;
+        insert RDWeekly;
+        
+        
+		
+		
+		
+	}
 	//test that updates to the openended recurring donation object effect the associated opps
     static testMethod void updateRecurringDonation(){
         
-        //Recurring_Donations_Settings rds__c = new Recurring_Donations_Settings();
+        RecurringDonations_TEST.getRecurringDonationsSettingsForTest(
+        new Recurring_Donations_Settings__c(
+        Opportunity_Forecast_Months__c = 12,
+        Maximum_Donations__c = 50,
+        Custom_Days__c = 14,
+        Open_Opportunity_Behavior__c = RecurringDonations.RecurringDonationCloseOptions.Mark_Opportunities_Closed_Lost.name()        
+        ));           
         
         Account a = new Account();
         a.Name = 'test Individual';
@@ -336,18 +379,12 @@ public class RecurringDonations_TEST {
 		system.assertEquals(unchangedOpp.Amount, 100);		
 		
         allOpps.remove(o.id);
-        
         //now, close the recurring donation 
         r1.Open_Ended_Status__c = system.label.RecurringDonationClosedStatus;
         update r1;
-        
         Opportunity closedOpp = allOpps.values()[0];
         closedOpp.StageName = closedstage;
         update closedOpp;
-        
-        
-        
-		
 	}
 	
 	//test closing an opportunity for an open recurring donation
@@ -362,7 +399,6 @@ public class RecurringDonations_TEST {
         delete [select id from Recurring_Donations_Settings__c];
         insert rds;
     }
-    
 	
 	
 }

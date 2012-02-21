@@ -679,7 +679,9 @@ global with sharing class RecurringDonations {
         }         
         return recurringDonationsSettings;
     }
+    
 
+    
     
     
 }
