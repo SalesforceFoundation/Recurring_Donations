@@ -34,8 +34,6 @@
 */
 global with sharing class RecurringDonations {
     
-    public RecurringDonations(){}
-    
     public enum RecurringDonationCloseOptions {Delete_Open_Opportunities, Mark_Opportunities_Closed_Lost, No_Action}
     public enum triggerAction {beforeInsert, beforeUpdate, beforeDelete, afterInsert, afterUpdate, afterDelete, afterUndelete}
     
@@ -675,26 +673,13 @@ global with sharing class RecurringDonations {
             //the only field w/o a default defined
             if (recurringDonationsSettings.Open_Opportunity_Behavior__c == null){  
                 recurringDonationsSettings.Open_Opportunity_Behavior__c = RecurringDonations.RecurringDonationCloseOptions.Mark_Opportunities_Closed_Lost.name();
-                upsert recurringDonationsSettings;                
+                upsert recurringDonationsSettings;    
+                recurringDonationsSettings = Recurring_Donations_Settings__c.getOrgDefaults();                           
             }
         }         
         return recurringDonationsSettings;
     }
-    
-    public static Recurring_Donations_Settings__c getRecurringDonationsSettingsForTest(Recurring_Donations_Settings__c rds){
-        //clear out the old ones and insert this
-        delete [select id from Recurring_Donations_Settings__c];
-        if (rds != null){
-            insert rds;
-            recurringDonationsSettings = rds;
-        }
-        //use default vals
-        else{
-        	recurringDonationsSettings = getRecurringDonationsSettings();
-        }   	
-        return recurringDonationsSettings;
-    }
-    
+
     
     
 }
