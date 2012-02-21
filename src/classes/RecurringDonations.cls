@@ -674,9 +674,10 @@ global with sharing class RecurringDonations {
             //system.debug(Households_Settings__c.getOrgDefaults());
             if (recurringDonationsSettings == null) { 
                 recurringDonationsSettings = new Recurring_Donations_Settings__c();
-                recurringDonationsSettings.Open_Opportunity_Behavior__c = '';
+                recurringDonationsSettings.Open_Opportunity_Behavior__c = RecurringDonations.RecurringDonationCloseOptions.Mark_Opportunities_Closed_Lost.name();
                 recurringDonationsSettings.Opportunity_Forecast_Months__c = 12; 
                 recurringDonationsSettings.Maximum_Donations__c = 50;
+                recurringDonationsSettings.Custom_Days__c = 14;
                 insert recurringDonationsSettings;
             }
         }         
