@@ -53,7 +53,7 @@ global with sharing class RecurringDonations {
         }           
         //recurring donations that need to be updated      
         if (!rdIds.isEmpty()){
-            updateOnChange(rdIds, false);                       
+            evaluateExistingOpportunities(rdIds, false);                       
         }
     }
     
@@ -102,12 +102,27 @@ global with sharing class RecurringDonations {
         
         //added for 2.0
         if (recDonationUpdates.size() > 0){
-            updateRecDonations(recDonationUpdates, oldRecurringDonations); 
+            evaluateRecurringDonationUpdate(recDonationUpdates, oldRecurringDonations); 
         }
         if (rdInserts.size() > 0){
             insertOpptys(rdInserts);
         }        
     }
+    
+    //future wrapper for rds with no opptys closed
+    @future
+    public static void insertNewOpptysFuture(set<id> recids){
+    	delete [select id from Opportunity where isClosed = false and Recurring_Donation__r.id IN :recids];
+    	list<Recurring_Donation__c> reclist = [select id, Total__c, Total_Paid_Installments__c, Schedule_Type__c,
+    	                                       Recurring_Donation_Campaign__c, Paid_Amount__c, Organization__c,
+    	                                       Open_Ended_Status__c, Next_Payment_Date__c, Last_Payment_Date__c,
+    	                                       Installments__c, Installment_Period__c, Installment_Amount__c,
+    	                                       Donor_Name__c, Date_Established__c, Contact__c, Amount__c
+    	                                       from Recurring_Donation__c];
+    	
+    	insertOpptys(reclist);
+    }
+    
     
     /// <name> insertContactOpportunities </name>
     /// <summary> Creates new Opportunities when a RecurringDonation is inserted </summary>
@@ -335,7 +350,10 @@ global with sharing class RecurringDonations {
                         createdOppIds.add(s.getId());
                     }
                 }
-                oppContactRolesFuture(createdOppIds);
+                if (!system.isFuture())
+                    oppContactRolesFuture(createdOppIds);
+                else
+                    oppContactRoles(createdOppIds);                    
             }                
         }
     }
@@ -416,11 +434,12 @@ global with sharing class RecurringDonations {
     
     
     //handles updates to the recurring donations object
-    public static void updateRecDonations(list<Recurring_Donation__c> recurringDonations, map<id, Recurring_Donation__c> oldRecurringDonations){
+    public static void evaluateRecurringDonationUpdate(list<Recurring_Donation__c> recurringDonations, map<id, Recurring_Donation__c> oldRecurringDonations){
         // determine the update type - 
         Recurring_Donations_Settings__c rds = getRecurringDonationsSettings();
         // opening a closed recurring donation
-        set<id> reevaluateOpps = new set<id>(); 
+        set<id> reevaluateOpps = new set<id>();
+        set<id> reinsertOpps = new set<id>(); 
         
         // closed an open recurring donation
         list<Recurring_Donation__c> newlycloseddonations = new list<Recurring_Donation__c>();
@@ -437,11 +456,24 @@ global with sharing class RecurringDonations {
             if (r.Open_Ended_Status__c == closedlabel && oldRD.Open_Ended_Status__c != r.Open_Ended_Status__c){
                 newlycloseddonations.add(r);
             }
-            else if (r.Open_Ended_Status__c == openlabel){
-                reevaluateopps.add(r.id);   
+            //if there's any other change that would require a reevaluation of existing Opps
+            else if (r.Open_Ended_Status__c == openlabel && 
+            (r.Amount__c != oldRD.Amount__c ||
+            r.Recurring_Donation_Campaign__c != oldRD.Recurring_Donation_Campaign__c ||
+            r.Organization__c != oldRD.Organization__c ||
+            r.Next_Payment_Date__c != oldRD.Next_Payment_Date__c ||
+            r.Installment_Period__c != oldRD.Installment_Period__c ||
+            r.Contact__c != oldRD.Contact__c)){
+                if (r.Last_Payment_Date__c == null){
+                    reinsertopps.add(r.id);
+                }                
+                else{                
+                    reevaluateopps.add(r.id);
+                }                        
             }
         }        
         
+        //handle any closing recurring donations
         if (!newlycloseddonations.isEmpty() && rds.Open_Opportunity_Behavior__c != RecurringDonationCloseOptions.No_Action.name()){
         	list<Opportunity> olist = [select StageName, Recurring_Donation__r.id from Opportunity where Recurring_Donation__r.id IN :newlycloseddonations and isClosed = false];
         	
@@ -457,13 +489,18 @@ global with sharing class RecurringDonations {
         }
         
         if (!reevaluateopps.isEmpty()){
-        	updateOnChange(reevaluateopps, true);
+        	evaluateExistingOpportunities(reevaluateopps, true);
         }
+        
+        if (!reinsertopps.isEmpty()){
+        	insertNewOpptysFuture(reinsertopps);
+        }
+        
     }
-    
-    //updating the RD based on a change in the opp stage, going from open to closed
+
+    //evaluate existing opportunities and add more if necessary - update recurring donation object with opportunity values
     @future
-    public static void updateOnChange(set<id> recurringDonationIDs, boolean clearOpenOpps){
+    public static void evaluateExistingOpportunities(set<id> recurringDonationIDs, boolean clearOpenOpps){
         
         //if we need to clear out existing opps before evaluating, do so here
         if (clearOpenOpps){
@@ -485,6 +522,8 @@ global with sharing class RecurringDonations {
         Recurring_Donations_Settings__c rds = getRecurringDonationsSettings();     
         string openLabel = system.label.RecurringDonationOpenStatus;
         list<string> openLabels = openLabel.split(',');
+        for(string s : openLabels)
+            system.debug('LABEL: ' + s);
         
         //get all possible rd records that may need updating, exclude ones not in an open state  
         map<id, Recurring_Donation__c> rdMap = new map<id, Recurring_Donation__c>([select id, Paid_Amount__c, Next_Payment_Date__c, 
@@ -497,13 +536,13 @@ global with sharing class RecurringDonations {
                                                                                   from Recurring_Donation__c 
                                                                                   where Open_Ended_Status__c IN :openLabels 
                                                                                   and id IN :recurringDonationIDs]);
-        
+        system.debug('RDMAP SIZE: ' + rdMap.keySet().size());
         list<sobject> sobjs = [select count(id) oppcount, MIN(CloseDate) MinDate, MAX(CloseDate) MaxDate, SUM(Amount) Total,
                                   isClosed, Recurring_Donation__r.id rdid, isWon
                                   from Opportunity where Recurring_Donation__r.Open_Ended_Status__c = :openLabel 
                                   and Recurring_Donation__r.id IN :rdMap.keySet()
                                   group by rollup(Recurring_Donation__r.id, isClosed, isWon)]; 
-        
+        system.debug('SOBJ SIZE: ' + sobjs.size());
         map<id, date> maxOpenPaymentMap = new map<id, date>();
         map<id, integer> oppCountMap = new map<id, integer>();
         //holds the rdid of all evaluated closed sets
@@ -514,6 +553,8 @@ global with sharing class RecurringDonations {
         //update the rc next payment date 
         //and add new donation objects needed 
         for (sobject obj : sobjs){
+            system.debug('--------------------------------------------------------------------------------------Here be SOBJS');
+
             id rdid = (id)obj.get('rdid'); 
 
             Recurring_Donation__c rd;
@@ -580,7 +621,7 @@ global with sharing class RecurringDonations {
             
             //if max open payment is less than the value of hte last payment + the 
             //scheduled open timeframe, add as many opps as needed to satisfy teh criteria
-            if (rd.Last_Payment_Date__c.addMonths(oppMonths) > maxOpenPaymentMap.get(rd.id)){
+            if (rd.Last_Payment_Date__c.addMonths(oppMonths) >= maxOpenPaymentMap.get(rd.id)){
             	integer oppCounter = 1;
                 do{
                     Opportunity o = new Opportunity();
@@ -663,7 +704,6 @@ global with sharing class RecurringDonations {
             }
         }
     }
-
     
      //get the settings. handles the case where the managed value doesn't exist yet
     public static Recurring_Donations_Settings__c getRecurringDonationsSettings() {
