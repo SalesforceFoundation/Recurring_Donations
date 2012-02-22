@@ -146,7 +146,7 @@ public with sharing class RecurringDonationsSettings {
     
     /** Test Method **/ 
     public static testMethod void TEST_RecurringDonationsSettings() {
-        RecurringDonations_TEST.getRecurringDonationsSettingsForTest(new Recurring_Donations_Settings__c());
+        RecurringDonations_TEST.setRecurringDonationsSettingsForTest(new Recurring_Donations_Settings__c());
         
         Account a = new Account(Name='TestAccount');
         insert a;
