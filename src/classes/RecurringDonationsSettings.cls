@@ -166,7 +166,7 @@ public with sharing class RecurringDonationsSettings {
         controller.testPackageIntegrity();
         controller.cancel();
         controller.editRDsettings();
-        controller.rds.Open_Opportunity_Behavior__c = '--------------------------------------------------------------------------------------------';
+        controller.rds.Open_Opportunity_Behavior__c = '-------------------';
         controller.saveRDSettings();   
         controller.rds.Open_Opportunity_Behavior__c = '1234';
         controller.saveRDSettings();
