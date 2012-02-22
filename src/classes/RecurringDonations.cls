@@ -255,6 +255,8 @@ global with sharing class RecurringDonations {
                     else
                         OppCloseDate = r.Date_Established__c;                  
                    
+                    date incrementdate = OppCloseDate;
+                                       
                     integer rdcounter = 1;                   
                     do{
                         Opportunity o = new Opportunity();
@@ -315,8 +317,8 @@ global with sharing class RecurringDonations {
                             o.CampaignId = r.Recurring_Donation_Campaign__c;
                         }
                         opportunityInserts.add(o);    
-                        rdcounter++;                                                               
-                    }while (loop_date < r.Date_Established__c.addMonths((integer)rds.Opportunity_Forecast_Months__c));
+                        rdcounter++;                                                                                       
+                    }while (loop_date < incrementdate.addMonths((integer)rds.Opportunity_Forecast_Months__c));
                 }
             }                 
         }
