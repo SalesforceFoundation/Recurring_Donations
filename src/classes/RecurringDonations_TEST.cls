@@ -290,14 +290,13 @@ public class RecurringDonations_TEST {
 	
 	//tests inserts of various types of open ended donations
 	static testMethod void insertOpenEndedRecurringDonations(){
-        RecurringDonations_TEST.getRecurringDonationsSettingsForTest(
+        RecurringDonations_TEST.setRecurringDonationsSettingsForTest(
         new Recurring_Donations_Settings__c(
         Opportunity_Forecast_Months__c = 12,
         Maximum_Donations__c = 50,
         Custom_Days__c = 14,
         Open_Opportunity_Behavior__c = RecurringDonations.RecurringDonationCloseOptions.Mark_Opportunities_Closed_Lost.name()        
-        ));		
-		
+        ));				
 		
 		Account a = new Account();
         a.Name = 'test Individual';
@@ -312,6 +311,8 @@ public class RecurringDonations_TEST {
         Campaign camp = new Campaign(name = 'Campaign', isActive = true);
         insert camp;
 		
+		list<Recurring_Donation__c> rdlist = new list<Recurring_Donation__c>();
+		
 		Recurring_Donation__c RD = new Recurring_Donation__c();
         RD.Name = 'testweekly';
         RD.Contact__c = c.Id;
@@ -320,7 +321,7 @@ public class RecurringDonations_TEST {
         RD.Date_Established__c = date.newinstance(1970,6,12);
         RD.Schedule_Type__c = System.Label.RecurringDonationMultiplyValue;
         RD.Open_Ended_Status__c = System.label.RecurringDonationOpenStatus;
-        insert RD;
+        rdlist.add(RD);
         
         
         RD = RD.clone(false);
@@ -329,37 +330,42 @@ public class RecurringDonations_TEST {
         RD.Contact__c = null;
         RD.Organization__c = a.id;
         RD.Recurring_Donation_Campaign__c = camp.id;
-        insert RD;
+        rdlist.add(RD);
         
         RD = RD.clone(false);
         RD.Name = 'testquarterly';
         RD.Installment_Period__c = System.Label.RecurringDonationInstallmentPeriodQuarterly;
-        insert RD;    
+        rdlist.add(RD);
         
         RD = RD.clone(false);
         RD.Name = 'testyearly';
         RD.Installment_Period__c = System.Label.RecurringDonationInstallmentPeriodYearly;
-        insert RD;
+        rdlist.add(RD);
         
         RD = RD.clone(false);
         RD.Name = 'testcustom';
         RD.Installment_Period__c = System.Label.RecurringDonationInstallmentPeriodCustom;
         RD.Next_Payment_Date__c = system.today();
-        insert RD;
+        rdlist.add(RD);
         
         RD = RD.clone(false);
         RD.Name = 'testbadinstallment';
         RD.Installment_Period__c = 'GarbageValue';
-        insert RD;
+        rdlist.add(RD);
         
-        /***** SOME ASSERTIONS HERE!!!!!!!!!!!!!!!!!!!!  **********************/
-  
-		
+        test.startTest();
+        insert rdlist;
+        test.stopTest();
+        
+        system.assertEquals(12, [select count() from Opportunity where Recurring_Donation__r.Name = 'testmonthly']);
+        system.assertEquals(4, [select count() from Opportunity where Recurring_Donation__r.Name = 'testquarterly']);
+        system.assertEquals(1, [select count() from Opportunity where Recurring_Donation__r.Name = 'testyearly']);
+        system.assertEquals(53, [select count() from Opportunity where Recurring_Donation__r.Name = 'testweekly']);
+        system.assertEquals(27, [select count() from Opportunity where Recurring_Donation__r.Name = 'testcustom']);
 	}
-	//test that updates to the openended recurring donation object effect the associated opps
-    static testMethod void updateRecurringDonation(){
-        
-        RecurringDonations_TEST.getRecurringDonationsSettingsForTest(
+	
+	static testMethod void updateOpenEndedRecurringDonationMonthly(){
+        RecurringDonations_TEST.setRecurringDonationsSettingsForTest(
         new Recurring_Donations_Settings__c(
         Opportunity_Forecast_Months__c = 12,
         Maximum_Donations__c = 50,
@@ -386,51 +392,646 @@ public class RecurringDonations_TEST {
         r1.Date_Established__c = date.newinstance(1970,6,12);
         r1.Schedule_Type__c = System.Label.RecurringDonationMultiplyValue;
         r1.Open_Ended_Status__c = System.label.RecurringDonationOpenStatus;
-        
+        r1.Next_Payment_Date__c = system.today();
         insert r1;
-        map<id, Opportunity> originalOpps = new map<id, Opportunity>([select id, Name,amount,accountid,CloseDate from Opportunity where Recurring_Donation__c = :r1.id]);    	   
-	   	
-	   	system.assertEquals(54, originalOpps.size());
-	   	system.assertEquals(100, originalOpps.values()[0].Amount);
-	   	
-	   	//close one opp
-	   	Opportunity o = originalOpps.values()[0];
-	   	string closedstage = [select masterlabel from opportunitystage where isActive = true and iswon = true and isClosed = true limit 1].masterlabel;
-	   	o.StageName = closedstage; 
-	   	update o;
-	   	
-	   	//should still be fifty three opps
-	   	system.assertEquals(53, [select count() from Opportunity where Recurring_Donation__c = :r1.id and isClosed != true]);
-	   		   	
-		r1.Installments__c = 5;
-		r1.Amount__c = 200;
+        
+        map<id, Opportunity> originalOpps = new map<id, Opportunity>([select id, Name,amount,accountid,CloseDate from Opportunity where Recurring_Donation__c = :r1.id]);          
+        
+        system.assertEquals(53, originalOpps.size());
+        system.assertEquals(100, originalOpps.values()[0].Amount);
+		
+		Test.startTest();
+		r1.Installment_Period__c = System.Label.RecurringDonationInstallmentPeriodMonthly;
 		update r1;
+		Test.stopTest();
 		
-		map<id, Opportunity> allOpps = new map<id, Opportunity>([select id, Name,amount,accountid,CloseDate from Opportunity where Recurring_Donation__c = :r1.id]);
-		Opportunity unchangedOpp = allOpps.get(o.id);
-		system.assertEquals(unchangedOpp.Amount, 100);		
+		system.assertEquals(12, [select count() from Opportunity where Recurring_Donation__c = :r1.id]);
 		
-        allOpps.remove(o.id);
-        //now, close the recurring donation 
-        r1.Open_Ended_Status__c = system.label.RecurringDonationClosedStatus;
+	}
+	static testMethod void updateOpenEndedRecurringDonationCustom(){
+		    RecurringDonations_TEST.setRecurringDonationsSettingsForTest(
+        new Recurring_Donations_Settings__c(
+        Opportunity_Forecast_Months__c = 12,
+        Maximum_Donations__c = 50,
+        Custom_Days__c = 14,
+        Open_Opportunity_Behavior__c = RecurringDonations.RecurringDonationCloseOptions.Mark_Opportunities_Closed_Lost.name()        
+        ));           
+        
+        Account a = new Account();
+        a.Name = 'test Individual';
+        insert a;
+        
+        Contact c = new Contact();
+        c.FirstName = 'test';
+        c.LastName = 'contact';
+        c.AccountId = a.Id;
+        insert c;       
+
+        Recurring_Donation__c r1 = new Recurring_Donation__c();
+        r1.Name = 'test';
+        r1.Installments__c = 2;
+        r1.Contact__c = c.Id;
+        r1.Amount__c = 100;
+        r1.Installment_Period__c = System.Label.RecurringDonationInstallmentPeriodWeekly;
+        r1.Date_Established__c = date.newinstance(1970,6,12);
+        r1.Schedule_Type__c = System.Label.RecurringDonationMultiplyValue;
+        r1.Open_Ended_Status__c = System.label.RecurringDonationOpenStatus;
+        r1.Next_Payment_Date__c = system.today();
+        insert r1;
+        
+        map<id, Opportunity> originalOpps = new map<id, Opportunity>([select id, Name,amount,accountid,CloseDate from Opportunity where Recurring_Donation__c = :r1.id]);          
+        
+        system.assertEquals(53, originalOpps.size());
+        system.assertEquals(100, originalOpps.values()[0].Amount);
+        
+        Test.startTest();
+        r1.Installment_Period__c = System.Label.RecurringDonationInstallmentPeriodCustom;
         update r1;
-        Opportunity closedOpp = allOpps.values()[0];
-        closedOpp.StageName = closedstage;
-        update closedOpp;
+        Test.stopTest();
+        system.assertEquals(27, [select count() from Opportunity where Recurring_Donation__c = :r1.id]);
+	}
+	
+	static testMethod void updateOpenEndedRecurringDonationYearly(){
+        RecurringDonations_TEST.setRecurringDonationsSettingsForTest(
+        new Recurring_Donations_Settings__c(
+        Opportunity_Forecast_Months__c = 12,
+        Maximum_Donations__c = 50,
+        Custom_Days__c = 14,
+        Open_Opportunity_Behavior__c = RecurringDonations.RecurringDonationCloseOptions.Mark_Opportunities_Closed_Lost.name()        
+        ));           
+        
+        Account a = new Account();
+        a.Name = 'test Individual';
+        insert a;
+        
+        Contact c = new Contact();
+        c.FirstName = 'test';
+        c.LastName = 'contact';
+        c.AccountId = a.Id;
+        insert c;       
+
+        Recurring_Donation__c r1 = new Recurring_Donation__c();
+        r1.Name = 'test';
+        r1.Installments__c = 2;
+        r1.Contact__c = c.Id;
+        r1.Amount__c = 100;
+        r1.Installment_Period__c = System.Label.RecurringDonationInstallmentPeriodWeekly;
+        r1.Date_Established__c = date.newinstance(1970,6,12);
+        r1.Schedule_Type__c = System.Label.RecurringDonationMultiplyValue;
+        r1.Open_Ended_Status__c = System.label.RecurringDonationOpenStatus;
+        r1.Next_Payment_Date__c = system.today();
+        insert r1;
+        
+        map<id, Opportunity> originalOpps = new map<id, Opportunity>([select id, Name,amount,accountid,CloseDate from Opportunity where Recurring_Donation__c = :r1.id]);          
+        
+        system.assertEquals(53, originalOpps.size());
+        system.assertEquals(100, originalOpps.values()[0].Amount);
+        
+        Test.startTest();
+        r1.Installment_Period__c = System.Label.RecurringDonationInstallmentPeriodYearly;
+        update r1;
+        Test.stopTest();
+        
+        system.assertEquals(1, [select count() from Opportunity where Recurring_Donation__c = :r1.id]);
+    }
+    static testMethod void updateOpenEndedRecurringDonationWeekly(){
+            RecurringDonations_TEST.setRecurringDonationsSettingsForTest(
+        new Recurring_Donations_Settings__c(
+        Opportunity_Forecast_Months__c = 12,
+        Maximum_Donations__c = 50,
+        Custom_Days__c = 14,
+        Open_Opportunity_Behavior__c = RecurringDonations.RecurringDonationCloseOptions.Mark_Opportunities_Closed_Lost.name()        
+        ));           
+        
+        Account a = new Account();
+        a.Name = 'test Individual';
+        insert a;
+        
+        Contact c = new Contact();
+        c.FirstName = 'test';
+        c.LastName = 'contact';
+        c.AccountId = a.Id;
+        insert c;       
+
+        Recurring_Donation__c r1 = new Recurring_Donation__c();
+        r1.Name = 'test';
+        r1.Installments__c = 2;
+        r1.Contact__c = c.Id;
+        r1.Amount__c = 100;
+        r1.Installment_Period__c = System.Label.RecurringDonationInstallmentPeriodMonthly;
+        r1.Date_Established__c = date.newinstance(1970,6,12);
+        r1.Schedule_Type__c = System.Label.RecurringDonationMultiplyValue;
+        r1.Open_Ended_Status__c = System.label.RecurringDonationOpenStatus;
+        r1.Next_Payment_Date__c = system.today();
+        insert r1;
+        
+        map<id, Opportunity> originalOpps = new map<id, Opportunity>([select id, Name,amount,accountid,CloseDate from Opportunity where Recurring_Donation__c = :r1.id]);          
+        
+        system.assertEquals(12, originalOpps.size());
+        system.assertEquals(100, originalOpps.values()[0].Amount);
+        
+        Test.startTest();
+        r1.Installment_Period__c = System.Label.RecurringDonationInstallmentPeriodWeekly;
+        update r1;
+        Test.stopTest();        
+        system.assertEquals(53, [select count() from Opportunity where Recurring_Donation__c = :r1.id]);
+    }
+    
+    static testMethod void updateOpenEndedRecurringDonationQuarterly(){
+        RecurringDonations_TEST.setRecurringDonationsSettingsForTest(
+        new Recurring_Donations_Settings__c(
+        Opportunity_Forecast_Months__c = 12,
+        Maximum_Donations__c = 50,
+        Custom_Days__c = 14,
+        Open_Opportunity_Behavior__c = RecurringDonations.RecurringDonationCloseOptions.Mark_Opportunities_Closed_Lost.name()        
+        ));           
+        
+        Account a = new Account();
+        a.Name = 'test Individual';
+        insert a;
+        
+        Contact c = new Contact();
+        c.FirstName = 'test';
+        c.LastName = 'contact';
+        c.AccountId = a.Id;
+        insert c;       
+
+        Recurring_Donation__c r1 = new Recurring_Donation__c();
+        r1.Name = 'test';
+        r1.Installments__c = 2;
+        r1.Contact__c = c.Id;
+        r1.Amount__c = 100;
+        r1.Installment_Period__c = System.Label.RecurringDonationInstallmentPeriodWeekly;
+        r1.Date_Established__c = date.newinstance(1970,6,12);
+        r1.Schedule_Type__c = System.Label.RecurringDonationMultiplyValue;
+        r1.Open_Ended_Status__c = System.label.RecurringDonationOpenStatus;
+        r1.Next_Payment_Date__c = system.today();
+        insert r1;
+        
+        map<id, Opportunity> originalOpps = new map<id, Opportunity>([select id, Name,amount,accountid,CloseDate from Opportunity where Recurring_Donation__c = :r1.id]);          
+        
+        system.assertEquals(53, originalOpps.size());
+        system.assertEquals(100, originalOpps.values()[0].Amount);
+        
+        Test.startTest();
+        r1.Installment_Period__c = System.Label.RecurringDonationInstallmentPeriodQuarterly;
+        update r1;
+        Test.stopTest();
+        
+        system.assertEquals(4, [select count() from Opportunity where Recurring_Donation__c = :r1.id]);
+    }    
+    	
+	//test closing an opportunity for an open recurring donation
+	static testMethod void closeOppForOpenEndedRecurringDonationWeekly(){
+        RecurringDonations_TEST.setRecurringDonationsSettingsForTest(
+        new Recurring_Donations_Settings__c(
+        Opportunity_Forecast_Months__c = 12,
+        Maximum_Donations__c = 50,
+        Custom_Days__c = 14,
+        Open_Opportunity_Behavior__c = RecurringDonations.RecurringDonationCloseOptions.Mark_Opportunities_Closed_Lost.name()        
+        ));           
+        
+        Account a = new Account();
+        a.Name = 'test Individual';
+        insert a;
+        
+        Contact c = new Contact();
+        c.FirstName = 'test';
+        c.LastName = 'contact';
+        c.AccountId = a.Id;
+        insert c;       
+
+        Recurring_Donation__c r1 = new Recurring_Donation__c();
+        r1.Name = 'test';
+        r1.Installments__c = 2;
+        r1.Contact__c = c.Id;
+        r1.Amount__c = 100;
+        r1.Installment_Period__c = System.Label.RecurringDonationInstallmentPeriodWeekly;
+        r1.Date_Established__c = date.newinstance(1970,6,12);
+        r1.Schedule_Type__c = System.Label.RecurringDonationMultiplyValue;
+        r1.Open_Ended_Status__c = System.label.RecurringDonationOpenStatus;
+        r1.Next_Payment_Date__c = system.today();
+        insert r1;
+        
+        map<id, Opportunity> originalOpps = new map<id, Opportunity>([select id, Name,amount,accountid,CloseDate from Opportunity where Recurring_Donation__c = :r1.id]);
+        system.assertEquals(53, originalOpps.size());          
+        
+        Opportunity o = originalOpps.values()[0];
+        string closedstage = [select masterlabel from opportunitystage where isActive = true and iswon = true and isClosed = true limit 1].masterlabel;
+        o.StageName = closedstage;
+        o.CloseDate = system.today();
+        
+        Test.startTest();        
+        update o;
+        Test.stopTest();
+        
+        
+        Recurring_Donation__c rd = [select Last_Payment_Date__c from Recurring_Donation__c where id = :r1.id];     
+        
+        system.assertEquals(53, [select count() from Opportunity where Recurring_Donation__c = :r1.id and isClosed = false]);
+        system.assertEquals(system.today(), rd.Last_Payment_Date__c);
+	}
+	//test closing an opportunity for an open recurring donation
+    static testMethod void closeOppForOpenEndedRecurringDonationMonthly(){
+        RecurringDonations_TEST.setRecurringDonationsSettingsForTest(
+        new Recurring_Donations_Settings__c(
+        Opportunity_Forecast_Months__c = 12,
+        Maximum_Donations__c = 50,
+        Custom_Days__c = 14,
+        Open_Opportunity_Behavior__c = RecurringDonations.RecurringDonationCloseOptions.Mark_Opportunities_Closed_Lost.name()        
+        ));           
+        
+        Account a = new Account();
+        a.Name = 'test Individual';
+        insert a;
+        
+        Contact c = new Contact();
+        c.FirstName = 'test';
+        c.LastName = 'contact';
+        c.AccountId = a.Id;
+        insert c;       
+
+        Recurring_Donation__c r1 = new Recurring_Donation__c();
+        r1.Name = 'test';
+        r1.Installments__c = 2;
+        r1.Contact__c = c.Id;
+        r1.Amount__c = 100;
+        r1.Installment_Period__c = System.Label.RecurringDonationInstallmentPeriodMonthly;
+        r1.Date_Established__c = date.newinstance(1970,6,12);
+        r1.Schedule_Type__c = System.Label.RecurringDonationMultiplyValue;
+        r1.Open_Ended_Status__c = System.label.RecurringDonationOpenStatus;
+        r1.Next_Payment_Date__c = system.today();
+        insert r1;
+        
+        map<id, Opportunity> originalOpps = new map<id, Opportunity>([select id, Name,amount,accountid,CloseDate from Opportunity where Recurring_Donation__c = :r1.id]);
+        system.assertEquals(12, originalOpps.size());          
+        
+        Opportunity o = originalOpps.values()[0];
+        string closedstage = [select masterlabel from opportunitystage where isActive = true and iswon = true and isClosed = true limit 1].masterlabel;
+        o.StageName = closedstage;
+        o.CloseDate = system.today();
+        
+        Test.startTest();        
+        update o;
+        Test.stopTest();
+        
+        
+        Recurring_Donation__c rd = [select Last_Payment_Date__c from Recurring_Donation__c where id = :r1.id];     
+        
+        system.assertEquals(12, [select count() from Opportunity where Recurring_Donation__c = :r1.id and isClosed = false]);
+        system.assertEquals(system.today(), rd.Last_Payment_Date__c);
+    }
+	
+	//test closing an opportunity for an open recurring donation
+    static testMethod void closeOppForOpenEndedRecurringDonationQuarterly(){
+        RecurringDonations_TEST.setRecurringDonationsSettingsForTest(
+        new Recurring_Donations_Settings__c(
+        Opportunity_Forecast_Months__c = 12,
+        Maximum_Donations__c = 50,
+        Custom_Days__c = 14,
+        Open_Opportunity_Behavior__c = RecurringDonations.RecurringDonationCloseOptions.Mark_Opportunities_Closed_Lost.name()        
+        ));           
+        
+        Account a = new Account();
+        a.Name = 'test Individual';
+        insert a;
+        
+        Contact c = new Contact();
+        c.FirstName = 'test';
+        c.LastName = 'contact';
+        c.AccountId = a.Id;
+        insert c;       
+
+        Recurring_Donation__c r1 = new Recurring_Donation__c();
+        r1.Name = 'test';
+        r1.Installments__c = 2;
+        r1.Contact__c = c.Id;
+        r1.Amount__c = 100;
+        r1.Installment_Period__c = System.Label.RecurringDonationInstallmentPeriodQuarterly;
+        r1.Date_Established__c = date.newinstance(1970,6,12);
+        r1.Schedule_Type__c = System.Label.RecurringDonationMultiplyValue;
+        r1.Open_Ended_Status__c = System.label.RecurringDonationOpenStatus;
+        r1.Next_Payment_Date__c = system.today();
+        insert r1;
+        
+        map<id, Opportunity> originalOpps = new map<id, Opportunity>([select id, Name,amount,accountid,CloseDate from Opportunity where Recurring_Donation__c = :r1.id]);
+        system.assertEquals(4, originalOpps.size());          
+        
+        Opportunity o = originalOpps.values()[0];
+        string closedstage = [select masterlabel from opportunitystage where isActive = true and iswon = true and isClosed = true limit 1].masterlabel;
+        o.StageName = closedstage;
+        o.CloseDate = system.today();
+        
+        Test.startTest();        
+        update o;
+        Test.stopTest();
+        
+        
+        Recurring_Donation__c rd = [select Last_Payment_Date__c from Recurring_Donation__c where id = :r1.id];     
+        system.assertEquals(system.today(), rd.Last_Payment_Date__c);
+        system.assertEquals(4, [select count() from Opportunity where Recurring_Donation__c = :r1.id and isClosed = false]);
+        
+    }
+    
+    //test closing an opportunity for an open recurring donation
+    static testMethod void closeOppForOpenEndedRecurringDonationCustom(){
+        RecurringDonations_TEST.setRecurringDonationsSettingsForTest(
+        new Recurring_Donations_Settings__c(
+        Opportunity_Forecast_Months__c = 12,
+        Maximum_Donations__c = 50,
+        Custom_Days__c = 14,
+        Open_Opportunity_Behavior__c = RecurringDonations.RecurringDonationCloseOptions.Mark_Opportunities_Closed_Lost.name()        
+        ));           
+        
+        Account a = new Account();
+        a.Name = 'test Individual';
+        insert a;
+        
+        Contact c = new Contact();
+        c.FirstName = 'test';
+        c.LastName = 'contact';
+        c.AccountId = a.Id;
+        insert c;       
+
+        Recurring_Donation__c r1 = new Recurring_Donation__c();
+        r1.Name = 'test';
+        r1.Installments__c = 2;
+        r1.Organization__c = a.id;
+        r1.Amount__c = 100;
+        r1.Installment_Period__c = System.Label.RecurringDonationInstallmentPeriodCustom;
+        r1.Date_Established__c = date.newinstance(1970,6,12);
+        r1.Schedule_Type__c = System.Label.RecurringDonationMultiplyValue;
+        r1.Open_Ended_Status__c = System.label.RecurringDonationOpenStatus;
+        r1.Next_Payment_Date__c = system.today();
+        insert r1;
+        
+        map<id, Opportunity> originalOpps = new map<id, Opportunity>([select id, Name,amount,accountid,CloseDate from Opportunity where Recurring_Donation__c = :r1.id]);
+        system.assertEquals(27, originalOpps.size());          
+        
+        Opportunity o = originalOpps.values()[0];
+        string closedstage = [select masterlabel from opportunitystage where isActive = true and iswon = true and isClosed = true limit 1].masterlabel;
+        o.StageName = closedstage;
+        o.CloseDate = system.today();
+        
+        Test.startTest();        
+        update o;
+        Test.stopTest();
+        
+        
+        Recurring_Donation__c rd = [select Last_Payment_Date__c from Recurring_Donation__c where id = :r1.id];     
+        
+        system.assertEquals(27, [select count() from Opportunity where Recurring_Donation__c = :r1.id and isClosed = false]);
+        system.assertEquals(system.today(), rd.Last_Payment_Date__c);
+    }
+    //test closing an opportunity for an open recurring donation
+    static testMethod void closeOppForOpenEndedRecurringDonationYearly(){
+        RecurringDonations_TEST.setRecurringDonationsSettingsForTest(
+        new Recurring_Donations_Settings__c(
+        Opportunity_Forecast_Months__c = 12,
+        Maximum_Donations__c = 50,
+        Custom_Days__c = 14,
+        Open_Opportunity_Behavior__c = RecurringDonations.RecurringDonationCloseOptions.Mark_Opportunities_Closed_Lost.name()        
+        ));           
+        
+        Account a = new Account();
+        a.Name = 'test Individual';
+        insert a;
+        
+        Contact c = new Contact();
+        c.FirstName = 'test';
+        c.LastName = 'contact';
+        c.AccountId = a.Id;
+        insert c;       
+
+        Recurring_Donation__c r1 = new Recurring_Donation__c();
+        r1.Name = 'test';
+        r1.Installments__c = 2;
+        r1.Organization__c = a.id;
+        r1.Amount__c = 100;
+        r1.Installment_Period__c = System.Label.RecurringDonationInstallmentPeriodYearly;
+        r1.Date_Established__c = date.newinstance(1970,6,12);
+        r1.Schedule_Type__c = System.Label.RecurringDonationMultiplyValue;
+        r1.Open_Ended_Status__c = System.label.RecurringDonationOpenStatus;
+        r1.Next_Payment_Date__c = system.today();
+        insert r1;
+        
+        map<id, Opportunity> originalOpps = new map<id, Opportunity>([select id, Name,amount,accountid,CloseDate from Opportunity where Recurring_Donation__c = :r1.id]);
+        system.assertEquals(1, originalOpps.size());          
+        
+        Opportunity o = originalOpps.values()[0];
+        string closedstage = [select masterlabel from opportunitystage where isActive = true and iswon = true and isClosed = true limit 1].masterlabel;
+        o.StageName = closedstage;
+        o.CloseDate = system.today();
+        
+        Test.startTest();        
+        update o;
+        Test.stopTest();
+        
+        
+        Recurring_Donation__c rd = [select Last_Payment_Date__c from Recurring_Donation__c where id = :r1.id];     
+        
+        system.assertEquals(1, [select count() from Opportunity where Recurring_Donation__c = :r1.id and isClosed = false]);
+        system.assertEquals(system.today(), rd.Last_Payment_Date__c);
+    }
+	
+	static testMethod void closeOpenEndedRecurringDonationMarkOppsClosedLost(){
+		RecurringDonations_TEST.setRecurringDonationsSettingsForTest(
+        new Recurring_Donations_Settings__c(
+        Opportunity_Forecast_Months__c = 12,
+        Maximum_Donations__c = 50,
+        Custom_Days__c = 14,
+        Open_Opportunity_Behavior__c = RecurringDonations.RecurringDonationCloseOptions.Mark_Opportunities_Closed_Lost.name()        
+        ));           
+        
+        Account a = new Account();
+        a.Name = 'test Individual';
+        insert a;
+        
+        Contact c = new Contact();
+        c.FirstName = 'test';
+        c.LastName = 'contact';
+        c.AccountId = a.Id;
+        insert c;       
+
+        Recurring_Donation__c r1 = new Recurring_Donation__c();
+        r1.Name = 'test';
+        r1.Installments__c = 2;
+        r1.Contact__c = c.Id;
+        r1.Amount__c = 100;
+        r1.Installment_Period__c = System.Label.RecurringDonationInstallmentPeriodWeekly;
+        r1.Date_Established__c = date.newinstance(1970,6,12);
+        r1.Schedule_Type__c = System.Label.RecurringDonationMultiplyValue;
+        r1.Open_Ended_Status__c = System.label.RecurringDonationOpenStatus;
+        r1.Next_Payment_Date__c = system.today();
+        insert r1;
+        
+        map<id, Opportunity> originalOpps = new map<id, Opportunity>([select id, Name,amount,accountid,CloseDate from Opportunity where Recurring_Donation__c = :r1.id]);
+        system.assertEquals(53, originalOpps.size());     
+        
+        Test.startTest();
+        r1.Open_Ended_Status__c = System.label.RecurringDonationClosedStatus;
+        update r1;
+		Test.stopTest();
+		
+		//assert all previously open opps are marked closed lost
+		system.assertEquals(53, [select count() from Opportunity where isClosed = true and isWon = false and Recurring_Donation__c = :r1.id]);
+		
+	}
+	
+	static testMethod void updateRecurringDonationWithClosedOpp(){
+        RecurringDonations_TEST.setRecurringDonationsSettingsForTest(
+        new Recurring_Donations_Settings__c(
+        Opportunity_Forecast_Months__c = 12,
+        Maximum_Donations__c = 50,
+        Custom_Days__c = 14,
+        Open_Opportunity_Behavior__c = RecurringDonations.RecurringDonationCloseOptions.Mark_Opportunities_Closed_Lost.name()        
+        ));           
+        
+        Account a = new Account();
+        a.Name = 'test Individual';
+        insert a;
+        
+        Contact c = new Contact();
+        c.FirstName = 'test';
+        c.LastName = 'contact';
+        c.AccountId = a.Id;
+        insert c;        
+
+        Recurring_Donation__c r1 = new Recurring_Donation__c();
+        r1.Name = 'test';
+        r1.Installments__c = 2;
+        r1.Contact__c = c.Id;
+        r1.Amount__c = 100;
+        r1.Installment_Period__c = System.Label.RecurringDonationInstallmentPeriodWeekly;
+        r1.Date_Established__c = date.newinstance(1970,6,12);
+        r1.Schedule_Type__c = System.Label.RecurringDonationMultiplyValue;
+        r1.Open_Ended_Status__c = System.label.RecurringDonationOpenStatus;
+        r1.Next_Payment_Date__c = system.today();
+        insert r1;
+        
+        map<id, Opportunity> originalOpps = new map<id, Opportunity>([select id, Name,amount,accountid,CloseDate from Opportunity where Recurring_Donation__c = :r1.id]);
+        Opportunity o = originalOpps.values()[0];
+        string closedstage = [select masterlabel from opportunitystage where isActive = true and iswon = true and isClosed = true limit 1].masterlabel;
+        o.StageName = closedstage;
+        o.CloseDate = system.today();
+        update o;
+        
+        //fake the last payment date close operation
+        r1.Last_Payment_Date__c = system.today();
+        update r1;
+                
+        Test.startTest();        
+        r1.Installment_Period__c = System.Label.RecurringDonationInstallmentPeriodYearly;
+        update r1;
+        Test.stopTest();        
+        
+        Recurring_Donation__c rd = [select Last_Payment_Date__c from Recurring_Donation__c where id = :r1.id];     
+        
+        system.assertEquals(1, [select count() from Opportunity where Recurring_Donation__c = :r1.id and isClosed = false]);
+        system.assertEquals(system.today(), rd.Last_Payment_Date__c);
 	}
 	
 	//test closing an opportunity for an open recurring donation
-	static testMethod void closeOpp(){
-     
-		
-	}
+    static testMethod void closeOppForOpenEndedRecurringDonationBadRecurrance(){
+        RecurringDonations_TEST.setRecurringDonationsSettingsForTest(
+        new Recurring_Donations_Settings__c(
+        Opportunity_Forecast_Months__c = 12,
+        Maximum_Donations__c = 50,
+        Custom_Days__c = 14,
+        Open_Opportunity_Behavior__c = RecurringDonations.RecurringDonationCloseOptions.Mark_Opportunities_Closed_Lost.name()        
+        ));           
+        
+        Account a = new Account();
+        a.Name = 'test Individual';
+        insert a;
+        
+        Contact c = new Contact();
+        c.FirstName = 'test';
+        c.LastName = 'contact';
+        c.AccountId = a.Id;
+        insert c;       
+        
+        Campaign camp = new Campaign(Name = 'MyTestCamp', isActive = true);
+        insert camp;
+
+        Recurring_Donation__c r1 = new Recurring_Donation__c();
+        r1.Name = 'test';
+        r1.Installments__c = 2;
+        r1.Organization__c = a.id;
+        r1.Amount__c = 100;
+        r1.Recurring_Donation_Campaign__c = camp.id;
+        r1.Installment_Period__c = System.Label.RecurringDonationInstallmentPeriodYearly;
+        r1.Date_Established__c = date.newinstance(1970,6,12);
+        r1.Schedule_Type__c = System.Label.RecurringDonationMultiplyValue;
+        r1.Open_Ended_Status__c = System.label.RecurringDonationOpenStatus;
+        r1.Next_Payment_Date__c = system.today();
+        insert r1;
+        
+        map<id, Opportunity> originalOpps = new map<id, Opportunity>([select id, Name,amount,accountid,CloseDate from Opportunity where Recurring_Donation__c = :r1.id]);
+        Opportunity o = originalOpps.values()[0];
+        string closedstage = [select masterlabel from opportunitystage where isActive = true and iswon = true and isClosed = true limit 1].masterlabel;
+        o.StageName = closedstage;
+        o.CloseDate = system.today();
+        r1.Installment_Period__c = 'GarbageDate';
+        update r1;
+        
+        Test.startTest();        
+        update o;
+        Test.stopTest();
+    }
+	
+	   //test closing an opportunity for an open recurring donation
+    static testMethod void closeRecurringDonationDeleteOpps(){
+        RecurringDonations_TEST.setRecurringDonationsSettingsForTest(
+        new Recurring_Donations_Settings__c(
+        Opportunity_Forecast_Months__c = 12,
+        Maximum_Donations__c = 50,
+        Custom_Days__c = 14,
+        Open_Opportunity_Behavior__c = RecurringDonations.RecurringDonationCloseOptions.Delete_Open_Opportunities.name()        
+        ));           
+        
+        Account a = new Account();
+        a.Name = 'test Individual';
+        insert a;
+        
+        Contact c = new Contact();
+        c.FirstName = 'test';
+        c.LastName = 'contact';
+        c.AccountId = a.Id;
+        insert c;       
+        
+        Campaign camp = new Campaign(Name = 'MyTestCamp', isActive = true);
+        insert camp;
+
+        Recurring_Donation__c r1 = new Recurring_Donation__c();
+        r1.Name = 'test';
+        r1.Installments__c = 2;
+        r1.Organization__c = a.id;
+        r1.Amount__c = 100;
+        r1.Recurring_Donation_Campaign__c = camp.id;
+        r1.Installment_Period__c = System.Label.RecurringDonationInstallmentPeriodYearly;
+        r1.Date_Established__c = date.newinstance(1970,6,12);
+        r1.Schedule_Type__c = System.Label.RecurringDonationMultiplyValue;
+        r1.Open_Ended_Status__c = System.label.RecurringDonationOpenStatus;
+        r1.Next_Payment_Date__c = system.today();
+        insert r1;
+        
+        r1.Open_Ended_Status__c = system.label.RecurringDonationClosedStatus;
+        
+        Test.startTest();        
+        update r1;
+        Test.stopTest();
+        
+        //there should be no open donations
+        system.assertEquals(0, [select count() from Opportunity where Recurring_Donation__c = :r1.id and isClosed = false]);        
+    }
+	
+	
 	
 	    
-    public static void getRecurringDonationsSettingsForTest(Recurring_Donations_Settings__c rds){
+    public static void setRecurringDonationsSettingsForTest(Recurring_Donations_Settings__c rds){
         //clear out the old ones and insert this
         delete [select id from Recurring_Donations_Settings__c];
         insert rds;
     }
-	
-	
 }
