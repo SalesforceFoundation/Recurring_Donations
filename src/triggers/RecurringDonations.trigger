@@ -16,7 +16,7 @@
 
     THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
     "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT 
-    LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS 
+    LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS  
     FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE 
     COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, 
     INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, 
@@ -38,41 +38,43 @@ after insert, after update, after delete, after undelete) {
     if (!rds.DISABLE_RecurringDonations_trigger__c && !system.isFuture()){
     
         if(Trigger.isBefore && Trigger.isInsert){
-            RecurringDonations process = new RecurringDonations (Trigger.new, Trigger.oldMap, triggerAction.beforeInsert);
+            RecurringDonations process = new RecurringDonations (Trigger.newMap, Trigger.oldMap, triggerAction.beforeInsert);
         }
         if(Trigger.isBefore && Trigger.isUpdate){
-            RecurringDonations process = new RecurringDonations (Trigger.new, Trigger.oldMap, triggerAction.beforeUpdate);
+            RecurringDonations process = new RecurringDonations (Trigger.newMap, Trigger.oldMap, triggerAction.beforeUpdate);
         }
         if(Trigger.isBefore && Trigger.isDelete ){
-            RecurringDonations process = new RecurringDonations (Trigger.old, null, triggerAction.beforeDelete);
+            RecurringDonations process = new RecurringDonations (Trigger.oldMap, null, triggerAction.beforeDelete);
         }
         if(Trigger.isInsert && Trigger.isAfter){
-    
-        //James Melville 05/03/2011 Dynamically build Recurring donation query to allow currency to be included if needed.
-        //build start of dynamic query
-        String queryRCD = 'select id,Open_Ended_Status__c, Next_Payment_Date__c, Organization__c,Contact__c,Installment_Amount__c,Installments__c,Amount__c,Total__c,Installment_Period__c,Date_Established__c,Donor_Name__c,Schedule_Type__c,Recurring_Donation_Campaign__c';
+            //James Melville 05/03/2011 Dynamically build Recurring donation query to allow currency to be included if needed.
+            //build start of dynamic query
+            String queryRCD = 'select id,Open_Ended_Status__c, Next_Payment_Date__c, Organization__c,Contact__c,Installment_Amount__c,Installments__c,Amount__c,Total__c,Installment_Period__c,Date_Established__c,Donor_Name__c,Schedule_Type__c,Recurring_Donation_Campaign__c';
        
-        //if currencyiso field exists add it to query for use later
-        if(Schema.sObjectType.Recurring_Donation__c.fields.getMap().get('CurrencyIsoCode') != null)
-            queryRCD = queryRCD + ',CurrencyIsoCode';
+            //if currencyiso field exists add it to query for use later
+            if(Schema.sObjectType.Recurring_Donation__c.fields.getMap().get('CurrencyIsoCode') != null)
+                queryRCD = queryRCD + ',CurrencyIsoCode';
        
-        //continue building query - dynamic apex does not allow nested binds (:Trigger.new) so we build a list
-        List<Id> ids = new List<Id>();
+            //continue building query - dynamic apex does not allow nested binds (:Trigger.new) so we build a list
+            List<Id> ids = new List<Id>();
         
-        for(Recurring_Donation__c r : Trigger.new)
-        {
-            ids.add(r.Id);
-        }
+            for(Recurring_Donation__c r : Trigger.new){
+                ids.add(r.Id);
+            }
         
-        //Trigger.new.Id;
-        queryRCD=queryRCD+' from Recurring_Donation__c where Id in :ids';
-        //execute query
-        Recurring_Donation__c[] updatedRecurringDonations = Database.query(queryRCD);
-        RecurringDonations process = new RecurringDonations (updatedRecurringDonations, Trigger.oldMap, triggerAction.afterInsert);
+            //Trigger.new.Id;
+            queryRCD=queryRCD+' from Recurring_Donation__c where Id in :ids';
+            //execute query
+            Recurring_Donation__c[] updatedRecurringDonations = Database.query(queryRCD);
+            map<id, Recurring_Donation__c> updatedRDs = new map<id, Recurring_Donation__c>();
+            for (Recurring_Donation__c rd : updatedRecurringDonations){
+                updatedRDs.put(rd.id, rd);            
+            }
+            RecurringDonations process = new RecurringDonations (updatedRDs, Trigger.oldMap, triggerAction.afterInsert);
         }
     
         if(Trigger.isUpdate && Trigger.isAfter){
-            RecurringDonations process = new RecurringDonations (Trigger.new, Trigger.oldMap, triggerAction.afterUpdate);
+            RecurringDonations process = new RecurringDonations (Trigger.newMap, Trigger.oldMap, triggerAction.afterUpdate);
         }
     }    
 }
