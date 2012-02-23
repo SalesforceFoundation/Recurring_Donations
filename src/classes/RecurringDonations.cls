@@ -276,7 +276,7 @@ global with sharing class RecurringDonations {
                     do{
                         Opportunity o = new Opportunity();
                         o.CloseDate = OppCloseDate;   
-                        loop_date = OppCloseDate;                                                                                         
+                                                                                                      
                         if(RDCurrencyField != null){
                             //set the donation currency field to equal the recurring donation currency
                             o.put(OppCurrencyField,r.get(RDCurrencyField));
@@ -333,13 +333,18 @@ global with sharing class RecurringDonations {
                         }
                         opportunityInserts.add(o);    
                         rdcounter++;                                                                                       
-                    }while (loop_date < incrementdate.addMonths((integer)rds.Opportunity_Forecast_Months__c));
+                    }while (OppCloseDate < incrementdate.addMonths((integer)rds.Opportunity_Forecast_Months__c));
+                    
+                    r.Installments__c = rdcounter; 
                 }
             }                 
         }
         
+        
+        
         if( opportunityInserts.size() > 0 )
         {
+        	update recurringDonations;
             Database.SaveResult[] lsr = Database.insert(opportunityInserts, false);
             
             if (ConIDForRole == null){
@@ -542,9 +547,9 @@ global with sharing class RecurringDonations {
                                   from Opportunity where Recurring_Donation__r.Open_Ended_Status__c = :openLabel 
                                   and Recurring_Donation__r.id IN :rdMap.keySet()
                                   group by rollup(Recurring_Donation__r.id, isClosed, isWon)]; 
-        system.debug('SOBJ SIZE: ' + sobjs.size());
+        
         map<id, date> maxOpenPaymentMap = new map<id, date>();
-        map<id, integer> oppCountMap = new map<id, integer>();
+  
         //holds the rdid of all evaluated closed sets
         set<id> isClosedEvaluatedSet = new set<id>();
         //Create a list of ContactIds used in these RecurringDonations
@@ -553,8 +558,7 @@ global with sharing class RecurringDonations {
         //update the rc next payment date 
         //and add new donation objects needed 
         for (sobject obj : sobjs){
-            system.debug('--------------------------------------------------------------------------------------Here be SOBJS');
-
+            
             id rdid = (id)obj.get('rdid'); 
 
             Recurring_Donation__c rd;
@@ -594,9 +598,9 @@ global with sharing class RecurringDonations {
                     updateMap.put(rdid, rd);                        
                 }
                 
-                if (!isClosed && isWon == null && isClosedEvaluatedSet.contains(rdid)){
-                    //get the summary row total of opens                    
-                    oppCountMap.put(rdid, (integer)obj.get('oppcount'));
+                if (!isClosed && !isWon && isClosedEvaluatedSet.contains(rdid)){                    
+                    rd.Installments__c = (integer)obj.get('oppcount');
+                    updateMap.put(rdid, rd);                    
                 }                    
             }                
         }
@@ -619,6 +623,7 @@ global with sharing class RecurringDonations {
         for (Recurring_Donation__c rd : updateMap.values()){
             date OppCloseDate = maxOpenPaymentMap.get(rd.id);
             
+            system.debug('LAST_PAYMENT_DATE ' + rd.Last_Payment_Date__c + ' WITH OPP MONTHS ' + rd.Last_Payment_Date__c.addMonths(oppMonths) + ' >= MAX OPEN PAYMENT ' + maxOpenPaymentMap.get(rd.id));
             //if max open payment is less than the value of hte last payment + the 
             //scheduled open timeframe, add as many opps as needed to satisfy teh criteria
             if (rd.Last_Payment_Date__c.addMonths(oppMonths) >= maxOpenPaymentMap.get(rd.id)){
@@ -664,9 +669,9 @@ global with sharing class RecurringDonations {
                     }
                     
                     OppCloseDate = o.CloseDate;
-                    
+             
                     String oName = rd.Donor_Name__c + ' ' + System.Label.RecurringDonationPrefix +
-                    ' (' + string.valueOf((oppCountMap.get(rd.id) + oppCounter)) + ') ' + o.CloseDate.format();
+                    ' (' + string.valueOf(updateMap.get(rd.id).Installments__c + oppCounter) + ') ' + o.CloseDate.format();
                     
                     o.Name = oName;
                     o.Amount = rd.Amount__c;
