@@ -38,13 +38,13 @@ after insert, after update, after delete, after undelete) {
     if (!rds.DISABLE_RecurringDonations_trigger__c && !system.isFuture()){
     
         if(Trigger.isBefore && Trigger.isInsert){
-            RecurringDonations process = new RecurringDonations (Trigger.newMap, Trigger.oldMap, triggerAction.beforeInsert);
+            RecurringDonations process = new RecurringDonations (trigger.newMap, trigger.oldMap, triggerAction.beforeInsert);
         }
         if(Trigger.isBefore && Trigger.isUpdate){
-            RecurringDonations process = new RecurringDonations (Trigger.newMap, Trigger.oldMap, triggerAction.beforeUpdate);
+            RecurringDonations process = new RecurringDonations (trigger.newMap, trigger.oldMap, triggerAction.beforeUpdate);
         }
         if(Trigger.isBefore && Trigger.isDelete ){
-            RecurringDonations process = new RecurringDonations (Trigger.oldMap, null, triggerAction.beforeDelete);
+            RecurringDonations process = new RecurringDonations (trigger.oldMap, trigger.oldMap, triggerAction.beforeDelete);
         }
         if(Trigger.isInsert && Trigger.isAfter){
             //James Melville 05/03/2011 Dynamically build Recurring donation query to allow currency to be included if needed.
@@ -70,11 +70,11 @@ after insert, after update, after delete, after undelete) {
             for (Recurring_Donation__c rd : updatedRecurringDonations){
                 updatedRDs.put(rd.id, rd);            
             }
-            RecurringDonations process = new RecurringDonations (updatedRDs, Trigger.oldMap, triggerAction.afterInsert);
+            RecurringDonations process = new RecurringDonations (updatedRDs, trigger.oldMap, triggerAction.afterInsert);
         }
     
         if(Trigger.isUpdate && Trigger.isAfter){
-            RecurringDonations process = new RecurringDonations (Trigger.newMap, Trigger.oldMap, triggerAction.afterUpdate);
+            RecurringDonations process = new RecurringDonations (trigger.newMap, trigger.oldMap, triggerAction.afterUpdate);
         }
     }    
 }
