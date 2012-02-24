@@ -8,7 +8,7 @@
         <apex:TabPanel switchtype="client" value="{!selectedTab}" id="tabpanel">
             <apex:tab label="General Settings" name="general_settings">
                 <apex:form id="generalform">
-                    <apex:outputPanel id="SettingsOutputPanel">  
+                    <apex:outputPanel id="SettingsOutputPanel">   
                         <apex:PageBlockSection columns="2" title="General Settings" collapsible="false">
                                 <apex:outputField value="{!rds.Opportunity_Forecast_Months__c}" rendered="{!NOT(canEditRDSettings)}" />
                                 <apex:inputField value="{!rds.Opportunity_Forecast_Months__c}" rendered="{!canEditRDSettings}" />
@@ -18,6 +18,10 @@
                                 </apex:selectList>                            
                                 <apex:outputField value="{!rds.Maximum_Donations__c}" rendered="{!NOT(canEditRDSettings)}" />
                                 <apex:inputField value="{!rds.Maximum_Donations__c}" rendered="{!canEditRDSettings}" />
+                                <apex:outputField id="rtnametext" value="{!rds.Record_Type__c}" rendered="{!NOT(canEditRDSettings)}" />
+                                <apex:selectList value="{!rds.Record_Type__c}" size="1" multiselect="false" rendered="{!canEditRDSettings}">
+                                    <apex:selectOptions value="{!RecordTypeList}" />
+                                </apex:selectList> 
                         </apex:PageBlockSection>
                         <apex:outputPanel style="text-align: center; display: block; margin-left:auto; margin-right:auto;">
                             <apex:commandButton value="Save" rendered="{!canEditRDSettings}" action="{!saveRDSettings}"/>  
