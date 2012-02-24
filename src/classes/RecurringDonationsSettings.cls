@@ -102,7 +102,11 @@ public with sharing class RecurringDonationsSettings {
         testOpp.Amount = 100;
         testOpp.CloseDate = system.today();
         testOpp.Name = 'TestOpp';
-        testOpp.StageName = [select MasterLabel from OpportunityStage where isWon = true and isClosed = true and isActive = true].MasterLabel;
+        
+        //If there's no closed/won stage??
+        string SName = '';
+        SName = [select MasterLabel from OpportunityStage where isWon = true and isClosed = true and isActive = true].MasterLabel;
+        testOpp.StageName = SName;        
         
         //use one if we got one, otherwise, create one for testing
         list<Recurring_Donation__c> rd = new list<Recurring_Donation__c>();
