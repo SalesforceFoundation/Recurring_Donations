@@ -1,12 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomLabels xmlns="http://soap.sforce.com/2006/04/metadata">
     <labels>
+        <fullName>RecurringDonationBadLabelWarning</fullName>
+        <categories>RecurringDonations</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>RecurringDonationBadLabelWarning</shortDescription>
+        <value>Your custom label for closed lost Opportunities does not correspond to an active closed/lost Opportunity Stage Name. This can cause unwanted results when marking Recurring Donations closed and having the Open Opportunity Behavior setting set to: Mark_Opportunities_Closed_Lost.  Please check your stage names and RecurringDonationClosedLostOpportunityStage custom label.</value>
+    </labels>
+    <labels>
         <fullName>RecurringDonationCantDeleteError</fullName>
         <categories>RecurringDonations</categories>
         <language>en_US</language>
         <protected>true</protected>
         <shortDescription>RecurringDonationCantDeleteError</shortDescription>
         <value>You must delete the related Donations before you can delete this recurring donation</value>
+    </labels>
+    <labels>
+        <fullName>RecurringDonationClosedLostOpportunityStage</fullName>
+        <categories>RecurringDonations</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>RecurringDonationClosedLostOpportunityStage</shortDescription>
+        <value>Closed Lost</value>
     </labels>
     <labels>
         <fullName>RecurringDonationClosedStatus</fullName>
@@ -39,6 +55,14 @@
         <protected>true</protected>
         <shortDescription>RecurringDonationDivideValue</shortDescription>
         <value>Divide By</value>
+    </labels>
+    <labels>
+        <fullName>RecurringDonationInstallmentPeriod1stand15th</fullName>
+        <categories>RecurringDonations</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>RecurringDonationInstallmentPeriod1stand15th</shortDescription>
+        <value>1st and 15th</value>
     </labels>
     <labels>
         <fullName>RecurringDonationInstallmentPeriodCustom</fullName>
@@ -79,6 +103,14 @@
         <protected>true</protected>
         <shortDescription>RecurringDonationInstallmentPeriodYearly</shortDescription>
         <value>Yearly</value>
+    </labels>
+    <labels>
+        <fullName>RecurringDonationInvalidCustomInstallment</fullName>
+        <categories>RecurringDonations</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>RecurringDonationInvalidCustomInstallment</shortDescription>
+        <value>All Custom Installments must have a Name, positive integer Value and Increment</value>
     </labels>
     <labels>
         <fullName>RecurringDonationMissingDataError</fullName>
