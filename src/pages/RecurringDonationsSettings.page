@@ -72,7 +72,7 @@
                             <apex:commandButton value="Replace and Delete" rendered="{!deleteInstallmentMode}" action="{!deleteInstallment}"/>
                             <apex:commandButton value="Save" rendered="{!AND(NOT(deleteInstallmentMode),canEditCISettings)}" action="{!saveCISettings}"/>  
                             <apex:commandButton value="Cancel" rendered="{!OR(deleteInstallmentMode,canEditCISettings)}" action="{!cancel}"/>
-                            <apex:commandButton value="Edit" rendered="{!AND(NOT(deleteInstallmentMode),NOT(canEditCISettings))}" action="{!editCISSettings}" rerender="CustomInstallmentsOutputPanel"/>
+                            <apex:commandButton value="Edit" rendered="{!AND(NOT(deleteInstallmentMode),NOT(canEditCISettings))}" action="{!editCISettings}" rerender="CustomInstallmentsOutputPanel"/>
                         </apex:outputPanel>
                     </apex:outputPanel>            
                 </apex:form>

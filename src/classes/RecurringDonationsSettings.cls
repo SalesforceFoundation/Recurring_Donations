@@ -41,11 +41,8 @@ public with sharing class RecurringDonationsSettings {
     public list<Custom_Installment_Settings__c> cis {get; set;}
     public string selectedTab {get; set;}
     public integer cisSize{get; set;}
-    
     public string selectedInstallmentName{get; set;}
     public string replacementInstallment{get; set;}
-    
-    
     public list<SelectOption> validInstallments{
         get{
         	list<SelectOption> Installments = new list<SelectOption>(); 
@@ -66,9 +63,6 @@ public with sharing class RecurringDonationsSettings {
             return Installments;
         }
     }
-    
-    public map<string, Custom_Installment_Settings__c> cisMap;
-        
     public list<SelectOption> closeOptions{
     	get{
             list<RecurringDonations.RecurringDonationCloseOptions> CloseOptionValues = RecurringDonations.RecurringDonationCloseOptions.values();		
@@ -78,7 +72,8 @@ public with sharing class RecurringDonationsSettings {
             }
             return options;
         }
-    }        
+    }
+    public map<string, Custom_Installment_Settings__c> cisMap;        
         
     //called from action method for page 
     public PageReference getSettingsFirstTime() {
@@ -104,12 +99,12 @@ public with sharing class RecurringDonationsSettings {
         selectedTab = 'general_settings';
         return null;
     }
-    public pagereference editCISSettings(){
+    
+    public pagereference editCISettings(){
     	canEditCISettings = true;
     	selectedTab = 'installment_settings';
     	return null;
     }
-    
     
     public pagereference cancel(){
     	cis.clear();
@@ -136,21 +131,25 @@ public with sharing class RecurringDonationsSettings {
         return null;
     }
     
+    //adds a row to the CI page
     public pageReference addCIRow(){    	
     	Custom_Installment_Settings__c c = new Custom_Installment_Settings__c();
     	cis.add(c);
     	return null;
     }
+    
+    //saves a new CI setting
     public pageReference saveCISettings(){
     	boolean invalidupsert = false;
     	
     	for (Custom_Installment_Settings__c c : cis){
-    		c.Value__c = c.Value__c.intValue();
-    		
     		if (c.Name == null || c.Value__c < 1 || c.Increment__c == null){
-    		    ApexPages.Message myMsg = new ApexPages.Message(ApexPages.Severity.FATAL, 'All Custom Installments must have a Name, positive integer Value and Increment');
+    		    ApexPages.Message myMsg = new ApexPages.Message(ApexPages.Severity.FATAL, system.label.RecurringDonationInvalidCustomInstallment);
                 ApexPages.addMessage(myMsg);      
                 invalidupsert = true;          
+    		}
+    		else{
+                c.Value__c = c.Value__c.intValue();
     		}
     	}    	
     	if(!invalidupsert){
@@ -160,12 +159,14 @@ public with sharing class RecurringDonationsSettings {
     	return null;
     }
     
-    
+    //initiates custom installmetn deletion wizard
     public pageReference runDeleteWizard(){
         deleteInstallmentMode = true;    	
     	selectedTab = 'installment_settings';
     	return null;
     }
+    
+    //handles the delete & replace button
     public pageReference deleteInstallment(){
     	
     	list<Recurring_Donation__c> rdupdatelist = new list<Recurring_Donation__c>();
@@ -183,8 +184,7 @@ public with sharing class RecurringDonationsSettings {
     	selectedTab = 'installment_settings';
     	deleteInstallmentMode = false;   
     	return null;
-    }
-    
+    }    
     
     //test an opp insert as done in the class
     //and provide a warning if it fails
@@ -255,7 +255,7 @@ public with sharing class RecurringDonationsSettings {
         
         Account a = new Account(Name='TestAccount');
         insert a;
-        insert new Recurring_Donation__c(Name = 'TestRD', Organization__c = a.id);
+        insert new Recurring_Donation__c(Name = 'TestRD', Organization__c = a.id, Installment_Period__c='TestValueForUnitTests');
  
  
         Test.setCurrentPageReference(new PageReference('Page.RecurringDonationsSettings'));
@@ -275,5 +275,15 @@ public with sharing class RecurringDonationsSettings {
         controller.saveRDSettings();   
         controller.rds.Open_Opportunity_Behavior__c = '1234';
         controller.saveRDSettings();
+        controller.addCIRow();        
+        controller.editCISettings();
+        Custom_Installment_Settings__c c = new Custom_Installment_Settings__c(Name='TestValueForUnitTests', Value__c = 5.0, Increment__c = 'Weeks');
+        controller.cis.add(c);
+        controller.saveCISettings();
+        controller.runDeleteWizard();
+        controller.selectedInstallmentName = 'TestValueForUnitTests';
+        controller.replacementInstallment = 'Weekly';        
+        controller.deleteInstallment();        
+        list<SelectOption> mylist = controller.validInstallments;
     }
 }
