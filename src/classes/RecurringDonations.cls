@@ -64,6 +64,21 @@ global with sharing class RecurringDonations {
         }
     }
     
+    //support for older model
+    public RecurringDonations(list<Recurring_Donation__c> rd, list<Recurring_Donation__c> nulllist, triggerAction ta){
+        Recurring_Donations_Settings__c rds = getRecurringDonationsSettings();
+        for (Recurring_Donation__c r : rd){
+            if (ta==triggerAction.beforeInsert){
+                if (r.Organization__c == null && r.Contact__c == null){
+                    r.addError(System.Label.RecurringDonationMissingDataError);
+                }
+                if (r.Installments__c > rds.Maximum_Donations__c){
+                    r.addError(System.Label.RecurringDonationTooManyInstallmentsError);
+                }
+            }
+        }                	   
+    }
+    
     //handles Recurring Donation scenarios
     public RecurringDonations(map<id, Recurring_Donation__c> recurringDonations, map<id, Recurring_Donation__c> oldRecurringDonations, triggerAction ta){       	 
         
@@ -74,15 +89,6 @@ global with sharing class RecurringDonations {
         
         for(id rid : recurringDonations.keySet()){
         	Recurring_Donation__c r = recurringDonations.get(rid);
-        	
-            if (ta==triggerAction.beforeInsert){
-                if (r.Organization__c == null && r.Contact__c == null){
-                    r.addError(System.Label.RecurringDonationMissingDataError);
-                }
-                if (r.Installments__c > rds.Maximum_Donations__c){
-                    r.addError(System.Label.RecurringDonationTooManyInstallmentsError);
-                }
-            }
             
             if (ta==triggerAction.afterInsert){
                 rdInserts.put(rid, r);
@@ -900,9 +906,16 @@ global with sharing class RecurringDonations {
         else if (InstallmentType == System.Label.RecurringDonationInstallmentPeriodWeekly){
             CalcDate = CalcDate.addDays(7);
         }
-        else if (InstallmentType == System.label.RecurringDonationInstallmentPeriodCustom){
+        else if (InstallmentType == System.label.RecurringDonationInstallmentPeriodCustom){ 
             CalcDate = CalcDate.addDays((integer)rds.Custom_Days__c);
         }
+        else if (InstallmentType == system.label.RecurringDonationInstallmentPeriod1stand15th){
+            //increment it by one day until we hit either the 1st or 15th            
+            do{
+            	CalcDate = CalcDate.addDays(1);
+            }while (CalcDate.day() != 15 && CalcDate.day() != 1);
+        }
+        
         //if its not a valid value, set it to the max last payment date plus the 
         //the open ended value so we only create one opp max
         else{
