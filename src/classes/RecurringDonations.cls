@@ -483,29 +483,75 @@ global with sharing class RecurringDonations {
         }
     }
     
-
-    /// <name> deleteRecDonations </name>
-    /// <summary> Validates that a Recurring Donation can be deleted </summary>
-    /// <param name="recurringDonations"> RecurringDonation objects that are being triggered </param>
-    public static void deleteRecDonations(Recurring_Donation__c[] recurringDonations)
-    {
-        Map<Id,Id> recDonationMap = new Map<Id,Id>();
-        List<Id> recDonationIds = new List<Id>();
+    //updates opps that are part of a recurring donation that was updated
+    @future
+    public static void updateExistingOppsFuture(set<id>recIDs){updateExistingOpps(recIDs);}
+    public static void updateExistingOpps(set<id> recIDs){
         
-        for(Recurring_Donation__c r : recurringDonations)
-        {
-            recDonationIds.add(r.Id);
-        }
-        for (Opportunity o : [Select Id, Recurring_Donation__c from Opportunity where Recurring_Donation__c in :recDonationIds])
-        {
-            recDonationMap.put(o.Recurring_Donation__c,o.Id);
-        }
-        for(Recurring_Donation__c r : recurringDonations)
-        {
-            if(recDonationMap.containsKey(r.Id))
-            {
-                r.addError(System.Label.RecurringDonationCantDeleteError);
+        
+        string openLabel = system.label.RecurringDonationOpenStatus;
+        map<id, Recurring_Donation__c> rdMap = new map<id, Recurring_Donation__c>([select id, Paid_Amount__c, Next_Payment_Date__c, 
+                                                                                    Contact__c, Organization__c, Amount__c, 
+                                                                                    Date_Established__c, Recurring_Donation_Campaign__c,
+                                                                                     Installment_Period__c, Installments__c,
+                                                                                     Last_Payment_Date__c, Open_Ended_Status__c,
+                                                                                     Schedule_Type__c, Total_Paid_Installments__c,
+                                                                                     Donor_Name__c
+                                                                                  from Recurring_Donation__c 
+                                                                                  where Open_Ended_Status__c = :openLabel 
+                                                                                  and id IN :recIDs]);        
+                           
+        list<Opportunity> oppList = [select id, Amount, CampaignId, AccountID, CloseDate 
+                                       from Opportunity 
+                                       where Recurring_Donation__r.id IN :rdMap.keySet() 
+                                       and isClosed = false
+                                       order by CloseDate desc];
+
+        //build a map of recurring donation ID and opps
+        map<id, list<Opportunity>> RDOppMap = new map<id, list<Opportunity>>(); 
+        for (Opportunity o : opplist){
+            if (RDOppMap.containsKey(o.Recurring_Donation__r.id)){
+                list<Opportunity> opps = RDOppMap.get(o.Recurring_Donation__r.id);
+                opps.add(o);
+                RDOppMap.put(o.Recurring_Donation__r.id, opps);
             }
+            else{
+                RDOppMap.put(o.Recurring_Donation__r.id, new list<Opportunity>{o});
+            }
+        }       
+        
+        //opps for updating
+        list<Opportunity> updateOppsList = new list<Opportunity>();
+        
+        //loop through existing opps for each RD and update according to values on the RD
+        for (id RDid : RDOppMap.keySet()){
+            
+            date PaymentDate = RDMap.get(RDid).Next_Payment_Date__c;
+            
+            for (Opportunity o : RDOppMap.get(RDid)){
+                
+                o.Amount = rdMap.get(RDid).Amount__c;
+                if (rdMap.get(RDid).Recurring_Donation_Campaign__c != null){
+                    o.CampaignId = rdMap.get(RDid).Recurring_Donation_Campaign__c;
+                }               
+                o.AccountID = rdMap.get(RDid).Organization__c;
+                o.CloseDate = PaymentDate;                      
+
+                //now append appropriate amount to this date
+                PaymentDate = getNextDate(PaymentDate, RDMap.get(RDid).Installment_Period__c);
+                updateOppsList.add(o);
+            }
+        }
+        
+        if (!updateOppsList.isEmpty())
+           update updateOppsList;
+        
+        
+        if (!system.isFuture() && RDOppMap.keySet().size() == 1){
+            updateRecurringDonationOnOppChange(RDOppMap.keySet());
+        }          
+        else{
+            updateRecurringDonationOnOppChangeFuture(RDOppMap.keySet());            
         }
     }
     
@@ -570,79 +616,33 @@ global with sharing class RecurringDonations {
         	}
         }
     }
-
-
-//////////////////////////////////////////////////////////////////////////////////////////
-    @future
-    public static void updateExistingOppsFuture(set<id>recIDs){updateExistingOpps(recIDs);}
-    public static void updateExistingOpps(set<id> recIDs){
+    
+        /// <name> deleteRecDonations </name>
+    /// <summary> Validates that a Recurring Donation can be deleted </summary>
+    /// <param name="recurringDonations"> RecurringDonation objects that are being triggered </param>
+    public static void deleteRecDonations(Recurring_Donation__c[] recurringDonations)
+    {
+        Map<Id,Id> recDonationMap = new Map<Id,Id>();
+        List<Id> recDonationIds = new List<Id>();
         
-        
-        string openLabel = system.label.RecurringDonationOpenStatus;
-        map<id, Recurring_Donation__c> rdMap = new map<id, Recurring_Donation__c>([select id, Paid_Amount__c, Next_Payment_Date__c, 
-                                                                                    Contact__c, Organization__c, Amount__c, 
-                                                                                    Date_Established__c, Recurring_Donation_Campaign__c,
-                                                                                     Installment_Period__c, Installments__c,
-                                                                                     Last_Payment_Date__c, Open_Ended_Status__c,
-                                                                                     Schedule_Type__c, Total_Paid_Installments__c,
-                                                                                     Donor_Name__c
-                                                                                  from Recurring_Donation__c 
-                                                                                  where Open_Ended_Status__c = :openLabel 
-                                                                                  and id IN :recIDs]);        
-                    	   
-    	list<Opportunity> oppList = [select id, Amount, CampaignId, AccountID, CloseDate 
-    	                               from Opportunity 
-    	                               where Recurring_Donation__r.id IN :rdMap.keySet() 
-    	                               and isClosed = false
-    	                               order by CloseDate desc];
-
-        //build a map of recurring donation ID and opps
-        map<id, list<Opportunity>> RDOppMap = new map<id, list<Opportunity>>(); 
-        for (Opportunity o : opplist){
-            if (RDOppMap.containsKey(o.Recurring_Donation__r.id)){
-            	list<Opportunity> opps = RDOppMap.get(o.Recurring_Donation__r.id);
-            	opps.add(o);
-            	RDOppMap.put(o.Recurring_Donation__r.id, opps);
+        for(Recurring_Donation__c r : recurringDonations)
+        {
+            recDonationIds.add(r.Id);
+        }
+        for (Opportunity o : [Select Id, Recurring_Donation__c from Opportunity where Recurring_Donation__c in :recDonationIds])
+        {
+            recDonationMap.put(o.Recurring_Donation__c,o.Id);
+        }
+        for(Recurring_Donation__c r : recurringDonations)
+        {
+            if(recDonationMap.containsKey(r.Id))
+            {
+                r.addError(System.Label.RecurringDonationCantDeleteError);
             }
-            else{
-            	RDOppMap.put(o.Recurring_Donation__r.id, new list<Opportunity>{o});
-            }
-        }    	
-    	
-    	//opps for updating
-    	list<Opportunity> updateOppsList = new list<Opportunity>();
-    	
-    	//loop through existing opps for each RD and update according to values on the RD
-    	for (id RDid : RDOppMap.keySet()){
-    		
-    		date PaymentDate = RDMap.get(RDid).Next_Payment_Date__c;
-    		
-    		for (Opportunity o : RDOppMap.get(RDid)){
-                
-                o.Amount = rdMap.get(RDid).Amount__c;
-                if (rdMap.get(RDid).Recurring_Donation_Campaign__c != null){
-                	o.CampaignId = rdMap.get(RDid).Recurring_Donation_Campaign__c;
-                }    			
-    			o.AccountID = rdMap.get(RDid).Organization__c;
-                o.CloseDate = PaymentDate;                      
-
-                //now append appropriate amount to this date
-                PaymentDate = getNextDate(PaymentDate, RDMap.get(RDid).Installment_Period__c);
-                updateOppsList.add(o);
-    		}
-    	}
-    	
-    	if (!updateOppsList.isEmpty())
-    	   update updateOppsList;
-    	
-    	
-    	if (!system.isFuture() && RDOppMap.keySet().size() == 1){
-            updateRecurringDonationOnOppChange(RDOppMap.keySet());
-    	}    	   
-    	else{
-            updateRecurringDonationOnOppChangeFuture(RDOppMap.keySet());    		
-    	}
+        }
     }
+    
+    
 
     //evaluate existing opportunities and add more if necessary - update recurring donation object with opportunity values
     @future
@@ -914,12 +914,31 @@ global with sharing class RecurringDonations {
             do{
             	CalcDate = CalcDate.addDays(1);
             }while (CalcDate.day() != 15 && CalcDate.day() != 1);
-        }
-        
-        //if its not a valid value, set it to the max last payment date plus the 
-        //the open ended value so we only create one opp max
+        }        
         else{
-            CalcDate = CalcDate.addMonths((integer)rds.Opportunity_Forecast_Months__c);
+        	map<string, Custom_Installment_Settings__c> cisMap = Custom_Installment_Settings__c.getAll();
+            //handle custom installment types        	
+        	if (cisMap.containsKey(InstallmentType)){
+        		Custom_Installment_Settings__c c = cisMap.get(InstallmentType);
+        		
+        		if (c.Increment__c == 'Days'){
+                    CalcDate = CalcDate.addDays(integer.valueOf(c.Value__c));
+                }
+                else if (c.Increment__c == 'Weeks'){
+                    CalcDate = CalcDate.addDays(integer.valueOf(c.Value__c * 7));
+                }
+                else if (c.Increment__c == 'Months'){
+                    CalcDate = CalcDate.addMonths(integer.valueOf(c.Value__c));
+                }
+                else if (c.Increment__c == 'Years'){
+                    CalcDate = CalcDate.addYears(integer.valueOf(c.Value__c));
+                }        	
+        	}
+            //if its not a valid value, set it to the max last payment date plus the 
+            //the open ended value so we only create one opp max                    	   
+            else{	
+                CalcDate = CalcDate.addMonths((integer)rds.Opportunity_Forecast_Months__c);
+            }                
         }
     	return CalcDate;
     }
