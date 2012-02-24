@@ -7,17 +7,15 @@
         </apex:PageBlockSection>
         <apex:TabPanel switchtype="client" value="{!selectedTab}" id="tabpanel">
             <apex:tab label="General Settings" name="general_settings">
-                <apex:form id="theform">
+                <apex:form id="generalform">
                     <apex:outputPanel id="SettingsOutputPanel">  
-                        <apex:PageBlockSection columns="2" title="Settings" collapsible="false">
+                        <apex:PageBlockSection columns="2" title="General Settings" collapsible="false">
                                 <apex:outputField value="{!rds.Opportunity_Forecast_Months__c}" rendered="{!NOT(canEditRDSettings)}" />
                                 <apex:inputField value="{!rds.Opportunity_Forecast_Months__c}" rendered="{!canEditRDSettings}" />
                                 <apex:outputField value="{!rds.Open_Opportunity_Behavior__c}" rendered="{!NOT(canEditRDSettings)}" />
                                 <apex:selectList value="{!rds.Open_Opportunity_Behavior__c}" size="1" multiselect="false" rendered="{!canEditRDSettings}">
                                     <apex:selectOptions value="{!closeOptions}" />
-                                </apex:selectList>
-                                <apex:outputField value="{!rds.Custom_Days__c}" rendered="{!NOT(canEditRDSettings)}" />
-                                <apex:inputField value="{!rds.Custom_Days__c}" rendered="{!canEditRDSettings}" />
+                                </apex:selectList>                            
                                 <apex:outputField value="{!rds.Maximum_Donations__c}" rendered="{!NOT(canEditRDSettings)}" />
                                 <apex:inputField value="{!rds.Maximum_Donations__c}" rendered="{!canEditRDSettings}" />
                         </apex:PageBlockSection>
@@ -30,6 +28,54 @@
                 </apex:form>
             </apex:tab>
             <apex:tab label="Custom Installment Periods" name="installment_settings">
+                <apex:form id="installmentform">
+                    <apex:outputPanel id="CustomInstallmentsOutputPanel">
+                        <apex:PageBlockSection columns="1" title="Custom Installments" collapsible="false">
+                            <apex:outputText value="No Custom Installments Defined" rendered="{!AND(cisSize < 1, NOT(deleteInstallmentMode))}"/>  
+                              <apex:pageBlockTable var="ci" value="{!cis}" rendered="{!NOT(deleteInstallmentMode)}"  >                
+                                <apex:column value="{!ci.Name}" rendered="{!AND(cisSize>0,NOT(canEditCISettings),NOT(deleteInstallmentMode))}"/>
+                                <apex:column value="{!ci.Value__c}" rendered="{!AND(cisSize>0,NOT(canEditCISettings),NOT(deleteInstallmentMode))}"/>
+                                <apex:column value="{!ci.Increment__c}" rendered="{!AND(cisSize>0,NOT(canEditCISettings),NOT(deleteInstallmentMode))}"/>
+                                <apex:column rendered="{!AND(cisSize>0,NOT(canEditCISettings),NOT(deleteInstallmentMode))}"> 
+                                    <apex:facet name="header"></apex:facet>
+                                    <a href="javascript:DeleteInstallment('{!ci.Name}');">Replace and Delete</a>
+                                    <apex:commandLink action="{!runDeleteWizard}" value="Delete and Replace" id="deleteLink" rendered="{!AND(NOT(deleteInstallmentMode),canEditCISettings)}" rerender="CustomInstallmentsOutputPanel"/>
+                                </apex:column>                                  
+                                <apex:column rendered="{!AND(cisSize>0,canEditCISettings,NOT(deleteInstallmentMode))}">
+                                    <apex:facet name="header">Custom Installment Name</apex:facet>
+                                    <apex:inputtext value="{!ci.Name}"/>
+                                </apex:column>
+                                <apex:column rendered="{!AND(cisSize>0,canEditCISettings,NOT(deleteInstallmentMode))}">       
+                                        <apex:facet name="header">Custom Installment Value (#)</apex:facet>
+                                    <apex:inputtext value="{!ci.Value__c}"/>
+                                </apex:column>
+                                <apex:column rendered="{!AND(cisSize>0,canEditCISettings,NOT(deleteInstallmentMode))}">
+                                    <apex:facet name="header">Custom Installment Interval</apex:facet>                     
+                                    <apex:selectList value="{!ci.Increment__c}" multiselect="false" size="1" required="true">
+                                        <apex:selectOption itemValue="Days" itemLabel="Days"/> 
+                                        <apex:selectOption itemValue="Weeks" itemLabel="Weeks"/>                                        
+                                        <apex:selectOption itemValue="Months" itemLabel="Months"/>
+                                        <apex:selectOption itemValue="Years" itemLabel="Years"/>                                        
+                                    </apex:selectList>
+                                </apex:column>  
+                            </apex:pageBlockTable>
+                            <apex:commandLink action="{!addCIRow}" value="Add New Custom Installment" id="addCIRowLink" rendered="{!AND(canEditCISettings,NOT(deleteInstallmentMode))}" rerender="CustomInstallmentsOutputPanel"/>
+                            <apex:outputText value="Replace with the selected value and delete" rendered="{!deleteInstallmentMode}" />
+                            <apex:selectList size="1" value="{!replacementInstallment}" rendered="{!deleteInstallmentMode}"> 
+                                <apex:selectOptions value="{!validInstallments}"/>
+                            </apex:selectList>                                    
+                        </apex:PageBlockSection>  
+                        <apex:actionFunction action="{!runDeleteWizard}" name="DeleteInstallment" rerender="CustomInstallmentsOutputPanel">
+                            <apex:param name="installmentname" value="" assignTo="{!selectedInstallmentName}"/>
+                        </apex:actionFunction>
+                        <apex:outputPanel style="text-align: center; display: block; margin-left:auto; margin-right:auto;">
+                            <apex:commandButton value="Replace and Delete" rendered="{!deleteInstallmentMode}" action="{!deleteInstallment}"/>
+                            <apex:commandButton value="Save" rendered="{!AND(NOT(deleteInstallmentMode),canEditCISettings)}" action="{!saveCISettings}"/>  
+                            <apex:commandButton value="Cancel" rendered="{!OR(deleteInstallmentMode,canEditCISettings)}" action="{!cancel}"/>
+                            <apex:commandButton value="Edit" rendered="{!AND(NOT(deleteInstallmentMode),NOT(canEditCISettings))}" action="{!editCISSettings}" rerender="CustomInstallmentsOutputPanel"/>
+                        </apex:outputPanel>
+                    </apex:outputPanel>            
+                </apex:form>
             </apex:tab>
         </apex:TabPanel>
     </apex:PageBlock> 

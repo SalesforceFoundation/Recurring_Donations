@@ -35,8 +35,39 @@
 public with sharing class RecurringDonationsSettings {
 
     public boolean canEditRDSettings {get; set;}
+    public boolean canEditCISettings {get; set;}
+    public boolean deleteInstallmentMode {get; set;}
     public Recurring_Donations_Settings__c rds {get; set;}
+    public list<Custom_Installment_Settings__c> cis {get; set;}
     public string selectedTab {get; set;}
+    public integer cisSize{get; set;}
+    
+    public string selectedInstallmentName{get; set;}
+    public string replacementInstallment{get; set;}
+    
+    
+    public list<SelectOption> validInstallments{
+        get{
+        	list<SelectOption> Installments = new list<SelectOption>(); 
+            list<string> custominstallments = new list<string>();
+            
+            cisMap = Custom_Installment_Settings__c.getAll().clone();
+            //custominstallments = cisMap.keySet();
+            cisMap.remove(selectedInstallmentName);
+                	   
+            for (string s : cisMap.keySet()){
+                Installments.add(new SelectOption(s,s));
+            }
+            Installments.add(new SelectOption(System.Label.RecurringDonationInstallmentPeriodYearly,System.Label.RecurringDonationInstallmentPeriodYearly));
+            Installments.add(new SelectOption(System.Label.RecurringDonationInstallmentPeriodYearly,System.Label.RecurringDonationInstallmentPeriodWeekly));
+            Installments.add(new SelectOption(System.Label.RecurringDonationInstallmentPeriodYearly,System.Label.RecurringDonationInstallmentPeriodQuarterly));
+            Installments.add(new SelectOption(System.Label.RecurringDonationInstallmentPeriodYearly,System.Label.RecurringDonationInstallmentPeriodMonthly));
+            Installments.add(new SelectOption(System.Label.RecurringDonationInstallmentPeriodYearly,System.Label.RecurringDonationInstallmentPeriod1stand15th));
+            return Installments;
+        }
+    }
+    
+    public map<string, Custom_Installment_Settings__c> cisMap;
         
     public list<SelectOption> closeOptions{
     	get{
@@ -52,25 +83,43 @@ public with sharing class RecurringDonationsSettings {
     //called from action method for page 
     public PageReference getSettingsFirstTime() {
         rds = RecurringDonations.getRecurringDonationsSettings();                   
-        
+        cisMap = Custom_Installment_Settings__c.getAll();
+        cis = cisMap.values();
+        cisSize = cisMap.keySet().size();
         //test inserts
         testPackageIntegrity();
         return null;
     }        
 
     public RecurringDonationsSettings(){
-    	selectedTab = 'general_settings';
+    	if (selectedTab == null)
+    	   selectedTab = 'general_settings';
         canEditRDSettings = false;
+        canEditCISettings = false;
+        deleteInstallmentMode = false;
     }
     
     public pagereference editRDsettings(){
         canEditRDSettings = true;    
+        selectedTab = 'general_settings';
         return null;
     }
+    public pagereference editCISSettings(){
+    	canEditCISettings = true;
+    	selectedTab = 'installment_settings';
+    	return null;
+    }
+    
     
     public pagereference cancel(){
+    	cis.clear();
         canEditRDSettings = false;
-        rds = RecurringDonations.getRecurringDonationsSettings();
+        canEditCISettings = false;
+        deleteInstallmentMode = false;
+        cisMap = Custom_Installment_Settings__c.getAll();
+        cis = cisMap.values();
+        cisSize = cisMap.keySet().size();
+        rds = RecurringDonations.getRecurringDonationsSettings();        
         return null;
     }
 
@@ -86,6 +135,56 @@ public with sharing class RecurringDonationsSettings {
         }
         return null;
     }
+    
+    public pageReference addCIRow(){    	
+    	Custom_Installment_Settings__c c = new Custom_Installment_Settings__c();
+    	cis.add(c);
+    	return null;
+    }
+    public pageReference saveCISettings(){
+    	boolean invalidupsert = false;
+    	
+    	for (Custom_Installment_Settings__c c : cis){
+    		c.Value__c = c.Value__c.intValue();
+    		
+    		if (c.Name == null || c.Value__c < 1 || c.Increment__c == null){
+    		    ApexPages.Message myMsg = new ApexPages.Message(ApexPages.Severity.FATAL, 'All Custom Installments must have a Name, positive integer Value and Increment');
+                ApexPages.addMessage(myMsg);      
+                invalidupsert = true;          
+    		}
+    	}    	
+    	if(!invalidupsert){
+    	   upsert cis;
+    	   canEditCISettings = false;
+    	}    	       
+    	return null;
+    }
+    
+    
+    public pageReference runDeleteWizard(){
+        deleteInstallmentMode = true;    	
+    	selectedTab = 'installment_settings';
+    	return null;
+    }
+    public pageReference deleteInstallment(){
+    	
+    	list<Recurring_Donation__c> rdupdatelist = new list<Recurring_Donation__c>();
+    	rdupdatelist = [select Installment_Period__c from Recurring_Donation__c where Installment_Period__c = :selectedInstallmentName];
+    	for (Recurring_Donation__c rd : rdupdatelist){
+    	   rd.Installment_Period__c = replacementInstallment;
+    	
+    	}
+    	delete [select id from Custom_Installment_Settings__c where Name = :selectedInstallmentName];
+        cisMap = Custom_Installment_Settings__c.getAll();
+        cis = cisMap.values();
+        cisSize = cisMap.keySet().size();
+        rds = RecurringDonations.getRecurringDonationsSettings(); 
+    	
+    	selectedTab = 'installment_settings';
+    	deleteInstallmentMode = false;   
+    	return null;
+    }
+    
     
     //test an opp insert as done in the class
     //and provide a warning if it fails
