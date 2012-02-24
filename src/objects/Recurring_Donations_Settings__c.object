@@ -5,6 +5,14 @@
     <description>Settings for the Recurring Donations Package</description>
     <enableFeeds>false</enableFeeds>
     <fields>
+        <fullName>Add_Campaign_to_All_Opportunites__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>If selected, all Opportunities for Recurring Donations will use the Campaign on the Recurring Donation. Otherwise, only the first Opportunity will have the Campaign.</inlineHelpText>
+        <label>Add Campaign to All Opportunites</label>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
         <fullName>Custom_Days__c</fullName>
         <defaultValue>14</defaultValue>
         <externalId>false</externalId>
