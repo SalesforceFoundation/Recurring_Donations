@@ -36,6 +36,7 @@ public with sharing class RecurringDonationsSettings {
 
     public boolean canEditRDSettings {get; set;}
     public Recurring_Donations_Settings__c rds {get; set;}
+    public string selectedTab {get; set;}
         
     public list<SelectOption> closeOptions{
     	get{
@@ -58,6 +59,7 @@ public with sharing class RecurringDonationsSettings {
     }        
 
     public RecurringDonationsSettings(){
+    	selectedTab = 'general_settings';
         canEditRDSettings = false;
     }
     
