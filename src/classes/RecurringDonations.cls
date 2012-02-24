@@ -231,6 +231,8 @@ global with sharing class RecurringDonations {
         //Lists used for final Insert
         list<Opportunity> opportunityInserts = new list<Opportunity>();
         
+        Recurring_Donations_Settings__c rds = getRecurringDonationsSettings();
+        
         // James Melville 05/03/2011 Added to support multi-currency sfdc.  */
         // CurrencyIsoCode doesn't exist in non-multi-currency orgs
         SObjectField OppCurrencyField = Schema.sObjectType.Opportunity.fields.getMap().get('CurrencyIsoCode');
@@ -336,6 +338,9 @@ global with sharing class RecurringDonations {
                     if (r.Recurring_Donation_Campaign__c != null){
                        opp.CampaignId = r.Recurring_Donation_Campaign__c;
                     }
+                    if (rds.Record_Type__c != null){
+                    	opp.RecordTypeID = rds.Record_Type__c;
+                    }
                 
                     opportunityInserts.add(opp);
                     if ( opportunityInserts.size() == 100 )
@@ -350,8 +355,7 @@ global with sharing class RecurringDonations {
             else{
                 //if its not 'open', we're not doing anything to it
                 if (r.Open_Ended_Status__c == system.label.RecurringDonationOpenStatus){
-                    //get settings so we can figure out how many donations to create
-                    Recurring_Donations_Settings__c rds = getRecurringDonationsSettings();
+                    //get settings so we can figure out how many donations to create                    
                     date OppCloseDate;
                     date loop_date;
                   
@@ -401,6 +405,10 @@ global with sharing class RecurringDonations {
                         oName += ') ';
                         oName += o.CloseDate.format();
                         o.Name = oName;
+                        
+                        if (rds.Record_Type__c != null){
+                            o.RecordTypeID = rds.Record_Type__c;
+                        }
                 
                         o.StageName = System.Label.RecurringDonationStageName;
                         o.Recurring_Donation__c = r.Id;
@@ -415,8 +423,6 @@ global with sharing class RecurringDonations {
                 }
             }                 
         }
-        
-        
         
         if( opportunityInserts.size() > 0 )
         {
@@ -642,7 +648,10 @@ global with sharing class RecurringDonations {
         }
     }
     
-    
+    //////////////////////////////////////////////////////////////////////////////
+
+
+
 
     //evaluate existing opportunities and add more if necessary - update recurring donation object with opportunity values
     @future
