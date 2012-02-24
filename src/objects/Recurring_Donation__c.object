@@ -120,11 +120,11 @@
                 <default>false</default>
             </picklistValues>
             <picklistValues>
-                <fullName>Custom</fullName>
+                <fullName>Weekly</fullName>
                 <default>false</default>
             </picklistValues>
             <picklistValues>
-                <fullName>Weekly</fullName>
+                <fullName>1st &amp; 15th</fullName>
                 <default>false</default>
             </picklistValues>
             <sorted>false</sorted>
@@ -137,7 +137,7 @@
         <defaultValue>1</defaultValue>
         <deprecated>false</deprecated>
         <externalId>false</externalId>
-        <inlineHelpText>Number of installments, or number of Opportunities to remain open for open-ended recurring donations.</inlineHelpText>
+        <inlineHelpText>Number of installments.</inlineHelpText>
         <label>Installments</label>
         <precision>18</precision>
         <required>false</required>
