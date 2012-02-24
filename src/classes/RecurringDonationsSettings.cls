@@ -73,8 +73,18 @@ public with sharing class RecurringDonationsSettings {
             return options;
         }
     }
-    public map<string, Custom_Installment_Settings__c> cisMap;        
-        
+    public map<string, Custom_Installment_Settings__c> cisMap;
+    public list<SelectOption> RecordTypeList{
+    	get{
+            list<SelectOption> options = new list<SelectOption>();    		
+    	    list<RecordType> rtlist = [select id, Name from RecordType where sobjecttype = 'Opportunity'];
+            for (RecordType rt : rtlist){
+                options.add(new SelectOption(rt.id, rt.Name));
+            }	
+    		return options;
+    	}
+    }
+            
     //called from action method for page 
     public PageReference getSettingsFirstTime() {
         rds = RecurringDonations.getRecurringDonationsSettings();                   
