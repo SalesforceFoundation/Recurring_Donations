@@ -335,9 +335,9 @@ global with sharing class RecurringDonations {
                 
                     opp.StageName = System.Label.RecurringDonationStageName;
                     opp.Recurring_Donation__c = r.Id;
-                    if (r.Recurring_Donation_Campaign__c != null){
+                    if (r.Recurring_Donation_Campaign__c != null && (rds.Add_Campaign_to_All_Opportunites__c || j < 1)){
                        opp.CampaignId = r.Recurring_Donation_Campaign__c;
-                    }
+                    }                                        
                     if (rds.Record_Type__c != null){
                     	opp.RecordTypeID = rds.Record_Type__c;
                     }
@@ -408,13 +408,12 @@ global with sharing class RecurringDonations {
                         
                         if (rds.Record_Type__c != null){
                             o.RecordTypeID = rds.Record_Type__c;
-                        }
-                
+                        }                
                         o.StageName = System.Label.RecurringDonationStageName;
                         o.Recurring_Donation__c = r.Id;
-                        if (r.Recurring_Donation_Campaign__c != null){
+                        if (r.Recurring_Donation_Campaign__c != null && (rds.Add_Campaign_to_All_Opportunites__c || rdcounter == 1)){
                             o.CampaignId = r.Recurring_Donation_Campaign__c;
-                        }
+                        }  
                         opportunityInserts.add(o);    
                         rdcounter++;                                                                                       
                     }while (OppCloseDate < incrementdate.addMonths((integer)rds.Opportunity_Forecast_Months__c));
