@@ -19,8 +19,8 @@
                                 <apex:outputField value="{!rds.Maximum_Donations__c}" rendered="{!NOT(canEditRDSettings)}" />
                                 <apex:inputField value="{!rds.Maximum_Donations__c}" rendered="{!canEditRDSettings}" />
                                 
-                                <apex:inputCheckBox value="{!rds.Add_Campaign_to_All_Opportunites__c}" disabled="false" rendered="{!canEditRDSettings}"/>
-                                <apex:inputCheckBox value="{!rds.Add_Campaign_to_All_Opportunites__c}" disabled="true" rendered="{!NOT(canEditRDSettings)}"/>
+                                <apex:inputfield value="{!rds.Add_Campaign_to_All_Opportunites__c}"  rendered="{!canEditRDSettings}"/>
+                                <apex:outputfield value="{!rds.Add_Campaign_to_All_Opportunites__c}"  rendered="{!NOT(canEditRDSettings)}"/>
                                 
                                 <apex:outputField id="rtnametext" value="{!rds.Record_Type__c}" rendered="{!NOT(canEditRDSettings)}" />
                                 <apex:selectList value="{!rds.Record_Type__c}" size="1" multiselect="false" rendered="{!canEditRDSettings}">
