@@ -43,6 +43,12 @@ public with sharing class RecurringDonationsSettings {
     public integer cisSize{get; set;}
     public string selectedInstallmentName{get; set;}
     public string replacementInstallment{get; set;}
+    public RecordType RTName{
+    	get{
+    		RecordType rectypeforname = [select Name from RecordType where ID = :rds.Record_Type__c];
+    		return rectypeforname;
+    	}
+    }
     public list<SelectOption> validInstallments{
         get{
         	list<SelectOption> Installments = new list<SelectOption>(); 
