@@ -123,8 +123,7 @@ public with sharing class RecurringDonationsSettings {
         cisMap = Custom_Installment_Settings__c.getAll();
         cis = cisMap.values();
         cisSize = cisMap.keySet().size();
-        //test inserts
-        testPackageIntegrity();
+       
         
         if (rds.Last_Update_Check__c == null){
             checkforupdates();
@@ -134,6 +133,9 @@ public with sharing class RecurringDonationsSettings {
             RecurringDonationsPkgVersionCheck npvc = new RecurringDonationsPkgVersionCheck('npe03');        
             npvc.RecurringDonationsCheckVersion(false);
         }
+        
+         //test inserts
+        testPackageIntegrity();
         return null;
     }        
 
