@@ -90,6 +90,32 @@ public with sharing class RecurringDonationsSettings {
     		return options;
     	}
     }
+    
+    /***  Vars for PKG Update Info ***/
+    public string getMyVersion(){return string.valueof(Package.Version.Request);}
+    public string getMaxVersion(){return rds.Max_Package_Version__c;}
+    public string getUpdateURL(){return rds.Package_Update_URL__c;}
+    public string getLastUpdate(){      
+        DateTime d = rds.Last_Update_Check__c;
+        string datestring = '';
+        if (d != null)
+            datestring = d.format('MMMMM dd, yyyy hh:mm:ss a');
+        return datestring;
+    }
+    public string getpkgupdatestatus(){
+        string status = rds.Has_Package_Update__c;
+        if (status == 'true')
+           status = 'New Update Available';
+        else if (status == 'false')
+           status = 'No New Updates Available';
+        else
+           status = status;
+           
+        return status;
+    }
+    /************************************/
+    
+    
             
     //called from action method for page 
     public PageReference getSettingsFirstTime() {
@@ -99,6 +125,15 @@ public with sharing class RecurringDonationsSettings {
         cisSize = cisMap.keySet().size();
         //test inserts
         testPackageIntegrity();
+        
+        if (rds.Last_Update_Check__c == null){
+            checkforupdates();
+        }
+        
+        else{
+            RecurringDonationsPkgVersionCheck npvc = new RecurringDonationsPkgVersionCheck('npe03');        
+            npvc.RecurringDonationsCheckVersion(false);
+        }
         return null;
     }        
 
@@ -201,6 +236,12 @@ public with sharing class RecurringDonationsSettings {
     	deleteInstallmentMode = false;   
     	return null;
     }    
+    
+    public void checkForUpdates(){
+        RecurringDonationsPkgVersionCheck npvc = new RecurringDonationsPkgVersionCheck('npe03');        
+        npvc.RecurringDonationsCheckVersion(true);
+    }
+    
     
     //test an opp insert as done in the class
     //and provide a warning if it fails
