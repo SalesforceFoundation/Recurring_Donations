@@ -33,16 +33,28 @@
 * @description The controller for the VF page used for settings 
 */
 public with sharing class RecurringDonationsSettings {
-
+    //invalid fields for opp mappings
+    set<string> invalidOppFields = new set<string>{'accountid', 'amount', 'campaignid', 'closedate', 'createdbyid', 
+    	                                           'createddate', 'fiscal', 'fiscalquarter', 'fiscalyear', 'forecastcategory', 
+    	                                           'stagename', 'recurring_donation__c', 'forecastcategoryname',
+    	                                           'forecastname', 'hasopportunitylineitem', 'id', 'isclosed', 'isdeleted', 'isprivate', 
+    	                                           'iswon', 'lastactivitydate', 'lastmodifiedbyid', 'lastmodifieddate', 'recordtypeid', 
+    	                                           'systemmodstamp', 'totalopportunityquantity'};        
     public boolean canEditRDSettings {get; set;}
     public boolean canEditCISettings {get; set;}
     public boolean deleteInstallmentMode {get; set;}
+    public boolean addingFieldMapping{get; set;}
     public Recurring_Donations_Settings__c rds {get; set;}
     public list<Custom_Installment_Settings__c> cis {get; set;}
+    public list<Custom_Field_Mapping__c> cfm {get; set;}
     public string selectedTab {get; set;}
-    public integer cisSize{get; set;}
+    public integer cisSize{get; set;} 
+    public integer cfmSize{get; set;}
     public string selectedInstallmentName{get; set;}
     public string replacementInstallment{get; set;}
+    public map<string, Custom_Installment_Settings__c> cisMap;
+    public map<string, Custom_Field_Mapping__c> cfmMap;
+    public string fieldMappingName{get; set;}
     public RecordType RTName{
     	get{
     		RecordType rectypeforname = [select Name from RecordType where ID = :rds.Record_Type__c];
@@ -79,7 +91,6 @@ public with sharing class RecurringDonationsSettings {
             return options;
         }
     }
-    public map<string, Custom_Installment_Settings__c> cisMap;
     public list<SelectOption> RecordTypeList{
     	get{
             list<SelectOption> options = new list<SelectOption>();    		
@@ -90,6 +101,27 @@ public with sharing class RecurringDonationsSettings {
     		return options;
     	}
     }
+    public list<SelectOption> availableRDFields;               
+    public list<SelectOption> getavailableRDFields(){
+        list<SelectOption> fieldlist = new list<SelectOption>();
+        map<String, Schema.SObjectField> M = schema.SObjectType.Recurring_Donation__c.fields.getMap();            
+        for (string s : m.keySet()){
+            fieldlist.add(new SelectOption(s,s));
+        }
+        return sortOptionList(fieldlist);
+    }
+    public string RDField{get;set;}
+    public list<SelectOption> availableOpportunityFields;               
+    public list<SelectOption> getavailableOpportunityFields(){
+        list<SelectOption> fieldlist = new list<SelectOption>();
+        map<String, Schema.SObjectField> M = schema.SObjectType.Opportunity.fields.getMap();            
+        for (string s : m.keySet()){
+        	if (!invalidOppFields.contains(s))
+                fieldlist.add(new SelectOption(s, s));
+        }
+        return sortOptionList(fieldlist);
+    }
+    public string OppField{get;set;}
     
     /***  Vars for PKG Update Info ***/
     public string getMyVersion(){return string.valueof(Package.Version.Request);}
@@ -121,10 +153,11 @@ public with sharing class RecurringDonationsSettings {
     public PageReference getSettingsFirstTime() {
         rds = RecurringDonations.getRecurringDonationsSettings();                   
         cisMap = Custom_Installment_Settings__c.getAll();
+        cfmMap = Custom_Field_Mapping__c.getAll().clone();
+        cfm = cfmMap.values();        
         cis = cisMap.values();
         cisSize = cisMap.keySet().size();
-       
-        
+        cfmSize = cfmMap.keySet().size();               
         if (rds.Last_Update_Check__c == null){
             checkforupdates();
         }
@@ -145,6 +178,7 @@ public with sharing class RecurringDonationsSettings {
         canEditRDSettings = false;
         canEditCISettings = false;
         deleteInstallmentMode = false;
+        addingFieldMapping = false;
     }
     
     public pagereference editRDsettings(){
@@ -159,11 +193,18 @@ public with sharing class RecurringDonationsSettings {
     	return null;
     }
     
+    public pagereference addFieldMapping(){
+    	addingFieldMapping = true;
+    	selectedTab = 'field_mapping_settings';
+    	return null;
+    }
+    
     public pagereference cancel(){
     	cis.clear();
         canEditRDSettings = false;
         canEditCISettings = false;
         deleteInstallmentMode = false;
+        addingFieldMapping = false;
         cisMap = Custom_Installment_Settings__c.getAll();
         cis = cisMap.values();
         cisSize = cisMap.keySet().size();
@@ -239,11 +280,57 @@ public with sharing class RecurringDonationsSettings {
     	return null;
     }    
     
+    public pageReference saveFieldMapping(){
+    	if (isValidMapping(RDField, OppField)){
+    	   string fmName = 'FieldMapping' + cfm.size();	
+    	   Custom_Field_Mapping__c myFM = new Custom_Field_Mapping__c(Opportunity_Field__c = OppField, Recurring_Donation_Field__c = RDField, Name = fmName); 
+    	   insert myFM;
+    	   cfm.add(myFM);
+    	   cfmSize = cfm.size();
+    	   addingFieldMapping = false;	
+    	}    	
+    	//add error
+    	else{
+            ApexPages.Message myMsg = new ApexPages.Message(ApexPages.Severity.WARNING, system.label.RecurringDonationBadFieldMapping);
+            ApexPages.addMessage(myMsg);
+    	}
+        selectedTab = 'field_mapping_settings';        
+    	return null;
+    }
+    
+    
+    public pageReference deleteFieldMapping(){
+    	if (fieldMappingName != null){
+    		delete [select id from Custom_Field_Mapping__c where Name = :fieldMappingName];
+    		cfmMap.remove(fieldMappingName);
+    		cfm = cfmMap.values();
+    		cfmSize = cfm.size();
+    	}    	    	
+    	return null;
+    }
+    
+    
     public void checkForUpdates(){
         RecurringDonationsPkgVersionCheck npvc = new RecurringDonationsPkgVersionCheck('npe03');        
         npvc.RecurringDonationsCheckVersion(true);
     }
     
+    //checks the compatibility of a recurring donation and opp field
+    private boolean isValidMapping(string RDField, string OppField){
+    	boolean isValid = false;
+    	
+    	Schema.Sobjectfield schemaRDField = schema.SObjectType.Recurring_Donation__c.fields.getMap().get(RDField);
+        Schema.Sobjectfield schemaOppField = schema.SobjectType.Opportunity.fields.getMap().get(OppField);
+    	
+    	if (schemaRDField != null && schemaOppField != null){
+            Schema.DescribeFieldResult RDF = schemaRDField.getDescribe();
+            Schema.DescribeFieldResult ODF = schemaOppField.getDescribe();                        		
+    		if  (RDF.isAccessible() && (ODF.isAccessible() && !ODF.isDeprecatedAndHidden() && ODF.isUpdateable())){
+                isValid = true;                    		  
+    		}
+    	}
+    	return isValid;
+    }
     
     //test an opp insert as done in the class
     //and provide a warning if it fails
@@ -306,6 +393,34 @@ public with sharing class RecurringDonationsSettings {
         if (myMsg != null){
         	ApexPages.addMessage(myMsg);
         }
+    }
+    
+        
+    //http://improveit360.blogspot.com/2010/09/implementing-quicksort-to-sort-list-of.html
+    private list<SelectOption> sortOptionList(list<SelectOption> ListToSort)
+    {
+        if(ListToSort == null || ListToSort.size() <= 1)
+            return ListToSort;
+            
+        List<SelectOption> Less = new List<SelectOption>();
+        List<SelectOption> Greater = new List<SelectOption>();
+        integer pivot = ListToSort.size() / 2;
+          
+        // save the pivot and remove it from the list
+        SelectOption pivotValue = ListToSort[pivot];
+        ListToSort.remove(pivot);
+        
+        for(SelectOption x : ListToSort)
+        {
+            if(x.getLabel() <= pivotValue.getLabel())
+                Less.add(x);
+            else if(x.getLabel() > pivotValue.getLabel()) Greater.add(x);   
+        }
+        List<SelectOption> returnList = new List<SelectOption> ();
+        returnList.addAll(SortOptionList(Less));
+        returnList.add(pivotValue);
+        returnList.addAll(SortOptionList(Greater));
+        return returnList; 
     }
     
     /** Test Method **/ 
