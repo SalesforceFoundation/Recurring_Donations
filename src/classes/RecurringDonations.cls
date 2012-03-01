@@ -46,6 +46,7 @@ global with sharing class RecurringDonations {
            
     //handles Opportunity closures
     public RecurringDonations(map<id, Opportunity> newOppMap, map<id, Opportunity> oldOppMap, triggerAction ta){
+    	RecurringDonations_ProcessControl.hasRun = true;
         set<id> rdIDs = new set<id>();        
         if (ta == triggerAction.afterUpdate){       
             for (Opportunity o : newOppMap.values()){
@@ -76,11 +77,12 @@ global with sharing class RecurringDonations {
                 //evaluateExistingOpportunities(rdIds, false);
             else
                 updateRecurringDonationOnOppChangeFuture(rdIds);                                        
-        }
+        }        
     }
     
     //support for older model
     public RecurringDonations(list<Recurring_Donation__c> rd, list<Recurring_Donation__c> nulllist, triggerAction ta){
+    	RecurringDonations_ProcessControl.hasRun = true;
         Recurring_Donations_Settings__c rds = getRecurringDonationsSettings();
         for (Recurring_Donation__c r : rd){
             if (ta==triggerAction.beforeInsert){
@@ -96,7 +98,7 @@ global with sharing class RecurringDonations {
     
     //handles Recurring Donation scenarios
     public RecurringDonations(map<id, Recurring_Donation__c> recurringDonations, map<id, Recurring_Donation__c> oldRecurringDonations, triggerAction ta){       	 
-        
+        RecurringDonations_ProcessControl.hasRun = true;
         list<Recurring_Donation__c> recDonationDeletes = new list<Recurring_Donation__c>();
         map<id, Recurring_Donation__c> rdInserts = new map<id, Recurring_Donation__c>(); 
         list<Recurring_Donation__c> recDonationUpdates = new list<Recurring_Donation__c>();
