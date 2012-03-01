@@ -39,6 +39,8 @@ global with sharing class RecurringDonations {
     public enum RecurringDonationCloseOptions {Delete_Open_Opportunities, Mark_Opportunities_Closed_Lost, No_Action}
     public enum triggerAction {beforeInsert, beforeUpdate, beforeDelete, afterInsert, afterUpdate, afterDelete, afterUndelete}
     public static Recurring_Donations_Settings__c recurringDonationsSettings;    
+    public static map<id, Recurring_Donation__c> recurringDonationMap;
+    public static map<string, Custom_Field_Mapping__c> customFieldMappingSettings = new map<string, Custom_Field_Mapping__c>();
     
     /*** Constructors ***/ 
            
@@ -54,9 +56,22 @@ global with sharing class RecurringDonations {
                 }
             }                  
         }           
+        
+        //Get the open label for opps
+        string openLabel = system.label.RecurringDonationOpenStatus;
+        recurringDonationMap = new map<id, Recurring_Donation__c>([select id, Paid_Amount__c, Next_Payment_Date__c, 
+                                                                                    Contact__c, Organization__c, Amount__c, 
+                                                                                    Date_Established__c, Recurring_Donation_Campaign__c,
+                                                                                     Installment_Period__c, Installments__c,
+                                                                                     Last_Payment_Date__c, Open_Ended_Status__c,
+                                                                                     Schedule_Type__c, Total_Paid_Installments__c,
+                                                                                     Donor_Name__c
+                                                                                  from Recurring_Donation__c 
+                                                                                  where Open_Ended_Status__c = :openLabel
+                                                                                  and id IN :RDids]);
         //recurring donations that need to be updated      
-        if (!rdIds.isEmpty()){
-        	if (rdIds.size() == 1)
+        if (!recurringDonationMap.keySet().isEmpty()){
+        	if (recurringDonationMap.keySet().size() == 1)
         	   updateRecurringDonationOnOppChange(rdIds);
                 //evaluateExistingOpportunities(rdIds, false);
             else
@@ -86,6 +101,8 @@ global with sharing class RecurringDonations {
         map<id, Recurring_Donation__c> rdInserts = new map<id, Recurring_Donation__c>(); 
         list<Recurring_Donation__c> recDonationUpdates = new list<Recurring_Donation__c>();
         Recurring_Donations_Settings__c rds = getRecurringDonationsSettings();
+        //Get the open label for opps
+        string openLabel = system.label.RecurringDonationOpenStatus;
         
         for(id rid : recurringDonations.keySet()){
         	Recurring_Donation__c r = recurringDonations.get(rid);
@@ -161,6 +178,7 @@ global with sharing class RecurringDonations {
         
         //holds the rdid of all evaluated closed sets, allows us to figure out the various summary rows
         set<id> isClosedEvaluatedSet = new set<id>();
+        map<id, date> maxOpenPaymentMap = new map<id, date>();
         
         //update the rc next payment date 
         //and add new donation objects needed 
@@ -184,12 +202,14 @@ global with sharing class RecurringDonations {
             //already used, so we don't accidentally use the summary row below
             boolean isClosed = (boolean)obj.get('isClosed');
             boolean isWon = (boolean)obj.get('isWon');
+            integer oppCount = (integer)obj.get('oppcount');
             
             if (rdid != null){
                 //if this is the open set for this rd
                 if ((boolean)obj.get('isClosed') != null && !isClosed && 
                     (boolean)obj.get('isWon') != null && !isWon){
                     rd.Next_Payment_Date__c = (date)obj.get('MinDate');
+                    maxOpenPaymentMap.put(rdid, (date)obj.get('MaxDate'));
                     updateMap.put(rdid, rd);                                       
                 }
                 //if this is the closed set     
@@ -199,11 +219,11 @@ global with sharing class RecurringDonations {
                     rd.Total_Paid_Installments__c = (integer)obj.get('oppcount');
                     updateMap.put(rdid, rd);                        
                 }
-                //grand summary row                
-                if ((boolean)obj.get('isClosed') == null && (boolean)obj.get('isWon') == null){                    
-                    rd.Installments__c = (integer)obj.get('oppcount');
+                //should be grand summary row                
+               // if ((boolean)obj.get('isClosed') == false && (boolean)obj.get('isWon') == false){                    
+                    rd.Installments__c = oppCount; 
                     updateMap.put(rdid, rd);                    
-                }                    
+                //}                    
             }                
         }
         
@@ -220,7 +240,7 @@ global with sharing class RecurringDonations {
     	                                       Recurring_Donation_Campaign__c, Paid_Amount__c, Organization__c,
     	                                       Open_Ended_Status__c, Next_Payment_Date__c, Last_Payment_Date__c,
     	                                       Installments__c, Installment_Period__c, Installment_Amount__c,
-    	                                       Donor_Name__c, Date_Established__c, Contact__c, Amount__c
+    	                                       Donor_Name__c, Date_Established__c, Contact__c, Amount__c    	                                       
     	                                       from Recurring_Donation__c];
     	
         insertOppsOnRecurringDonationInsert(reclist);
@@ -232,18 +252,20 @@ global with sharing class RecurringDonations {
         list<Opportunity> opportunityInserts = new list<Opportunity>();
         
         Recurring_Donations_Settings__c rds = getRecurringDonationsSettings();
+        customFieldMappingSettings = Custom_Field_Mapping__c.getAll();
         
         // James Melville 05/03/2011 Added to support multi-currency sfdc.  */
         // CurrencyIsoCode doesn't exist in non-multi-currency orgs
         SObjectField OppCurrencyField = Schema.sObjectType.Opportunity.fields.getMap().get('CurrencyIsoCode');
         //grab the contact id for role to take advantage of NPSP C&O if it exists
         Sobjectfield ConIDForRole = Schema.sObjectType.Opportunity.fields.getMap().get('npe01__Contact_Id_for_Role__c');
-                    
+        set<id> updateRecurringDonationSet = new set<id>();            
         
         //Create a list of ContactIds used in these RecurringDonations
         list<Id> contactIds = new list<Id>();
         map<Id,Id> recConMap = new map<Id,Id>();
         for(Recurring_Donation__c r : recurringDonations){
+        	updateRecurringDonationSet.add(r.id);
             if (r.Contact__c != null){
                 contactIds.add(r.Contact__c);
                 recConMap.put(r.Id,r.Contact__c);
@@ -340,8 +362,14 @@ global with sharing class RecurringDonations {
                     }                                        
                     if (rds.Record_Type__c != null){
                     	opp.RecordTypeID = rds.Record_Type__c;
+                    }                    
+                    
+                    //evaluate any custom field mappings
+                    for (string s : customFieldMappingSettings.keySet()){
+                        Custom_Field_Mapping__c cfm = customFieldMappingSettings.get(s);
+                        opp.put(cfm.Opportunity_Field__c, r.get(cfm.Recurring_Donation_Field__c));
                     }
-                
+                    
                     opportunityInserts.add(opp);
                     if ( opportunityInserts.size() == 100 )
                     {
@@ -367,15 +395,20 @@ global with sharing class RecurringDonations {
                     if (r.Next_Payment_Date__c != null)                     
                         OppCloseDate = r.Next_Payment_Date__c;
                     else
-                        OppCloseDate = r.Date_Established__c;                  
+                        OppCloseDate = r.Date_Established__c;
+                        
+                    if (r.Total_Paid_Installments__c > 0){
+                    	OppCloseDate = getNextDate(OppCloseDate, r.Installment_Period__c);
+                    }                                          
                    
                     date incrementdate = OppCloseDate;
-                                       
-                    integer rdcounter = 1;                   
+                    
+                    integer rdcounter = 1;
+                           
                     do{
                         Opportunity o = new Opportunity();
-                        o.CloseDate = OppCloseDate;   
-                                                                                                      
+                        o.CloseDate = OppCloseDate;
+                                                                                                          
                         if(RDCurrencyField != null){
                             //set the donation currency field to equal the recurring donation currency
                             o.put(OppCurrencyField,r.get(RDCurrencyField));
@@ -390,7 +423,7 @@ global with sharing class RecurringDonations {
                             if (ConIDForRole != null){
                                 o.put((string)c.id, 'npe01__Contact_Id_For_Role__c');
                             }
-                        }                           
+                        }       
                                        
                         o.Amount = r.Installment_Amount__c;
                     
@@ -414,18 +447,22 @@ global with sharing class RecurringDonations {
                         if (r.Recurring_Donation_Campaign__c != null && (rds.Add_Campaign_to_All_Opportunites__c || rdcounter == 1)){
                             o.CampaignId = r.Recurring_Donation_Campaign__c;
                         }  
+                        
+                        //evaluate any custom field mappings
+                        for (string s : customFieldMappingSettings.keySet()){
+                            Custom_Field_Mapping__c cfm = customFieldMappingSettings.get(s);
+                            o.put(cfm.Opportunity_Field__c, r.get(cfm.Recurring_Donation_Field__c));
+                        }
                         opportunityInserts.add(o);    
                         rdcounter++;                                                                                       
-                    }while (OppCloseDate < incrementdate.addMonths((integer)rds.Opportunity_Forecast_Months__c));
-                    
-                    r.Installments__c = rdcounter; 
+                    }while (OppCloseDate < incrementdate.addMonths((integer)rds.Opportunity_Forecast_Months__c));                                        
                 }
             }                 
         }
         
         if( opportunityInserts.size() > 0 )
         {
-        	update recurringDonations;
+        	updateRecurringDonationOnOppChangeFuture(updateRecurringDonationSet);
             Database.SaveResult[] lsr = Database.insert(opportunityInserts, false);
             
             if (ConIDForRole == null){
@@ -506,7 +543,7 @@ global with sharing class RecurringDonations {
                                                                                   where Open_Ended_Status__c = :openLabel 
                                                                                   and id IN :recIDs]);        
                            
-        list<Opportunity> oppList = [select id, Amount, CampaignId, AccountID, CloseDate 
+        list<Opportunity> oppList = [select id, Amount, CampaignId, AccountID, CloseDate, Recurring_Donation__r.id                                         
                                        from Opportunity 
                                        where Recurring_Donation__r.id IN :rdMap.keySet() 
                                        and isClosed = false
@@ -625,7 +662,7 @@ global with sharing class RecurringDonations {
         /// <name> deleteRecDonations </name>
     /// <summary> Validates that a Recurring Donation can be deleted </summary>
     /// <param name="recurringDonations"> RecurringDonation objects that are being triggered </param>
-    public static void deleteRecDonations(Recurring_Donation__c[] recurringDonations)
+    private static void deleteRecDonations(Recurring_Donation__c[] recurringDonations)
     {
         Map<Id,Id> recDonationMap = new Map<Id,Id>();
         List<Id> recDonationIds = new List<Id>();
@@ -646,147 +683,75 @@ global with sharing class RecurringDonations {
             }
         }
     }
-    
-    //////////////////////////////////////////////////////////////////////////////
 
-
-
-
-    //evaluate existing opportunities and add more if necessary - update recurring donation object with opportunity values
-    @future
-    public static void evaluateExistingOpportunities(set<id> recurringDonationIDs, boolean clearOpenOpps){
-        
-        //if we need to clear out existing opps before evaluating, do so here
-        if (clearOpenOpps){
-            delete [select id from Opportunity where isClosed = false and Recurring_Donation__r.id IN :recurringDonationIDs];
-        }
-        
-        // James Melville 05/03/2011 Added to support multi-currency sfdc.  */
-        // CurrencyIsoCode doesn't exist in non-multi-currency orgs
-        // we check currency iscode before entering the loop since it's a system check
-        SObjectField OppCurrencyField = Schema.sObjectType.Opportunity.fields.getMap().get('CurrencyIsoCode');
-        
-        //grab the contact id for role to take advantage of NPSP C&O if it exists
-        Sobjectfield ConIDForRole = Schema.sObjectType.Opportunity.fields.getMap().get('npe01__Contact_Id_for_Role__c');
-        
-        //set of RDs to be updated         
-        map<id, Recurring_Donation__c> updateMap = new map<id, Recurring_Donation__c>();
-        list<Opportunity> oppInsertList = new list<Opportunity>();
-        
-        Recurring_Donations_Settings__c rds = getRecurringDonationsSettings();     
-        string openLabel = system.label.RecurringDonationOpenStatus;
-        list<string> openLabels = openLabel.split(',');
-        for(string s : openLabels)
-            system.debug('LABEL: ' + s);
-        
-        //get all possible rd records that may need updating, exclude ones not in an open state  
-        map<id, Recurring_Donation__c> rdMap = new map<id, Recurring_Donation__c>([select id, Paid_Amount__c, Next_Payment_Date__c, 
-                                                                                    Contact__c, Organization__c, Amount__c, 
-                                                                                    Date_Established__c, Recurring_Donation_Campaign__c,
-                                                                                     Installment_Period__c, Installments__c,
-                                                                                     Last_Payment_Date__c, Open_Ended_Status__c,
-                                                                                     Schedule_Type__c, Total_Paid_Installments__c,
-                                                                                     Donor_Name__c
-                                                                                  from Recurring_Donation__c 
-                                                                                  where Open_Ended_Status__c IN :openLabels 
-                                                                                  and id IN :recurringDonationIDs]);
-        system.debug('RDMAP SIZE: ' + rdMap.keySet().size());
-        list<sobject> sobjs = [select count(id) oppcount, MIN(CloseDate) MinDate, MAX(CloseDate) MaxDate, SUM(Amount) Total,
-                                  isClosed, Recurring_Donation__r.id rdid, isWon
-                                  from Opportunity where Recurring_Donation__r.Open_Ended_Status__c = :openLabel 
-                                  and Recurring_Donation__r.id IN :rdMap.keySet()
-                                  group by rollup(Recurring_Donation__r.id, isClosed, isWon)]; 
-        
-        map<id, date> maxOpenPaymentMap = new map<id, date>();
-  
-        //holds the rdid of all evaluated closed sets
-        set<id> isClosedEvaluatedSet = new set<id>();
-        //Create a list of ContactIds used in these RecurringDonations
-        set<id> contactIds = new set<id>();
-        
-        //update the rc next payment date 
-        //and add new donation objects needed 
-        for (sobject obj : sobjs){
-            
-            id rdid = (id)obj.get('rdid'); 
-
-            Recurring_Donation__c rd;
-            
-            if (!updateMap.containsKey(rdid)){
-                rd = rdMap.get(rdid);
-            }
-            else{
-                rd = updateMap.get(rdid);
-            }
-            
-            //the summary isclosed row will contain a null boolean
-            //which is evaluated as false, so we'll need to mark 
-            //this rdid as having had the nonsummary false isclosed value 
-            //already used, so we don't accidentally use the summary row below
-            boolean isClosed = (boolean)obj.get('isClosed');
-            boolean isWon = (boolean)obj.get('isWon');
-            
-            if (rdid != null){
-            	
-                if (rd.Contact__c != null ){
-                    contactIds.add(rd.Contact__c);
-                }
-                
-                //if this is the open set for this rd
-                if (!isClosed && !isWon && !isClosedEvaluatedSet.contains(rdid)){
-                    rd.Next_Payment_Date__c = (date)obj.get('MinDate');
-                    isClosedEvaluatedSet.add(rdid);
-                    updateMap.put(rdid, rd);
-                    maxOpenPaymentMap.put(rdid, (date)obj.get('MaxDate'));                              
-                }
-                //if this is the closed set     
-                else if (isClosed && isWon){
-                	rd.Last_Payment_Date__c = (date)obj.get('MaxDate');
-                    rd.Paid_Amount__c = (decimal)obj.get('Total');     
-                    rd.Total_Paid_Installments__c = (integer)obj.get('oppcount');
-                    updateMap.put(rdid, rd);                        
-                }
-                
-                if (!isClosed && !isWon && isClosedEvaluatedSet.contains(rdid)){                    
-                    rd.Installments__c = (integer)obj.get('oppcount');
-                    updateMap.put(rdid, rd);                    
-                }                    
-            }                
-        }
-        
+    public static void evaluateRecurringDonationsForNewOppInsert(list<Recurring_Donation__c> recurringDonationsToEvaluate){
+    	
+    	Recurring_Donations_Settings__c rds = getRecurringDonationsSettings();
+    	
+    	//IF THERE ARE NO OPEN OPPS WHEN WE EXAMINE THE RD, WE NEED TO UDPATE THE RD, OTHERWISE, THE RD 
+    	//SHOULD HAVE THE CORRECT INFO
+    	
+    	list<Opportunity> oppInsertList = new list<Opportunity>();
+    	
+    	
         //get the total number of forecast months
-        integer oppMonths = (integer)rds.Opportunity_Forecast_Months__c;
-        
+        integer forecast_months = (integer)rds.Opportunity_Forecast_Months__c;
         SObjectField RDCurrencyField; 
         // multicurrency support
+        SObjectField OppCurrencyField = Schema.sObjectType.Opportunity.fields.getMap().get('CurrencyIsoCode');
+        //grab the contact id for role to take advantage of NPSP C&O if it exists
+        Sobjectfield ConIDForRole = Schema.sObjectType.Opportunity.fields.getMap().get('npe01__Contact_Id_for_Role__c');
         if(OppCurrencyField != null){
             RDCurrencyField = Schema.sObjectType.Recurring_Donation__c.fields.getMap().get('CurrencyIsoCode');
         }
+        string openlabel = system.label.RecurringDonationOpenStatus;
         
+        
+        //get the existing donations
+        list<sobject> sobjs = [select count(id) oppCount, MAX(CloseDate) MaxDate,
+                                  Recurring_Donation__r.id rdid
+                                  from Opportunity where Recurring_Donation__r.Open_Ended_Status__c = :openLabel 
+                                  and Recurring_Donation__r.id IN :recurringDonationsToEvaluate                                  
+                                  group by rollup(Recurring_Donation__r.id)]; 
+        
+        map<id, date> lastOppMap = new map<id, date>();
+        map<id, integer> oppCountMap = new map<id, integer>();
+        set<id> contactIDs = new set<id>();
+                
+        for (Recurring_Donation__c rd : recurringDonationsToEvaluate){
+            if (rd.Contact__c != null ){
+                contactIds.add(rd.Contact__c);
+            }
+        }            
         //Create a Map of Contact Ids and Contact Records
         map<id,Contact> contactMap;        
         if (contactIds.size() > 0){
             contactMap = new Map<Id,Contact>([Select Id, AccountId from Contact where Id in :contactIds and AccountId != null]);
-        }
-        
-        for (Recurring_Donation__c rd : updateMap.values()){
-            date OppCloseDate = maxOpenPaymentMap.get(rd.id);
-            
-            system.debug('LAST_PAYMENT_DATE ' + rd.Last_Payment_Date__c + ' WITH OPP MONTHS ' + rd.Last_Payment_Date__c.addMonths(oppMonths) + ' >= MAX OPEN PAYMENT ' + maxOpenPaymentMap.get(rd.id));
-            //if max open payment is less than the value of hte last payment + the 
-            //scheduled open timeframe, add as many opps as needed to satisfy teh criteria
-            if (rd.Last_Payment_Date__c.addMonths(oppMonths) >= maxOpenPaymentMap.get(rd.id)){
-            	integer oppCounter = 1;
+        }        
+ 
+        for (sobject obj : sobjs){
+            id rdid = (id)obj.get('rdid'); 
+            if ((date)obj.get('MaxDate') != null){
+                lastOppMap.put(rdid, (date)obj.get('MaxDate'));
+            }
+                                  
+            oppCountMap.put(rdid, (integer)obj.get('oppCount'));                 
+        }        
+        customFieldMappingSettings = Custom_Field_Mapping__c.getAll();
+        for (Recurring_Donation__c rd : recurringDonationsToEvaluate){
+            integer oppCounter = oppCountMap.get(rd.id) + 1; 
+                           
+            if (system.today().addMonths(forecast_months) > lastOppMap.get(rd.id)){
+                date oppclosedate = lastOppMap.get(rd.id);
                 do{
                     Opportunity o = new Opportunity();
 
-                    if(RDCurrencyField != null){
-                        //set the donation currency field to equal the recurring donation currency
-                        o.put(OppCurrencyField,rd.get(RDCurrencyField));
-                    }
+                    //multicurrency?
+                    if(RDCurrencyField != null){o.put(OppCurrencyField,rd.get(RDCurrencyField));}
                     
+                    //account or contact?
                     if (rd.Organization__c != null){
-                       o.AccountId = rd.Organization__c;
+                    	o.AccountId = rd.Organization__c;
                     }
                     else if (contactMap.containsKey(rd.Contact__c)){
                         Contact c = contactMap.get(rd.Contact__c);
@@ -794,54 +759,34 @@ global with sharing class RecurringDonations {
                         if (ConIDForRole != null){
                             o.put((string)c.id, 'npe01__Contact_Id_For_Role__c');
                         }
-                    }
-                    
-                    if (rd.Installment_Period__c == System.Label.RecurringDonationInstallmentPeriodYearly){
-                        o.CloseDate = OppCloseDate.addYears(1);
-                    } 
-                    else if (rd.Installment_Period__c == System.Label.RecurringDonationInstallmentPeriodQuarterly){
-                        o.CloseDate = OppCloseDate.addMonths(3);
-                    } 
-                    else if (rd.Installment_Period__c == System.Label.RecurringDonationInstallmentPeriodMonthly){
-                        o.CloseDate = OppCloseDate.addMonths(1);
-                    } 
-                    else if (rd.Installment_Period__c == System.Label.RecurringDonationInstallmentPeriodWeekly){
-                        o.CloseDate = OppCloseDate.addDays(7);
-                    }
-                    else if (rd.Installment_Period__c == System.label.RecurringDonationInstallmentPeriodCustom){
-                        o.CloseDate = OppCloseDate.addDays((integer)rds.Custom_Days__c);
-                    }
-                    //if its not a valid value, set it to the max last payment date plus the 
-                    //the open ended value so we only create one opp max
-                    else{
-                        o.CloseDate = rd.Last_Payment_Date__c.addMonths(oppMonths);
-                    }
-                    
-                    OppCloseDate = o.CloseDate;
-             
-                    String oName = rd.Donor_Name__c + ' ' + System.Label.RecurringDonationPrefix +
-                    ' (' + string.valueOf(updateMap.get(rd.id).Installments__c + oppCounter) + ') ' + o.CloseDate.format();
+                    }                    
+                                                                            	           
+                	string oName = rd.Donor_Name__c + ' ' + System.Label.RecurringDonationPrefix +
+                    ' (' + string.valueOf(oppCounter) + ') ' + o.CloseDate.format();
                     
                     o.Name = oName;
                     o.Amount = rd.Amount__c;
                     o.StageName = System.Label.RecurringDonationStageName;                    
                     o.Recurring_Donation__c = rd.Id;
-                    if (rd.Recurring_Donation_Campaign__c != null){
+                    oppclosedate = getNextDate(oppclosedate, rd.Installment_Period__c);
+                    o.CloseDate = oppclosedate;
+                    //evaluate any custom field mappings
+                    for (string s : customFieldMappingSettings.keySet()){
+                        Custom_Field_Mapping__c cfm = customFieldMappingSettings.get(s);
+                        o.put(cfm.Opportunity_Field__c, rd.get(cfm.Recurring_Donation_Field__c));
+                    }
+                    
+                    if (rd.Recurring_Donation_Campaign__c != null && (rds.Add_Campaign_to_All_Opportunites__c || oppCounter == 1)){
                        o.CampaignId = rd.Recurring_Donation_Campaign__c;
                     }
+                    
                     oppCounter++;
-                    oppInsertList.add(o);                    
-                }
-                while (OppCloseDate < rd.Last_Payment_Date__c.addMonths(oppMonths));
+                    oppInsertList.add(o);                	
+                }while(oppclosedate < system.today().addMonths(forecast_months));
             }
         }
         
-        //update recurring donations
-        if (!updateMap.values().isEmpty()){
-            update updateMap.values();
-        }
-        
-        //insert the opps
+         //insert the opps
         if(!oppInsertList.isEmpty()){
             Database.SaveResult[] lsr = Database.insert(oppInsertList, false);
             
@@ -856,8 +801,8 @@ global with sharing class RecurringDonations {
                 }
                 oppContactRoles(createdOppIds);
             }
-        }
-    }
+        }        
+    } 
     
     /*** UTILITY METHODS ***/
     
