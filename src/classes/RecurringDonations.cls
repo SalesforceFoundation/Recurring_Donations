@@ -425,7 +425,7 @@ global with sharing class RecurringDonations {
                             }
                         }       
                                        
-                        o.Amount = r.Installment_Amount__c;
+                        o.Amount = r.Amount__c;
                     
                         OppCloseDate = getNextDate(OppCloseDate, r.Installment_Period__c);
                     
