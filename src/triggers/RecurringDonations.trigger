@@ -53,6 +53,14 @@ after insert, after update, after delete, after undelete) {
             'Contact__c,Installment_Amount__c,Installments__c,Amount__c,Total__c,Installment_Period__c, ' +
             'Date_Established__c,Donor_Name__c,Schedule_Type__c,Recurring_Donation_Campaign__c,Total_Paid_Installments__c ';
        
+            //add any custom mapping to make sure we have the required fields
+            map<string, Custom_Field_Mapping__c> cfmMap = new map<string, Custom_Field_Mapping__c>();
+            cfmMap = Custom_Field_Mapping__c.getAll();
+            for (string s : cfmMap.keySet()){
+            	queryRCD = queryRCD + ',' + cfmMap.get(s).Recurring_Donation_Field__c;
+            }
+       
+       
             //if currencyiso field exists add it to query for use later
             if(Schema.sObjectType.Recurring_Donation__c.fields.getMap().get('CurrencyIsoCode') != null)
                 queryRCD = queryRCD + ',CurrencyIsoCode';
