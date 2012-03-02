@@ -82,8 +82,7 @@ global with sharing class RecurringDonations {
     
     //support for older model
     public RecurringDonations(list<Recurring_Donation__c> rd, list<Recurring_Donation__c> nulllist, triggerAction ta){
-    	RecurringDonations_ProcessControl.hasRun = true;
-        Recurring_Donations_Settings__c rds = getRecurringDonationsSettings();
+    	Recurring_Donations_Settings__c rds = getRecurringDonationsSettings();
         for (Recurring_Donation__c r : rd){
             if (ta==triggerAction.beforeInsert){
                 if (r.Organization__c == null && r.Contact__c == null){
@@ -107,16 +106,13 @@ global with sharing class RecurringDonations {
         string openLabel = system.label.RecurringDonationOpenStatus;
         
         for(id rid : recurringDonations.keySet()){
-        	Recurring_Donation__c r = recurringDonations.get(rid);
-            
+        	Recurring_Donation__c r = recurringDonations.get(rid);            
             if (ta==triggerAction.afterInsert){
                 rdInserts.put(rid, r);
-            }
-            
+            }            
             if (ta==triggerAction.beforeDelete){
                 recDonationDeletes.add(r);
-            }            
-            
+            }                        
             //added for 2.0
             if (ta==triggerAction.afterUpdate){
                 recDonationUpdates.add(r);
@@ -205,6 +201,10 @@ global with sharing class RecurringDonations {
             boolean isClosed = (boolean)obj.get('isClosed');
             boolean isWon = (boolean)obj.get('isWon');
             integer oppCount = (integer)obj.get('oppcount');
+            system.debug('ID IS-------------------------' + (id)obj.get('rdid'));
+            system.debug('ISCLOSED IS-------------------------' + (boolean)obj.get('isClosed'));
+            system.debug('ISWON IS-------------------------' + (boolean)obj.get('isWon'));
+            
             
             if (rdid != null){
                 //if this is the open set for this rd
