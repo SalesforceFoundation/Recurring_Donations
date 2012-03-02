@@ -5,9 +5,9 @@
         <apex:PageBlockSection columns="1">
             <apex:outputtext value="{!$Label.RecurringDonationSettingsDescription}" style="font-style:italic;" />
         </apex:PageBlockSection>
+        <apex:form id="generalform">
         <apex:TabPanel switchtype="client" value="{!selectedTab}" id="tabpanel">
             <apex:tab label="General Settings" name="general_settings">
-                <apex:form id="generalform">
                     <apex:outputPanel id="SettingsOutputPanel">   
                         <apex:PageBlockSection columns="2" title="General Settings" collapsible="false">
                                 <apex:outputField value="{!rds.Opportunity_Forecast_Months__c}" rendered="{!NOT(canEditRDSettings)}" />
@@ -58,11 +58,9 @@
                             <apex:commandButton value="Cancel" rendered="{!canEditRDSettings}" action="{!cancel}"/>
                             <apex:commandButton value="Edit" rendered="{!NOT(canEditRDSettings)}" action="{!editRDSettings}" rerender="SettingsOutputPanel"/>
                         </apex:outputPanel>
-                    </apex:outputPanel> 
-                </apex:form>
+                    </apex:outputPanel>
             </apex:tab>
             <apex:tab label="Custom Installment Periods" name="installment_settings">
-                <apex:form id="installmentform">
                     <apex:outputPanel id="CustomInstallmentsOutputPanel">
                         <apex:PageBlockSection columns="1" title="Custom Installments" collapsible="false">
                             <apex:outputText value="No Custom Installments Defined" rendered="{!AND(cisSize < 1, NOT(deleteInstallmentMode))}"/>  
@@ -108,11 +106,9 @@
                             <apex:commandButton value="Cancel" rendered="{!OR(deleteInstallmentMode,canEditCISettings)}" action="{!cancel}"/>
                             <apex:commandButton value="Edit" rendered="{!AND(NOT(deleteInstallmentMode),NOT(canEditCISettings))}" action="{!editCISettings}" rerender="CustomInstallmentsOutputPanel"/>
                         </apex:outputPanel>
-                    </apex:outputPanel>            
-                </apex:form>
+                    </apex:outputPanel>
             </apex:tab>
             <apex:tab label="Custom Field Mappings" name="field_mapping_settings">
-                <apex:form id="fieldmappingform">
                     <apex:outputPanel id="FieldMappingsOutputPanel">
                         <apex:PageBlockSection columns="1" title="Custom Field Mappings" collapsible="false">
                             <apex:outputPanel id="FMPageBlock">
@@ -150,8 +146,9 @@
                             </apex:actionFunction>            
                         </apex:PageBlockSection>
                     </apex:outputPanel>
-                </apex:form>    
+                    
             </apex:tab>
         </apex:TabPanel>
+        </apex:form>
     </apex:PageBlock> 
 </apex:page>
