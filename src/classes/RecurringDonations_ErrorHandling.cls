@@ -37,9 +37,27 @@ public without sharing class RecurringDonations_ErrorHandling {
     
     public static void handleDMLErrorsOnOppInsert(list<Database.SaveResult> lsr, list<Opportunity> badOpps, boolean isUIOperation){
         if (!isUIOperation){
+        	list<Recurring_Donations_Error_Queue__c> rdeqList = new list<Recurring_Donations_Error_Queue__c>();
+            //we only want one error per id, so we filter with this set
+            set<id> RDIDs = new set<id>();
+            integer i = 0;            
             for (Opportunity o : badOpps){
-                //insert into our custom list setting?                  
-                Recurring_Donations_Error_Queue__c rdeq = new Recurring_Donations_Error_Queue__c();
+                
+                if (!RDIDs.contains(o.Recurring_Donation__c)){
+                    Database.SaveResult thisSR = lsr[0];
+                    //insert into our custom list setting?                  
+                    Recurring_Donations_Error_Queue__c rdeq = new Recurring_Donations_Error_Queue__c();
+                    rdeq.Name = 'E-' + o.Recurring_Donation__c + '-' + i;
+                    rdeq.Recurring_Donation_ID__c = o.Recurring_Donation__c;
+                    rdeq.Error_Message__c = thisSR.getErrors()[0].getMessage();
+                    rdeqList.add(rdeq);
+                    RDIDs.add(o.Recurring_Donation__c);
+                }
+                i++;
+            }
+            if (!rdeqList.isEmpty()){
+            	insert rdeqList;
+            	sendErrorQueueEmailNotification();
             }
         }            
         //add the error to the parent Recurring Donation for this opp
@@ -51,9 +69,16 @@ public without sharing class RecurringDonations_ErrorHandling {
     
     @future
     public static void sendErrorQueueEmailNotification(){
+    	map<string, Recurring_Donations_Error_Queue__c> rdeqMap = Recurring_Donations_Error_Queue__c.getAll();
+    	if (!rdeqMap.isEmpty()){
+    		
+    		
+    	}
     	
     	
     } 
 
-
+    private void constructEmailMessage(){
+    	
+    }
 }
