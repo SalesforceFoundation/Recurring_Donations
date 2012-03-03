@@ -2,6 +2,7 @@
 <CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
     <customSettingsType>List</customSettingsType>
     <customSettingsVisibility>Public</customSettingsVisibility>
+    <description>Defines custom installment periods for open-ended donations.</description>
     <enableFeeds>false</enableFeeds>
     <fields>
         <fullName>Increment__c</fullName>
