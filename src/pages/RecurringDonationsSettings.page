@@ -26,7 +26,14 @@
                                 </apex:PageBlockSectionItem>
                                 <apex:selectList value="{!rds.Record_Type__c}" size="1" multiselect="false" rendered="{!canEditRDSettings}">
                                     <apex:selectOptions value="{!RecordTypeList}" />
-                                </apex:selectList> 
+                                </apex:selectList>
+                                <apex:selectList value="{!rds.Error_Email_Notifications__c}" size="1" multiselect="false" rendered="{!canEditRDSettings}">
+                                    <apex:selectOptions value="{!ErrorEmailOptions}" />
+                                </apex:selectList>
+                                <apex:PageBlockSectionItem helpText="{!$ObjectType.Recurring_Donations_Settings__c.Fields.Error_Email_Notifications__c.inlineHelpText}" rendered="{!NOT(canEditRDSettings)}"  >
+                                    <apex:outputlabel for="errordisplayname" value="Error Email Notifications"/>
+                                    <apex:outputField id="errordisplayname" value="{!EmailErrorDisplayName.Name}" rendered="{!NOT(canEditRDSettings)}" label="Error Email Notifications" />
+                                </apex:PageBlockSectionItem>
                         </apex:PageBlockSection>
                         <apex:pageBlockSection id="pkgVerCheck" title="Package Update Information & Configuration" columns="2" collapsible="false">
                             <apex:outputPanel id="pkgverinfo">
