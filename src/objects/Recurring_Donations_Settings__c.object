@@ -56,6 +56,17 @@ DISABLES the RecurringDonations.trigger (Recurring_Donations__c, ALL).
         <type>Checkbox</type>
     </fields>
     <fields>
+        <fullName>Error_Email_Notifications__c</fullName>
+        <description>The system administrator or public group all error notification emails are sent to.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>The system administrator or public group all error notification emails are sent to.</inlineHelpText>
+        <label>Error Email Notifications</label>
+        <length>255</length>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
         <fullName>Has_Package_Update__c</fullName>
         <externalId>false</externalId>
         <label>Has Package Update</label>
