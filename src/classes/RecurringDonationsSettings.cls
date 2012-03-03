@@ -61,6 +61,24 @@ public with sharing class RecurringDonationsSettings {
     		return rectypeforname;
     	}
     }
+    //we're going to borrow the group object to generate the proper output field 
+    public Group EmailErrorDisplayName{
+    	get{
+    		Group g = new Group();
+    		g.Name = rds.Error_Email_Notifications__c;    		
+    		if (rds.Error_Email_Notifications__c instanceof id){
+                if (rds.Error_Email_Notifications__c.startsWith('00G')){
+                    g.Name = 'Group: ';
+                    g.Name += [select Name from Group where id = :rds.Error_Email_Notifications__c].Name;                	
+                }
+                else if (rds.Error_Email_Notifications__c.startsWith('005')){
+                	g.Name = 'User: ';
+                	g.Name += [select Name from User where id = :rds.Error_Email_Notifications__c].Name;
+                }            	
+    		}
+            return g;
+    	}
+    }
     public list<SelectOption> validInstallments{
         get{
         	list<SelectOption> Installments = new list<SelectOption>(); 
@@ -100,26 +118,42 @@ public with sharing class RecurringDonationsSettings {
             }	
     		return options;
     	}
-    }
-    public list<SelectOption> availableRDFields;               
-    public list<SelectOption> getavailableRDFields(){
-        list<SelectOption> fieldlist = new list<SelectOption>();
-        map<String, Schema.SObjectField> M = schema.SObjectType.Recurring_Donation__c.fields.getMap();            
-        for (string s : m.keySet()){
-            fieldlist.add(new SelectOption(s,s));
+    }                   
+    public list<SelectOption> ErrorEmailOptions{
+    	get{
+    		list<SelectOption> options = new list<SelectOption>();
+    		options.add(new SelectOption('None', 'None'));
+    		options.add(new SelectOption('All Sys Admins', 'All Sys Admins'));
+    		for (User u : [select Name, id from User where User.Profile.Name = 'System Administrator']){
+    			options.add(new SelectOption(u.id, 'User: ' + u.Name));
+    		}
+    		for (Group g : [select id, Name from Group where Type = 'Regular']){
+    			options.add(new SelectOption(g.id, 'Group: ' + g.Name));
+    		}    	
+            return options;
+    	}
+    }    
+    public list<SelectOption> availableRDFields{
+        get{
+            list<SelectOption> fieldlist = new list<SelectOption>();
+            map<String, Schema.SObjectField> M = schema.SObjectType.Recurring_Donation__c.fields.getMap();            
+            for (string s : m.keySet()){
+                fieldlist.add(new SelectOption(s,s));
+            }
+            return sortOptionList(fieldlist);
         }
-        return sortOptionList(fieldlist);
     }
-    public string RDField{get;set;}
-    public list<SelectOption> availableOpportunityFields;               
-    public list<SelectOption> getavailableOpportunityFields(){
-        list<SelectOption> fieldlist = new list<SelectOption>();
-        map<String, Schema.SObjectField> M = schema.SObjectType.Opportunity.fields.getMap();            
-        for (string s : m.keySet()){
-        	if (!invalidOppFields.contains(s))
-                fieldlist.add(new SelectOption(s, s));
-        }
-        return sortOptionList(fieldlist);
+    public string RDField{get;set;}                   
+    public list<SelectOption> availableOpportunityFields{
+        get{
+            list<SelectOption> fieldlist = new list<SelectOption>();
+            map<String, Schema.SObjectField> M = schema.SObjectType.Opportunity.fields.getMap();            
+            for (string s : m.keySet()){
+                if (!invalidOppFields.contains(s))
+                    fieldlist.add(new SelectOption(s, s));
+            }
+            return sortOptionList(fieldlist);
+        }            
     }
     public string OppField{get;set;}
     
