@@ -175,43 +175,39 @@ global with sharing class RecurringDonations {
                                   group by rollup(Recurring_Donation__r.id, isClosed, isWon)]; 
         
         //holds the rdid of all evaluated closed sets, allows us to figure out the various summary rows
+        //this is a workaorund for the null boolean aggregate result bug
         set<id> isClosedEvaluatedSet = new set<id>();
         map<id, date> maxOpenPaymentMap = new map<id, date>();
         
+        //we want this outside of the loop so the grand summary row (null id) always refers to the 
+        //rdids before it
+        Recurring_Donation__c rd;        
         //update the rc next payment date 
         //and add new donation objects needed 
         for (sobject obj : sobjs){
             id rdid = (id)obj.get('rdid'); 
-
-            Recurring_Donation__c rd;
-            
-            //if we already have values for this RD, get it from our rdid map, otherwise just grab
-            //the one we're already working on 
-            if (!updateMap.containsKey(rdid)){
-                rd = rdMap.get(rdid);
-            }
-            else{
-                rd = updateMap.get(rdid);
-            }
             
             //the summary isclosed row will contain a null boolean
             //which is evaluated as false, so we'll need to mark 
             //this rdid as having had the nonsummary false isclosed value 
             //already used, so we don't accidentally use the summary row below
             boolean isClosed = (boolean)obj.get('isClosed');
-            boolean isWon = (boolean)obj.get('isWon');
-            integer oppCount = (integer)obj.get('oppcount');
-            system.debug('ID IS-------------------------' + (id)obj.get('rdid'));
-            system.debug('ISCLOSED IS-------------------------' + (boolean)obj.get('isClosed'));
-            system.debug('ISWON IS-------------------------' + (boolean)obj.get('isWon'));
-            
+            boolean isWon = (boolean)obj.get('isWon');            
             
             if (rdid != null){
+            	//if we already have values for this RD, get it from our rdid map, otherwise just grab
+                //the one we're already working on 
+                if (!updateMap.containsKey(rdid)){
+                    rd = rdMap.get(rdid);
+                }
+                else{
+                    rd = updateMap.get(rdid);
+                }
                 //if this is the open set for this rd
-                if ((boolean)obj.get('isClosed') != null && !isClosed && 
-                    (boolean)obj.get('isWon') != null && !isWon){
+                if (!isClosed && !isWon && !isClosedEvaluatedSet.contains(rdid)){
                     rd.Next_Payment_Date__c = (date)obj.get('MinDate');
                     maxOpenPaymentMap.put(rdid, (date)obj.get('MaxDate'));
+                    isClosedEvaluatedSet.add(rdid);
                     updateMap.put(rdid, rd);                                       
                 }
                 //if this is the closed set     
@@ -220,13 +216,12 @@ global with sharing class RecurringDonations {
                     rd.Paid_Amount__c = (decimal)obj.get('Total');     
                     rd.Total_Paid_Installments__c = (integer)obj.get('oppcount');
                     updateMap.put(rdid, rd);                        
-                }
-                //should be grand summary row                
-               // if ((boolean)obj.get('isClosed') == false && (boolean)obj.get('isWon') == false){                    
-                    rd.Installments__c = oppCount; 
-                    updateMap.put(rdid, rd);                    
-                //}                    
-            }                
+                }                   
+            }
+            else{          
+                rd.Installments__c = (integer)obj.get('oppcount'); 
+                updateMap.put(rd.id, rd);            	
+            }                            
         }
         
         if (!updateMap.isEmpty()){
@@ -762,16 +757,16 @@ global with sharing class RecurringDonations {
                             o.put((string)c.id, 'npe01__Contact_Id_For_Role__c');
                         }
                     }                    
-                                                                            	           
+                    
+                    oppclosedate = getNextDate(oppclosedate, rd.Installment_Period__c);
+                    o.CloseDate = oppclosedate;                                                                            	           
                 	string oName = rd.Donor_Name__c + ' ' + System.Label.RecurringDonationPrefix +
                     ' (' + string.valueOf(oppCounter) + ') ' + o.CloseDate.format();
                     
                     o.Name = oName;
                     o.Amount = rd.Amount__c;
                     o.StageName = System.Label.RecurringDonationStageName;                    
-                    o.Recurring_Donation__c = rd.Id;
-                    oppclosedate = getNextDate(oppclosedate, rd.Installment_Period__c);
-                    o.CloseDate = oppclosedate;
+                    o.Recurring_Donation__c = rd.Id;                    
                     //evaluate any custom field mappings
                     for (string s : customFieldMappingSettings.keySet()){
                         Custom_Field_Mapping__c cfm = customFieldMappingSettings.get(s);
@@ -795,15 +790,43 @@ global with sharing class RecurringDonations {
             //if we didn't find the npe01 field on the opp, we need to create OCRs manually
             if (ConIDForRole == null){
                 set<Id> createdOppIds = new set<Id>();
+                list<Database.SaveResult> badSRs = new list<Database.SaveResult>();
+                list<Opportunity> badOpps = new list<Opportunity>();
+                integer i = 0;
                 for (Database.SaveResult s : lsr){
-                    if (s.isSuccess() == true){
-                    //get all the new OppIds into a list
+                	if (s.isSuccess() == true){
+                        //get all the new OppIds into a list
                         createdOppIds.add(s.getId());
-                    }
+                    }    
+                    //handle errors on insert   
+                    else{
+                    	badSRs.add(s);
+                    	badOpps.add(oppInsertList[i]);
+                    }                     
+                    i++;
                 }
                 oppContactRoles(createdOppIds);
+                if (!badSRs.isEmpty()){
+                	if (oppInsertList.size() == 1)                	
+                        RecurringDonations_ErrorHandling.handleDMLErrorsOnOppInsert(badSRs, badOpps, true);
+                    else
+                        RecurringDonations_ErrorHandling.handleDMLErrorsOnOppInsert(badSRs, badOpps, false);                	   
+                }                
             }
-        }        
+        }    
+        
+        //update the recurring donation when we're done->
+        set<id> RDIDSet = new set<id>();
+        for (Recurring_Donation__c rd : recurringDonationsToEvaluate){
+            RDIDSet.add(rd.id);
+        } 
+        
+        if (system.isFuture() || recurringDonationsToEvaluate.size() == 1){
+        	updateRecurringDonationOnOppChange(RDIDSet);
+        }
+        else{
+        	updateRecurringDonationOnOppChangeFuture(RDIDSet);
+        }   
     } 
     
     /*** UTILITY METHODS ***/
