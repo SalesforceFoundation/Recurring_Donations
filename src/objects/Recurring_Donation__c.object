@@ -105,6 +105,7 @@
         <fullName>Installment_Period__c</fullName>
         <deprecated>false</deprecated>
         <externalId>false</externalId>
+        <inlineHelpText>Sets the installment period for your recurring donations.  WARNING: Changing the Installment Period for an existing open-ended Recurring Donation can cause open Opportunities to be deleted and recreated. Any associated data may not be retained.</inlineHelpText>
         <label>Installment Period</label>
         <picklist>
             <picklistValues>
@@ -124,7 +125,7 @@
                 <default>false</default>
             </picklistValues>
             <picklistValues>
-                <fullName>1st &amp; 15th</fullName>
+                <fullName>1st and 15th</fullName>
                 <default>false</default>
             </picklistValues>
             <sorted>false</sorted>
@@ -330,5 +331,17 @@
         <protected>false</protected>
         <requireRowSelection>false</requireRowSelection>
         <url>{!URLFOR($Action.Recurring_Donation__c.New, null,  [Name  =  Contact.FirstName &amp; &quot; &quot;&amp; Contact.LastName&amp;&quot; Donation - &quot;&amp;   TEXT( TODAY()),retURL=&quot;/&quot;&amp;Contact.Id])}</url>
+    </webLinks>
+    <webLinks>
+        <fullName>Refresh_Opportunities</fullName>
+        <availability>online</availability>
+        <description>Run the check opp routine for Recurring Donations</description>
+        <displayType>button</displayType>
+        <height>600</height>
+        <linkType>page</linkType>
+        <masterLabel>Refresh Opportunities</masterLabel>
+        <openType>sidebar</openType>
+        <page>RecurringDonations_AddDonationsBTN</page>
+        <protected>false</protected>
     </webLinks>
 </CustomObject>
