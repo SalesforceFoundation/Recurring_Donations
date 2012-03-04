@@ -65,6 +65,14 @@
         <value>Divide By</value>
     </labels>
     <labels>
+        <fullName>RecurringDonationErrorEmailBody</fullName>
+        <categories>RecurringDonations</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>RecurringDonationErrorEmailBody</shortDescription>
+        <value>Errors were encountered when trying to insert new Opportunities for your open-ended Recurring Donations. This can adversely affect your forecasting and functionality of your Salesforce.com instance. Addressing these errors as soon as possible can prevent bad data from entering your system.  The Recurring Donation and associated Opportunity insert error are listed below.</value>
+    </labels>
+    <labels>
         <fullName>RecurringDonationInstallmentPeriod1stand15th</fullName>
         <categories>RecurringDonations</categories>
         <language>en_US</language>
