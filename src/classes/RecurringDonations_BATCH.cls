@@ -32,7 +32,7 @@
 * @date 2012 (2.0)
 * @description Class provides a batchable wrapper for open ended recurring donations
 */
-public with sharing class RecurringDonations_BATCH {
+public with sharing class RecurringDonations_BATCH implements Database.Batchable<sObject>{
     public String query { get; set; }
     // constructors
     public RecurringDonations_BATCH(string q) {query = q;}
