@@ -72,7 +72,7 @@ global with sharing class RecurringDonations {
                                                                                   and id IN :RDids]);
         //recurring donations that need to be updated      
         if (!recurringDonationMap.keySet().isEmpty()){
-        	if (recurringDonationMap.keySet().size() == 1)
+        	if (recurringDonationMap.keySet().size() == 1 || system.isBatch())
         	   updateRecurringDonationOnOppChange(rdIds);
                 //evaluateExistingOpportunities(rdIds, false);
             else
@@ -128,7 +128,7 @@ global with sharing class RecurringDonations {
             handleRecurringDonationUpdate(recDonationUpdates, oldRecurringDonations); 
         }
         if (!rdInserts.isEmpty()){
-            if (rdInserts.keySet().size() == 1)            
+            if (rdInserts.keySet().size() == 1 || system.isBatch())            
                 insertOppsOnRecurringDonationInsert(rdInserts.values());
             else
                 insertOppsOnRecurringDonationInsertFuture(rdInserts.keySet());
@@ -470,7 +470,7 @@ global with sharing class RecurringDonations {
                         createdOppIds.add(s.getId());
                     }
                 }
-                if (!system.isFuture())
+                if (!system.isFuture() && !system.isBatch())
                     oppContactRolesFuture(createdOppIds);
                 else
                     oppContactRoles(createdOppIds);                    
@@ -586,7 +586,7 @@ global with sharing class RecurringDonations {
            update updateOppsList;
         
         
-        if (!system.isFuture() && RDOppMap.keySet().size() == 1){
+        if (!system.isFuture() && RDOppMap.keySet().size() == 1 && !system.isBatch()){
             updateRecurringDonationOnOppChange(RDOppMap.keySet());
         }          
         else{
@@ -635,7 +635,7 @@ global with sharing class RecurringDonations {
         	runRecurringDonationClosedActions(newlycloseddonations);
         }
         if (!reevaluateopps.isEmpty()){
-        	if (reevaluateopps.size() == 1)
+        	if (reevaluateopps.size() == 1 || system.isBatch())
                 updateExistingOpps(reevaluateopps);
             else
                 updateExistingOppsFuture(reevaluateopps);
@@ -644,7 +644,7 @@ global with sharing class RecurringDonations {
         if (!reinsertopps.isEmpty()){
         	//clear existing open opps and recreate
         	delete [select id from Opportunity where Recurring_Donation__c IN :reinsertopps and isClosed = false];
-        	if (reinsertopps.size() == 1){
+        	if (reinsertopps.size() == 1 || system.isBatch()){
                 insertOppsOnRecurringDonationInsert(reinsertopps);            		
         	}
         	else{
@@ -821,7 +821,7 @@ global with sharing class RecurringDonations {
             RDIDSet.add(rd.id);
         } 
         
-        if (system.isFuture() || recurringDonationsToEvaluate.size() == 1){
+        if (system.isFuture() || recurringDonationsToEvaluate.size() == 1 || system.isBatch()){
         	updateRecurringDonationOnOppChange(RDIDSet);
         }
         else{
