@@ -46,7 +46,19 @@ public with sharing class RecurringDonations_BATCH {
         RecurringDonations.evaluateRecurringDonationsForNewOppInsert(result);    
     }
     public void finish(Database.BatchableContext bc) {
+        //update our settings
+        Recurring_Donations_Settings__c rds = RecurringDonations.getRecurringDonationsSettings();
+        AsyncApexJob a = [select Id, Status, NumberOfErrors, JobItemsProcessed,
+                            TotalJobItems, CompletedDate
+                            from AsyncApexJob 
+                            where Id = :BC.getJobId()];
+                            
+        rds.Last_Batch_Run__c = a.CompletedDate;
+        rds.Number_Of_Successes__c = a.JobItemsProcessed;
+        rds.Number_Of_Failures__c = a.NumberOfErrors;
+        update rds;                            
+        
         //if needed, send messages from teh error queue
-        RecurringDonations_ErrorHandling.sendErrorQueueEmailNotification();
+        RecurringDonations_ErrorHandling.sendErrorQueueEmailNotification();        
     }
 }
