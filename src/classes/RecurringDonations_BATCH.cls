@@ -38,10 +38,15 @@ public with sharing class RecurringDonations_BATCH {
     public RecurringDonations_BATCH(string q) {query = q;}
     
     public database.Querylocator start(Database.BatchableContext bc){
+    	//clear any existing errors from the queue
+    	delete [select id from Recurring_Donations_Error_Queue__c];
         return Database.getQueryLocator(query);      
     }
     public void execute(Database.BatchableContext bc, Sobject[] result){
         RecurringDonations.evaluateRecurringDonationsForNewOppInsert(result);    
     }
-    public void finish(Database.BatchableContext bc) {}
+    public void finish(Database.BatchableContext bc) {
+        //if needed, send messages from teh error queue
+        RecurringDonations_ErrorHandling.sendErrorQueueEmailNotification();
+    }
 }
