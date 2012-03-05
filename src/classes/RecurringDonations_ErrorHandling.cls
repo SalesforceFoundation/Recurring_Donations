@@ -61,7 +61,7 @@ public without sharing class RecurringDonations_ErrorHandling {
             	//if we're in a batch job, let the batch handle the send notification so it happens
             	//at one time
             	if (!system.isBatch()) 
-            	   sendErrorQueueEmailNotification();
+            	   sendErrorQueueEmailNotificationFuture();
             }
         }            
         //add the error to the parent Recurring Donation for this opp
@@ -72,6 +72,7 @@ public without sharing class RecurringDonations_ErrorHandling {
     }
     
     @future
+    public static void sendErrorQueueEmailNotificationFuture(){sendErrorQueueEmailNotification();}
     public static void sendErrorQueueEmailNotification(){
     	map<string, Recurring_Donations_Error_Queue__c> rdeqMap = Recurring_Donations_Error_Queue__c.getAll();
     	rds = RecurringDonations.getRecurringDonationsSettings();
