@@ -32,4 +32,4 @@
 * @date 2012 (2.0)
 * @description Semaphore for recursion prevention 
 */
-public with sharing class RecurringDonations_ProcessControl {public static boolean hasRun = false;}
+public with sharing class RecurringDonations_ProcessControl {public static boolean hasRun = false;public static boolean batchButton = false;}
