@@ -34,6 +34,7 @@
 */
 public without sharing class RecurringDonations_ErrorHandling {
     
+    public static Recurring_Donations_Settings__c rds;
     
     public static void handleDMLErrorsOnOppInsert(list<Database.SaveResult> lsr, list<Opportunity> badOpps, boolean isUIOperation){
         if (!isUIOperation){
@@ -57,7 +58,10 @@ public without sharing class RecurringDonations_ErrorHandling {
             }
             if (!rdeqList.isEmpty()){
             	insert rdeqList;
-            	sendErrorQueueEmailNotification();
+            	//if we're in a batch job, let the batch handle the send notification so it happens
+            	//at one time
+            	if (!system.isBatch()) 
+            	   sendErrorQueueEmailNotification();
             }
         }            
         //add the error to the parent Recurring Donation for this opp
@@ -70,15 +74,53 @@ public without sharing class RecurringDonations_ErrorHandling {
     @future
     public static void sendErrorQueueEmailNotification(){
     	map<string, Recurring_Donations_Error_Queue__c> rdeqMap = Recurring_Donations_Error_Queue__c.getAll();
-    	if (!rdeqMap.isEmpty()){
-    		
-    		
+    	rds = RecurringDonations.getRecurringDonationsSettings();
+    	if (!rdeqMap.isEmpty() && rds.Error_Email_Notifications__c != 'None' && rds.Error_Email_Notifications__c != null){
+    		Messaging.SingleEmailMessage sme = createEmailMessage(rdeqMap.values());
+            if (!test.isRunningTest())
+                Messaging.sendEmail(new Messaging.SingleEmailMessage[]{sme});
     	}
-    	
-    	
+    	//clear the queue
+    	delete [select id from Recurring_Donations_Error_Queue__c];
     } 
 
-    private void constructEmailMessage(){
-    	
+    private static Messaging.SingleEmailMessage createEmailMessage(list<Recurring_Donations_Error_Queue__c> rdeqList){
+        Messaging.SingleEmailMessage mail = new Messaging.SingleEmailMessage();
+        mail.setUseSignature(false);
+        mail.setSenderDisplayName('Salesforce Recurring Donations');
+        mail.setSubject('Salesforce Recurring Donations Errors');
+        string bodyString;
+        bodyString += system.label.RecurringDonationErrorEmailBody;
+        bodyString += '\n\nErrors:';
+        for (Recurring_Donations_Error_Queue__c rdeq : rdeqlist){
+        	bodyString += '\n' + system.url.getSalesforceBaseUrl() + '/' + rdeq.Recurring_Donation_ID__c;
+        	bodystring += ' Error Message: ' + rdeq.Error_Message__c;        	
+        }        
+        mail.setPlainTextBody(bodyString);
+        list<string> sendList = new list<string>();
+        //user, sysadmins or PG
+        string mailList = rds.Error_Email_Notifications__c;
+        if (mailList.startsWith('005')){
+        	sendList.add([select email from User where id = :mailList].email);
+        }
+        else if(mailList == 'All Sys Admins'){
+        	list<User> sysadminlist = [select email from User where User.Profile.Name = 'System Administrator'];
+        	for (User u : sysadminlist){
+                sendList.add(u.email);        		
+        	}        	
+        }
+        else if(mailList.startsWith('00G')){
+        	list<GroupMember> groupUsers = [select g.UserOrGroupId from GroupMember g where GroupId = :mailList];
+        	set<id> userIDs = new set<id>();
+        	for (GroupMember g : groupUsers)
+        	   userIDs.add(g.UserOrGroupId);
+        	list<User> userList = [select email from User where id IN :userIDs];
+        	for (User u : userList){
+        		sendList.add(u.email);
+        	}
+        }        
+        mail.setToAddresses(sendList);                    
+
+        return mail;    	
     }
 }
