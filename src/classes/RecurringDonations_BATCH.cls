@@ -35,7 +35,7 @@
 public with sharing class RecurringDonations_BATCH {
     public String query { get; set; }
     // constructors
-    public RecurringDonations_BATCH() {query = q;}
+    public RecurringDonations_BATCH(string q) {query = q;}
     
     public database.Querylocator start(Database.BatchableContext bc){
     	//clear any existing errors from the queue
