@@ -37,6 +37,7 @@ global without sharing class RecurringDonations_BATCH implements Database.Batcha
     public integer recCount;
     // constructors
     public RecurringDonations_BATCH(string q) {
+    	RecurringDonations_ProcessControl.batchButton = true;
     	query = q;
         recCount = 0;
     }
