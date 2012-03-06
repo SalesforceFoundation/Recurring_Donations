@@ -459,7 +459,10 @@ global with sharing class RecurringDonations {
         
         if( opportunityInserts.size() > 0 )
         {
-        	updateRecurringDonationOnOppChangeFuture(updateRecurringDonationSet);
+        	if (!system.isBatch())
+                updateRecurringDonationOnOppChangeFuture(updateRecurringDonationSet);
+            else
+                updateRecurringDonationOnOppChange(updateRecurringDonationSet);                                    	       
             Database.SaveResult[] lsr = Database.insert(opportunityInserts, false);
             
             if (ConIDForRole == null){
@@ -586,15 +589,14 @@ global with sharing class RecurringDonations {
            update updateOppsList;
         
         
-        if (!system.isFuture() && RDOppMap.keySet().size() == 1 && !system.isBatch()){
+        if ((!system.isFuture() && RDOppMap.keySet().size() == 1) || system.isBatch()){
             updateRecurringDonationOnOppChange(RDOppMap.keySet());
         }          
         else{
             updateRecurringDonationOnOppChangeFuture(RDOppMap.keySet());            
         }
     }
-    
-    
+        
     //handles updates to the recurring donations object
     public static void handleRecurringDonationUpdate(list<Recurring_Donation__c> recurringDonations, map<id, Recurring_Donation__c> oldRecurringDonations){
         
@@ -613,8 +615,7 @@ global with sharing class RecurringDonations {
             //if we're closing an open ended donation, modify the existing opps as required by the custom setting
             if (r.Open_Ended_Status__c == closedlabel && oldRD.Open_Ended_Status__c != r.Open_Ended_Status__c){
                 newlycloseddonations.add(r);
-            }
-            
+            }            
             
             //if there's any other change that would require a reevaluation of existing Opps
             else if (r.Open_Ended_Status__c == openlabel){
@@ -820,12 +821,14 @@ global with sharing class RecurringDonations {
         for (Recurring_Donation__c rd : recurringDonationsToEvaluate){
             RDIDSet.add(rd.id);
         } 
+        system.debug('IS FUTURE----' + system.isFuture());
+        system.debug('IS BATCH----' + system.isBatch());
         
-        if (system.isFuture() || recurringDonationsToEvaluate.size() == 1 || system.isBatch()){
+        if (system.isFuture() || recurringDonationsToEvaluate.size() == 1 || system.isBatch() || RecurringDonations_ProcessControl.batchButton){
         	updateRecurringDonationOnOppChange(RDIDSet);
         }
         else{
-        	updateRecurringDonationOnOppChangeFuture(RDIDSet);
+        	updateRecurringDonationOnOppChangeFuture(RDIDSet); 
         }   
     } 
     
