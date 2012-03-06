@@ -59,6 +59,8 @@ public with sharing class RecurringDonationsSettings {
     public map<string, Recurring_Donations_Error_Queue__c> rdeqMap;
     public string fieldMappingName{get; set;}
     public boolean runningBatch{get; set;}
+    //holds value to evaluate change in forecast months
+    public integer forecastMonths;
     public RecordType RTName{
     	get{
     		RecordType rectypeforname = [select Name from RecordType where ID = :rds.Record_Type__c];
@@ -187,7 +189,8 @@ public with sharing class RecurringDonationsSettings {
             
     //called from action method for page 
     public PageReference getSettingsFirstTime() {
-        rds = RecurringDonations.getRecurringDonationsSettings();                   
+        rds = RecurringDonations.getRecurringDonationsSettings();     
+        forecastMonths = (integer)rds.Opportunity_Forecast_Months__c;              
         cisMap = Custom_Installment_Settings__c.getAll();
         cfmMap = Custom_Field_Mapping__c.getAll().clone();
         rdeqMap = Recurring_Donations_Error_Queue__c.getAll();
@@ -257,6 +260,15 @@ public with sharing class RecurringDonationsSettings {
         try{
             update rds;
             canEditRDSettings = false;
+            //if we reduced the number of forecast months, we need to trim opps
+            if (forecastMonths > rds.Opportunity_Forecast_Months__c){
+            	trimOpportunities();            	
+            }
+            //if we added months, kick off the batch job to update the RDs
+            else if (forecastMonths < rds.Opportunity_Forecast_Months__c){
+                runBatch();
+            }
+            forecastMonths = (integer)rds.Opportunity_Forecast_Months__c;
         }
         catch (Exception e){
             ApexPages.Message myMsg = new ApexPages.Message(ApexPages.Severity.FATAL, e.getMessage());
@@ -381,6 +393,15 @@ public with sharing class RecurringDonationsSettings {
         
     	return null;
     }    
+    
+    public void trimOpportunities(){
+    	date limitDate = system.today().addMonths(rds.Opportunity_Forecast_Months__c);
+    	string openlabel = system.label.RecurringDonationOpenStatus;
+    	delete [select id from Opportunity 
+    	       where CloseDate > :limitDate 
+    	       and isClosed != true 
+    	       and Recurring_Donation__r.Open_Ended_Status__c = :openLabel];
+    }
     
     //checks the compatibility of a recurring donation and opp field
     private boolean isValidMapping(string RDField, string OppField){
