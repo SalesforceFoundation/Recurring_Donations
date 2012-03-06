@@ -64,6 +64,9 @@ public with sharing class RecurringDonations_AddDonationsBTN {
         qString += ' where id = \'' + RecurringDonation.id + '\'';
         RecurringDonation = (Recurring_Donation__c)database.query(qString);
         RecurringDonations.evaluateRecurringDonationsForNewOppInsert(new list<Recurring_Donation__c>{RecurringDonation});
-        return null;
+        
+        PageReference pageRef = new PageReference(returnurl);
+        pageRef.setRedirect(true);
+        return pageRef;
     }
 }
