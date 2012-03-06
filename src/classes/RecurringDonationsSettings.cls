@@ -200,15 +200,19 @@ public with sharing class RecurringDonationsSettings {
         rdeqSize = rdeqMap.keySet().size();
         cisSize = cisMap.keySet().size();
         cfmSize = cfmMap.keySet().size();               
-        if (rds.Last_Update_Check__c == null){
-            checkforupdates();
-        }
         
-        else{
-            RecurringDonationsPkgVersionCheck npvc = new RecurringDonationsPkgVersionCheck('npe03');        
-            npvc.RecurringDonationsCheckVersion(false);
-        }
+        Pagereference pr;
+        pr = scheduleRecurringDonationsUpdate();
+        if (pr == null){
+            if (rds.Last_Update_Check__c == null){
+                checkforupdates();
+            }
         
+            else{
+                RecurringDonationsPkgVersionCheck npvc = new RecurringDonationsPkgVersionCheck('npe03');        
+                npvc.RecurringDonationsCheckVersion(false);
+            }
+        }
          //test inserts
         testPackageIntegrity();
         return null;
@@ -371,7 +375,7 @@ public with sharing class RecurringDonationsSettings {
     	return null;
     }
     public pageReference runBatch(){
-    	RecurringDonations_ProcessControl.batchButton = true;
+    	
     	runningBatch = true;
     	string openLabel = system.label.RecurringDonationOpenStatus;
         string queryRCD = 'select id,Open_Ended_Status__c, Next_Payment_Date__c, Organization__c, ' + 
@@ -401,6 +405,52 @@ public with sharing class RecurringDonationsSettings {
     	       where CloseDate > :limitDate 
     	       and isClosed != true 
     	       and Recurring_Donation__r.Open_Ended_Status__c = :openLabel];
+    }
+    
+    public pageReference scheduleRecurringDonationsUpdate(){
+    	PageReference pr = null;
+        
+        if (!rds.Disable_Nightly_Job__c){
+            Integer scheduledJobLimit = 25;
+            boolean alreadyScheduled = false;            
+            
+            List<cronTrigger> scheduledUpdates = [SELECT Id FROM cronTrigger limit :scheduledJobLimit];
+            
+            if(rds.Nightly_Update_ID__c != null){
+                for(cronTrigger thisScheduledJob : scheduledUpdates){ 
+                    if(thisScheduledJob.id == rds.Nightly_Update_ID__c){
+                        alreadyScheduled = true;
+                        break;
+                    }
+                }
+            }
+            
+            if(!alreadyScheduled){
+                if(scheduledUpdates.size()<scheduledJobLimit){     
+                    
+                    RecurringDonations_SCHED nightlyJob = new RecurringDonations_SCHED(); 
+                    //need to check for already scheduled job
+                    String sch='17 11 3 * * ?'; 
+                    scheduledUpdates.clear();
+                    scheduledUpdates = [SELECT Id FROM cronTrigger where cronExpression = :sch];
+                    if (scheduledUpdates.size()==0){
+                        String jobId = system.schedule('Recurring Donation Updates', sch ,nightlyJob);
+                        rds.Nightly_Update_ID__c = jobId;
+                    }
+                    else{
+                        rds.Nightly_Update_ID__c = scheduledUpdates[0].Id;
+                    }
+                    //if we update page settings, we need to call a redirect
+                    update rds;
+                    pr = ApexPages.currentPage();                    
+                } 
+                else{
+                	ApexPages.Message myMsg = new ApexPages.Message(ApexPages.Severity.FATAL, system.label.RecurringDonationSchedulingError);
+                    ApexPages.addMessage(myMsg);                    
+                }
+            }    
+        }
+        return pr;
     }
     
     //checks the compatibility of a recurring donation and opp field
