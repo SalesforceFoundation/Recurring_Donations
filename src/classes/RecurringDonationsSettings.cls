@@ -395,7 +395,7 @@ public with sharing class RecurringDonationsSettings {
     }    
     
     public void trimOpportunities(){
-    	date limitDate = system.today().addMonths(rds.Opportunity_Forecast_Months__c);
+    	date limitDate = system.today().addMonths((integer)rds.Opportunity_Forecast_Months__c);
     	string openlabel = system.label.RecurringDonationOpenStatus;
     	delete [select id from Opportunity 
     	       where CloseDate > :limitDate 
