@@ -152,9 +152,33 @@
                                 <apex:param name="fmname" value="" assignTo="{!fieldMappingName}"/>
                             </apex:actionFunction>            
                         </apex:PageBlockSection>
-                    </apex:outputPanel>
-                    
+                    </apex:outputPanel>                    
             </apex:tab>
+            <apex:tab label="Batch Settings" name="batch_settings"> 
+                <apex:PageBlockSection columns="1" title="Batch Status" collapsible="false">
+                    <apex:outputfield value="{!rds.Last_Batch_Run__c}"/>
+                    <apex:outputfield value="{!rds.Number_of_Failures__c}"/>
+                    <apex:outputfield value="{!rds.Number_of_Successes__c}"/>
+                    <apex:outputPanel rendered="{!runningbatch}">
+                        <c:batchjobs batchComponentLabel="Updating Recurring Donation Opportunities"
+                        numberOfJobs="1" rerenderOnComplete="true" />
+                    </apex:outputPanel>
+                    <apex:outputPanel style="text-align: center; display: block; margin-left:auto; margin-right:auto;">
+                        <apex:commandButton value="Run Batch Update" action="{!runBatch}"/>                                                 
+                    </apex:outputPanel>  
+                </apex:PageBlockSection>
+                <apex:PageBlockSection columns="1" title="Most Recent Error Queue" collapsible="false">
+                     <apex:outputText value="No errors currently in the queue" rendered="{!rdeqSize < 1}"/>
+                     <apex:pageBlockTable var="eq" value="{!rdeq}">                
+                        <apex:column value="{!eq.Recurring_Donation_ID__c}" rendered="{!AND(rdeqSize>0,NOT(canEditCISettings),NOT(deleteInstallmentMode))}"/>
+                        <apex:column value="{!eq.Error_Message__c}" rendered="{!AND(rdeqSize>0,NOT(canEditCISettings),NOT(deleteInstallmentMode))}"/>                                                                      
+                    </apex:pageBlockTable>                    
+                    <apex:outputPanel style="text-align: center; display: block; margin-left:auto; margin-right:auto;">
+                        <apex:commandButton value="Clear Error Queue" action="{!clearErrorQueue}"/>                                                
+                    </apex:outputPanel>
+                </apex:PageBlockSection>
+                
+            </apex:tab>            
         </apex:TabPanel>
         </apex:form>
     </apex:PageBlock> 

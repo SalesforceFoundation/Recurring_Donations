@@ -47,14 +47,18 @@ public with sharing class RecurringDonationsSettings {
     public Recurring_Donations_Settings__c rds {get; set;}
     public list<Custom_Installment_Settings__c> cis {get; set;}
     public list<Custom_Field_Mapping__c> cfm {get; set;}
+    public list<Recurring_Donations_Error_Queue__c> rdeq {get; set;}
     public string selectedTab {get; set;}
     public integer cisSize{get; set;} 
     public integer cfmSize{get; set;}
+    public integer rdeqSize{get; set;}
     public string selectedInstallmentName{get; set;}
     public string replacementInstallment{get; set;}
     public map<string, Custom_Installment_Settings__c> cisMap;
     public map<string, Custom_Field_Mapping__c> cfmMap;
+    public map<string, Recurring_Donations_Error_Queue__c> rdeqMap;
     public string fieldMappingName{get; set;}
+    public boolean runningBatch{get; set;}
     public RecordType RTName{
     	get{
     		RecordType rectypeforname = [select Name from RecordType where ID = :rds.Record_Type__c];
@@ -180,16 +184,17 @@ public with sharing class RecurringDonationsSettings {
         return status;
     }
     /************************************/
-    
-    
             
     //called from action method for page 
     public PageReference getSettingsFirstTime() {
         rds = RecurringDonations.getRecurringDonationsSettings();                   
         cisMap = Custom_Installment_Settings__c.getAll();
         cfmMap = Custom_Field_Mapping__c.getAll().clone();
+        rdeqMap = Recurring_Donations_Error_Queue__c.getAll();
+        rdeq = rdeqMap.values();
         cfm = cfmMap.values();        
         cis = cisMap.values();
+        rdeqSize = rdeqMap.keySet().size();
         cisSize = cisMap.keySet().size();
         cfmSize = cfmMap.keySet().size();               
         if (rds.Last_Update_Check__c == null){
@@ -213,6 +218,7 @@ public with sharing class RecurringDonationsSettings {
         canEditCISettings = false;
         deleteInstallmentMode = false;
         addingFieldMapping = false;
+        runningBatch = false;
     }
     
     public pagereference editRDsettings(){
@@ -330,8 +336,7 @@ public with sharing class RecurringDonationsSettings {
     	}
         selectedTab = 'field_mapping_settings';        
     	return null;
-    }
-    
+    }    
     
     public pageReference deleteFieldMapping(){
     	if (fieldMappingName != null){
@@ -341,13 +346,41 @@ public with sharing class RecurringDonationsSettings {
     		cfmSize = cfm.size();
     	}    	    	
     	return null;
-    }
-    
+    }    
     
     public void checkForUpdates(){
         RecurringDonationsPkgVersionCheck npvc = new RecurringDonationsPkgVersionCheck('npe03');        
         npvc.RecurringDonationsCheckVersion(true);
     }
+    
+    public pageReference clearErrorQueue(){
+    	delete [select id from Recurring_Donations_Error_Queue__c];
+    	rdeqSize = 0;
+    	return null;
+    }
+    public pageReference runBatch(){
+    	RecurringDonations_ProcessControl.batchButton = true;
+    	runningBatch = true;
+    	string openLabel = system.label.RecurringDonationOpenStatus;
+        string queryRCD = 'select id,Open_Ended_Status__c, Next_Payment_Date__c, Organization__c, ' + 
+            'Contact__c,Installment_Amount__c,Installments__c,Amount__c,Total__c,Installment_Period__c, ' +
+            'Date_Established__c,Donor_Name__c,Schedule_Type__c,Recurring_Donation_Campaign__c,Total_Paid_Installments__c ';
+            //add any custom mapping to make sure we have the required fields
+        map<string, Custom_Field_Mapping__c> cfmMap = new map<string, Custom_Field_Mapping__c>();
+        cfmMap = Custom_Field_Mapping__c.getAll();
+        for (string s : cfmMap.keySet()){
+            queryRCD = queryRCD + ',' + cfmMap.get(s).Recurring_Donation_Field__c;
+        }
+            //if currencyiso field exists add it to query for use later
+        if(Schema.sObjectType.Recurring_Donation__c.fields.getMap().get('CurrencyIsoCode') != null)
+            queryRCD = queryRCD + ',CurrencyIsoCode';
+        queryRCD=queryRCD+' from Recurring_Donation__c where Open_Ended_Status__c = \'' + openLabel + '\'';
+        
+        //call the batch job, processing 50 at a time 
+        Id batchInstanceId = Database.executeBatch(new RecurringDonations_BATCH(queryRCD), 50); 
+        
+    	return null;
+    }    
     
     //checks the compatibility of a recurring donation and opp field
     private boolean isValidMapping(string RDField, string OppField){
@@ -427,8 +460,7 @@ public with sharing class RecurringDonationsSettings {
         if (myMsg != null){
         	ApexPages.addMessage(myMsg);
         }
-    }
-    
+    }    
         
     //http://improveit360.blogspot.com/2010/09/implementing-quicksort-to-sort-list-of.html
     private list<SelectOption> sortOptionList(list<SelectOption> ListToSort)
