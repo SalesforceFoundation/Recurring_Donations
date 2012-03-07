@@ -69,4 +69,25 @@ public with sharing class RecurringDonations_AddDonationsBTN {
         pageRef.setRedirect(true);
         return pageRef;
     }
+    
+    public static testMethod void testBTN(){
+        Account a = new Account(Name = 'TestA');
+        insert a;
+        Recurring_Donation__c r1 = new Recurring_Donation__c();
+        r1.Name = 'test';
+        r1.Installments__c = 2;
+        r1.Organization__c = a.Id;
+        r1.Amount__c = 100;
+        r1.Installment_Period__c = System.Label.RecurringDonationInstallmentPeriodWeekly;
+        r1.Date_Established__c = date.newinstance(1970,6,12);
+        r1.Schedule_Type__c = System.Label.RecurringDonationMultiplyValue;
+        r1.Open_Ended_Status__c = System.label.RecurringDonationOpenStatus;
+        r1.Next_Payment_Date__c = system.today();
+        insert r1;
+        
+        ApexPages.StandardController scc = new ApexPages.StandardController(r1);
+        RecurringDonations_AddDonationsBTN rdadb = new RecurringDonations_AddDonationsBTN(scc);
+        system.assertEquals(r1.id, rdadb.RecurringDonation.id);
+        rdadb.buttonClick();	
+    }
 }
