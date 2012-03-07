@@ -35,14 +35,11 @@ after insert, after update, after delete, after undelete) {
     Recurring_Donations_Settings__c rds = RecurringDonations.getRecurringDonationsSettings();
     public enum triggerAction {beforeInsert, beforeUpdate, beforeDelete, afterInsert, afterUpdate, afterDelete, afterUndelete}
     
-    if (!rds.DISABLE_RecurringDonations_trigger__c && !system.isFuture() && RecurringDonations_ProcessControl.hasRun != true){ 
+    if (!rds.DISABLE_RecurringDonations_trigger__c && RecurringDonations_ProcessControl.hasRun != true){ 
     
         if(Trigger.isBefore && Trigger.isInsert){
             RecurringDonations process = new RecurringDonations (trigger.new, trigger.old, triggerAction.beforeInsert);
-        }
-        if(Trigger.isBefore && Trigger.isUpdate){
-            RecurringDonations process = new RecurringDonations (trigger.newMap, trigger.oldMap, triggerAction.beforeUpdate);
-        }
+        }        
         if(Trigger.isBefore && Trigger.isDelete ){
             RecurringDonations process = new RecurringDonations (trigger.oldMap, trigger.oldMap, triggerAction.beforeDelete);
         }
