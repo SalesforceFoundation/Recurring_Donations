@@ -101,6 +101,9 @@ public without sharing class RecurringDonations_ErrorHandling {
         list<string> sendList = new list<string>();
         //user, sysadmins or PG
         string mailList = rds.Error_Email_Notifications__c;
+        
+        system.debug('MAIL LIST IS: ' + mailList);
+        
         if (mailList.startsWith('005')){
         	sendList.add([select email from User where id = :mailList].email);
         }
@@ -120,8 +123,127 @@ public without sharing class RecurringDonations_ErrorHandling {
         		sendList.add(u.email);
         	}
         }        
-        mail.setToAddresses(sendList);                    
+        mail.setToAddresses(sendList);                   
 
         return mail;    	
     }
+    
+    /*** Test Methods ***/
+    
+    static testMethod void testErrorHandlingAllSysAdmins(){
+        RecurringDonations_TEST.setRecurringDonationsSettingsForTest(new Recurring_Donations_Settings__c( 
+        Error_Email_Notifications__c ='All Sys Admins'                
+        ));         
+        
+        Account a = new Account(Name = 'Test');
+        insert a;
+        Recurring_Donation__c r1 = new Recurring_Donation__c();
+        r1.Name = 'test';
+        r1.Organization__c = a.id;
+        r1.Amount__c = 100;
+        r1.Installment_Period__c = System.Label.RecurringDonationInstallmentPeriodWeekly;
+        r1.Open_Ended_Status__c = System.label.RecurringDonationOpenStatus;
+        r1.Next_Payment_Date__c = system.today();
+        insert r1;    
+        
+        //create some opps
+        list<Opportunity> olist = new list<Opportunity>();
+        integer i;
+        for (i = 0; i<=10; i++){
+            Opportunity o = new Opportunity(
+                StageName = 'Closed Won',
+                Name = 'Opp ' + i,
+                CloseDate = system.today(),
+                Amount = 1.00,
+                Recurring_Donation__c = r1.id                
+            );
+            olist.add(o);                    	
+        }
+        //invalidate one opp    	
+        olist[0].Name = null;
+        Database.saveresult[] lsr = Database.insert(olist, false);
+        list<Opportunity> badOpps = new list<Opportunity>{olist[0]};
+        //run it using bulk setup
+        RecurringDonations_ErrorHandling.handleDMLErrorsOnOppInsert(lsr, badOpps, false);                            	       
+        //try it using UI setup
+        RecurringDonations_ErrorHandling.handleDMLErrorsOnOppInsert(lsr, badOpps, true);         
+    }
+    
+    static testMethod void testErrorHandlingUser(){
+     	User u = [select id from User limit 1];
+        RecurringDonations_TEST.setRecurringDonationsSettingsForTest(new Recurring_Donations_Settings__c( 
+        Error_Email_Notifications__c = u.id                
+        ));  
+        
+        Account a = new Account(Name = 'Test');
+        insert a;
+        Recurring_Donation__c r1 = new Recurring_Donation__c();
+        r1.Name = 'test';
+        r1.Organization__c = a.id;
+        r1.Amount__c = 100;
+        r1.Installment_Period__c = System.Label.RecurringDonationInstallmentPeriodWeekly;
+        r1.Open_Ended_Status__c = System.label.RecurringDonationOpenStatus;
+        r1.Next_Payment_Date__c = system.today();
+        insert r1;      
+        
+         //create some opps
+        list<Opportunity> olist = new list<Opportunity>();
+        integer i;
+        for (i = 0; i<=10; i++){
+            Opportunity o = new Opportunity(
+                StageName = 'Closed Won',
+                Name = 'Opp ' + i,
+                CloseDate = system.today(),
+                Amount = 1.00,
+                Recurring_Donation__c = r1.id                
+            );
+            olist.add(o);                       
+        }
+        //invalidate one opp        
+        olist[0].Name = null;
+        Database.saveresult[] lsr = Database.insert(olist, false);
+        list<Opportunity> badOpps = new list<Opportunity>{olist[0]};
+        //run it using bulk setup
+        RecurringDonations_ErrorHandling.handleDMLErrorsOnOppInsert(lsr, badOpps, false);
+    }
+    
+    static testMethod void testErrorHandlingPublicGroup(){
+        Group g = new Group(Name = 'MyGroup');
+        insert g;
+        system.debug('GID IS: ' + g.id);
+        RecurringDonations_TEST.setRecurringDonationsSettingsForTest(new Recurring_Donations_Settings__c( 
+        Error_Email_Notifications__c = g.id                
+        ));         
+        
+        Account a = new Account(Name = 'Test');
+        insert a;
+        Recurring_Donation__c r1 = new Recurring_Donation__c();
+        r1.Name = 'test';
+        r1.Organization__c = a.id;
+        r1.Amount__c = 100;
+        r1.Installment_Period__c = System.Label.RecurringDonationInstallmentPeriodWeekly;
+        r1.Open_Ended_Status__c = System.label.RecurringDonationOpenStatus;
+        r1.Next_Payment_Date__c = system.today();
+        insert r1;                   
+        
+        //create some opps
+        list<Opportunity> olist = new list<Opportunity>();
+        integer i;
+        for (i = 0; i<=10; i++){
+            Opportunity o = new Opportunity(
+                StageName = 'Closed Won',
+                Name = 'Opp ' + i,
+                CloseDate = system.today(),
+                Amount = 1.00,
+                Recurring_Donation__c = r1.id                
+            );
+            olist.add(o);                       
+        }
+        //invalidate one opp        
+        olist[0].Name = null;
+        Database.saveresult[] lsr = Database.insert(olist, false);
+        list<Opportunity> badOpps = new list<Opportunity>{olist[0]};
+        //run it using bulk setup
+        RecurringDonations_ErrorHandling.handleDMLErrorsOnOppInsert(lsr, badOpps, false);
+    }    
 }
