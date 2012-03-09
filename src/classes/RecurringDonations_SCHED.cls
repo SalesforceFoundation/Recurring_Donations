@@ -55,6 +55,14 @@ global class RecurringDonations_SCHED implements Schedulable {
     }
     
     static testmethod void test(){ 
+             
+        Custom_Field_Mapping__c cfm = new Custom_Field_Mapping__c(
+        Recurring_Donation_Field__c = 'Last_Payment_Date__c',
+        Opportunity_Field__c = 'Description',
+        Name = 'CFMName00001-Test'
+        );
+        insert cfm;
+        
         Test.startTest(); 
         
         //Schedule the test job 
