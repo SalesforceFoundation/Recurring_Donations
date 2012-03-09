@@ -66,6 +66,7 @@ public without sharing class RecurringDonations_ErrorHandling {
         }            
         //add the error to the parent Recurring Donation for this opp
         else{
+        	system.debug('I AM HERE');
             Recurring_Donation__c rd = [select id from Recurring_Donation__c where id = :badOpps[0].Recurring_Donation__c];
             rd.addError(lsr[0].getErrors()[0].getMessage());
         }           
@@ -90,19 +91,17 @@ public without sharing class RecurringDonations_ErrorHandling {
         mail.setUseSignature(false);
         mail.setSenderDisplayName('Salesforce Recurring Donations');
         mail.setSubject('Salesforce Recurring Donations Errors');
-        string bodyString;
+        string bodyString = '';
         bodyString += system.label.RecurringDonationErrorEmailBody;
         bodyString += '\n\nErrors:';
         for (Recurring_Donations_Error_Queue__c rdeq : rdeqlist){
-        	bodyString += '\n' + system.url.getSalesforceBaseUrl() + '/' + rdeq.Recurring_Donation_ID__c;
+        	bodyString += '\n' + system.url.getSalesforceBaseUrl().toExternalForm() + '/' + rdeq.Recurring_Donation_ID__c;
         	bodystring += ' Error Message: ' + rdeq.Error_Message__c;        	
         }        
         mail.setPlainTextBody(bodyString);
         list<string> sendList = new list<string>();
         //user, sysadmins or PG
         string mailList = rds.Error_Email_Notifications__c;
-        
-        system.debug('MAIL LIST IS: ' + mailList);
         
         if (mailList.startsWith('005')){
         	sendList.add([select email from User where id = :mailList].email);
