@@ -60,10 +60,12 @@ global without sharing class RecurringDonations_BATCH implements Database.Batcha
                             TotalJobItems, CompletedDate
                             from AsyncApexJob 
                             where Id = :BC.getJobId()];
+        integer errorcount = 0;
+        errorcount = [select count() from Recurring_Donations_Error_Queue__c];                             
                             
         rds.Last_Batch_Run__c = a.CompletedDate;
-        rds.Number_Of_Successes__c = recCount;
-        rds.Number_Of_Failures__c = a.NumberOfErrors;
+        rds.Number_Of_Successes__c = recCount - errorcount;
+        rds.Number_Of_Failures__c = errorcount;
         update rds;                            
         
         //if needed, send messages from teh error queue

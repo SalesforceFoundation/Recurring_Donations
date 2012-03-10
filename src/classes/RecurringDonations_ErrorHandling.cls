@@ -36,40 +36,33 @@ public without sharing class RecurringDonations_ErrorHandling {
     
     public static Recurring_Donations_Settings__c rds;
     
-    public static void handleDMLErrorsOnOppInsert(list<Database.SaveResult> lsr, list<Opportunity> badOpps, boolean isUIOperation){
-        if (!isUIOperation){
-        	list<Recurring_Donations_Error_Queue__c> rdeqList = new list<Recurring_Donations_Error_Queue__c>();
-            //we only want one error per id, so we filter with this set
-            set<id> RDIDs = new set<id>();
-            integer i = 0;            
-            for (Opportunity o : badOpps){
-                
-                if (!RDIDs.contains(o.Recurring_Donation__c)){
-                    Database.SaveResult thisSR = lsr[0];
-                    //insert into our custom list setting?                  
-                    Recurring_Donations_Error_Queue__c rdeq = new Recurring_Donations_Error_Queue__c();
-                    rdeq.Name = 'E-' + o.Recurring_Donation__c + '-' + i;
-                    rdeq.Recurring_Donation_ID__c = o.Recurring_Donation__c;
-                    rdeq.Error_Message__c = thisSR.getErrors()[0].getMessage();
-                    rdeqList.add(rdeq);
-                    RDIDs.add(o.Recurring_Donation__c);
-                }
-                i++;
-            }
-            if (!rdeqList.isEmpty()){
-            	insert rdeqList;
-            	//if we're in a batch job, let the batch handle the send notification so it happens
-            	//at one time
-            	if (!system.isBatch()) 
-            	   sendErrorQueueEmailNotificationFuture();
-            }
-        }            
-        //add the error to the parent Recurring Donation for this opp
-        else{
-        	system.debug('I AM HERE');
-            Recurring_Donation__c rd = [select id from Recurring_Donation__c where id = :badOpps[0].Recurring_Donation__c];
-            rd.addError(lsr[0].getErrors()[0].getMessage());
-        }           
+    public static void handleDMLErrorsOnOppInsert(list<Database.SaveResult> lsr, list<Opportunity> badOpps){ 
+        list<Recurring_Donations_Error_Queue__c> rdeqList = new list<Recurring_Donations_Error_Queue__c>();
+        //we only want one error per id, so we filter with this set
+        set<id> RDIDs = new set<id>();
+        integer i = 0;            
+        for (Opportunity o : badOpps){
+                  
+            if (!RDIDs.contains(o.Recurring_Donation__c)){
+                Database.SaveResult thisSR = lsr[0];
+                //insert into our custom list setting?                  
+                Recurring_Donations_Error_Queue__c rdeq = new Recurring_Donations_Error_Queue__c();
+                rdeq.Name = 'E-' + o.Recurring_Donation__c + '-' + i;
+                rdeq.Recurring_Donation_ID__c = o.Recurring_Donation__c;
+                rdeq.Error_Message__c = thisSR.getErrors()[0].getMessage();
+                rdeqList.add(rdeq);
+                RDIDs.add(o.Recurring_Donation__c);
+            }            
+            i++;
+        }
+         
+        if (!rdeqList.isEmpty()){
+            insert rdeqList;
+            //if we're in a batch job, let the batch handle the send notification so it happens
+            //at one time
+            if (!system.isBatch() && !RecurringDonations_ProcessControl.batchButton)  
+                sendErrorQueueEmailNotificationFuture();
+        }                  
     }
     
     @future
@@ -82,8 +75,9 @@ public without sharing class RecurringDonations_ErrorHandling {
             if (!test.isRunningTest())
                 Messaging.sendEmail(new Messaging.SingleEmailMessage[]{sme});
     	}
-    	//clear the queue
-    	delete [select id from Recurring_Donations_Error_Queue__c];
+    	//clear the queue if not in a batch, otherwise, save them 
+        if (!system.isBatch() && !RecurringDonations_ProcessControl.batchButton)      	   
+    	   delete [select id from Recurring_Donations_Error_Queue__c];
     } 
 
     private static Messaging.SingleEmailMessage createEmailMessage(list<Recurring_Donations_Error_Queue__c> rdeqList){
@@ -163,9 +157,7 @@ public without sharing class RecurringDonations_ErrorHandling {
         Database.saveresult[] lsr = Database.insert(olist, false);
         list<Opportunity> badOpps = new list<Opportunity>{olist[0]};
         //run it using bulk setup
-        RecurringDonations_ErrorHandling.handleDMLErrorsOnOppInsert(lsr, badOpps, false);                            	       
-        //try it using UI setup
-        RecurringDonations_ErrorHandling.handleDMLErrorsOnOppInsert(lsr, badOpps, true);         
+        RecurringDonations_ErrorHandling.handleDMLErrorsOnOppInsert(lsr, badOpps);
     }
     
     static testMethod void testErrorHandlingUser(){
@@ -202,8 +194,8 @@ public without sharing class RecurringDonations_ErrorHandling {
         olist[0].Name = null;
         Database.saveresult[] lsr = Database.insert(olist, false);
         list<Opportunity> badOpps = new list<Opportunity>{olist[0]};
-        //run it using bulk setup
-        RecurringDonations_ErrorHandling.handleDMLErrorsOnOppInsert(lsr, badOpps, false);
+        
+        RecurringDonations_ErrorHandling.handleDMLErrorsOnOppInsert(lsr, badOpps);
     }
     
     static testMethod void testErrorHandlingPublicGroup(){
@@ -242,7 +234,7 @@ public without sharing class RecurringDonations_ErrorHandling {
         olist[0].Name = null;
         Database.saveresult[] lsr = Database.insert(olist, false);
         list<Opportunity> badOpps = new list<Opportunity>{olist[0]};
-        //run it using bulk setup
-        RecurringDonations_ErrorHandling.handleDMLErrorsOnOppInsert(lsr, badOpps, false);
+        
+        RecurringDonations_ErrorHandling.handleDMLErrorsOnOppInsert(lsr, badOpps);
     }    
 }
