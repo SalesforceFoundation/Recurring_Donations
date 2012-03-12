@@ -562,12 +562,20 @@ public with sharing class RecurringDonationsSettings {
     
     /** Test Method **/ 
     public static testMethod void TEST_RecurringDonationsSettings() {
-        RecurringDonations_TEST.setRecurringDonationsSettingsForTest(new Recurring_Donations_Settings__c());
+    	id rtid = [select id from RecordType where sobjecttype = 'Opportunity' limit 1].id;
+    	id uid = [select id from User limit 1].id;
+        RecurringDonations_TEST.setRecurringDonationsSettingsForTest(new Recurring_Donations_Settings__c(
+        Error_Email_Notifications__c = uid, Record_Type__c = rtid, Max_Package_Version__c = '2.0',
+        Package_Update_URL__c = 'http://www.salesforce.com', Last_Update_Check__c = system.today(),
+        Has_Package_Update__c = 'true'        
+        ));
+        
+        Custom_Installment_Settings__c cis = new Custom_Installment_Settings__c(Name = 'TESTINSTALLMENT', Value__c = 1, Increment__c = 'Weeks');
+        insert cis;
         
         Account a = new Account(Name='TestAccount');
         insert a;
         insert new Recurring_Donation__c(Name = 'TestRD', Organization__c = a.id, Installment_Period__c='TestValueForUnitTests');
- 
  
         Test.setCurrentPageReference(new PageReference('Page.RecurringDonationsSettings'));
         
@@ -590,11 +598,51 @@ public with sharing class RecurringDonationsSettings {
         controller.editCISettings();
         Custom_Installment_Settings__c c = new Custom_Installment_Settings__c(Name='TestValueForUnitTests', Value__c = 5.0, Increment__c = 'Weeks');
         controller.cis.add(c);
-        controller.saveCISettings();
+        controller.saveCISettings(); 
         controller.runDeleteWizard();
         controller.selectedInstallmentName = 'TestValueForUnitTests';
         controller.replacementInstallment = 'Weekly';        
         controller.deleteInstallment();        
+        controller.RDField = 'Amount__c';
+        controller.OppField = 'Amount';
+        controller.saveFieldMapping();
+        controller.fieldMappingName = 'TestNAME';
+        controller.deleteFieldMapping();
+        Recordtype rt = controller.RTName;
+        Group g =  controller.EmailErrorDisplayName;
+        g =  controller.EmailErrorDisplayName;        
+        controller.addFieldMapping();
+        list<SelectOption> eeolist = controller.ErrorEmailOptions;
+        list<SelectOption> rtlist = controller.RecordTypeList;
         list<SelectOption> mylist = controller.validInstallments;
-    }
+        list<SelectOption> rdfield = controller.availableRDFields;
+        list<SelectOption> oppfield = controller.availableOpportunityFields;
+        string myversion = controller.getMyVersion();
+        string maxversion = controller.getMaxVersion();
+        string uurl = controller.getUpdateURL();
+        string lupdte = controller.getLastUpdate();         
+        string getpkgupdatestatus = controller.getpkgupdatestatus();
+        controller.trimOpportunities();
+        controller.checkForUpdates();
+        controller.clearErrorQueue();
+    }   
+    //covering everything else 
+    public static testMethod void TEST_RecurringDonationsSettings2(){
+    	id rtid = [select id from RecordType where sobjecttype = 'Opportunity' limit 1].id;
+        Group g = new Group(Name = 'Testgroup');
+        insert g;        
+        
+        RecurringDonations_TEST.setRecurringDonationsSettingsForTest(new Recurring_Donations_Settings__c(
+        Error_Email_Notifications__c = g.id, Record_Type__c = rtid, Max_Package_Version__c = '2.0',
+        Package_Update_URL__c = 'http://www.salesforce.com', Last_Update_Check__c = null,
+        Has_Package_Update__c = 'false'        
+        ));   
+    	
+    	Test.setCurrentPageReference(new PageReference('Page.RecurringDonationsSettings'));
+        //pass the controller into the extension
+        RecurringDonationsSettings controller = new RecurringDonationsSettings(); 
+        controller.getSettingsFirstTime();
+    	list<SelectOption> eeolist = controller.ErrorEmailOptions;
+    	string updatestatus = controller.getpkgupdatestatus();
+    }    
 }
