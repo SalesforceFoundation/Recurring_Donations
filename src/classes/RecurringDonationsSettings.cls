@@ -154,6 +154,9 @@ public with sharing class RecurringDonationsSettings {
         get{
             list<SelectOption> fieldlist = new list<SelectOption>();
             map<String, Schema.SObjectField> M = schema.SObjectType.Opportunity.fields.getMap();            
+            for (Custom_Field_Mapping__c cf : cfm){
+                invalidOppFields.add(cf.Opportunity_Field__c);	 
+            }            
             for (string s : m.keySet()){
                 if (!invalidOppFields.contains(s))
                     fieldlist.add(new SelectOption(s, s));
@@ -337,8 +340,15 @@ public with sharing class RecurringDonationsSettings {
     }    
     
     public pageReference saveFieldMapping(){
-    	if (isValidMapping(RDField, OppField)){
+    	//get existing Opp fields
+    	set<string> opptyFields = new set<string>();
+    	for (Custom_Field_Mapping__c cf : cfm){
+    		opptyFields.add(cf.Opportunity_Field__c);
+    	} 
+    	
+    	if (isValidMapping(RDField, OppField) && !opptyFields.contains(OppField)){
     	   string fmName = 'FieldMapping' + cfm.size();	
+    	   
     	   Custom_Field_Mapping__c myFM = new Custom_Field_Mapping__c(Opportunity_Field__c = OppField, Recurring_Donation_Field__c = RDField, Name = fmName); 
     	   insert myFM;
     	   cfm.add(myFM);
