@@ -463,7 +463,9 @@ public with sharing class RecurringDonationsSettings {
     	if (schemaRDField != null && schemaOppField != null){
             Schema.DescribeFieldResult RDF = schemaRDField.getDescribe();
             Schema.DescribeFieldResult ODF = schemaOppField.getDescribe();                        		
-    		if  (RDF.isAccessible() && (ODF.isAccessible() && !ODF.isDeprecatedAndHidden() && ODF.isUpdateable())){
+    		if  (RDF.isAccessible() && (ODF.isAccessible() && !ODF.isDeprecatedAndHidden() && ODF.isUpdateable()) &&
+                (RDF.getSoapType() == ODF.getSoapType())
+    		   ){
                 isValid = true;                    		  
     		}
     	}
