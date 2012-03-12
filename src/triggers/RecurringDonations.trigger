@@ -46,17 +46,25 @@ after insert, after update, after delete, after undelete) {
         if(Trigger.isInsert && Trigger.isAfter){
             //James Melville 05/03/2011 Dynamically build Recurring donation query to allow currency to be included if needed.
             //build start of dynamic query
-            String queryRCD = 'select id,Open_Ended_Status__c, Next_Payment_Date__c, Organization__c, ' + 
-            'Contact__c,Installment_Amount__c,Installments__c,Amount__c,Total__c,Installment_Period__c, ' +
-            'Date_Established__c,Donor_Name__c,Schedule_Type__c,Recurring_Donation_Campaign__c,Total_Paid_Installments__c ';
+            
+            set<string> existingFields = new set<string>{  'Open_Ended_Status__c', 'Next_Payment_Date__c',
+            	                                           'Organization__c', 'Contact__c', 'Installment_Amount__c',
+            	                                           'Installments__c', 'Amount__c', 'Total__c', 'Installment_Period__c',
+            	                                           'Date_Established__c', 'Donor_Name__c', 'Schedule_Type__c', 
+            	                                           'Recurring_Donation_Campaign__c', 'Total_Paid_Installments__c'};
+            
+            String queryRCD = 'select id';
+            for (string s : existingFields){
+            	queryRCD += ', ' + s;             	
+            }
        
             //add any custom mapping to make sure we have the required fields
             map<string, Custom_Field_Mapping__c> cfmMap = new map<string, Custom_Field_Mapping__c>();
             cfmMap = Custom_Field_Mapping__c.getAll();
             for (string s : cfmMap.keySet()){
-            	queryRCD = queryRCD + ',' + cfmMap.get(s).Recurring_Donation_Field__c;
-            }
-       
+                if (!existingFields.contains(s) || s != 'id')
+            	   queryRCD = queryRCD + ',' + cfmMap.get(s).Recurring_Donation_Field__c;
+            }       
        
             //if currencyiso field exists add it to query for use later
             if(Schema.sObjectType.Recurring_Donation__c.fields.getMap().get('CurrencyIsoCode') != null)
