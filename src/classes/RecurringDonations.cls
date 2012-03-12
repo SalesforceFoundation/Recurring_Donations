@@ -72,7 +72,7 @@ global with sharing class RecurringDonations {
                                                                                   and id IN :RDids]);
         //recurring donations that need to be updated      
         if (!recurringDonationMap.keySet().isEmpty()){
-        	if (recurringDonationMap.keySet().size() == 1 || system.isBatch())
+        	if (recurringDonationMap.keySet().size() == 1 || system.isBatch() || RecurringDonations_ProcessControl.batchButton)
         	   updateRecurringDonationOnOppChange(rdIds);
                 //evaluateExistingOpportunities(rdIds, false);
             else
@@ -391,17 +391,18 @@ global with sharing class RecurringDonations {
                     
                     if (r.Next_Payment_Date__c != null)                     
                         OppCloseDate = r.Next_Payment_Date__c;
-                    else
-                        OppCloseDate = r.Date_Established__c;
-                        
+                    else{
+                        OppCloseDate = r.Date_Established__c;                                                                        
+                    }                                             
+                    /*
                     if (r.Total_Paid_Installments__c > 0){
-                    	OppCloseDate = getNextDate(OppCloseDate, r.Installment_Period__c);
-                    }                                          
-                   
+                            OppCloseDate = getNextDate(OppCloseDate, r.Installment_Period__c);
+                    } */   
                     date incrementdate = OppCloseDate;
-                    
                     integer rdcounter = 1;
-                           
+                    if (r.Total_Paid_Installments__c > 0)
+                        rdcounter = (integer)r.Total_Paid_Installments__c + 1;
+                            
                     do{
                         Opportunity o = new Opportunity();
                         o.CloseDate = OppCloseDate;
@@ -458,26 +459,54 @@ global with sharing class RecurringDonations {
         }
         
         if( opportunityInserts.size() > 0 )
-        {
-        	if (!system.isBatch())
-                updateRecurringDonationOnOppChangeFuture(updateRecurringDonationSet);
-            else
-                updateRecurringDonationOnOppChange(updateRecurringDonationSet);                                    	       
-            Database.SaveResult[] lsr = Database.insert(opportunityInserts, false);
+        {   
+        	set<id> RDID = new set<id>();        	
+            for (Opportunity o : opportunityInserts){
+            	RDID.add(o.Recurring_Donation__c);
+            }
             
+            Database.SaveResult[] lsr;
+            list<Database.SaveResult> badSRs = new list<Database.SaveResult>();
+            list<Opportunity> badOpps = new list<Opportunity>();
+            set<id> createdOppIds = new set<id>();  
+            
+            //we're probably coming from the UI if we're only updating one RD, so lets 
+            //let the error bubble up to the top
+            if (RDID.size() == 1)
+                lsr = Database.insert(opportunityInserts, true);
+            //otherwise, this is a bulk operation so fail to the error handler 
+            else
+                lsr = Database.insert(opportunityInserts, false);        
+                    
+            integer i = 0;                          
+            for (Database.SaveResult s : lsr){
+                if (s.isSuccess() == true){
+                    //get all the new OppIds into a list
+                    createdOppIds.add(s.getId());
+                }    
+                //handle errors on insert   
+                else{
+                    badSRs.add(s);
+                    badOpps.add(opportunityInserts[i]);            
+                }                     
+                i++;
+            }
+                    
             if (ConIDForRole == null){
-                set<id> createdOppIds = new set<id>();
-                for (Database.SaveResult s : lsr){
-                    if (s.isSuccess() == true){
-                        //get all the new OppIds into a list
-                        createdOppIds.add(s.getId());
-                    }
-                }
-                if (!system.isFuture() && !system.isBatch())
-                    oppContactRolesFuture(createdOppIds);
+                if (!system.isFuture() && !system.isBatch() && !RecurringDonations_ProcessControl.batchButton)
+                    oppContactRolesFuture(createdOppIds); 
                 else
                     oppContactRoles(createdOppIds);                    
-            }                
+            }
+            
+            if (!badSRs.isEmpty()){
+                RecurringDonations_ErrorHandling.handleDMLErrorsOnOppInsert(badSRs, badOpps);
+            }            
+            
+            if (!system.isBatch() && !system.isFuture() && !RecurringDonations_ProcessControl.batchButton)
+                updateRecurringDonationOnOppChangeFuture(updateRecurringDonationSet); 
+            else
+                updateRecurringDonationOnOppChange(updateRecurringDonationSet);
         }
     }
     
@@ -531,6 +560,7 @@ global with sharing class RecurringDonations {
     public static void updateExistingOpps(set<id> recIDs){
         
         
+        Recurring_Donations_Settings__c rds = getRecurringDonationsSettings();
         string openLabel = system.label.RecurringDonationOpenStatus;
         map<id, Recurring_Donation__c> rdMap = new map<id, Recurring_Donation__c>([select id, Paid_Amount__c, Next_Payment_Date__c, 
                                                                                     Contact__c, Organization__c, Amount__c, 
@@ -573,7 +603,7 @@ global with sharing class RecurringDonations {
             for (Opportunity o : RDOppMap.get(RDid)){
                 
                 o.Amount = rdMap.get(RDid).Amount__c;
-                if (rdMap.get(RDid).Recurring_Donation_Campaign__c != null){
+                if (rdMap.get(RDid).Recurring_Donation_Campaign__c != null && rds.Add_Campaign_to_All_Opportunites__c){ 
                     o.CampaignId = rdMap.get(RDid).Recurring_Donation_Campaign__c;
                 }               
                 o.AccountID = rdMap.get(RDid).Organization__c;
@@ -589,14 +619,14 @@ global with sharing class RecurringDonations {
            update updateOppsList;
         
         
-        if ((!system.isFuture() && RDOppMap.keySet().size() == 1) || system.isBatch()){
+        if (system.isFuture() || RDOppMap.keySet().size() == 1 || system.isBatch() || RecurringDonations_ProcessControl.batchButton){
             updateRecurringDonationOnOppChange(RDOppMap.keySet());
         }          
         else{
             updateRecurringDonationOnOppChangeFuture(RDOppMap.keySet());            
         }
     }
-        
+         
     //handles updates to the recurring donations object
     public static void handleRecurringDonationUpdate(list<Recurring_Donation__c> recurringDonations, map<id, Recurring_Donation__c> oldRecurringDonations){
         
@@ -614,7 +644,7 @@ global with sharing class RecurringDonations {
             
             //if we're closing an open ended donation, modify the existing opps as required by the custom setting
             if (r.Open_Ended_Status__c == closedlabel && oldRD.Open_Ended_Status__c != r.Open_Ended_Status__c){
-                newlycloseddonations.add(r);
+                newlycloseddonations.add(r);        
             }            
             
             //if there's any other change that would require a reevaluation of existing Opps
@@ -685,12 +715,8 @@ global with sharing class RecurringDonations {
     public static void evaluateRecurringDonationsForNewOppInsert(list<Recurring_Donation__c> recurringDonationsToEvaluate){
     	
     	Recurring_Donations_Settings__c rds = getRecurringDonationsSettings();
-    	
-    	//IF THERE ARE NO OPEN OPPS WHEN WE EXAMINE THE RD, WE NEED TO UDPATE THE RD, OTHERWISE, THE RD 
-    	//SHOULD HAVE THE CORRECT INFO
-    	
+    
     	list<Opportunity> oppInsertList = new list<Opportunity>();
-    	
     	
         //get the total number of forecast months
         integer forecast_months = (integer)rds.Opportunity_Forecast_Months__c;
@@ -703,7 +729,6 @@ global with sharing class RecurringDonations {
             RDCurrencyField = Schema.sObjectType.Recurring_Donation__c.fields.getMap().get('CurrencyIsoCode');
         }
         string openlabel = system.label.RecurringDonationOpenStatus;
-        
         
         //get the existing donations
         list<sobject> sobjs = [select count(id) oppCount, MAX(CloseDate) MaxDate,
@@ -734,103 +759,118 @@ global with sharing class RecurringDonations {
             }
                                   
             oppCountMap.put(rdid, (integer)obj.get('oppCount'));                 
-        }        
+        }
+        
         customFieldMappingSettings = Custom_Field_Mapping__c.getAll();
+        //if the RD has no opps, we'll need to bail back to the insert methods
+        list<Recurring_Donation__c> reRollRDs = new list<Recurring_Donation__c>();
         for (Recurring_Donation__c rd : recurringDonationsToEvaluate){
-            integer oppCounter = oppCountMap.get(rd.id) + 1; 
+        	
+        	//only proceed if there are some opps, otherwise we need to start over from scratch	
+        	if (oppCountMap.containsKey(rd.id)){
+        	    integer oppCounter = oppCountMap.get(rd.id) + 1;                    
                            
-            if (system.today().addMonths(forecast_months) > lastOppMap.get(rd.id)){
-                date oppclosedate = lastOppMap.get(rd.id);
-                do{
-                    Opportunity o = new Opportunity();
+                if (system.today().addMonths(forecast_months) > lastOppMap.get(rd.id)){
+                    date oppclosedate = lastOppMap.get(rd.id);
+                    do{
+                        Opportunity o = new Opportunity();
 
-                    //multicurrency?
-                    if(RDCurrencyField != null){o.put(OppCurrencyField,rd.get(RDCurrencyField));}
+                        //multicurrency?
+                        if(RDCurrencyField != null){o.put(OppCurrencyField,rd.get(RDCurrencyField));}
                     
-                    //account or contact?
-                    if (rd.Organization__c != null){
-                    	o.AccountId = rd.Organization__c;
-                    }
-                    else if (contactMap.containsKey(rd.Contact__c)){
-                        Contact c = contactMap.get(rd.Contact__c);
-                        o.AccountId = c.AccountId;
-                        if (ConIDForRole != null){
-                            o.put((string)c.id, 'npe01__Contact_Id_For_Role__c');
+                        //account or contact?
+                        if (rd.Organization__c != null){
+                    	   o.AccountId = rd.Organization__c;
                         }
-                    }                    
+                        else if (contactMap.containsKey(rd.Contact__c)){
+                            Contact c = contactMap.get(rd.Contact__c);
+                            o.AccountId = c.AccountId;
+                            if (ConIDForRole != null){
+                                o.put((string)c.id, 'npe01__Contact_Id_For_Role__c');
+                            }
+                        }                    
                     
-                    oppclosedate = getNextDate(oppclosedate, rd.Installment_Period__c);
-                    o.CloseDate = oppclosedate;                                                                            	           
-                	string oName = rd.Donor_Name__c + ' ' + System.Label.RecurringDonationPrefix +
-                    ' (' + string.valueOf(oppCounter) + ') ' + o.CloseDate.format();
+                        oppclosedate = getNextDate(oppclosedate, rd.Installment_Period__c);
+                        o.CloseDate = oppclosedate;                                                                            	           
+                	    string oName = rd.Donor_Name__c + ' ' + System.Label.RecurringDonationPrefix +
+                        ' (' + string.valueOf(oppCounter) + ') ' + o.CloseDate.format();
                     
-                    o.Name = oName;
-                    o.Amount = rd.Amount__c;
-                    o.StageName = System.Label.RecurringDonationStageName;                    
-                    o.Recurring_Donation__c = rd.Id;                    
-                    //evaluate any custom field mappings
-                    for (string s : customFieldMappingSettings.keySet()){
-                        Custom_Field_Mapping__c cfm = customFieldMappingSettings.get(s);
-                        o.put(cfm.Opportunity_Field__c, rd.get(cfm.Recurring_Donation_Field__c));
-                    }
+                        o.Name = oName;
+                        o.Amount = rd.Amount__c;
+                        o.StageName = System.Label.RecurringDonationStageName;                    
+                        o.Recurring_Donation__c = rd.Id;                    
+                        //evaluate any custom field mappings
+                        for (string s : customFieldMappingSettings.keySet()){
+                            Custom_Field_Mapping__c cfm = customFieldMappingSettings.get(s);
+                            o.put(cfm.Opportunity_Field__c, rd.get(cfm.Recurring_Donation_Field__c));
+                        }
                     
-                    if (rd.Recurring_Donation_Campaign__c != null && (rds.Add_Campaign_to_All_Opportunites__c || oppCounter == 1)){
-                       o.CampaignId = rd.Recurring_Donation_Campaign__c;
-                    }
+                        if (rd.Recurring_Donation_Campaign__c != null && (rds.Add_Campaign_to_All_Opportunites__c || oppCounter == 1)){
+                            o.CampaignId = rd.Recurring_Donation_Campaign__c;
+                        }
                     
-                    oppCounter++;
-                    oppInsertList.add(o);                	
-                }while(oppclosedate < system.today().addMonths(forecast_months));
+                        oppCounter++;
+                        oppInsertList.add(o);                	
+                    }while(oppclosedate < system.today().addMonths(forecast_months));
+                }
+        	}
+        	else{
+        		reRollRDs.add(rd);
+        	}
+        }
+        if (!reRollRDs.isEmpty())
+            insertOppsOnRecurringDonationInsert(reRollRDs);
+       
+        set<id> RDID = new set<id>();  
+        if(!oppInsertList.isEmpty())
+        {
+            Database.SaveResult[] lsr;
+            list<Database.SaveResult> badSRs = new list<Database.SaveResult>();
+            list<Opportunity> badOpps = new list<Opportunity>();
+            set<id> createdOppIds = new set<id>();  
+            
+            //we're probably coming from the UI if we're only updating one RD, so lets 
+            //let the error bubble up to the top
+            if (RDID.size() == 1)
+                lsr = Database.insert(oppInsertList, true);
+            //otherwise, this is a bulk operation so fail to the error handler 
+            else
+                lsr = Database.insert(oppInsertList, false);        
+                    
+            integer i = 0;                          
+            for (Database.SaveResult s : lsr){
+                if (s.isSuccess() == true){
+                    //get all the new OppIds into a list
+                    createdOppIds.add(s.getId());
+                    RDID.add(oppInsertList[i].Recurring_Donation__c);                    
+                }    
+                //handle errors on insert   
+                else{
+                    badSRs.add(s);
+                    badOpps.add(oppInsertList[i]);            
+                }                     
+                i++;
+            }
+                    
+            if (ConIDForRole == null){
+                if (!system.isFuture() && !system.isBatch() && !RecurringDonations_ProcessControl.batchButton)
+                    oppContactRolesFuture(createdOppIds); 
+                else 
+                    oppContactRoles(createdOppIds);                    
+            }
+            
+            if (!badSRs.isEmpty()){
+                RecurringDonations_ErrorHandling.handleDMLErrorsOnOppInsert(badSRs, badOpps);
             }
         }
         
-         //insert the opps
-        if(!oppInsertList.isEmpty()){
-            Database.SaveResult[] lsr = Database.insert(oppInsertList, false);
-            
-            //if we didn't find the npe01 field on the opp, we need to create OCRs manually
-            if (ConIDForRole == null){
-                set<Id> createdOppIds = new set<Id>();
-                list<Database.SaveResult> badSRs = new list<Database.SaveResult>();
-                list<Opportunity> badOpps = new list<Opportunity>();
-                integer i = 0;
-                for (Database.SaveResult s : lsr){
-                	if (s.isSuccess() == true){
-                        //get all the new OppIds into a list
-                        createdOppIds.add(s.getId());
-                    }    
-                    //handle errors on insert   
-                    else{
-                    	badSRs.add(s);
-                    	badOpps.add(oppInsertList[i]);
-                    }                     
-                    i++;
-                }
-                oppContactRoles(createdOppIds);
-                if (!badSRs.isEmpty()){
-                	if (oppInsertList.size() == 1)                	
-                        RecurringDonations_ErrorHandling.handleDMLErrorsOnOppInsert(badSRs, badOpps, true);
-                    else
-                        RecurringDonations_ErrorHandling.handleDMLErrorsOnOppInsert(badSRs, badOpps, false);                	   
-                }                
-            }
-        }    
-        
-        //update the recurring donation when we're done->
-        set<id> RDIDSet = new set<id>();
-        for (Recurring_Donation__c rd : recurringDonationsToEvaluate){
-            RDIDSet.add(rd.id);
-        } 
-        system.debug('IS FUTURE----' + system.isFuture());
-        system.debug('IS BATCH----' + system.isBatch());
-        
-        if (system.isFuture() || recurringDonationsToEvaluate.size() == 1 || system.isBatch() || RecurringDonations_ProcessControl.batchButton){
-        	updateRecurringDonationOnOppChange(RDIDSet);
+        if (system.isFuture() || system.isBatch() || (recurringDonationsToEvaluate.size() == 1 && !system.isFuture() && !system.isBatch()) || RecurringDonations_ProcessControl.batchButton){
+        	updateRecurringDonationOnOppChange(RDID);
         }
         else{
-        	updateRecurringDonationOnOppChangeFuture(RDIDSet); 
+        	updateRecurringDonationOnOppChangeFuture(RDID); 
         }   
-    } 
+    }
     
     /*** UTILITY METHODS ***/
     
@@ -855,18 +895,19 @@ global with sharing class RecurringDonations {
     private static void runRecurringDonationClosedActions(list<Recurring_Donation__c> closedRDs){
         // determine the update type - 
         Recurring_Donations_Settings__c rds = getRecurringDonationsSettings();
-         
+         system.debug('IN THE PRIVATE METHOD');
         if (!closedRDs.isEmpty() && rds.Open_Opportunity_Behavior__c != RecurringDonationCloseOptions.No_Action.name()){
             list<Opportunity> olist = [select StageName, Recurring_Donation__r.id from Opportunity where Recurring_Donation__r.id IN :closedRDs and isClosed = false];
-            
+         
             if (rds.Open_Opportunity_Behavior__c == RecurringDonationCloseOptions.Delete_Open_Opportunities.name()){
+               system.debug('IN THE PRIVATE METHOD3');
                database.delete(olist);
             }              
             else if (rds.Open_Opportunity_Behavior__c == RecurringDonationCloseOptions.Mark_Opportunities_Closed_Lost.name()){
                 for (Opportunity o : olist){
                     o.StageName = system.label.RecurringDonationClosedLostOpportunityStage;
                 }            
-                update olist;
+                update olist; 
             }
         }
     }
