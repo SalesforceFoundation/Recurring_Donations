@@ -145,7 +145,7 @@
                             </apex:outputPanel>
                             <apex:outputPanel style="text-align: center; display: block; margin-left:auto; margin-right:auto;">
                                 <apex:commandButton value="Add Mapping" action="{!addFieldMapping}" rendered="{!NOT(addingFieldMapping)}"/>
-                                <apex:commandButton value="Save" action="{!saveFieldMapping}" rendered="{!addingFieldMapping}" rerender="FieldMappingsOutputPanel"/>  
+                                <apex:commandButton value="Save" action="{!saveFieldMapping}" rendered="{!addingFieldMapping}" />  
                                 <apex:commandButton value="Cancel" action="{!cancel}" rendered="{!addingFieldMapping}"/>                            
                             </apex:outputPanel>
                             <apex:actionFunction action="{!deleteFieldMapping}" name="DeleteFieldMapping" rerender="FieldMappingsOutputPanel">
