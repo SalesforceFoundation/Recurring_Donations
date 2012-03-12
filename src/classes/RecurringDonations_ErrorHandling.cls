@@ -39,17 +39,17 @@ public without sharing class RecurringDonations_ErrorHandling {
     public static void handleDMLErrorsOnOppInsert(list<Database.SaveResult> lsr, list<Opportunity> badOpps){ 
         list<Recurring_Donations_Error_Queue__c> rdeqList = new list<Recurring_Donations_Error_Queue__c>();
         //we only want one error per id, so we filter with this set
-        set<id> RDIDs = new set<id>();
+        set<id> RDIDs = new set<id>(); 
         integer i = 0;            
         for (Opportunity o : badOpps){
                   
             if (!RDIDs.contains(o.Recurring_Donation__c)){
-                Database.SaveResult thisSR = lsr[0];
+                Database.SaveResult thisSR = lsr[i];
                 //insert into our custom list setting?                  
                 Recurring_Donations_Error_Queue__c rdeq = new Recurring_Donations_Error_Queue__c();
                 rdeq.Name = 'E-' + o.Recurring_Donation__c + '-' + i;
                 rdeq.Recurring_Donation_ID__c = o.Recurring_Donation__c;
-                rdeq.Error_Message__c = thisSR.getErrors()[0].getMessage();
+                rdeq.Error_Message__c = thisSR.getErrors()[i].getMessage();
                 rdeqList.add(rdeq);
                 RDIDs.add(o.Recurring_Donation__c);
             }            
