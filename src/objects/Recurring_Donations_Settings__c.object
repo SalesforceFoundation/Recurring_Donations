@@ -13,18 +13,6 @@
         <type>Checkbox</type>
     </fields>
     <fields>
-        <fullName>Custom_Days__c</fullName>
-        <defaultValue>14</defaultValue>
-        <externalId>false</externalId>
-        <inlineHelpText>Number of days for the custom Recurring Donations installment period.  The installment period picklist value on the Recurring Donation object is determined by custom labels.</inlineHelpText>
-        <label>Custom Days</label>
-        <precision>18</precision>
-        <required>false</required>
-        <scale>0</scale>
-        <type>Number</type>
-        <unique>false</unique>
-    </fields>
-    <fields>
         <fullName>DISABLE_Donations_trigger__c</fullName>
         <defaultValue>false</defaultValue>
         <description>DISABLES the Donations.trigger (Opportunity, before insert, before update, after insert, after update)</description>
@@ -44,6 +32,14 @@ DISABLES the Donations.trigger  (Opportunity, before insert, before update,
 DISABLES the RecurringDonations.trigger (Recurring_Donations__c, ALL).
 - checking this box will disable a trigger.  This can cause erratic and unpredictable behavior in your NPSP. FOR ADVANCED CONSULTANTS AND DEVELOPERS ONLY.</inlineHelpText>
         <label>DISABLE_RecurringDonations_trigger</label>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Disable_Nightly_Job__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Prevents the scheduling of the nightly update to Recurring Donations. Any existing scheduled job will need to be removed through Setup-&gt;Monitoring-&gt;Scheduled Jobs</inlineHelpText>
+        <label>Disable Nightly Job</label>
         <type>Checkbox</type>
     </fields>
     <fields>
@@ -76,6 +72,14 @@ DISABLES the RecurringDonations.trigger (Recurring_Donations__c, ALL).
         <unique>false</unique>
     </fields>
     <fields>
+        <fullName>Last_Batch_Run__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>The date and time of the last batch update of Recurring Donations.</inlineHelpText>
+        <label>Last Batch Run</label>
+        <required>false</required>
+        <type>DateTime</type>
+    </fields>
+    <fields>
         <fullName>Last_Update_Check__c</fullName>
         <externalId>false</externalId>
         <label>Last Update Check</label>
@@ -104,6 +108,37 @@ DISABLES the RecurringDonations.trigger (Recurring_Donations__c, ALL).
         <unique>false</unique>
     </fields>
     <fields>
+        <fullName>Nightly_Update_ID__c</fullName>
+        <externalId>false</externalId>
+        <label>Nightly Update ID</label>
+        <length>18</length>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Number_of_Failures__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Number of Recurring Donations unsuccessfully updated in the last batch operation.</inlineHelpText>
+        <label>Number of Failures</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Number_of_Successes__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Number of Recurring Donations successfully updated in the last batch run.</inlineHelpText>
+        <label>Number of Successes</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
         <fullName>Open_Opportunity_Behavior__c</fullName>
         <description>Determines the behavior of any remaining open Opportunities when an open-ended Recurring Donation is moved to a closed status.</description>
         <externalId>false</externalId>
@@ -119,7 +154,7 @@ DISABLES the RecurringDonations.trigger (Recurring_Donations__c, ALL).
         <defaultValue>12</defaultValue>
         <description>Number of months worth of open Opportunities to be created when using an open-ended Recurring Donation.  Determined by the Last Payment Date field.</description>
         <externalId>false</externalId>
-        <inlineHelpText>Number of months worth of open Opportunities to be created when using an open-ended Recurring Donation.  Determined by the Last Payment Date field.</inlineHelpText>
+        <inlineHelpText>Number of months from today worth of open Opportunities to be created when using open-ended Recurring Donations. WARNING: Reducing this value will result in extra Opportunities being deleted.  Increasing it will launch a batch process to add Opportunities</inlineHelpText>
         <label>Opportunity Forecast Months</label>
         <precision>18</precision>
         <required>false</required>
