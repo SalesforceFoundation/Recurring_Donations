@@ -80,7 +80,6 @@ global without sharing class RecurringDonations_BATCH implements Database.Batcha
         new Recurring_Donations_Settings__c(
         Opportunity_Forecast_Months__c = 12,
         Maximum_Donations__c = 50,
-        Custom_Days__c = 14,
         Open_Opportunity_Behavior__c = RecurringDonations.RecurringDonationCloseOptions.Mark_Opportunities_Closed_Lost.name()
         ));           
                     
