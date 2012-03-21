@@ -275,7 +275,6 @@ public class RecurringDonations_TEST {
 		Recurring_Donations_Settings__c rds = RecurringDonations.getRecurringDonationsSettings();
 		system.assertEquals(12, rds.Opportunity_Forecast_Months__c);
 		system.assertEquals(50, rds.Maximum_Donations__c);
-		system.assertEquals(14, rds.Custom_Days__c);
 		system.assertEquals(RecurringDonations.RecurringDonationCloseOptions.Mark_Opportunities_Closed_Lost.name(), rds.Open_Opportunity_Behavior__c);		     
 	}
 	
@@ -286,7 +285,6 @@ public class RecurringDonations_TEST {
         new Recurring_Donations_Settings__c(
         Opportunity_Forecast_Months__c = 12,
         Maximum_Donations__c = 50,
-        Custom_Days__c = 14,
         Open_Opportunity_Behavior__c = RecurringDonations.RecurringDonationCloseOptions.Mark_Opportunities_Closed_Lost.name()        
         ));				
 		
@@ -361,7 +359,6 @@ public class RecurringDonations_TEST {
         new Recurring_Donations_Settings__c(
         Opportunity_Forecast_Months__c = 12,
         Maximum_Donations__c = 50,
-        Custom_Days__c = 14,
         Open_Opportunity_Behavior__c = RecurringDonations.RecurringDonationCloseOptions.Mark_Opportunities_Closed_Lost.name()        
         ));           
         
@@ -404,7 +401,6 @@ public class RecurringDonations_TEST {
         new Recurring_Donations_Settings__c(
         Opportunity_Forecast_Months__c = 12,
         Maximum_Donations__c = 50,
-        Custom_Days__c = 14,
         Open_Opportunity_Behavior__c = RecurringDonations.RecurringDonationCloseOptions.Mark_Opportunities_Closed_Lost.name(),
         Add_Campaign_to_All_Opportunites__c = true        
         ));           
@@ -444,7 +440,6 @@ public class RecurringDonations_TEST {
         new Recurring_Donations_Settings__c(
         Opportunity_Forecast_Months__c = 12,
         Maximum_Donations__c = 50,
-        Custom_Days__c = 14,
         Open_Opportunity_Behavior__c = RecurringDonations.RecurringDonationCloseOptions.Mark_Opportunities_Closed_Lost.name()        
         ));           
         
@@ -487,7 +482,6 @@ public class RecurringDonations_TEST {
         new Recurring_Donations_Settings__c(
         Opportunity_Forecast_Months__c = 12,
         Maximum_Donations__c = 50,
-        Custom_Days__c = 14,
         Open_Opportunity_Behavior__c = RecurringDonations.RecurringDonationCloseOptions.Mark_Opportunities_Closed_Lost.name()        
         ));           
         
@@ -530,7 +524,6 @@ public class RecurringDonations_TEST {
         new Recurring_Donations_Settings__c(
         Opportunity_Forecast_Months__c = 12,
         Maximum_Donations__c = 50,
-        Custom_Days__c = 14,
         Open_Opportunity_Behavior__c = RecurringDonations.RecurringDonationCloseOptions.Mark_Opportunities_Closed_Lost.name()        
         ));           
         
@@ -575,7 +568,6 @@ public class RecurringDonations_TEST {
         new Recurring_Donations_Settings__c(
         Opportunity_Forecast_Months__c = 12,
         Maximum_Donations__c = 50,
-        Custom_Days__c = 14,
         Open_Opportunity_Behavior__c = RecurringDonations.RecurringDonationCloseOptions.Mark_Opportunities_Closed_Lost.name()        
         ));           
         
@@ -627,7 +619,6 @@ public class RecurringDonations_TEST {
         new Recurring_Donations_Settings__c(
         Opportunity_Forecast_Months__c = 6,
         Maximum_Donations__c = 50,
-        Custom_Days__c = 14,
         Open_Opportunity_Behavior__c = RecurringDonations.RecurringDonationCloseOptions.Mark_Opportunities_Closed_Lost.name()        
         ));           
         
@@ -681,7 +672,6 @@ public class RecurringDonations_TEST {
         new Recurring_Donations_Settings__c(
         Opportunity_Forecast_Months__c = 12,
         Maximum_Donations__c = 50,
-        Custom_Days__c = 14,
         Open_Opportunity_Behavior__c = RecurringDonations.RecurringDonationCloseOptions.Mark_Opportunities_Closed_Lost.name()        
         ));           
         
@@ -733,7 +723,6 @@ public class RecurringDonations_TEST {
         new Recurring_Donations_Settings__c(
         Opportunity_Forecast_Months__c = 12,
         Maximum_Donations__c = 50,
-        Custom_Days__c = 14,
         Open_Opportunity_Behavior__c = RecurringDonations.RecurringDonationCloseOptions.Mark_Opportunities_Closed_Lost.name()        
         ));           
         
@@ -794,7 +783,6 @@ public class RecurringDonations_TEST {
         new Recurring_Donations_Settings__c(
         Opportunity_Forecast_Months__c = 1,
         Maximum_Donations__c = 50,
-        Custom_Days__c = 14,
         Open_Opportunity_Behavior__c = RecurringDonations.RecurringDonationCloseOptions.Mark_Opportunities_Closed_Lost.name()        
         ));           
         
@@ -854,7 +842,6 @@ public class RecurringDonations_TEST {
         new Recurring_Donations_Settings__c(
         Opportunity_Forecast_Months__c = 12,
         Maximum_Donations__c = 50,
-        Custom_Days__c = 14,
         Open_Opportunity_Behavior__c = RecurringDonations.RecurringDonationCloseOptions.Mark_Opportunities_Closed_Lost.name(),
         Add_Campaign_to_All_Opportunites__c = true        
         ));           
@@ -914,7 +901,6 @@ public class RecurringDonations_TEST {
         new Recurring_Donations_Settings__c(
         Opportunity_Forecast_Months__c = 12,
         Maximum_Donations__c = 50,
-        Custom_Days__c = 14,
         Open_Opportunity_Behavior__c = RecurringDonations.RecurringDonationCloseOptions.Mark_Opportunities_Closed_Lost.name(),
         Add_Campaign_to_All_Opportunites__c = true       
         ));           
@@ -975,7 +961,6 @@ public class RecurringDonations_TEST {
         new Recurring_Donations_Settings__c(
         Opportunity_Forecast_Months__c = 12,
         Maximum_Donations__c = 50,
-        Custom_Days__c = 14,
         Open_Opportunity_Behavior__c = RecurringDonations.RecurringDonationCloseOptions.Mark_Opportunities_Closed_Lost.name()        
         ));           
         
@@ -1028,7 +1013,6 @@ public class RecurringDonations_TEST {
         new Recurring_Donations_Settings__c(
         Opportunity_Forecast_Months__c = 12,
         Maximum_Donations__c = 50,
-        Custom_Days__c = 14,
         Open_Opportunity_Behavior__c = RecurringDonations.RecurringDonationCloseOptions.Mark_Opportunities_Closed_Lost.name()        
         ));           
         
@@ -1072,7 +1056,6 @@ public class RecurringDonations_TEST {
         new Recurring_Donations_Settings__c(
         Opportunity_Forecast_Months__c = 12,
         Maximum_Donations__c = 50, 
-        Custom_Days__c = 14,
         Open_Opportunity_Behavior__c = RecurringDonations.RecurringDonationCloseOptions.Mark_Opportunities_Closed_Lost.name()        
         ));           
         
@@ -1126,7 +1109,6 @@ public class RecurringDonations_TEST {
         new Recurring_Donations_Settings__c(
         Opportunity_Forecast_Months__c = 12,
         Maximum_Donations__c = 50,
-        Custom_Days__c = 14,
         Open_Opportunity_Behavior__c = RecurringDonations.RecurringDonationCloseOptions.Mark_Opportunities_Closed_Lost.name()        
         ));           
         
@@ -1175,7 +1157,6 @@ public class RecurringDonations_TEST {
         new Recurring_Donations_Settings__c(
         Opportunity_Forecast_Months__c = 12,
         Maximum_Donations__c = 50,
-        Custom_Days__c = 14,
         Open_Opportunity_Behavior__c = RecurringDonations.RecurringDonationCloseOptions.Delete_Open_Opportunities.name()        
         ));           
         
@@ -1222,16 +1203,16 @@ public class RecurringDonations_TEST {
         new Recurring_Donations_Settings__c(
         Opportunity_Forecast_Months__c = 6,
         Maximum_Donations__c = 50,
-        Custom_Days__c = 14,
         Open_Opportunity_Behavior__c = RecurringDonations.RecurringDonationCloseOptions.Mark_Opportunities_Closed_Lost.name()        
         ));           
         
-        Custom_Field_Mapping__c cfm = new Custom_Field_Mapping__c(
-        Recurring_Donation_Field__c = 'Last_Payment_Date__c',
+        delete [select id from Custom_Field_Mapping__c];
+        Custom_Field_Mapping__c cfm1 = new Custom_Field_Mapping__c(
+        Recurring_Donation_Field__c = 'Name',
         Opportunity_Field__c = 'Description',
         Name = 'CFMName00001-Test'
         );
-        insert cfm;
+        insert cfm1;
         
         Account a = new Account();
         a.Name = 'test Individual';
@@ -1271,21 +1252,21 @@ public class RecurringDonations_TEST {
         Test.startTest();
         insert rdlist;
         rdlist[0].Amount__c = 50;
+        rdlist[1].Amount__c = 50;
         rdlist[1].Next_Payment_Date__c = system.today().addDays(5);
         RecurringDonations_ProcessControl.hasRun = false;
-        update rdlist;                
-        map<id, Opportunity> originalOpps = new map<id, Opportunity>([select id, Name,amount,accountid,CloseDate from Opportunity where Recurring_Donation__r.id = :r1.id or Recurring_Donation__c = :r2.id]);
-        RecurringDonations_ProcessControl.hasRun = false;
+        update rdlist;        
         Test.stopTest();
-        originalOpps = new map<id, Opportunity>([select id, Name,amount,accountid,CloseDate from Opportunity where Recurring_Donation__r.id = :r1.id or Recurring_Donation__c = :r2.id]);
+        
+        map<id, Opportunity> originalOpps = new map<id, Opportunity>([select id, Name,amount,accountid,CloseDate from Opportunity where Recurring_Donation__r.id = :r1.id or Recurring_Donation__c = :r2.id]);
         system.assertEquals(7, originalOpps.size());
+        system.assertEquals(50, originalOpps.values()[0].Amount);
 	}
 	static testMethod void tooManyInstallments(){
         RecurringDonations_TEST.setRecurringDonationsSettingsForTest(
         new Recurring_Donations_Settings__c(
         Opportunity_Forecast_Months__c = 6,
         Maximum_Donations__c = 2,
-        Custom_Days__c = 14,
         Open_Opportunity_Behavior__c = RecurringDonations.RecurringDonationCloseOptions.Mark_Opportunities_Closed_Lost.name()        
         ));           
         
@@ -1322,18 +1303,19 @@ public class RecurringDonations_TEST {
         new Recurring_Donations_Settings__c(
         Opportunity_Forecast_Months__c = 6,
         Maximum_Donations__c = 50,
-        Custom_Days__c = 14,
         Open_Opportunity_Behavior__c = RecurringDonations.RecurringDonationCloseOptions.Mark_Opportunities_Closed_Lost.name()        
         ));           
         
+        //remove any existing custom field mappings
+        delete [select id from Custom_Field_Mapping__c];        
         Custom_Field_Mapping__c cfm = new Custom_Field_Mapping__c(
-        Recurring_Donation_Field__c = 'Last_Payment_Date__c',
+        Recurring_Donation_Field__c = 'Name',
         Opportunity_Field__c = 'Description',
         Name = 'CFMName00001-Test'
         );
         insert cfm;
         
-        Account a = new Account();
+        Account a = new Account(); 
         a.Name = 'test Individual';
         insert a;
         
@@ -1342,7 +1324,7 @@ public class RecurringDonations_TEST {
         c.LastName = 'contact';
         c.AccountId = a.Id;
         insert c;       
-
+        
         list<Recurring_Donation__c> rdlist = new list<Recurring_Donation__c>();
         Recurring_Donation__c r1 = new Recurring_Donation__c();
         r1.Name = 'test';
