@@ -92,7 +92,7 @@
         <fullName>Installment_Amount__c</fullName>
         <deprecated>false</deprecated>
         <externalId>false</externalId>
-        <formula>IF( text(Schedule_Type__c)=$Label.RecurringDonationMultiplyValue , Amount__c , IF(Installments__c&gt;0,Amount__c / Installments__c,0))</formula>
+        <formula>IF( OR((text(Schedule_Type__c)=$Label.RecurringDonationMultiplyValue), (text(Open_Ended_Status__c)!=&quot;&quot;), (text(Open_Ended_Status__c)!=&quot;None&quot;)) , Amount__c , IF(Installments__c&gt;0,Amount__c / Installments__c,0))</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
         <label>Installment Amount</label>
         <precision>18</precision>
@@ -152,7 +152,7 @@
         <description>Date of the last payment for this Recurring Donation</description>
         <externalId>false</externalId>
         <inlineHelpText>Date of the last payment for this Recurring Donation</inlineHelpText>
-        <label>Last Payment Date</label>
+        <label>Last Donation Date</label>
         <required>false</required>
         <trackHistory>false</trackHistory>
         <type>Date</type>
@@ -162,7 +162,7 @@
         <description>Holds the date of the next recurring payment.  Manually editing this field will recalculate all future opportunity&apos;s close dates based on the scheduled defined.</description>
         <externalId>false</externalId>
         <inlineHelpText>Holds the date of the next recurring payment.  Manually editing this field will recalculate all future opportunity&apos;s close dates based on the scheduled defined.</inlineHelpText>
-        <label>Next Payment Date</label>
+        <label>Next Donation Date</label>
         <required>false</required>
         <trackHistory>false</trackHistory>
         <type>Date</type>
@@ -261,12 +261,13 @@
         <fullName>Total__c</fullName>
         <deprecated>false</deprecated>
         <externalId>false</externalId>
-        <formula>CASE(
+        <formula>IF(TEXT( Open_Ended_Status__c) =  $Label.RecurringDonationOpenStatus, 0,
+CASE(
  Schedule_Type__c ,
 &quot;Multiply By&quot;, Installments__c * Amount__c ,
 &quot;Divide By&quot;,Amount__c
 ,0
-)</formula>
+))</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
         <label>Total</label>
         <precision>18</precision>
