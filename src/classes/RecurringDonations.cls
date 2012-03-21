@@ -237,7 +237,7 @@ global with sharing class RecurringDonations {
     	                                       Recurring_Donation_Campaign__c, Paid_Amount__c, Organization__c,
     	                                       Open_Ended_Status__c, Next_Payment_Date__c, Last_Payment_Date__c,
     	                                       Installments__c, Installment_Period__c, Installment_Amount__c,
-    	                                       Donor_Name__c, Date_Established__c, Contact__c, Amount__c    	                                       
+    	                                       Donor_Name__c, Date_Established__c, Contact__c, Amount__c, Name    	                                       
     	                                       from Recurring_Donation__c];
     	
         insertOppsOnRecurringDonationInsert(reclist);
@@ -263,7 +263,7 @@ global with sharing class RecurringDonations {
         map<Id,Id> recConMap = new map<Id,Id>();
         for(Recurring_Donation__c r : recurringDonations){
         	updateRecurringDonationSet.add(r.id);
-            if (r.Contact__c != null){
+            if (r.Contact__c != null){ 
                 contactIds.add(r.Contact__c);
                 recConMap.put(r.Id,r.Contact__c);
             }
@@ -444,12 +444,12 @@ global with sharing class RecurringDonations {
                         o.Recurring_Donation__c = r.Id;
                         if (r.Recurring_Donation_Campaign__c != null && (rds.Add_Campaign_to_All_Opportunites__c || rdcounter == 1)){
                             o.CampaignId = r.Recurring_Donation_Campaign__c;
-                        }  
+                        }   
                         
                         //evaluate any custom field mappings
                         for (string s : customFieldMappingSettings.keySet()){
                             Custom_Field_Mapping__c cfm = customFieldMappingSettings.get(s);
-                            o.put(cfm.Opportunity_Field__c, r.get(cfm.Recurring_Donation_Field__c));
+                            o.put(cfm.Opportunity_Field__c, r.get(cfm.Recurring_Donation_Field__c)); 
                         }
                         opportunityInserts.add(o);    
                         rdcounter++;                                                                                       
@@ -884,6 +884,14 @@ global with sharing class RecurringDonations {
             //the only field w/o a default defined
             if (recurringDonationsSettings.Open_Opportunity_Behavior__c == null){  
                 recurringDonationsSettings.Open_Opportunity_Behavior__c = RecurringDonations.RecurringDonationCloseOptions.Mark_Opportunities_Closed_Lost.name();
+                recurringDonationsSettings.Add_Campaign_to_All_Opportunites__c = true;
+                recurringDonationsSettings.Enable_Update_Check__c = true;
+                recurringDonationsSettings.Error_Email_Notifications__c = 'All Sys Admins';
+                recurringDonationsSettings.Maximum_Donations__c = 50;
+                recurringDonationsSettings.Opportunity_Forecast_Months__c = 12;
+                recurringDonationsSettings.Update_Check_Interval__c = 90;
+                id myid = [select id from RecordType where sobjecttype = 'Opportunity' limit 1].id;
+                recurringDonationsSettings.Record_Type__c = myid; 
                 upsert recurringDonationsSettings;    
                 recurringDonationsSettings = Recurring_Donations_Settings__c.getOrgDefaults();                           
             }
@@ -928,9 +936,9 @@ global with sharing class RecurringDonations {
         else if (InstallmentType == System.Label.RecurringDonationInstallmentPeriodWeekly){
             CalcDate = CalcDate.addDays(7);
         }
-        else if (InstallmentType == System.label.RecurringDonationInstallmentPeriodCustom){ 
+      /*  else if (InstallmentType == System.label.RecurringDonationInstallmentPeriodCustom){ 
             CalcDate = CalcDate.addDays((integer)rds.Custom_Days__c);
-        }
+        }*/
         else if (InstallmentType == system.label.RecurringDonationInstallmentPeriod1stand15th){
             //increment it by one day until we hit either the 1st or 15th            
             do{
