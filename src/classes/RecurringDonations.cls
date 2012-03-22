@@ -652,12 +652,12 @@ global with sharing class RecurringDonations {
             else if (r.Open_Ended_Status__c == openlabel){
                 if (r.Amount__c != oldRD.Amount__c ||
                     r.Recurring_Donation_Campaign__c != oldRD.Recurring_Donation_Campaign__c ||
-                    r.Organization__c != oldRD.Organization__c ||
+        //            r.Organization__c != oldRD.Organization__c ||
                     r.Next_Payment_Date__c != oldRD.Next_Payment_Date__c                    
                     ){
                     reevaluateopps.add(r.id);
                 }
-                else if (r.Installment_Period__c != oldRD.Installment_Period__c || r.Contact__c != oldRD.Contact__c){
+                else if (r.Installment_Period__c != oldRD.Installment_Period__c /*|| r.Contact__c != oldRD.Contact__c*/){
                     reinsertopps.add(r);
                 }                                        
             }
