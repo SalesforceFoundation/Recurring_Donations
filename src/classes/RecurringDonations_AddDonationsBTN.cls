@@ -46,19 +46,30 @@ public with sharing class RecurringDonations_AddDonationsBTN {
     }
     
     public PageReference buttonClick(){
-    	system.assert(RecurringDonation != null);
-        map<string, Custom_Field_Mapping__c> cfm = Custom_Field_Mapping__c.getAll();
-        //get the rest of hte fiedls
-        string qString = 'select id, Paid_Amount__c, Next_Payment_Date__c, ' +  
-                            'Contact__c, Organization__c, Amount__c, ' +  
-                            'Date_Established__c, Recurring_Donation_Campaign__c, ' + 
-                            'Installment_Period__c, Installments__c, ' + 
-                            'Last_Payment_Date__c, Open_Ended_Status__c, ' + 
-                            'Schedule_Type__c, Total_Paid_Installments__c, ' + 
-                            'Donor_Name__c';                             
-        for (string s : cfm.keySet()){
-        	qString += ' ,' + cfm.get(s).Recurring_Donation_Field__c;        	
-        }                                    
+    	   system.assert(RecurringDonation != null);
+        
+           set<string> existingFields = new set<string>{  'open_ended_status__c', 'next_payment_date__c', 'name',
+                                                           'organization__c', 'contact__c', 'installment_amount__c',
+                                                           'installments__c', 'amount__c', 'total__c', 'installment_period__c',
+                                                           'date_established__c', 'donor_name__c', 'schedule_type__c', 
+                                                           'recurring_donation_campaign__c', 'total_paid_installments__c'};
+            
+            String qString = 'select id';
+            for (string s : existingFields){
+                qString += ', ' + s;               
+            }
+       
+            //add any custom mapping to make sure we have the required fields
+            map<string, Custom_Field_Mapping__c> cfmMap = new map<string, Custom_Field_Mapping__c>();
+            cfmMap = Custom_Field_Mapping__c.getAll();
+            for (string s : cfmMap.keySet()){
+                string RDFieldName = cfmMap.get(s).Recurring_Donation_Field__c;             
+                if (!existingFields.contains(RDFieldName.toLowerCase()) && s != 'id'){
+                   qString = qString + ',' + cfmMap.get(s).Recurring_Donation_Field__c;
+                   existingFields.add(RDFieldName.toLowerCase());   
+                }
+            }       
+                                           
                             
         qString += ' from Recurring_Donation__c ';
         qString += ' where id = \'' + RecurringDonation.id + '\'';
@@ -84,6 +95,13 @@ public with sharing class RecurringDonations_AddDonationsBTN {
         r1.Open_Ended_Status__c = System.label.RecurringDonationOpenStatus;
         r1.Next_Payment_Date__c = system.today();
         insert r1;
+        
+        delete[select id from Custom_Field_Mapping__c];
+        insert new Custom_Field_Mapping__c(
+        Name = 'CFM-' + system.now(),
+        Opportunity_Field__c = 'closedate',
+        Recurring_Donation_Field__c = 'last_payment_date__c'
+        );
         
         ApexPages.StandardController scc = new ApexPages.StandardController(r1);
         RecurringDonations_AddDonationsBTN rdadb = new RecurringDonations_AddDonationsBTN(scc);
