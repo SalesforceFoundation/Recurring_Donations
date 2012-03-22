@@ -70,7 +70,7 @@
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>RecurringDonationErrorEmailBody</shortDescription>
-        <value>Errors were encountered when trying to insert new Opportunities for your open-ended Recurring Donations. This can adversely affect your forecasting and functionality of your Salesforce.com instance. Addressing these errors as soon as possible can prevent bad data from entering your system.  The Recurring Donation and associated Opportunity insert error are listed below.</value>
+        <value>Errors were encountered when trying to insert new Opportunities for your open-ended Recurring Donations. This can adversely affect your forecasting and functionality of your Salesforce.com instance. Addressing these errors as soon as possible can prevent bad data from entering your system.  The Recurring Donation and associated Opportunity insert error are listed below, and can be found in the Recurring Donations Settings tab under &apos;Batch Settings&apos;.</value>
     </labels>
     <labels>
         <fullName>RecurringDonationInstallmentPeriod1stand15th</fullName>
@@ -167,6 +167,14 @@
         <protected>false</protected>
         <shortDescription>RecurringDonationRequiredFieldsWarning</shortDescription>
         <value>The following required fields on your Opportunity object may cause issues with your Recurring Donations package:</value>
+    </labels>
+    <labels>
+        <fullName>RecurringDonationSchedulingError</fullName>
+        <categories>RecurringDonations</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>RecurringDonationSchedulingError</shortDescription>
+        <value>There was an error in scheduling your nightly Recurring Donations update.</value>
     </labels>
     <labels>
         <fullName>RecurringDonationSettingsDescription</fullName>
