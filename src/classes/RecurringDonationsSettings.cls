@@ -347,12 +347,13 @@ public with sharing class RecurringDonationsSettings {
     	} 
     	
     	if (isValidMapping(RDField, OppField) && !opptyFields.contains(OppField)){
-    	   string fmName = 'FieldMapping' + cfm.size();	
+    	   string fmName = 'FieldMapping-' + system.now();	 
     	   
     	   Custom_Field_Mapping__c myFM = new Custom_Field_Mapping__c(Opportunity_Field__c = OppField, Recurring_Donation_Field__c = RDField, Name = fmName); 
     	   insert myFM;
     	   cfm.add(myFM);
     	   cfmSize = cfm.size();
+    	   cfmMap.put(myFM.Name, myFM); 
     	   addingFieldMapping = false;	
     	}    	
     	//add error
@@ -569,7 +570,7 @@ public with sharing class RecurringDonationsSettings {
         returnList.addAll(SortOptionList(Less));
         returnList.add(pivotValue);
         returnList.addAll(SortOptionList(Greater));
-        return returnList; 
+        return returnList;   
     }
     
     /** Test Method **/ 
@@ -656,5 +657,11 @@ public with sharing class RecurringDonationsSettings {
         controller.getSettingsFirstTime();
     	list<SelectOption> eeolist = controller.ErrorEmailOptions;
     	string updatestatus = controller.getpkgupdatestatus();
+    	string lupdte = controller.getLastUpdate();
+    	controller.RDField = 'garbage';
+    	controller.OppField = 'garbage';
+    	controller.saveFieldMapping();
+    	controller.cis.add(new Custom_Installment_Settings__c(Name = 'CisSetTest', Value__c = 1, Increment__c = 'Weeks'));
+    	controller.saveCISettings();
     }    
 }
