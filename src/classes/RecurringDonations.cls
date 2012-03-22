@@ -151,7 +151,7 @@ global with sharing class RecurringDonations {
         
         //Get our settings
         Recurring_Donations_Settings__c rds = getRecurringDonationsSettings();     
-        
+         
         //Get the open label for opps
         string openLabel = system.label.RecurringDonationOpenStatus;
         
@@ -419,7 +419,7 @@ global with sharing class RecurringDonations {
                             Contact c = contactMap.get(r.Contact__c);
                             o.AccountId = c.AccountId;
                             if (ConIDForRole != null){
-                                o.put((string)c.id, 'npe01__Contact_Id_For_Role__c');
+                                o.put('npe01__Contact_Id_For_Role__c', (string)c.id);
                             }
                         }       
                                        
