@@ -1,6 +1,6 @@
 /*
     Copyright (c) 2012, Salesforce.com Foundation
-    All rights reserved.
+    All rights reserved. 
     
     Redistribution and use in source and binary forms, with or without
     modification, are permitted provided that the following conditions are met:
@@ -84,6 +84,7 @@ public class RecurringDonations_TEST {
 		r1.Installment_Period__c = System.Label.RecurringDonationInstallmentPeriodYearly;
 		r1.Date_Established__c = date.newinstance(1970,6,12);
 		r1.Schedule_Type__c = System.Label.RecurringDonationMultiplyValue;
+		r1.Open_Ended_Status__c = 'None'; 
 		insert r1;
 		
 		Opportunity[] installments1 = [select Name,amount,accountid,CloseDate from Opportunity where Recurring_Donation__c = :r1.id];
@@ -118,6 +119,7 @@ public class RecurringDonations_TEST {
 		r1.Installment_Period__c = System.Label.RecurringDonationInstallmentPeriodWeekly;
 		r1.Date_Established__c = date.newinstance(1970,6,12);
 		r1.Schedule_Type__c = System.Label.RecurringDonationMultiplyValue;
+		r1.Open_Ended_Status__c = 'None'; 
 		insert r1;
 		
 		Opportunity[] installments1 = [select Name,amount,accountid,CloseDate from Opportunity where Recurring_Donation__c = :r1.id];
@@ -151,6 +153,7 @@ public class RecurringDonations_TEST {
 		r1.Installment_Period__c = System.Label.RecurringDonationInstallmentPeriodQuarterly;
 		r1.Date_Established__c = date.newinstance(1970,6,12);
 		r1.Schedule_Type__c = System.Label.RecurringDonationMultiplyValue;
+		r1.Open_Ended_Status__c = 'None'; 
 		insert r1;
 		
 		Opportunity[] installments1 = [select Name,amount,accountid,CloseDate from Opportunity where Recurring_Donation__c = :r1.id];
@@ -191,6 +194,7 @@ public class RecurringDonations_TEST {
 		r1.Date_Established__c = date.newinstance(1970,6,12);
 		r1.Schedule_Type__c = System.Label.RecurringDonationMultiplyValue;
 		r1.Recurring_Donation_Campaign__c = campaignId;
+		r1.Open_Ended_Status__c = 'None'; 
 		insert r1;
 		
 		Opportunity[] installments1 = [select Name,amount,accountid,CloseDate,CampaignId from Opportunity where Recurring_Donation__c = :r1.id];
@@ -219,6 +223,7 @@ public class RecurringDonations_TEST {
 		r2.Installment_Period__c = System.Label.RecurringDonationInstallmentPeriodMonthly;
 		r2.Date_Established__c = date.newinstance(1970,6,12);
 		r2.Schedule_Type__c = System.Label.RecurringDonationDivideValue;
+		r2.Open_Ended_Status__c = 'None'; 
 		insert r2;
 		
 		Opportunity[] installments2 = [select Name,amount,accountid,CloseDate from Opportunity where Recurring_Donation__c = :r2.id];
@@ -259,6 +264,7 @@ public class RecurringDonations_TEST {
 		r1.Name = 'test';
 		r1.Installments__c = 2;
 		r1.Contact__c = c.Id;
+		r1.Open_Ended_Status__c = 'None'; 
 		r1.Amount__c = 100;
 		r1.Installment_Period__c = System.Label.RecurringDonationInstallmentPeriodWeekly;
 		r1.Date_Established__c = date.newinstance(1970,6,12);
@@ -333,12 +339,6 @@ public class RecurringDonations_TEST {
         rdlist.add(RD);
         
         RD = RD.clone(false);
-        RD.Name = 'testcustom';
-        RD.Installment_Period__c = System.Label.RecurringDonationInstallmentPeriodCustom;
-        RD.Next_Payment_Date__c = system.today();
-        rdlist.add(RD);
-        
-        RD = RD.clone(false);
         RD.Name = 'testbadinstallment';
         RD.Installment_Period__c = 'GarbageValue';
         rdlist.add(RD);
@@ -350,8 +350,7 @@ public class RecurringDonations_TEST {
         system.assertEquals(12, [select count() from Opportunity where Recurring_Donation__r.Name = 'testmonthly']);
         system.assertEquals(4, [select count() from Opportunity where Recurring_Donation__r.Name = 'testquarterly']);
         system.assertEquals(1, [select count() from Opportunity where Recurring_Donation__r.Name = 'testyearly']);
-        system.assertEquals(53, [select count() from Opportunity where Recurring_Donation__r.Name = 'testweekly']);
-        system.assertEquals(27, [select count() from Opportunity where Recurring_Donation__r.Name = 'testcustom']);
+        system.assertEquals(53, [select count() from Opportunity where Recurring_Donation__r.Name = 'testweekly']);        
 	}
 	
 	static testMethod void updateOpenEndedRecurringDonationMonthly(){
