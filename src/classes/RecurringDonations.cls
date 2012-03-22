@@ -577,9 +577,9 @@ global with sharing class RecurringDonations {
                                        from Opportunity 
                                        where Recurring_Donation__r.id IN :rdMap.keySet() 
                                        and isClosed = false
-                                       order by CloseDate desc];
+                                       order by CloseDate asc];
 
-        //build a map of recurring donation ID and opps
+        //build a map of recurring donation ID and opps 
         map<id, list<Opportunity>> RDOppMap = new map<id, list<Opportunity>>(); 
         for (Opportunity o : opplist){
             if (RDOppMap.containsKey(o.Recurring_Donation__r.id)){
