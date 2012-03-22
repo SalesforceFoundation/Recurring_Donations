@@ -786,7 +786,7 @@ global with sharing class RecurringDonations {
                             Contact c = contactMap.get(rd.Contact__c);
                             o.AccountId = c.AccountId;
                             if (ConIDForRole != null){
-                                o.put((string)c.id, 'npe01__Contact_Id_For_Role__c');
+                                o.put('npe01__Contact_Id_For_Role__c', (string)c.id);
                             }
                         }                    
                     
