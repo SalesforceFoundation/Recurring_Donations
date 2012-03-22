@@ -49,7 +49,7 @@ public without sharing class RecurringDonations_ErrorHandling {
                 Recurring_Donations_Error_Queue__c rdeq = new Recurring_Donations_Error_Queue__c();
                 rdeq.Name = 'E-' + o.Recurring_Donation__c + '-' + i;
                 rdeq.Recurring_Donation_ID__c = o.Recurring_Donation__c;
-                rdeq.Error_Message__c = thisSR.getErrors()[i].getMessage();
+                rdeq.Error_Message__c = thisSR.getErrors()[0].getMessage();
                 rdeqList.add(rdeq);
                 RDIDs.add(o.Recurring_Donation__c);
             }            
@@ -60,8 +60,11 @@ public without sharing class RecurringDonations_ErrorHandling {
             insert rdeqList;
             //if we're in a batch job, let the batch handle the send notification so it happens
             //at one time
-            if (!system.isBatch() && !RecurringDonations_ProcessControl.batchButton)  
+            if (!system.isBatch() && !RecurringDonations_ProcessControl.batchButton && !system.isFuture())  
                 sendErrorQueueEmailNotificationFuture();
+            else if (system.isFuture()){
+            	sendErrorQueueEmailNotification();
+            }                 
         }                  
     }
     
