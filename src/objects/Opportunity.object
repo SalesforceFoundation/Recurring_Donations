@@ -595,6 +595,13 @@
             </values>
         </picklistValues>
     </recordTypes>
+    <validationRules>
+        <fullName>TEST_VALID</fullName>
+        <active>false</active>
+        <errorConditionFormula>NOT(ISNULL( Contact__c ))</errorConditionFormula>
+        <errorDisplayField>Contact__c</errorDisplayField>
+        <errorMessage>PROCESS IS DEAD.</errorMessage>
+    </validationRules>
     <webLinks>
         <fullName>Add_Matching_Donation</fullName>
         <availability>online</availability>
