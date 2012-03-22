@@ -606,7 +606,8 @@ global with sharing class RecurringDonations {
                 if (rdMap.get(RDid).Recurring_Donation_Campaign__c != null && rds.Add_Campaign_to_All_Opportunites__c){ 
                     o.CampaignId = rdMap.get(RDid).Recurring_Donation_Campaign__c;
                 }               
-                o.AccountID = rdMap.get(RDid).Organization__c;
+                //changed for beta 7 - dont' update with a null org unless we need to
+                //o.AccountID = rdMap.get(RDid).Organization__c;
                 o.CloseDate = PaymentDate;                      
 
                 //now append appropriate amount to this date
