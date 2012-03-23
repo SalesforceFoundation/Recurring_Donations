@@ -206,8 +206,10 @@ public with sharing class RecurringDonationsSettings {
         
         Pagereference pr;
         pr = scheduleRecurringDonationsUpdate();
+        boolean skipUpdateCheck = false;
         if (pr == null){
             if (rds.Last_Update_Check__c == null){
+                skipUpdateCheck = true;
                 checkforupdates();
             }
         
@@ -216,8 +218,9 @@ public with sharing class RecurringDonationsSettings {
                 npvc.RecurringDonationsCheckVersion(false);
             }
         }
-         //test inserts
-        testPackageIntegrity();
+        
+        if (!skipUpdateCheck)
+            testPackageIntegrity();
         return null;
     }        
 
