@@ -160,6 +160,7 @@ OR(
     </fields>
     <fields>
         <fullName>Last_Payment_Date__c</fullName>
+        <deprecated>false</deprecated>
         <description>Date of the last payment for this Recurring Donation</description>
         <externalId>false</externalId>
         <inlineHelpText>Date of the last payment for this Recurring Donation</inlineHelpText>
@@ -170,6 +171,7 @@ OR(
     </fields>
     <fields>
         <fullName>Next_Payment_Date__c</fullName>
+        <deprecated>false</deprecated>
         <description>Holds the date of the next recurring payment.  Manually editing this field will recalculate all future opportunity&apos;s close dates based on the scheduled defined.</description>
         <externalId>false</externalId>
         <inlineHelpText>Holds the date of the next recurring payment.  Manually editing this field will recalculate all future opportunity&apos;s close dates based on the scheduled defined.</inlineHelpText>
@@ -180,6 +182,7 @@ OR(
     </fields>
     <fields>
         <fullName>Open_Ended_Status__c</fullName>
+        <deprecated>false</deprecated>
         <externalId>false</externalId>
         <label>Open Ended Status</label>
         <picklist>
@@ -214,6 +217,7 @@ OR(
     </fields>
     <fields>
         <fullName>Paid_Amount__c</fullName>
+        <deprecated>false</deprecated>
         <description>Total Amount paid on this Recurring Donation</description>
         <externalId>false</externalId>
         <inlineHelpText>Total Amount paid on this Recurring Donation</inlineHelpText>
@@ -257,6 +261,7 @@ OR(
     </fields>
     <fields>
         <fullName>Total_Paid_Installments__c</fullName>
+        <deprecated>false</deprecated>
         <description>Total number of installments paid on this open-ended recurring donation.</description>
         <externalId>false</externalId>
         <inlineHelpText>Total number of installments paid on this open-ended recurring donation.</inlineHelpText>

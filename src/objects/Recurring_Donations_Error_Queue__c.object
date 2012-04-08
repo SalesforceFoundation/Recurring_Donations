@@ -6,6 +6,7 @@
     <enableFeeds>false</enableFeeds>
     <fields>
         <fullName>Error_Message__c</fullName>
+        <deprecated>false</deprecated>
         <description>Error message for the operation on the associated Recurring Donation record</description>
         <externalId>false</externalId>
         <inlineHelpText>Error message for the operation on the associated Recurring Donation record</inlineHelpText>
@@ -17,6 +18,7 @@
     </fields>
     <fields>
         <fullName>Recurring_Donation_ID__c</fullName>
+        <deprecated>false</deprecated>
         <description>ID of the affected Recurring Donation record</description>
         <externalId>false</externalId>
         <inlineHelpText>ID of the affected Recurring Donation record</inlineHelpText>

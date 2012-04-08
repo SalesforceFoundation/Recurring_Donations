@@ -6,6 +6,7 @@
     <enableFeeds>false</enableFeeds>
     <fields>
         <fullName>Increment__c</fullName>
+        <deprecated>false</deprecated>
         <description>Weeks, Months, Days</description>
         <externalId>false</externalId>
         <label>Increment</label>
@@ -16,6 +17,7 @@
     </fields>
     <fields>
         <fullName>Value__c</fullName>
+        <deprecated>false</deprecated>
         <description>The integer increment value</description>
         <externalId>false</externalId>
         <label>Value</label>
