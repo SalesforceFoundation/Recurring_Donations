@@ -573,7 +573,7 @@ global with sharing class RecurringDonations {
                                                                                   where Open_Ended_Status__c = :openLabel 
                                                                                   and id IN :recIDs]);        
                            
-        list<Opportunity> oppList = [select id, Amount, CampaignId, AccountID, CloseDate, Recurring_Donation__r.id                                         
+        list<Opportunity> oppList = [select id, Amount, Name, CampaignId, AccountID, CloseDate, Recurring_Donation__r.id                                         
                                        from Opportunity 
                                        where Recurring_Donation__r.id IN :rdMap.keySet() 
                                        and isClosed = false
@@ -606,10 +606,27 @@ global with sharing class RecurringDonations {
                 if (rdMap.get(RDid).Recurring_Donation_Campaign__c != null && rds.Add_Campaign_to_All_Opportunites__c){ 
                     o.CampaignId = rdMap.get(RDid).Recurring_Donation_Campaign__c;
                 }               
+                
                 //changed for beta 7 - dont' update with a null org unless we need to
-                //o.AccountID = rdMap.get(RDid).Organization__c;
+                if (rdMap.get(RDid).Organization__c != null)
+                    o.AccountID = rdMap.get(RDid).Organization__c;
                 o.CloseDate = PaymentDate;                      
-
+                
+                //rebuild the donor string by plucking out the installment number for re-use
+                integer lbracket = o.Name.indexOf('(');
+                integer rbracket = o.Name.indexOf(')');
+                string iNumber = '';
+                if (lbracket > 0 && rbracket > lbracket)
+                   iNumber = o.Name.substring(lbracket, rbracket + 1);
+                //modify the name 
+                String oName = '';
+                oName += rdMap.get(RDid).Donor_Name__c; 
+                oName += ' ';
+                oName += System.Label.RecurringDonationPrefix;
+                oName += ' ' + iNumber + ' ';
+                oName += o.CloseDate.format();
+                o.Name = oName;
+                
                 //now append appropriate amount to this date
                 PaymentDate = getNextDate(PaymentDate, RDMap.get(RDid).Installment_Period__c);
                 updateOppsList.add(o);
@@ -652,12 +669,12 @@ global with sharing class RecurringDonations {
             else if (r.Open_Ended_Status__c == openlabel){
                 if (r.Amount__c != oldRD.Amount__c ||
                     r.Recurring_Donation_Campaign__c != oldRD.Recurring_Donation_Campaign__c ||
-        //            r.Organization__c != oldRD.Organization__c ||
+                    r.Organization__c != oldRD.Organization__c ||
                     r.Next_Payment_Date__c != oldRD.Next_Payment_Date__c                    
                     ){
                     reevaluateopps.add(r.id);
                 }
-                else if (r.Installment_Period__c != oldRD.Installment_Period__c /*|| r.Contact__c != oldRD.Contact__c*/){
+                else if (r.Installment_Period__c != oldRD.Installment_Period__c || r.Contact__c != oldRD.Contact__c){
                     reinsertopps.add(r);
                 }                                        
             }
