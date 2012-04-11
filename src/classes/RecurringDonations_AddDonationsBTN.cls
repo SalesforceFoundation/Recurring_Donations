@@ -74,10 +74,12 @@ public with sharing class RecurringDonations_AddDonationsBTN {
         qString += ' from Recurring_Donation__c ';
         qString += ' where id = \'' + RecurringDonation.id + '\'';
         RecurringDonation = (Recurring_Donation__c)database.query(qString);
-        RecurringDonations.evaluateRecurringDonationsForNewOppInsert(new list<Recurring_Donation__c>{RecurringDonation});
+    
+        if (RecurringDonation.Open_Ended_Status__c == system.label.RecurringDonationOpenStatus)
+            RecurringDonations.evaluateRecurringDonationsForNewOppInsert(new list<Recurring_Donation__c>{RecurringDonation});
         
         PageReference pageRef = new PageReference(returnurl);
-        pageRef.setRedirect(true);
+        pageRef.setRedirect(true);        
         return pageRef;
     }
     
