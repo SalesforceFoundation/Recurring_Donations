@@ -811,11 +811,10 @@ public class RecurringDonations_TEST {
         r1.Date_Established__c = date.newinstance(1970,6,12);
         r1.Schedule_Type__c = System.Label.RecurringDonationMultiplyValue;
         r1.Open_Ended_Status__c = System.label.RecurringDonationOpenStatus;
-        r1.Next_Payment_Date__c = system.today();
         insert r1;
         
         map<id, Opportunity> originalOpps = new map<id, Opportunity>([select id, Name,amount,accountid,CloseDate from Opportunity where Recurring_Donation__c = :r1.id]);
-        system.assertEquals(16, originalOpps.size());          
+        system.assertEquals(15, originalOpps.size());          
         
         Opportunity o = originalOpps.values()[0];
         string closedstage = [select masterlabel from opportunitystage where isActive = true and iswon = true and isClosed = true limit 1].masterlabel;
@@ -830,7 +829,7 @@ public class RecurringDonations_TEST {
         
         Recurring_Donation__c rd = [select Last_Payment_Date__c from Recurring_Donation__c where id = :r1.id];     
         
-        system.assertEquals(15, [select count() from Opportunity where Recurring_Donation__c = :r1.id and isClosed = false]);
+        system.assertEquals(14, [select count() from Opportunity where Recurring_Donation__c = :r1.id and isClosed = false]);
         system.assertEquals(system.today(), rd.Last_Payment_Date__c);
     }
     
