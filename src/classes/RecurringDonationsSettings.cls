@@ -291,7 +291,8 @@ public with sharing class RecurringDonationsSettings {
     public pageReference addCIRow(){    	
     	Custom_Installment_Settings__c c = new Custom_Installment_Settings__c();
     	cis.add(c);
-    	return null;
+    	cisSize++;
+    	return null; 
     }
     
     //saves a new CI setting
@@ -311,6 +312,9 @@ public with sharing class RecurringDonationsSettings {
     	if(!invalidupsert){
     	   upsert cis;
     	   canEditCISettings = false;
+    	   cisMap = Custom_Installment_Settings__c.getAll();
+           cis = cisMap.values();
+           cisSize = cisMap.keySet().size();
     	}    	       
     	return null;
     }
