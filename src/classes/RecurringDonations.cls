@@ -67,7 +67,7 @@ global with sharing class RecurringDonations {
                                                                                      Installment_Period__c, Installments__c,
                                                                                      Last_Payment_Date__c, Open_Ended_Status__c,
                                                                                      Schedule_Type__c, Total_Paid_Installments__c,
-                                                                                     Donor_Name__c
+                                                                                     Donor_Name__c, OwnerId
                                                                                   from Recurring_Donation__c 
                                                                                   where Open_Ended_Status__c = :openLabel
                                                                                   and id IN :RDids]);
@@ -163,7 +163,7 @@ global with sharing class RecurringDonations {
                                                                                      Installment_Period__c, Installments__c,
                                                                                      Last_Payment_Date__c, Open_Ended_Status__c,
                                                                                      Schedule_Type__c, Total_Paid_Installments__c,
-                                                                                     Donor_Name__c
+                                                                                     Donor_Name__c, OwnerId
                                                                                   from Recurring_Donation__c 
                                                                                   where Open_Ended_Status__c = :openLabel
                                                                                   and id IN :RDids]);
@@ -238,7 +238,7 @@ global with sharing class RecurringDonations {
     	                                       Recurring_Donation_Campaign__c, Paid_Amount__c, Organization__c,
     	                                       Open_Ended_Status__c, Next_Payment_Date__c, Last_Payment_Date__c,
     	                                       Installments__c, Installment_Period__c, Installment_Amount__c,
-    	                                       Donor_Name__c, Date_Established__c, Contact__c, Amount__c, Name    	                                       
+    	                                       Donor_Name__c, Date_Established__c, Contact__c, Amount__c, Name, OwnerId  	                                       
     	                                       from Recurring_Donation__c];
     	
         insertOppsOnRecurringDonationInsert(reclist);
@@ -355,6 +355,7 @@ global with sharing class RecurringDonations {
                 
                     opp.StageName = System.Label.RecurringDonationStageName;
                     opp.Recurring_Donation__c = r.Id;
+                    opp.OwnerId = r.OwnerId;
                     if (r.Recurring_Donation_Campaign__c != null && (rds.Add_Campaign_to_All_Opportunites__c || j < 1)){
                        opp.CampaignId = r.Recurring_Donation_Campaign__c;
                     }                                        
@@ -443,6 +444,7 @@ global with sharing class RecurringDonations {
                         }                
                         o.StageName = System.Label.RecurringDonationStageName;
                         o.Recurring_Donation__c = r.Id;
+                        o.OwnerId = r.OwnerId;
                         if (r.Recurring_Donation_Campaign__c != null && (rds.Add_Campaign_to_All_Opportunites__c || rdcounter == 1)){
                             o.CampaignId = r.Recurring_Donation_Campaign__c;
                         }   
@@ -569,7 +571,7 @@ global with sharing class RecurringDonations {
                                                                                      Installment_Period__c, Installments__c,
                                                                                      Last_Payment_Date__c, Open_Ended_Status__c,
                                                                                      Schedule_Type__c, Total_Paid_Installments__c,
-                                                                                     Donor_Name__c
+                                                                                     Donor_Name__c, OwnerId
                                                                                   from Recurring_Donation__c 
                                                                                   where Open_Ended_Status__c = :openLabel 
                                                                                   and id IN :recIDs]);        
@@ -817,7 +819,9 @@ global with sharing class RecurringDonations {
                         o.Name = oName;
                         o.Amount = rd.Amount__c;
                         o.StageName = System.Label.RecurringDonationStageName;                    
-                        o.Recurring_Donation__c = rd.Id;                    
+                        o.Recurring_Donation__c = rd.Id;        
+                        o.OwnerId = rd.OwnerId; 
+                                    
                         //evaluate any custom field mappings
                         for (string s : customFieldMappingSettings.keySet()){
                             Custom_Field_Mapping__c cfm = customFieldMappingSettings.get(s);
