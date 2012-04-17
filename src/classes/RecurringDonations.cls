@@ -829,6 +829,10 @@ global with sharing class RecurringDonations {
                             Custom_Field_Mapping__c cfm = customFieldMappingSettings.get(s);
                             o.put(cfm.Opportunity_Field__c, rd.get(cfm.Recurring_Donation_Field__c));
                         }
+                        
+                        if (rds.Record_Type__c != null && recordTypeIsValid()){
+                            o.RecordTypeID = rds.Record_Type__c;
+                        }    
                     
                         if (rd.Recurring_Donation_Campaign__c != null && (rds.Add_Campaign_to_All_Opportunites__c || oppCounter == 1)){
                             o.CampaignId = rd.Recurring_Donation_Campaign__c;
