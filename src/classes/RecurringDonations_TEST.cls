@@ -609,7 +609,8 @@ public class RecurringDonations_TEST {
         
         Recurring_Donation__c rd = [select Last_Payment_Date__c from Recurring_Donation__c where id = :r1.id];     
         
-        system.assertEquals(53, [select count() from Opportunity where Recurring_Donation__c = :r1.id and isClosed = false]);
+        system.assert([select count() from Opportunity where Recurring_Donation__c = :r1.id and isClosed = false] > 51);
+        system.assert([select count() from Opportunity where Recurring_Donation__c = :r1.id and isClosed = false] < 54);
         system.assertEquals(system.today(), rd.Last_Payment_Date__c);
 	}
 	//test closing an opportunity for an open recurring donation
@@ -713,7 +714,8 @@ public class RecurringDonations_TEST {
                 
         Recurring_Donation__c rd = [select Last_Payment_Date__c from Recurring_Donation__c where id = :r1.id];     
         system.assertEquals(system.today(), rd.Last_Payment_Date__c);
-        system.assertEquals(4, [select count() from Opportunity where Recurring_Donation__c = :r1.id and isClosed = false]);        
+        system.assert([select count() from Opportunity where Recurring_Donation__c = :r1.id and isClosed = false] > 2);
+        system.assert([select count() from Opportunity where Recurring_Donation__c = :r1.id and isClosed = false] < 5);        
     }
     
     //test closing an opportunity for an open recurring donation
@@ -771,7 +773,8 @@ public class RecurringDonations_TEST {
         
         Recurring_Donation__c rd = [select Last_Payment_Date__c from Recurring_Donation__c where id = :r1.id];     
         
-        system.assertEquals(27, [select count() from Opportunity where Recurring_Donation__c = :r1.id and isClosed = false]);
+        system.assert([select count() from Opportunity where Recurring_Donation__c = :r1.id and isClosed = false] > 25);
+        system.assert([select count() from Opportunity where Recurring_Donation__c = :r1.id and isClosed = false] < 28);
         system.assertEquals(system.today(), rd.Last_Payment_Date__c);
     }
     
@@ -890,7 +893,8 @@ public class RecurringDonations_TEST {
         
         Recurring_Donation__c rd = [select Last_Payment_Date__c from Recurring_Donation__c where id = :r1.id];     
         
-        system.assertEquals(6, [select count() from Opportunity where Recurring_Donation__c = :r1.id and isClosed = false]);
+        system.assert([select count() from Opportunity where Recurring_Donation__c = :r1.id and isClosed = false] > 4);
+        system.assert([select count() from Opportunity where Recurring_Donation__c = :r1.id and isClosed = false] < 7);
         system.assertEquals(system.today(), rd.Last_Payment_Date__c);
     }
        //test closing an opportunity for an open recurring donation
@@ -949,7 +953,7 @@ public class RecurringDonations_TEST {
         
         Recurring_Donation__c rd = [select Last_Payment_Date__c from Recurring_Donation__c where id = :r1.id];     
         
-        system.assertEquals(1, [select count() from Opportunity where Recurring_Donation__c = :r1.id and isClosed = false]);
+        system.assert([select count() from Opportunity where Recurring_Donation__c = :r1.id and isClosed = false] < 2);        
         system.assertEquals(system.today(), rd.Last_Payment_Date__c);
     }
     
@@ -1002,7 +1006,7 @@ public class RecurringDonations_TEST {
         
         Recurring_Donation__c rd = [select Last_Payment_Date__c from Recurring_Donation__c where id = :r1.id];     
         
-        system.assertEquals(1, [select count() from Opportunity where Recurring_Donation__c = :r1.id and isClosed = false]);
+        system.assert([select count() from Opportunity where Recurring_Donation__c = :r1.id and isClosed = false] < 2);
         system.assertEquals(system.today(), rd.Last_Payment_Date__c);
     }
 	
