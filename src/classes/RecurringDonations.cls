@@ -629,6 +629,7 @@ global with sharing class RecurringDonations {
                 oName += ' ' + iNumber + ' ';
                 oName += o.CloseDate.format();
                 o.Name = oName;
+                o.OwnerId = rdMap.get(RDid).OwnerId; 
                 
                 //now append appropriate amount to this date
                 PaymentDate = getNextDate(PaymentDate, RDMap.get(RDid).Installment_Period__c);
@@ -673,7 +674,8 @@ global with sharing class RecurringDonations {
                 if (r.Amount__c != oldRD.Amount__c ||
                     r.Recurring_Donation_Campaign__c != oldRD.Recurring_Donation_Campaign__c ||
                     r.Organization__c != oldRD.Organization__c ||
-                    r.Next_Payment_Date__c != oldRD.Next_Payment_Date__c                    
+                    r.Next_Payment_Date__c != oldRD.Next_Payment_Date__c ||
+                    r.OwnerId != oldRD.OwnerId                    
                     ){
                     reevaluateopps.add(r.id);
                 }
