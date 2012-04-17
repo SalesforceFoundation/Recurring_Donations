@@ -41,6 +41,7 @@ global with sharing class RecurringDonations {
     public static Recurring_Donations_Settings__c recurringDonationsSettings;    
     public static map<id, Recurring_Donation__c> recurringDonationMap;
     public static map<string, Custom_Field_Mapping__c> customFieldMappingSettings = new map<string, Custom_Field_Mapping__c>();
+    public static boolean RecordTypeValid;
     
     /*** Constructors ***/ 
            
@@ -357,7 +358,7 @@ global with sharing class RecurringDonations {
                     if (r.Recurring_Donation_Campaign__c != null && (rds.Add_Campaign_to_All_Opportunites__c || j < 1)){
                        opp.CampaignId = r.Recurring_Donation_Campaign__c;
                     }                                        
-                    if (rds.Record_Type__c != null){
+                    if (rds.Record_Type__c != null && recordTypeIsValid()){
                     	opp.RecordTypeID = rds.Record_Type__c;
                     }                    
                     
@@ -437,7 +438,7 @@ global with sharing class RecurringDonations {
                         oName += o.CloseDate.format();
                         o.Name = oName;
                         
-                        if (rds.Record_Type__c != null){
+                        if (rds.Record_Type__c != null && recordTypeIsValid()){
                             o.RecordTypeID = rds.Record_Type__c;
                         }                
                         o.StageName = System.Label.RecurringDonationStageName;
@@ -989,5 +990,19 @@ global with sharing class RecurringDonations {
             }                
         }
     	return CalcDate;
+    }
+    
+    private static boolean recordTypeIsValid(){
+    	if (RecordTypeValid == null){
+    		list<RecordType> rts = new list<RecordType>();
+    		rts = [select id from RecordType where id = :recurringDonationsSettings.Record_Type__c];
+    		if(!rts.isEmpty()){
+    			RecordTypeValid = true;
+    		}
+    		else{
+    			RecordTypeValid = false;
+    		}    		
+    	}
+    	return RecordTypeValid;
     }
 }

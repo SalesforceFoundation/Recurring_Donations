@@ -63,7 +63,16 @@ public with sharing class RecurringDonationsSettings {
     public integer forecastMonths;
     public RecordType RTName{
     	get{
-    		RecordType rectypeforname = [select Name from RecordType where ID = :rds.Record_Type__c];
+    		RecordType rectypeforname;
+    		list<RecordType> rtNames = new list<RecordType>();
+    		rtNames = [select Name from RecordType where ID = :rds.Record_Type__c];
+    		if (rtNames.size() == 1)
+                rectypeforname = rtNames[0];
+            
+            //there was an invalid rectype, so set a new one
+            else{            	
+                rectypeforname = new RecordType(Name = 'Invalid Recordtype - Default Will Be Used', sobjecttype='Opportunity');                       	
+            }                		   
     		return rectypeforname;
     	}
     }
