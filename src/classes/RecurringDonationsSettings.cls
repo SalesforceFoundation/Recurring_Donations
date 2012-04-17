@@ -407,7 +407,7 @@ public with sharing class RecurringDonationsSettings {
     	string openLabel = system.label.RecurringDonationOpenStatus;
         string queryRCD = 'select id,Open_Ended_Status__c, Next_Payment_Date__c, Organization__c, ' + 
             'Contact__c,Installment_Amount__c,Installments__c,Amount__c,Total__c,Installment_Period__c, ' +
-            'Date_Established__c,Donor_Name__c,Schedule_Type__c,Recurring_Donation_Campaign__c,Total_Paid_Installments__c ';
+            'Date_Established__c,Donor_Name__c,Schedule_Type__c,Recurring_Donation_Campaign__c,Total_Paid_Installments__c, OwnerId ';
             //add any custom mapping to make sure we have the required fields
         map<string, Custom_Field_Mapping__c> cfmMap = new map<string, Custom_Field_Mapping__c>();
         cfmMap = Custom_Field_Mapping__c.getAll();
