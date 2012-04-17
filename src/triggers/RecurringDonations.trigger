@@ -51,7 +51,8 @@ after insert, after update, after delete, after undelete) {
             	                                           'organization__c', 'contact__c', 'installment_amount__c',
             	                                           'installments__c', 'amount__c', 'total__c', 'installment_period__c',
             	                                           'date_established__c', 'donor_name__c', 'schedule_type__c', 
-            	                                           'recurring_donation_campaign__c', 'total_paid_installments__c'};
+            	                                           'recurring_donation_campaign__c', 'total_paid_installments__c',
+            	                                           'ownerid'};
             
             String queryRCD = 'select id';
             for (string s : existingFields){
