@@ -19,6 +19,10 @@ Installation
 * The dev branch contains the development source for the next major Recurring Donations release
 
 
+Release Notes
+---
+Available [here](https://github.com/SalesforceFoundation/Recurring_Donations/wiki/Release-Notes)
+
 
 Meta
 ----
