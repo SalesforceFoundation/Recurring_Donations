@@ -9,7 +9,7 @@ This is the Recurring Donations package.
 * Allows scheduling of multiple recurring Donations/Opportunities
 
 
-For more information go to [http://nonprofitstarterpack.org](http://nonprofitstarterpack.org)
+For more information go to [http://nonprofitstarterpack.org](http://nonprofitstarterpack.org) 
 
 Installation
 ---
