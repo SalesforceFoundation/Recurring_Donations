@@ -419,6 +419,9 @@ public with sharing class RecurringDonationsSettings {
             queryRCD = queryRCD + ',CurrencyIsoCode';
         queryRCD=queryRCD+' from Recurring_Donation__c where Open_Ended_Status__c = \'' + openLabel + '\'';
         
+        if(Test.isRunningTest())
+            queryRCD=queryRCD+' LIMIT 50';
+        
         //call the batch job, processing 50 at a time 
         Id batchInstanceId = Database.executeBatch(new RecurringDonations_BATCH(queryRCD), 50); 
         
