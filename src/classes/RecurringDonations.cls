@@ -405,7 +405,8 @@ global with sharing class RecurringDonations {
                     if (r.Total_Paid_Installments__c > 0)
                         rdcounter = (integer)r.Total_Paid_Installments__c + 1;
                             
-                    do{
+                    while (OppCloseDate < system.today().addMonths((integer)rds.Opportunity_Forecast_Months__c))
+                    {
                         Opportunity o = new Opportunity();
                         o.CloseDate = OppCloseDate;
                                                                                                           
@@ -456,7 +457,7 @@ global with sharing class RecurringDonations {
                         }
                         opportunityInserts.add(o);    
                         rdcounter++;                                                                                       
-                    }while (OppCloseDate < incrementdate.addMonths((integer)rds.Opportunity_Forecast_Months__c));                                        
+                    }                                        
                 }
             }                 
         }
