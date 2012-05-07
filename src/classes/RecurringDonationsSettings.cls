@@ -171,7 +171,7 @@ public with sharing class RecurringDonationsSettings {
     public string getMaxVersion(){return rds.Max_Package_Version__c;}
     public string getUpdateURL(){return rds.Package_Update_URL__c;}
     public string getLastUpdate(){      
-        DateTime d = rds.Last_Update_Check__c;
+        DateTime d = rds.Last_Update_Check__c; 
         string datestring = '';
         if (d != null)
             datestring = d.format('MMMMM dd, yyyy hh:mm:ss a');
