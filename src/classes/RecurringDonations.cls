@@ -736,7 +736,7 @@ global with sharing class RecurringDonations {
     }
 
     public static void evaluateRecurringDonationsForNewOppInsert(list<Recurring_Donation__c> recurringDonationsToEvaluate){
-    	
+        
     	Recurring_Donations_Settings__c rds = getRecurringDonationsSettings();
     
     	list<Opportunity> oppInsertList = new list<Opportunity>();
@@ -791,56 +791,55 @@ global with sharing class RecurringDonations {
         	
         	//only proceed if there are some opps, otherwise we need to start over from scratch	
         	if (oppCountMap.containsKey(rd.id)){
-        	    integer oppCounter = oppCountMap.get(rd.id) + 1;                    
-                           
-                if (system.today().addMonths(forecast_months) > lastOppMap.get(rd.id)){
-                    date oppclosedate = lastOppMap.get(rd.id);
-                    do{
-                        Opportunity o = new Opportunity();
+        	    integer oppCounter = oppCountMap.get(rd.id) + 1;      
+                date oppclosedate = getNextDate(lastOppMap.get(rd.id), rd.Installment_Period__c);
+                
+                while(oppclosedate < system.today().addMonths(forecast_months))
+                {
+                    Opportunity o = new Opportunity();
 
-                        //multicurrency?
-                        if(RDCurrencyField != null){o.put(OppCurrencyField,rd.get(RDCurrencyField));}
-                    
-                        //account or contact?
-                        if (rd.Organization__c != null){
-                    	   o.AccountId = rd.Organization__c;
+                    //multicurrency?
+                    if(RDCurrencyField != null){o.put(OppCurrencyField,rd.get(RDCurrencyField));}
+               
+                    //account or contact?
+                    if (rd.Organization__c != null){
+                        o.AccountId = rd.Organization__c;
+                    }
+                    else if (contactMap.containsKey(rd.Contact__c)){
+                        Contact c = contactMap.get(rd.Contact__c);
+                        o.AccountId = c.AccountId;
+                        if (ConIDForRole != null){
+                            o.put('npe01__Contact_Id_For_Role__c', (string)c.id);
                         }
-                        else if (contactMap.containsKey(rd.Contact__c)){
-                            Contact c = contactMap.get(rd.Contact__c);
-                            o.AccountId = c.AccountId;
-                            if (ConIDForRole != null){
-                                o.put('npe01__Contact_Id_For_Role__c', (string)c.id);
-                            }
-                        }                    
+                    }                    
                     
-                        oppclosedate = getNextDate(oppclosedate, rd.Installment_Period__c);
-                        o.CloseDate = oppclosedate;                                                                            	           
-                	    string oName = rd.Donor_Name__c + ' ' + System.Label.RecurringDonationPrefix +
-                        ' (' + string.valueOf(oppCounter) + ') ' + o.CloseDate.format();
+                    o.CloseDate = oppclosedate;                                                                            	           
+                	string oName = rd.Donor_Name__c + ' ' + System.Label.RecurringDonationPrefix +
+                    ' (' + string.valueOf(oppCounter) + ') ' + o.CloseDate.format();
                     
-                        o.Name = oName;
-                        o.Amount = rd.Amount__c;
-                        o.StageName = System.Label.RecurringDonationStageName;                    
-                        o.Recurring_Donation__c = rd.Id;        
-                        o.OwnerId = rd.OwnerId; 
+                    o.Name = oName;
+                    o.Amount = rd.Amount__c;
+                    o.StageName = System.Label.RecurringDonationStageName;                    
+                    o.Recurring_Donation__c = rd.Id;        
+                    o.OwnerId = rd.OwnerId; 
                                     
-                        //evaluate any custom field mappings
-                        for (string s : customFieldMappingSettings.keySet()){
-                            Custom_Field_Mapping__c cfm = customFieldMappingSettings.get(s);
-                            o.put(cfm.Opportunity_Field__c, rd.get(cfm.Recurring_Donation_Field__c));
-                        }
+                    //evaluate any custom field mappings
+                    for (string s : customFieldMappingSettings.keySet()){
+                        Custom_Field_Mapping__c cfm = customFieldMappingSettings.get(s);
+                        o.put(cfm.Opportunity_Field__c, rd.get(cfm.Recurring_Donation_Field__c));
+                    }
                         
-                        if (rds.Record_Type__c != null && recordTypeIsValid()){
-                            o.RecordTypeID = rds.Record_Type__c;
-                        }    
-                    
-                        if (rd.Recurring_Donation_Campaign__c != null && (rds.Add_Campaign_to_All_Opportunites__c || oppCounter == 1)){
-                            o.CampaignId = rd.Recurring_Donation_Campaign__c;
-                        }
-                    
-                        oppCounter++;
-                        oppInsertList.add(o);                	
-                    }while(oppclosedate < system.today().addMonths(forecast_months));
+                    if (rds.Record_Type__c != null && recordTypeIsValid()){
+                        o.RecordTypeID = rds.Record_Type__c;
+                    }    
+                
+                    if (rd.Recurring_Donation_Campaign__c != null && (rds.Add_Campaign_to_All_Opportunites__c || oppCounter == 1)){
+                        o.CampaignId = rd.Recurring_Donation_Campaign__c;
+                    }
+                
+                    oppCounter++;
+                    oppInsertList.add(o);  
+                    oppclosedate = getNextDate(oppclosedate, rd.Installment_Period__c);
                 }
         	}
         	else{
