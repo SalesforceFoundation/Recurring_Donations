@@ -1,6 +1,6 @@
 /*
     Copyright (c) 2012, Salesforce.com Foundation
-    All rights reserved.
+    All rights reserved. 
     
     Redistribution and use in source and binary forms, with or without
     modification, are permitted provided that the following conditions are met:
@@ -405,8 +405,7 @@ global with sharing class RecurringDonations {
                     if (r.Total_Paid_Installments__c > 0)
                         rdcounter = (integer)r.Total_Paid_Installments__c + 1;
                             
-                    while (OppCloseDate < system.today().addMonths((integer)rds.Opportunity_Forecast_Months__c))
-                    {
+                    do{
                         Opportunity o = new Opportunity();
                         o.CloseDate = OppCloseDate;
                                                                                                           
@@ -457,7 +456,7 @@ global with sharing class RecurringDonations {
                         }
                         opportunityInserts.add(o);    
                         rdcounter++;                                                                                       
-                    }                                        
+                    }while (OppCloseDate < incrementdate.addMonths((integer)rds.Opportunity_Forecast_Months__c));                                        
                 }
             }                 
         }
@@ -737,7 +736,7 @@ global with sharing class RecurringDonations {
     }
 
     public static void evaluateRecurringDonationsForNewOppInsert(list<Recurring_Donation__c> recurringDonationsToEvaluate){
-        
+    	
     	Recurring_Donations_Settings__c rds = getRecurringDonationsSettings();
     
     	list<Opportunity> oppInsertList = new list<Opportunity>();

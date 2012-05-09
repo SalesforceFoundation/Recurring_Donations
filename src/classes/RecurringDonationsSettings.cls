@@ -1,4 +1,4 @@
-/*
+/* 
     Copyright (c) 2012, Salesforce.com Foundation
     All rights reserved.
     
@@ -425,7 +425,7 @@ public with sharing class RecurringDonationsSettings {
         //call the batch job, processing 50 at a time 
         Id batchInstanceId = Database.executeBatch(new RecurringDonations_BATCH(queryRCD), 50); 
         
-    	return null;
+    	return null; 
     }    
     
     public void trimOpportunities(){
