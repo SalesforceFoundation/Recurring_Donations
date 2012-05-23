@@ -294,7 +294,9 @@ global with sharing class RecurringDonations {
             if (r.Open_Ended_Status__c != system.label.RecurringDonationOpenStatus && r.Open_Ended_Status__c != system.label.RecurringDonationClosedStatus){          
         
                 Decimal installs = r.Installments__c;
-                Integer installments = installs.intValue();
+                Integer installments = 0;
+                if (installs != null)
+                    installments = installs.intValue();
                 
                 for ( Integer j=0;j<installments;j++ )
                 {
@@ -638,7 +640,8 @@ global with sharing class RecurringDonations {
                 oName += ' ';
                 oName += System.Label.RecurringDonationPrefix;
                 oName += ' ' + iNumber + ' ';
-                oName += o.CloseDate.format();
+                if (o.CloseDate != null)
+                    oName += o.CloseDate.format();
                 o.Name = oName;
                 o.OwnerId = rdMap.get(RDid).OwnerId; 
                 
