@@ -282,7 +282,7 @@ global with sharing class RecurringDonations {
         }
 
         //Create a Map of Contact Ids and Contact Records
-        map<Id,Contact> contactMap;
+        map<Id,Contact> contactMap = new map<id, Contact>();
         map<Id,Account> accountMap;
         if (contactIds.size() > 0){
             contactMap = new Map<Id,Contact>([Select Id, AccountId from Contact where Id in :contactIds and AccountId != null]);
