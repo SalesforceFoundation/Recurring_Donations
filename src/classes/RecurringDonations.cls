@@ -192,8 +192,19 @@ global with sharing class RecurringDonations {
             //which is evaluated as false, so we'll need to mark 
             //this rdid as having had the nonsummary false isclosed value 
             //already used, so we don't accidentally use the summary row below
-            boolean isClosed = (boolean)obj.get('isClosed');
-            boolean isWon = (boolean)obj.get('isWon');            
+            /*boolean isClosed = (boolean)obj.get('isClosed');
+            boolean isWon = (boolean)obj.get('isWon');*/            
+            
+            boolean isClosed;
+            boolean isWon;
+            if ((boolean)obj.get('isClosed') != null)
+                isClosed = (boolean)obj.get('isClosed');
+            else
+                isClosed = false;
+            if ((boolean)obj.get('isWon') != null)
+                isWon = (boolean)obj.get('isWon');
+            else
+                isWon = false;
             
             if (rdid != null){
             	//if we already have values for this RD, get it from our rdid map, otherwise just grab
