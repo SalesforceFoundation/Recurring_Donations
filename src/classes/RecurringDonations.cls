@@ -291,12 +291,15 @@ global with sharing class RecurringDonations {
         //Loop through the Recurring Donations and create the appropriate number of Opportunities
         for(Recurring_Donation__c r : recurringDonations){
             //if we're not looking at an open-ended type donation, handle it the 'old' way        
+            date OppCloseDate;
             if (r.Open_Ended_Status__c != system.label.RecurringDonationOpenStatus && r.Open_Ended_Status__c != system.label.RecurringDonationClosedStatus){          
         
                 Decimal installs = r.Installments__c;
                 Integer installments = 0;
                 if (installs != null)
                     installments = installs.intValue();
+                
+                OppCloseDate = r.Date_Established__c;
                 
                 for ( Integer j=0;j<installments;j++ )
                 {
@@ -333,7 +336,7 @@ global with sharing class RecurringDonations {
                     } else {
                         opp.Amount = r.Installment_Amount__c;
                     }
-                
+                /*
                     if (r.Installment_Period__c == System.Label.RecurringDonationInstallmentPeriodYearly)
                     {
                         opp.CloseDate = (r.Date_Established__c).addYears(j);
@@ -353,6 +356,9 @@ global with sharing class RecurringDonations {
                     {
                        opp.CloseDate = (r.Date_Established__c);
                     }
+                */
+                    opp.CloseDate = OppCloseDate;                    
+                    OppCloseDate = getNextDate(OppCloseDate, r.Installment_Period__c);                
                 
                     String oName = '';
                     oName += r.Donor_Name__c; 
@@ -396,7 +402,7 @@ global with sharing class RecurringDonations {
                 //if its not 'open', we're not doing anything to it
                 if (r.Open_Ended_Status__c == system.label.RecurringDonationOpenStatus){
                     //get settings so we can figure out how many donations to create                    
-                    date OppCloseDate;
+                    
                     date loop_date;
                   
                     SObjectField RDCurrencyField; 
