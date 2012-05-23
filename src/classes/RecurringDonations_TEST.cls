@@ -1368,7 +1368,55 @@ public class RecurringDonations_TEST {
         update originalOpps.values();
         Test.stopTest();
         system.assert(originalOpps.keySet().size() > [select count() from Opportunity where isClosed = false and (Recurring_Donation__c = :r1.id or Recurring_Donation__c = :r2.id)]);        
-    }    
+    }       
+    
+    static testMethod void addMissingOppsTest(){
+        RecurringDonations_TEST.setRecurringDonationsSettingsForTest(
+        new Recurring_Donations_Settings__c(
+        Opportunity_Forecast_Months__c = 12,
+        Maximum_Donations__c = 50,
+        Open_Opportunity_Behavior__c = RecurringDonations.RecurringDonationCloseOptions.Mark_Opportunities_Closed_Lost.name(),
+        DISABLE_Donations_trigger__c = true     
+        ));           
+        
+        Account a = new Account();
+        a.Name = 'test Individual';
+        insert a;
+        
+        Contact c = new Contact();
+        c.FirstName = 'test';
+        c.LastName = 'contact';
+        c.AccountId = a.Id;
+        insert c;       
+
+        Campaign camp = new Campaign(Name = 'MyTestCamp', isActive = true);
+        insert camp;
+
+        Recurring_Donation__c r1 = new Recurring_Donation__c();
+        r1.Name = 'test';
+        r1.Installments__c = 2;
+        r1.Contact__c = c.Id;
+        r1.Amount__c = 100;
+        r1.Installment_Period__c = System.Label.RecurringDonationInstallmentPeriodMonthly;
+        r1.Recurring_Donation_Campaign__c = camp.id;
+        r1.Date_Established__c = date.newinstance(1970,6,12);
+        r1.Schedule_Type__c = System.Label.RecurringDonationMultiplyValue;
+        r1.Open_Ended_Status__c = System.label.RecurringDonationOpenStatus;
+        r1.Next_Payment_Date__c = system.today().addDays(-3);
+        r1.OwnerId = system.Userinfo.getUserId();
+        insert r1;
+        
+        map<id, Opportunity> originalOpps = new map<id, Opportunity>([select id, Name,amount,accountid,CloseDate from Opportunity where Recurring_Donation__c = :r1.id order by CloseDate asc]);
+        system.assertEquals(12, originalOpps.size());    
+        delete originalOpps.values()[11]; 
+        RecurringDonations_ProcessControl.hasRun = false;
+        Test.startTest();
+        RecurringDonations.evaluateRecurringDonationsForNewOppInsert(new list<Recurring_Donation__c>{r1});        
+        Test.stopTest();
+        
+        //assert we're back to 12 opps after deleting one
+        system.assertEquals(12, [select count() from Opportunity where Recurring_Donation__c = :r1.id]);        
+    } 
 	    
     public static void setRecurringDonationsSettingsForTest(Recurring_Donations_Settings__c rds){
         //clear out the old ones and insert this
