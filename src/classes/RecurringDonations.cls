@@ -42,6 +42,14 @@ global with sharing class RecurringDonations {
     public static map<id, Recurring_Donation__c> recurringDonationMap;
     public static map<string, Custom_Field_Mapping__c> customFieldMappingSettings = new map<string, Custom_Field_Mapping__c>();
     public static boolean RecordTypeValid;
+    public static set<string> existingFields = new set<string>{'open_ended_status__c', 'next_payment_date__c', 'name',
+                                                           'organization__c', 'contact__c', 'installment_amount__c',
+                                                           'installments__c', 'amount__c', 'total__c', 'installment_period__c',
+                                                           'date_established__c', 'donor_name__c', 'schedule_type__c', 
+                                                           'recurring_donation_campaign__c', 'total_paid_installments__c',
+                                                           'ownerid', 'paid_amount__c', 'last_payment_date__c'};
+    
+    
     
     /*** Constructors ***/ 
            
@@ -59,25 +67,12 @@ global with sharing class RecurringDonations {
             }                  
         }           
         
-        //Get the open label for opps
-        string openLabel = system.label.RecurringDonationOpenStatus;
-        recurringDonationMap = new map<id, Recurring_Donation__c>([select id, Paid_Amount__c, Next_Payment_Date__c, 
-                                                                                    Contact__c, Organization__c, Amount__c, 
-                                                                                    Date_Established__c, Recurring_Donation_Campaign__c,
-                                                                                     Installment_Period__c, Installments__c,
-                                                                                     Last_Payment_Date__c, Open_Ended_Status__c,
-                                                                                     Schedule_Type__c, Total_Paid_Installments__c,
-                                                                                     Donor_Name__c, OwnerId
-                                                                                  from Recurring_Donation__c 
-                                                                                  where Open_Ended_Status__c = :openLabel
-                                                                                  and id IN :RDids]);
         //recurring donations that need to be updated      
-        if (!recurringDonationMap.keySet().isEmpty()){
-        	if (recurringDonationMap.keySet().size() == 1 || system.isBatch() || RecurringDonations_ProcessControl.batchButton)
-        	   updateRecurringDonationOnOppChange(rdIds);
-                //evaluateExistingOpportunities(rdIds, false);
+        if (!rdIds.isEmpty()){
+        	if (rdIds.size() == 1 || system.isBatch() || RecurringDonations_ProcessControl.batchButton)
+        	   updateRecurringDonationOnOppChange(rdIds);        
             else
-                updateRecurringDonationOnOppChangeFuture(rdIds);                                        
+               updateRecurringDonationOnOppChangeFuture(rdIds);                                        
         }        
     }
     
@@ -155,18 +150,37 @@ global with sharing class RecurringDonations {
          
         //Get the open label for opps
         string openLabel = system.label.RecurringDonationOpenStatus;
-        
-        //get all possible rd records that may need updating, exclude ones not in an open state  
-        map<id, Recurring_Donation__c> rdMap = new map<id, Recurring_Donation__c>([select id, Paid_Amount__c, Next_Payment_Date__c, 
-                                                                                    Contact__c, Organization__c, Amount__c, 
-                                                                                    Date_Established__c, Recurring_Donation_Campaign__c,
-                                                                                     Installment_Period__c, Installments__c,
-                                                                                     Last_Payment_Date__c, Open_Ended_Status__c,
-                                                                                     Schedule_Type__c, Total_Paid_Installments__c,
-                                                                                     Donor_Name__c, OwnerId
-                                                                                  from Recurring_Donation__c 
-                                                                                  where Open_Ended_Status__c = :openLabel
-                                                                                  and id IN :RDids]);
+   
+        map<id, Recurring_Donation__c> rdMap = new map<id, Recurring_Donation__c>();
+              
+        String queryRCD = 'select id';
+        for (string s : existingFields){
+            queryRCD += ', ' + s;               
+        }
+       
+        //add any custom mapping to make sure we have the required fields
+        map<string, Custom_Field_Mapping__c> cfmMap = new map<string, Custom_Field_Mapping__c>();
+        cfmMap = Custom_Field_Mapping__c.getAll();
+        for (string s : cfmMap.keySet()){
+            string RDFieldName = cfmMap.get(s).Recurring_Donation_Field__c;             
+            if (!existingFields.contains(RDFieldName.toLowerCase()) && s != 'id'){
+                queryRCD = queryRCD + ',' + cfmMap.get(s).Recurring_Donation_Field__c;
+                existingFields.add(RDFieldName.toLowerCase());   
+            }
+        }       
+       
+        //if currencyiso field exists add it to query for use later
+        if(Schema.sObjectType.Recurring_Donation__c.fields.getMap().get('CurrencyIsoCode') != null)
+            queryRCD = queryRCD + ',CurrencyIsoCode';
+       
+        queryRCD=queryRCD+' from Recurring_Donation__c where Id in :RDids and Open_Ended_Status__c = :openLabel';
+       
+        //execute query
+        Recurring_Donation__c[] updatedRecurringDonations = Database.query(queryRCD);
+            
+        for (Recurring_Donation__c rd : updatedRecurringDonations){
+            rdMap.put(rd.id, rd);            
+        }        
         
         //get the cumulative values to update the recurring donations
         list<sobject> sobjs = [select count(id) oppcount, MIN(CloseDate) MinDate, MAX(CloseDate) MaxDate, SUM(Amount) Total,
@@ -245,13 +259,35 @@ global with sharing class RecurringDonations {
     @future
     public static void insertOppsOnRecurringDonationInsertFuture(set<id> recids){
     	delete [select id from Opportunity where isClosed = false and Recurring_Donation__r.id IN :recids];
-    	list<Recurring_Donation__c> reclist = [select id, Total__c, Total_Paid_Installments__c, Schedule_Type__c,
-    	                                       Recurring_Donation_Campaign__c, Paid_Amount__c, Organization__c,
-    	                                       Open_Ended_Status__c, Next_Payment_Date__c, Last_Payment_Date__c,
-    	                                       Installments__c, Installment_Period__c, Installment_Amount__c,
-    	                                       Donor_Name__c, Date_Established__c, Contact__c, Amount__c, Name, OwnerId  	                                       
-    	                                       from Recurring_Donation__c];
     	
+    	 //Get the open label for opps
+        string openLabel = system.label.RecurringDonationOpenStatus;
+              
+        String queryRCD = 'select id';
+        for (string s : existingFields){
+            queryRCD += ', ' + s;               
+        }
+       
+        //add any custom mapping to make sure we have the required fields
+        map<string, Custom_Field_Mapping__c> cfmMap = new map<string, Custom_Field_Mapping__c>();
+        cfmMap = Custom_Field_Mapping__c.getAll();
+        for (string s : cfmMap.keySet()){
+            string RDFieldName = cfmMap.get(s).Recurring_Donation_Field__c;             
+            if (!existingFields.contains(RDFieldName.toLowerCase()) && s != 'id'){
+                queryRCD = queryRCD + ',' + cfmMap.get(s).Recurring_Donation_Field__c;
+                existingFields.add(RDFieldName.toLowerCase());   
+            }
+        }       
+       
+        //if currencyiso field exists add it to query for use later
+        if(Schema.sObjectType.Recurring_Donation__c.fields.getMap().get('CurrencyIsoCode') != null)
+            queryRCD = queryRCD + ',CurrencyIsoCode';
+       
+        queryRCD=queryRCD+' from Recurring_Donation__c where Id in :recids';
+       
+        //execute query
+        Recurring_Donation__c[] reclist = Database.query(queryRCD);
+         
         insertOppsOnRecurringDonationInsert(reclist);
     }
     
@@ -584,16 +620,36 @@ global with sharing class RecurringDonations {
         
         Recurring_Donations_Settings__c rds = getRecurringDonationsSettings();
         string openLabel = system.label.RecurringDonationOpenStatus;
-        map<id, Recurring_Donation__c> rdMap = new map<id, Recurring_Donation__c>([select id, Paid_Amount__c, Next_Payment_Date__c, 
-                                                                                    Contact__c, Organization__c, Amount__c, 
-                                                                                    Date_Established__c, Recurring_Donation_Campaign__c,
-                                                                                     Installment_Period__c, Installments__c,
-                                                                                     Last_Payment_Date__c, Open_Ended_Status__c,
-                                                                                     Schedule_Type__c, Total_Paid_Installments__c,
-                                                                                     Donor_Name__c, OwnerId
-                                                                                  from Recurring_Donation__c 
-                                                                                  where Open_Ended_Status__c = :openLabel 
-                                                                                  and id IN :recIDs]);        
+        map<id, Recurring_Donation__c> rdMap = new map<id, Recurring_Donation__c>();
+              
+        String queryRCD = 'select id';
+        for (string s : existingFields){
+            queryRCD += ', ' + s;               
+        }
+       
+        //add any custom mapping to make sure we have the required fields
+        map<string, Custom_Field_Mapping__c> cfmMap = new map<string, Custom_Field_Mapping__c>();
+        cfmMap = Custom_Field_Mapping__c.getAll();
+        for (string s : cfmMap.keySet()){
+            string RDFieldName = cfmMap.get(s).Recurring_Donation_Field__c;             
+            if (!existingFields.contains(RDFieldName.toLowerCase()) && s != 'id'){
+                queryRCD = queryRCD + ',' + cfmMap.get(s).Recurring_Donation_Field__c;
+                existingFields.add(RDFieldName.toLowerCase());   
+            }
+        }       
+       
+        //if currencyiso field exists add it to query for use later
+        if(Schema.sObjectType.Recurring_Donation__c.fields.getMap().get('CurrencyIsoCode') != null)
+            queryRCD = queryRCD + ',CurrencyIsoCode';
+       
+        queryRCD=queryRCD+' from Recurring_Donation__c where Id in :recIDs and Open_Ended_Status__c = :openLabel';
+       
+        //execute query
+        Recurring_Donation__c[] updatedRecurringDonations = Database.query(queryRCD);
+            
+        for (Recurring_Donation__c rd : updatedRecurringDonations){
+            rdMap.put(rd.id, rd);            
+        }                                                                                 
                            
         list<Opportunity> oppList = [select id, Amount, Name, CampaignId, AccountID, CloseDate, Recurring_Donation__r.id                                         
                                        from Opportunity 
