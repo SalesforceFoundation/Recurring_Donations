@@ -50,6 +50,52 @@ global with sharing class RecurringDonations {
                                                            'ownerid', 'paid_amount__c', 'last_payment_date__c'};
     
     
+        /*** Multicurrency ***/
+    public static boolean multiCurrency;
+    //exchangerate store
+    static map<string, decimal> exchangeRates = new map<string,decimal>();
+    //corporate currency
+    static string currCorporate; 
+    
+       /*** Multicurrency Support Methods ***/
+    
+    //returns a boolean if we are in a multi-currency org or not.
+    //on first execution sets up static variables etc
+    public static boolean isMultiCurrency(){                    
+        if (multiCurrency==null){
+            //are we in a multi-currency org?
+            if (UserInfo.isMultiCurrencyOrganization()){
+                multiCurrency = true;
+                
+	            String queryExchangeRates = 'select IsoCode,ConversionRate,IsCorporate from CurrencyType';
+	            SObjectType soCurrencyType = Schema.getGlobalDescribe().get('CurrencyType');
+	            
+                map<string,SObjectField> ctFields = soCurrencyType.getDescribe().fields.getMap();
+                SObjectField ctIsoCode = ctFields.get('IsoCode');
+                SObjectField ctConversionRate = ctFields.get('ConversionRate');
+                SObjectField ctCorporate = ctFields.get('IsCorporate');
+
+                //iterate over all the currencies in the org (inc. inactive ones as they may have been used previously)
+                //this allows us to put them in a map and use the ISO code as key and also set the corporate
+                for(sObject ct: Database.query(queryExchangeRates)){
+                    exchangeRates.put((string)ct.get(ctIsoCode),(decimal)ct.get(ctConversionRate));
+                    if((boolean)ct.get(ctCorporate))currCorporate=(string)ct.get(ctIsoCode);
+                }
+            }
+            else
+                multiCurrency = false; 
+        }        
+        return multiCurrency;
+    }
+
+    //do a conversion from amount in corporate currency to the currency specified by the ISO code
+    public static decimal convertFromCorporate(String ISO,Decimal amt){
+        if(currCorporate == ISO || currCorporate == null) // no need to convert
+            return amt;
+        else //return value to 2DP
+            return (amt * exchangeRates.get(ISO)).setScale(2) ;
+    }
+    
     
     /*** Constructors ***/ 
            
@@ -143,6 +189,8 @@ global with sharing class RecurringDonations {
         //set of RDs to be updated         
         map<id, Recurring_Donation__c> updateMap = new map<id, Recurring_Donation__c>();
         
+        SObjectField RDCurrencyField;
+        
         //Get our settings
         Recurring_Donations_Settings__c rds = getRecurringDonationsSettings();     
          
@@ -168,8 +216,10 @@ global with sharing class RecurringDonations {
         }       
        
         //if in multicurrency org currencyiso field exists, add it to query for use later
-        if(UserInfo.isMultiCurrencyOrganization())
+        if(isMultiCurrency()){
             queryRCD = queryRCD + ',CurrencyIsoCode';
+        	RDCurrencyField = Schema.sObjectType.Recurring_Donation__c.fields.getMap().get('CurrencyIsoCode');
+        }
        
         queryRCD=queryRCD+' from Recurring_Donation__c where Id in :RDids and Open_Ended_Status__c = :openLabel';
        
@@ -237,7 +287,10 @@ global with sharing class RecurringDonations {
                 //if this is the closed set     
                 else if (isClosed && isWon){
                     rd.Last_Payment_Date__c = (date)obj.get('MaxDate');
-                    rd.Paid_Amount__c = (decimal)obj.get('Total');     
+                    if(isMultiCurrency())
+                    	rd.Paid_Amount__c = convertFromCorporate((string)rd.get(RDCurrencyField), (decimal)obj.get('Total'));    
+                    else
+                    	rd.Paid_Amount__c = (decimal)obj.get('Total');     
                     rd.Total_Paid_Installments__c = (integer)obj.get('oppcount');
                     updateMap.put(rdid, rd);                        
                 }                   
