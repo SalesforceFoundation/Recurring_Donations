@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customSettingsType>Hierarchy</customSettingsType>
+    <customSettingsVisibility>Public</customSettingsVisibility>
+    <description>Settings for the Recurring Donations Package</description>
+    <enableEnhancedLookup>false</enableEnhancedLookup>
+    <enableFeeds>false</enableFeeds>
+    <fields>
+        <fullName>Add_Campaign_to_All_Opportunites__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <inlineHelpText>If selected, all Opportunities for Recurring Donations will use the Campaign on the Recurring Donation. Otherwise, only the first Opportunity will have the Campaign.</inlineHelpText>
+        <label>Add Campaign to All Opportunites</label>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>DISABLE_Donations_trigger__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <description>DISABLES the Donations.trigger (Opportunity, before insert, before update, after insert, after update)</description>
+        <externalId>false</externalId>
+        <inlineHelpText>!!WARNING!!
+DISABLES the Donations.trigger  (Opportunity, before insert, before update, 
+- checking this box will disable a trigger.  This can cause erratic and unpredictable behavior in your NPSP. FOR ADVANCED CONSULTANTS AND DEVELOPERS ONLY.</inlineHelpText>
+        <label>DISABLE_Donations_trigger</label>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>DISABLE_RecurringDonations_trigger__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <description>DISABLES the RecurringDonations.trigger (Recurring_Donations__c, ALL).</description>
+        <externalId>false</externalId>
+        <inlineHelpText>!!WARNING!!
+DISABLES the RecurringDonations.trigger (Recurring_Donations__c, ALL).
+- checking this box will disable a trigger.  This can cause erratic and unpredictable behavior in your NPSP. FOR ADVANCED CONSULTANTS AND DEVELOPERS ONLY.</inlineHelpText>
+        <label>DISABLE_RecurringDonations_trigger</label>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Disable_Nightly_Job__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <inlineHelpText>Prevents the scheduling of the nightly update to Recurring Donations. Any existing scheduled job will need to be removed through Setup-&gt;Monitoring-&gt;Scheduled Jobs</inlineHelpText>
+        <label>Disable Nightly Job</label>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Enable_Update_Check__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <description>Controls if the package automatically checks for new updates and versions.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Controls if the package automatically checks for new updates and versions.</inlineHelpText>
+        <label>Enable Update Check</label>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Error_Email_Notifications__c</fullName>
+        <deprecated>false</deprecated>
+        <description>The system administrator or public group all error notification emails are sent to.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>The system administrator or public group all error notification emails are sent to.</inlineHelpText>
+        <label>Error Email Notifications</label>
+        <length>255</length>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Has_Package_Update__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Has Package Update</label>
+        <length>40</length>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Last_Batch_Run__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <inlineHelpText>The date and time of the last batch update of Recurring Donations.</inlineHelpText>
+        <label>Last Batch Run</label>
+        <required>false</required>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>Last_Update_Check__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Last Update Check</label>
+        <required>false</required>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>Max_Package_Version__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Max Package Version</label>
+        <length>12</length>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Maximum_Donations__c</fullName>
+        <defaultValue>50</defaultValue>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <inlineHelpText>Restricts the total number of donations created for non-open-ended Recurring Donations. Default is 50.  Larger values may result in DML errors.</inlineHelpText>
+        <label>Maximum Donations</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Nightly_Update_ID__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Nightly Update ID</label>
+        <length>18</length>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Number_of_Failures__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <inlineHelpText>Number of Recurring Donations unsuccessfully updated in the last batch operation.</inlineHelpText>
+        <label>Number of Failures</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Number_of_Successes__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <inlineHelpText>Number of Recurring Donations successfully updated in the last batch run.</inlineHelpText>
+        <label>Number of Successes</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Open_Opportunity_Behavior__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Determines the behavior of any remaining open Opportunities when an open-ended Recurring Donation is moved to a closed status.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Determines the behavior of any remaining open Opportunities when an open-ended Recurring Donation is moved to a closed status.</inlineHelpText>
+        <label>Open Opportunity Behavior</label>
+        <length>50</length>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Opportunity_Forecast_Months__c</fullName>
+        <defaultValue>12</defaultValue>
+        <deprecated>false</deprecated>
+        <description>Number of months worth of open Opportunities to be created when using an open-ended Recurring Donation.  Determined by the Last Payment Date field.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Number of months from today worth of open Opportunities to be created when using open-ended Recurring Donations. WARNING: Reducing this value will result in extra Opportunities being deleted.  Increasing it will launch a batch process to add Opportunities</inlineHelpText>
+        <label>Opportunity Forecast Months</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Package_Update_URL__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Package Update URL</label>
+        <required>false</required>
+        <type>Url</type>
+    </fields>
+    <fields>
+        <fullName>Record_Type__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <inlineHelpText>Record type used when Recurring Donation Opportunities are created.</inlineHelpText>
+        <label>Record Type</label>
+        <length>18</length>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Update_Check_Interval__c</fullName>
+        <deprecated>false</deprecated>
+        <description>The number of days between NPSP callouts to check for new versions of this package. The default value is 90 days.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>The number of days between NPSP callouts to check for new versions of this package. The default value is 90 days.</inlineHelpText>
+        <label>Update Check Interval</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <label>Recurring Donations Settings</label>
+</CustomObject>
