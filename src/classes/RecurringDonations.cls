@@ -213,7 +213,7 @@ global with sharing class RecurringDonations {
                 queryRCD = queryRCD + ',' + cfmMap.get(s).Recurring_Donation_Field__c;
                 existingFields.add(RDFieldName.toLowerCase());   
             }
-        }       
+        }        
        
         //if in multicurrency org currencyiso field exists, add it to query for use later
         if(isMultiCurrency()){
