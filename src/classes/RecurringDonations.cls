@@ -178,7 +178,7 @@ global with sharing class RecurringDonations {
     }
     
     /*** BEGIN STATIC METHODS ***/    
-    
+    //This future method allows us to call updateRecurringDonationOnOppChange asynch
     @future
     public static void updateRecurringDonationOnOppChangeFuture(set<id> RDids){updateRecurringDonationOnOppChange(RDids);} 
     public static void updateRecurringDonationOnOppChange(set<id> RDids){
