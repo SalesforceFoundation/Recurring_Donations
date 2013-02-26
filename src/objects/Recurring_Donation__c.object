@@ -36,6 +36,7 @@
     <deprecated>false</deprecated>
     <description>Recurring Donations with no end date.</description>
     <enableActivities>false</enableActivities>
+    <enableEnhancedLookup>false</enableEnhancedLookup>
     <enableFeeds>false</enableFeeds>
     <enableHistory>true</enableHistory>
     <enableReports>true</enableReports>

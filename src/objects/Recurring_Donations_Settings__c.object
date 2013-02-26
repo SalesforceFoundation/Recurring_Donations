@@ -3,6 +3,7 @@
     <customSettingsType>Hierarchy</customSettingsType>
     <customSettingsVisibility>Public</customSettingsVisibility>
     <description>Settings for the Recurring Donations Package</description>
+    <enableEnhancedLookup>false</enableEnhancedLookup>
     <enableFeeds>false</enableFeeds>
     <fields>
         <fullName>Add_Campaign_to_All_Opportunites__c</fullName>
