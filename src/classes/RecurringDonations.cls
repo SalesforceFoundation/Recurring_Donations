@@ -41,7 +41,16 @@ global with sharing class RecurringDonations {
     public static Recurring_Donations_Settings__c recurringDonationsSettings;    
     public static map<id, Recurring_Donation__c> recurringDonationMap;
     public static map<string, Custom_Field_Mapping__c> customFieldMappingSettings = new map<string, Custom_Field_Mapping__c>();
-    public static SObjectField OppCurrencyField;    
+    public static SObjectField OppCurrencyField{get{    	
+    	if (!checkedCurrency){
+        	checkedCurrency = true;
+        	OppCurrencyField = Schema.sObjectType.Opportunity.fields.getMap().get('CurrencyIsoCode');
+            return OppCurrencyField;
+    	}
+    	else
+    	   return null;
+    }set;}       
+    public static boolean checkedCurrency;     
     
     /*** Constructors ***/ 
            
@@ -283,11 +292,8 @@ global with sharing class RecurringDonations {
         list<Opportunity> opportunityInserts = new list<Opportunity>();
         
         Recurring_Donations_Settings__c rds = getRecurringDonationsSettings();
-        customFieldMappingSettings = Custom_Field_Mapping__c.getAll();
+        customFieldMappingSettings = Custom_Field_Mapping__c.getAll();        
         
-        // James Melville 05/03/2011 Added to support multi-currency sfdc.  */
-        // CurrencyIsoCode doesn't exist in non-multi-currency orgs
-//        SObjectField OppCurrencyField = Schema.sObjectType.Opportunity.fields.getMap().get('CurrencyIsoCode');
         //grab the contact id for role to take advantage of NPSP C&O if it exists
         Sobjectfield ConIDForRole = Schema.sObjectType.Opportunity.fields.getMap().get('npe01__Contact_Id_for_Role__c');
         set<id> updateRecurringDonationSet = new set<id>();            
