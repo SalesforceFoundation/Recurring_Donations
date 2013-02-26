@@ -41,12 +41,17 @@ global with sharing class RecurringDonations {
     public static Recurring_Donations_Settings__c recurringDonationsSettings;    
     public static map<id, Recurring_Donation__c> recurringDonationMap;
     public static map<string, Custom_Field_Mapping__c> customFieldMappingSettings = new map<string, Custom_Field_Mapping__c>();
+    public static SObjectField OppCurrencyField;    
     
     /*** Constructors ***/ 
            
     //handles Opportunity closures
     public RecurringDonations(map<id, Opportunity> newOppMap, map<id, Opportunity> oldOppMap, triggerAction ta){
     	RecurringDonations_ProcessControl.hasRun = true;
+        
+        //set the multicurrency field if it exists - otherwise its null
+        OppCurrencyField = Schema.sObjectType.Opportunity.fields.getMap().get('CurrencyIsoCode');
+        
         set<id> rdIDs = new set<id>();        
         if (ta == triggerAction.afterUpdate){       
             for (Opportunity o : newOppMap.values()){
@@ -60,6 +65,7 @@ global with sharing class RecurringDonations {
         
         //Get the open label for opps
         string openLabel = system.label.RecurringDonationOpenStatus;
+        /*
         recurringDonationMap = new map<id, Recurring_Donation__c>([select id, Paid_Amount__c, Next_Payment_Date__c, 
                                                                                     Contact__c, Organization__c, Amount__c, 
                                                                                     Date_Established__c, Recurring_Donation_Campaign__c,
@@ -70,9 +76,14 @@ global with sharing class RecurringDonations {
                                                                                   from Recurring_Donation__c 
                                                                                   where Open_Ended_Status__c = :openLabel
                                                                                   and id IN :RDids]);
+                       */                                                           
+                                                                                  
+        Integer rdcount = 0;
+        rdcount = [select count() from Recurring_Donation__c where Open_Ended_Status__c = :openLabel and id IN :RDids];
+                                                                                          
         //recurring donations that need to be updated      
-        if (!recurringDonationMap.keySet().isEmpty()){
-        	if (recurringDonationMap.keySet().size() == 1 || system.isBatch() || RecurringDonations_ProcessControl.batchButton)
+        if (rdcount > 0){
+        	if (rdcount == 1 || system.isBatch() || RecurringDonations_ProcessControl.batchButton)
         	   updateRecurringDonationOnOppChange(rdIds);
                 //evaluateExistingOpportunities(rdIds, false);
             else
@@ -142,7 +153,7 @@ global with sharing class RecurringDonations {
     public static void updateRecurringDonationOnOppChange(set<id> RDids){
      
         //Multicurrency Support
-        SObjectField OppCurrencyField = Schema.sObjectType.Opportunity.fields.getMap().get('CurrencyIsoCode');
+  //      SObjectField OppCurrencyField = Schema.sObjectType.Opportunity.fields.getMap().get('CurrencyIsoCode');
         //Use NPSP OCR Support?
         Sobjectfield ConIDForRole = Schema.sObjectType.Opportunity.fields.getMap().get('npe01__Contact_Id_for_Role__c');
         
@@ -255,7 +266,7 @@ global with sharing class RecurringDonations {
         
         // James Melville 05/03/2011 Added to support multi-currency sfdc.  */
         // CurrencyIsoCode doesn't exist in non-multi-currency orgs
-        SObjectField OppCurrencyField = Schema.sObjectType.Opportunity.fields.getMap().get('CurrencyIsoCode');
+//        SObjectField OppCurrencyField = Schema.sObjectType.Opportunity.fields.getMap().get('CurrencyIsoCode');
         //grab the contact id for role to take advantage of NPSP C&O if it exists
         Sobjectfield ConIDForRole = Schema.sObjectType.Opportunity.fields.getMap().get('npe01__Contact_Id_for_Role__c');
         set<id> updateRecurringDonationSet = new set<id>();            
@@ -742,7 +753,7 @@ global with sharing class RecurringDonations {
         integer forecast_months = (integer)rds.Opportunity_Forecast_Months__c;
         SObjectField RDCurrencyField; 
         // multicurrency support
-        SObjectField OppCurrencyField = Schema.sObjectType.Opportunity.fields.getMap().get('CurrencyIsoCode');
+ //       SObjectField OppCurrencyField = Schema.sObjectType.Opportunity.fields.getMap().get('CurrencyIsoCode');
         //grab the contact id for role to take advantage of NPSP C&O if it exists
         Sobjectfield ConIDForRole = Schema.sObjectType.Opportunity.fields.getMap().get('npe01__Contact_Id_for_Role__c');
         if(OppCurrencyField != null){
