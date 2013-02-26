@@ -151,9 +151,7 @@ global with sharing class RecurringDonations {
     @future
     public static void updateRecurringDonationOnOppChangeFuture(set<id> RDids){updateRecurringDonationOnOppChange(RDids);} 
     public static void updateRecurringDonationOnOppChange(set<id> RDids){
-     
-        //Multicurrency Support
-  //      SObjectField OppCurrencyField = Schema.sObjectType.Opportunity.fields.getMap().get('CurrencyIsoCode');
+  
         //Use NPSP OCR Support?
         Sobjectfield ConIDForRole = Schema.sObjectType.Opportunity.fields.getMap().get('npe01__Contact_Id_for_Role__c');
         
@@ -246,13 +244,36 @@ global with sharing class RecurringDonations {
     @future
     public static void insertOppsOnRecurringDonationInsertFuture(set<id> recids){
     	delete [select id from Opportunity where isClosed = false and Recurring_Donation__r.id IN :recids];
-    	list<Recurring_Donation__c> reclist = [select id, Total__c, Total_Paid_Installments__c, Schedule_Type__c,
-    	                                       Recurring_Donation_Campaign__c, Paid_Amount__c, Organization__c,
-    	                                       Open_Ended_Status__c, Next_Payment_Date__c, Last_Payment_Date__c,
-    	                                       Installments__c, Installment_Period__c, Installment_Amount__c,
-    	                                       Donor_Name__c, Date_Established__c, Contact__c, Amount__c, Name    	                                       
-    	                                       from Recurring_Donation__c];
-    	
+    	 set<string> existingFields = new set<string>{'open_ended_status__c', 'next_payment_date__c', 'name', 'paid_amount__c',
+                                                           'organization__c', 'contact__c', 'installment_amount__c', 'last_payment_date__c',
+                                                           'installments__c', 'amount__c', 'total__c', 'installment_period__c',
+                                                           'date_established__c', 'donor_name__c', 'schedule_type__c', 
+                                                           'recurring_donation_campaign__c', 'total_paid_installments__c'};
+            
+        String queryRCD = 'select id';
+        for (string s : existingFields){
+            queryRCD += ', ' + s;               
+        }
+       
+        //add any custom mapping to make sure we have the required fields
+        map<string, Custom_Field_Mapping__c> cfmMap = new map<string, Custom_Field_Mapping__c>();
+        cfmMap = Custom_Field_Mapping__c.getAll();
+        for (string s : cfmMap.keySet()){
+            string RDFieldName = cfmMap.get(s).Recurring_Donation_Field__c;             
+            if (!existingFields.contains(RDFieldName.toLowerCase()) && s != 'id'){
+                queryRCD = queryRCD + ',' + cfmMap.get(s).Recurring_Donation_Field__c;
+                existingFields.add(RDFieldName.toLowerCase());   
+            }
+        }       
+        
+        //if currencyiso field exists add it to query for use later
+        if(OppCurrencyField != null)            
+            queryRCD += ',CurrencyIsoCode';        
+       
+        queryRCD += ' from Recurring_Donation__c where Id in :recids';
+        //execute query
+            	
+    	list<Recurring_Donation__c> reclist = database.query(queryRCD);
         insertOppsOnRecurringDonationInsert(reclist);
     }
     
