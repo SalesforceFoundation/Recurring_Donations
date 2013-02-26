@@ -193,6 +193,8 @@ global with sharing class RecurringDonations {
             //already used, so we don't accidentally use the summary row below
             boolean isClosed = (boolean)obj.get('isClosed');
             boolean isWon = (boolean)obj.get('isWon');            
+            if (isClosed == null) isClosed = false;
+            if (isWon == null) isWon = false;
             
             if (rdid != null){
             	//if we already have values for this RD, get it from our rdid map, otherwise just grab
