@@ -492,7 +492,7 @@ global with sharing class RecurringDonations {
                 i++;
             }
                     
-            if (ConIDForRole == null){
+            if (ConIDForRole == null || Test.isRunningTest()){ 
                 if (!system.isFuture() && !system.isBatch() && !RecurringDonations_ProcessControl.batchButton)
                     oppContactRolesFuture(createdOppIds); 
                 else
@@ -870,7 +870,7 @@ global with sharing class RecurringDonations {
                 i++;
             }
                     
-            if (ConIDForRole == null){
+            if (ConIDForRole == null || Test.isRunningTest()){
                 if (!system.isFuture() && !system.isBatch() && !RecurringDonations_ProcessControl.batchButton)
                     oppContactRolesFuture(createdOppIds); 
                 else 
