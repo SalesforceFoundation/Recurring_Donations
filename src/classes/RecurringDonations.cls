@@ -74,19 +74,6 @@ global with sharing class RecurringDonations {
         
         //Get the open label for opps
         string openLabel = system.label.RecurringDonationOpenStatus;
-        /*
-        recurringDonationMap = new map<id, Recurring_Donation__c>([select id, Paid_Amount__c, Next_Payment_Date__c, 
-                                                                                    Contact__c, Organization__c, Amount__c, 
-                                                                                    Date_Established__c, Recurring_Donation_Campaign__c,
-                                                                                     Installment_Period__c, Installments__c,
-                                                                                     Last_Payment_Date__c, Open_Ended_Status__c,
-                                                                                     Schedule_Type__c, Total_Paid_Installments__c,
-                                                                                     Donor_Name__c
-                                                                                  from Recurring_Donation__c 
-                                                                                  where Open_Ended_Status__c = :openLabel
-                                                                                  and id IN :RDids]);
-                       */                                                           
-                                                                                  
         Integer rdcount = 0;
         rdcount = [select count() from Recurring_Donation__c where Open_Ended_Status__c = :openLabel and id IN :RDids];
                                                                                           
@@ -779,8 +766,7 @@ global with sharing class RecurringDonations {
         //get the total number of forecast months
         integer forecast_months = (integer)rds.Opportunity_Forecast_Months__c;
         SObjectField RDCurrencyField; 
-        // multicurrency support
- //       SObjectField OppCurrencyField = Schema.sObjectType.Opportunity.fields.getMap().get('CurrencyIsoCode');
+ 
         //grab the contact id for role to take advantage of NPSP C&O if it exists
         Sobjectfield ConIDForRole = Schema.sObjectType.Opportunity.fields.getMap().get('npe01__Contact_Id_for_Role__c');
         if(OppCurrencyField != null){
