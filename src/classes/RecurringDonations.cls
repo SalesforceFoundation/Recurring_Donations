@@ -252,7 +252,7 @@ global with sharing class RecurringDonations {
         cfmMap = Custom_Field_Mapping__c.getAll();
         for (string s : cfmMap.keySet()){
             string RDFieldName = cfmMap.get(s).Recurring_Donation_Field__c;             
-            if (!existingFields.contains(RDFieldName.toLowerCase()) && s != 'id'){
+            if (!existingFields.contains(RDFieldName.toLowerCase()) && !existingFields.contains('npe03__' + RDFieldName.toLowerCase()) && s != 'id'){
                 queryRCD = queryRCD + ',' + cfmMap.get(s).Recurring_Donation_Field__c;
                 existingFields.add(RDFieldName.toLowerCase());   
             }
