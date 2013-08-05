@@ -331,6 +331,7 @@ CASE(
         <fullName>New_Recurring_Acct_Donation</fullName>
         <availability>online</availability>
         <displayType>massActionButton</displayType>
+        <encodingKey>UTF-8</encodingKey>
         <linkType>url</linkType>
         <masterLabel>New Recurring Acct Donation</masterLabel>
         <openType>replace</openType>
@@ -343,6 +344,7 @@ CASE(
         <availability>online</availability>
         <description>Replaces the standard button with one that prefills the Organization Name</description>
         <displayType>massActionButton</displayType>
+        <encodingKey>UTF-8</encodingKey>
         <linkType>url</linkType>
         <masterLabel>New Recurring Contact Donation</masterLabel>
         <openType>replace</openType>
