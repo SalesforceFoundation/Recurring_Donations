@@ -73,7 +73,7 @@ global without sharing class RecurringDonations_BATCH implements Database.Batcha
     }
     
     
-    @isTest (SeeAllData = true)
+    @isTest 
     public static void testBatch() {
     	
     	RecurringDonations_TEST.setRecurringDonationsSettingsForTest(
@@ -111,12 +111,9 @@ global without sharing class RecurringDonations_BATCH implements Database.Batcha
         string closedstage = [select masterlabel from opportunitystage where isActive = true and iswon = true and isClosed = true limit 1].masterlabel;
         o.StageName = closedstage;
         o.CloseDate = system.today();
-        update o;
-        
+        update o;        
         
         //kick it off from the vf page
-        
-        
         Test.setCurrentPageReference(new PageReference('Page.RecurringDonationsSettings'));
         
         //pass the controller into the extension
