@@ -1,4 +1,4 @@
-/*
+/* 
     Copyright (c) 2012, Salesforce.com Foundation
     All rights reserved.
     
@@ -63,7 +63,16 @@ public with sharing class RecurringDonationsSettings {
     public integer forecastMonths;
     public RecordType RTName{
     	get{
-    		RecordType rectypeforname = [select Name from RecordType where ID = :rds.Record_Type__c];
+    		RecordType rectypeforname;
+    		list<RecordType> rtNames = new list<RecordType>();
+    		rtNames = [select Name from RecordType where ID = :rds.Record_Type__c];
+    		if (rtNames.size() == 1)
+                rectypeforname = rtNames[0];
+            
+            //there was an invalid rectype, so set a new one
+            else{            	
+                rectypeforname = new RecordType(Name = 'Invalid Recordtype - Default Will Be Used', sobjecttype='Opportunity');                       	
+            }                		   
     		return rectypeforname;
     	}
     }
@@ -171,7 +180,7 @@ public with sharing class RecurringDonationsSettings {
     public string getMaxVersion(){return rds.Max_Package_Version__c;}
     public string getUpdateURL(){return rds.Package_Update_URL__c;}
     public string getLastUpdate(){      
-        DateTime d = rds.Last_Update_Check__c; 
+        DateTime d = rds.Last_Update_Check__c;
         string datestring = '';
         if (d != null)
             datestring = d.format('MMMMM dd, yyyy hh:mm:ss a');
@@ -206,8 +215,10 @@ public with sharing class RecurringDonationsSettings {
         
         Pagereference pr;
         pr = scheduleRecurringDonationsUpdate();
+        boolean skipIntegrityCheck = false;
         if (pr == null){
             if (rds.Last_Update_Check__c == null){
+                skipIntegrityCheck = true;
                 checkforupdates();
             }
         
@@ -216,8 +227,9 @@ public with sharing class RecurringDonationsSettings {
                 npvc.RecurringDonationsCheckVersion(false);
             }
         }
-         //test inserts
-        testPackageIntegrity();
+        
+        if (!skipIntegrityCheck)
+            testPackageIntegrity();
         return null;
     }        
 
@@ -288,7 +300,8 @@ public with sharing class RecurringDonationsSettings {
     public pageReference addCIRow(){    	
     	Custom_Installment_Settings__c c = new Custom_Installment_Settings__c();
     	cis.add(c);
-    	return null;
+    	cisSize++;
+    	return null; 
     }
     
     //saves a new CI setting
@@ -308,6 +321,9 @@ public with sharing class RecurringDonationsSettings {
     	if(!invalidupsert){
     	   upsert cis;
     	   canEditCISettings = false;
+    	   cisMap = Custom_Installment_Settings__c.getAll();
+           cis = cisMap.values();
+           cisSize = cisMap.keySet().size();
     	}    	       
     	return null;
     }
@@ -391,7 +407,7 @@ public with sharing class RecurringDonationsSettings {
     	string openLabel = system.label.RecurringDonationOpenStatus;
         string queryRCD = 'select id,Open_Ended_Status__c, Next_Payment_Date__c, Organization__c, ' + 
             'Contact__c,Installment_Amount__c,Installments__c,Amount__c,Total__c,Installment_Period__c, ' +
-            'Date_Established__c,Donor_Name__c,Schedule_Type__c,Recurring_Donation_Campaign__c,Total_Paid_Installments__c ';
+            'Date_Established__c,Donor_Name__c,Schedule_Type__c,Recurring_Donation_Campaign__c,Total_Paid_Installments__c, OwnerId ';
             //add any custom mapping to make sure we have the required fields
         map<string, Custom_Field_Mapping__c> cfmMap = new map<string, Custom_Field_Mapping__c>();
         cfmMap = Custom_Field_Mapping__c.getAll();
@@ -403,10 +419,13 @@ public with sharing class RecurringDonationsSettings {
             queryRCD = queryRCD + ',CurrencyIsoCode';
         queryRCD=queryRCD+' from Recurring_Donation__c where Open_Ended_Status__c = \'' + openLabel + '\'';
         
+        if(Test.isRunningTest())
+            queryRCD=queryRCD+' LIMIT 50';
+        
         //call the batch job, processing 50 at a time 
         Id batchInstanceId = Database.executeBatch(new RecurringDonations_BATCH(queryRCD), 50); 
         
-    	return null;
+    	return null; 
     }    
     
     public void trimOpportunities(){
