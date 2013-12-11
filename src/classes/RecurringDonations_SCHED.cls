@@ -32,6 +32,7 @@
 * @date 2012 (2.0)
 * @description Supports the automatic scheduling of recurring donation updates  
 */
+@deprecated
 global class RecurringDonations_SCHED implements Schedulable {
 
     global void execute(SchedulableContext SC) { 

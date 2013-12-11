@@ -32,6 +32,7 @@
 * @date 2012 (2.0) 
 * @description Handles XML exchange for webservice callout to compare package versions 
 */
+@deprecated
 global without sharing class RecurringDonationsPkgVersionCheck {
     
 }
