@@ -1,3 +1,1 @@
-<apex:page >
-    <p>please use RD_AddDonationsBTN.page from the Cumulus package.</p>
-</apex:page>
+<apex:page standardController="Recurring_Donation__c" action="{! urlFor('/apex/npsp__RD_AddDonationsBTN', Recurring_Donation__c.Id, null, true) }" />
