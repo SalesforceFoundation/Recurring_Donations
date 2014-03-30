@@ -70,7 +70,7 @@
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>RecurringDonationErrorEmailBody</shortDescription>
-        <value>Errors were encountered when trying to insert new Opportunities for your open-ended Recurring Donations. This can adversely affect your forecasting and functionality of your Salesforce.com instance. Addressing these errors as soon as possible can prevent bad data from entering your system.  The Recurring Donation and associated Opportunity insert error are listed below, and can be found in the Recurring Donations Settings tab under &apos;Batch Settings&apos;.</value>
+        <value>Errors were encountered when trying to insert new Opportunities for your open-ended Recurring Donations. This can adversely affect your forecasting and functionality of your Salesforce.com instance. Addressing these errors as soon as possible can prevent bad data from entering your system.  The Recurring Donation and associated Opportunity insert error are listed below, and can be found in the NPSP Settings tab under System, Error Log.</value>
     </labels>
     <labels>
         <fullName>RecurringDonationInstallmentPeriod1stand15th</fullName>
@@ -79,14 +79,6 @@
         <protected>false</protected>
         <shortDescription>RecurringDonationInstallmentPeriod1stand15th</shortDescription>
         <value>1st and 15th</value>
-    </labels>
-    <labels>
-        <fullName>RecurringDonationInstallmentPeriodCustom</fullName>
-        <categories>RecurringDonations</categories>
-        <language>en_US</language>
-        <protected>false</protected>
-        <shortDescription>RecurringDonationInstallmentPeriodCustom</shortDescription>
-        <value>Custom</value>
     </labels>
     <labels>
         <fullName>RecurringDonationInstallmentPeriodMonthly</fullName>
