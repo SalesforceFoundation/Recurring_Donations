@@ -1,4 +1,4 @@
-<project name="CumulusTesting" default="deploy" basedir="." xmlns:sf="antlib:com.salesforce">
+<project name="Contacts_and_Organizations" default="deploy" basedir="." xmlns:sf="antlib:com.salesforce">
 
     <taskdef uri="antlib:com.salesforce" resource="com/salesforce/antlib.xml" classpath="lib/ant-salesforce.jar"/>
 
@@ -24,11 +24,13 @@
 
     <!-- TARGETS -->
 
+    <!-- deploy: Deploys the unmanaged code running all tests -->
     <target name="deploy">
       <sf:deploy username="${sf.username}" password="${sf.password}" serverurl="${sf.serverurl}" deployRoot="src" runAllTests="false" maxPoll="100" />
     </target>
 
 
+    <!-- uninstall: Removes all metadata from the package via a custom build destructiveChanges.xml package-->
     <target name="uninstall">
       <delete dir="uninstallsrc" />
       <delete dir="uninstall" />
@@ -37,6 +39,55 @@
       <sf:deploy username="${sf.username}" password="${sf.password}" serverurl="${sf.serverurl}" deployRoot="uninstall" runAllTests="false" purgeOnDelete="true" maxPoll="200" />
       <delete dir="uninstallsrc" />
       <delete dir="uninstall" />
+    </target>
+
+    <!-- destroyStaleMetadata: Delete any metadata which exists in the package in the org but not in the src directory.  This is useful in packaging orgs -->
+    <target name="destroyStaleMetadata">
+      <delete dir="uninstallsrc" />
+      <delete dir="uninstall" />
+
+      <!-- Fetch all metadata in the  package from target org -->
+      <retrievePackaged dir="uninstallsrc" package="${cumulusci.package.name}" />
+
+      <!-- Build a destructiveChanges.xml pacckage to delete metadata in org but not in repo -->
+      <buildDestroyStaleMetadata srcdir="uninstallsrc" commdir="src" dir="uninstall" />
+
+      <!-- deploy the destructiveChanges.xml package -->
+      <sf:deploy username="${sf.username}" password="${sf.password}" serverurl="${sf.serverurl}" deployRoot="uninstall" runAllTests="false" purgeOnDelete="true" maxPoll="200" />
+
+      <delete dir="uninstallsrc" />
+      <delete dir="uninstall" />
+    </target>
+
+    <!-- deployCI: Does a full build including uninstalling previously deployed unpackaged code, updating managed package versions, and then deploying with all tests -->
+    <!-- !!!WARNING!!!: DO NOT run this against a real production org as it will delete everything.  It is designed to clear the target org to ensure a clean build test. -->
+    <target name="deployCI">
+          <!-- First, uninstall all unpackaged code from the target org.  We have to do this first so we can uninstall and reinstall any managed packages not at the right version -->
+      <antcall target="uninstall" />
+
+      <!-- Deploy any unpackaged metadata needed for builds -->
+      <antcall target="deployUnpackaged" />
+
+      <!-- Finally, do a deploy with all tests -->
+      <antcall target="deploy" />
+          </target>
+
+    <!-- deployCIPackageOrg: Does a full build against the package org.  This differs from deployCI in that it uses destroyStaleMetadata instead of uninstall.
+         There are a few assumptions.  We never downgrade a dependent managed package in the packaging org.  This removes the need to completely remove
+         all metadata to allow a package downgrade.  In the package org, we can't delete all metadata once a production managed release is cut so this approach is required -->
+    <target name="deployCIPackageOrg">
+          <!-- Deploy any unpackaged metadata needed for builds -->
+      <antcall target="deployUnpackaged" />
+
+      <!-- Update the package.xml to managed package mode, adding install and uninstall script classes -->
+      <antcall target="updatePackageXmlManaged" />
+
+      <!-- Do a deploy with all tests -->
+      <antcall target="deploy" />
+
+      <!-- Finally, delete any metadata from the org which is not in the repo -->
+      <antcall target="destroyStaleMetadata" />
+
     </target>
 
     <!-- Developer focused build targets -->
@@ -56,8 +107,14 @@
       <sf:deploy username="${sf.username}" password="${sf.password}" serverurl="${sf.serverurl}" deployRoot="lib/empty" runAllTests="true" maxPoll="200" />
     </target>
 
+    <!-- updatePackageXml: Rebuilds the src/package.xml file to list all metadata in the src directory for known metadata types -->
     <target name="updatePackageXml">
       <buildPackageXml package="${cumulusci.package.name}" version="29.0" />
+    </target>
+
+    <!-- updatePackageXmlManaged: called before deployCIPackagingOrg to add attributes to the package.xml only available when deploying into a managed package -->
+    <target name="updatePackageXmlManaged">
+      <buildPackageXml package="${cumulusci.package.name}" version="${cumulusci.package.apiVersion}" installClass="${cumulusci.package.installClass}" uninstallClass="${cumulusci.package.uninstallClass}" />
     </target>
 
 </project>
