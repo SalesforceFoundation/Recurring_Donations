@@ -5,6 +5,7 @@
     <include file="${basedir}/lib/ant-salesforce.xml" />
 
     <loadproperties srcFile="${basedir}/cumulusci.properties"/>
+    <urlencode name="cumulusci.package.name.encoded" value="${cumulusci.package.name}" />
 
     <taskdef 
          resource="net/sf/antcontrib/antlib.xml"
@@ -34,7 +35,7 @@
     <target name="uninstall">
       <delete dir="uninstallsrc" />
       <delete dir="uninstall" />
-      <retrievePackaged dir="uninstallsrc" package="${cumulusci.package.name}" />
+      <retrievePackaged dir="uninstallsrc" package="${cumulusci.package.name.encoded}" />
       <buildPackagedDestructiveChanges srcdir="uninstallsrc" dir="uninstall" package="${cumulusci.package.name}" />
       <sf:deploy username="${sf.username}" password="${sf.password}" serverurl="${sf.serverurl}" deployRoot="uninstall" runAllTests="false" purgeOnDelete="true" maxPoll="200" />
       <delete dir="uninstallsrc" />
@@ -47,7 +48,7 @@
       <delete dir="uninstall" />
 
       <!-- Fetch all metadata in the  package from target org -->
-      <retrievePackaged dir="uninstallsrc" package="${cumulusci.package.name}" />
+      <retrievePackaged dir="uninstallsrc" package="${cumulusci.package.name.encoded}" />
 
       <!-- Build a destructiveChanges.xml pacckage to delete metadata in org but not in repo -->
       <buildDestroyStaleMetadata srcdir="uninstallsrc" commdir="src" dir="uninstall" />
@@ -102,6 +103,12 @@
       <retrievePackaged dir="packaged" package="${cumulusci.package.name}" />
     </target>
 
+    <!-- retrievePackagedToSrc: Retrieves all metadata from the package in the target org into the src directory -->
+    <target name="retrievePackagedToSrc">
+      <retrievePackaged dir="src" package="${cumulusci.package.name}" mkdir="false" />
+    </target>
+   
+
     <!-- runAllTests: Uses an empty package manifest to trigger execution of all tests in the target org without deploying any actual code changes -->
     <target name="runAllTests">
       <sf:deploy username="${sf.username}" password="${sf.password}" serverurl="${sf.serverurl}" deployRoot="lib/empty" runAllTests="true" maxPoll="200" />
@@ -109,12 +116,12 @@
 
     <!-- updatePackageXml: Rebuilds the src/package.xml file to list all metadata in the src directory for known metadata types -->
     <target name="updatePackageXml">
-      <buildPackageXml package="${cumulusci.package.name}" version="29.0" />
+      <buildPackageXml package="${cumulusci.package.name.encoded}" version="${cumulusci.package.apiVersion}" />
     </target>
 
     <!-- updatePackageXmlManaged: called before deployCIPackagingOrg to add attributes to the package.xml only available when deploying into a managed package -->
     <target name="updatePackageXmlManaged">
-      <buildPackageXml package="${cumulusci.package.name}" version="${cumulusci.package.apiVersion}" installClass="${cumulusci.package.installClass}" uninstallClass="${cumulusci.package.uninstallClass}" />
+      <buildPackageXml package="${cumulusci.package.name.encoded}" version="${cumulusci.package.apiVersion}" installClass="${cumulusci.package.installClass}" uninstallClass="${cumulusci.package.uninstallClass}" />
     </target>
 
 </project>
