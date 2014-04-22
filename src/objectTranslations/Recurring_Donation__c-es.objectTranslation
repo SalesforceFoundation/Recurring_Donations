@@ -55,7 +55,7 @@
         </picklistValues>
     </fields>
     <fields>
-        <help><!-- Number of installments. --></help>
+        <help><!-- Number of installments.  Only used with Non-Open Ended Recurring Donations. --></help>
         <label>Cantidad de cuotas</label>
         <name>Installments__c</name>
     </fields>
@@ -101,6 +101,7 @@
         <relationshipLabel><!-- Recurring Donations --></relationshipLabel>
     </fields>
     <fields>
+        <help><!-- Whether the Amount is used for each installment (Multiple By), or Amount is split between installments (Divide By).  Only used with Non-Open Ended Recurring Donations. --></help>
         <label>Criterio</label>
         <name>Schedule_Type__c</name>
         <picklistValues>

@@ -168,7 +168,7 @@ OR(
         <defaultValue>1</defaultValue>
         <deprecated>false</deprecated>
         <externalId>false</externalId>
-        <inlineHelpText>Number of installments.</inlineHelpText>
+        <inlineHelpText>Number of installments.  Only used with Non-Open Ended Recurring Donations.</inlineHelpText>
         <label>Installments</label>
         <precision>18</precision>
         <required>false</required>
@@ -270,6 +270,7 @@ OR(
         <fullName>Schedule_Type__c</fullName>
         <deprecated>false</deprecated>
         <externalId>false</externalId>
+        <inlineHelpText>Whether the Amount is used for each installment (Multiple By), or Amount is split between installments (Divide By).  Only used with Non-Open Ended Recurring Donations.</inlineHelpText>
         <label>Schedule Type</label>
         <picklist>
             <picklistValues>
