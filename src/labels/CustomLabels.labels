@@ -6,7 +6,7 @@
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>RecurringDonationBadFieldMapping</shortDescription>
-        <value>Invalid fields for mapping. Please edit your field choices and try again.</value>
+        <value>Fields must be of compatible datatypes. Please edit your field choices and try again.</value>
     </labels>
     <labels>
         <fullName>RecurringDonationBadLabelWarning</fullName>
@@ -190,6 +190,6 @@
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>RecurringDonationTooInstallmentsManyError</shortDescription>
-        <value>You must specify fewer than 50 installments</value>
+        <value>You must specify fewer than 50 installments.  (This error message is no longer used).</value>
     </labels>
 </CustomLabels>

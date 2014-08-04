@@ -134,7 +134,7 @@ OR(
         <fullName>Installment_Period__c</fullName>
         <deprecated>false</deprecated>
         <externalId>false</externalId>
-        <inlineHelpText>Sets the installment period for your recurring donations.  WARNING: Changing the Installment Period for an existing open-ended Recurring Donation can cause open Opportunities to be deleted and recreated. Any associated data may not be retained.</inlineHelpText>
+        <inlineHelpText>Sets the installment period for your recurring donations.  WARNING: Changing the Installment Period for an existing Recurring Donation can cause open Opportunities to be deleted and recreated. Any associated data may not be retained.</inlineHelpText>
         <label>Installment Period</label>
         <picklist>
             <picklistValues>
@@ -168,7 +168,7 @@ OR(
         <defaultValue>1</defaultValue>
         <deprecated>false</deprecated>
         <externalId>false</externalId>
-        <inlineHelpText>Number of installments.  Only used with Non-Open Ended Recurring Donations.</inlineHelpText>
+        <inlineHelpText>Number of installments.</inlineHelpText>
         <label>Installments</label>
         <precision>18</precision>
         <required>false</required>
@@ -290,9 +290,9 @@ OR(
     <fields>
         <fullName>Total_Paid_Installments__c</fullName>
         <deprecated>false</deprecated>
-        <description>Total number of installments paid on this open-ended recurring donation.</description>
+        <description>Total number of installments paid on this Recurring Donation.</description>
         <externalId>false</externalId>
-        <inlineHelpText>Total number of installments paid on this open-ended recurring donation.</inlineHelpText>
+        <inlineHelpText>Total number of installments paid on this Recurring Donation.</inlineHelpText>
         <label>Total Paid Installments</label>
         <precision>18</precision>
         <required>false</required>
@@ -314,6 +314,7 @@ CASE(
 ,0
 ))</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>For Non-Open Ended Recurring Donations, the total amount of all Opportunities.</inlineHelpText>
         <label>Total</label>
         <precision>18</precision>
         <required>false</required>

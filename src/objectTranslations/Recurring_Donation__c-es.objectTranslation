@@ -30,7 +30,7 @@
         <name>Installment_Amount__c</name>
     </fields>
     <fields>
-        <help><!-- Sets the installment period for your recurring donations.  WARNING: Changing the Installment Period for an existing open-ended Recurring Donation can cause open Opportunities to be deleted and recreated. Any associated data may not be retained. --></help>
+        <help><!-- Sets the installment period for your recurring donations.  WARNING: Changing the Installment Period for an existing Recurring Donation can cause open Opportunities to be deleted and recreated. Any associated data may not be retained. --></help>
         <label>Periodicidad</label>
         <name>Installment_Period__c</name>
         <picklistValues>
@@ -55,7 +55,7 @@
         </picklistValues>
     </fields>
     <fields>
-        <help><!-- Number of installments.  Only used with Non-Open Ended Recurring Donations. --></help>
+        <help><!-- Number of installments. --></help>
         <label>Cantidad de cuotas</label>
         <name>Installments__c</name>
     </fields>
@@ -114,11 +114,12 @@
         </picklistValues>
     </fields>
     <fields>
-        <help><!-- Total number of installments paid on this open-ended recurring donation. --></help>
+        <help><!-- Total number of installments paid on this Recurring Donation. --></help>
         <label><!-- Total Paid Installments --></label>
         <name>Total_Paid_Installments__c</name>
     </fields>
     <fields>
+        <help><!-- For Non-Open Ended Recurring Donations, the total amount of all Opportunities. --></help>
         <label>Total</label>
         <name>Total__c</name>
     </fields>
