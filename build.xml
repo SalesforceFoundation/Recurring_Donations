@@ -1,4 +1,4 @@
-<project name="Contacts_and_Organizations" default="deploy" basedir="." xmlns:sf="antlib:com.salesforce">
+<project name="Recurring_Donations" default="deploy" basedir="." xmlns:sf="antlib:com.salesforce">
 
     <taskdef uri="antlib:com.salesforce" resource="com/salesforce/antlib.xml" classpath="lib/ant-salesforce.jar"/>
 
@@ -78,7 +78,7 @@
          all metadata to allow a package downgrade.  In the package org, we can't delete all metadata once a production managed release is cut so this approach is required -->
     <target name="deployCIPackageOrg">
           <!-- Deploy any unpackaged metadata needed for builds -->
-      <antcall target="deployUnpackaged" />
+      <!--<antcall target="deployUnpackaged" />-->
 
       <!-- Update the package.xml to managed package mode, adding install and uninstall script classes -->
       <antcall target="updatePackageXmlManaged" />

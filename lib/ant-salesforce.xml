@@ -254,6 +254,9 @@
             <case value="objects">
               <property name="typename" value="CustomObject" />
             </case>
+            <case value="objectTranslations">
+              <property name="typename" value="CustomObjectTranslation" />
+            </case>
             <case value="pages">
               <property name="typename" value="ApexPage" />
             </case>
@@ -262,6 +265,9 @@
             </case>
             <case value="tabs">
               <property name="typename" value="CustomTab" />
+            </case>
+            <case value="translations">
+              <property name="typename" value="Translations" />
             </case>
             <case value="triggers">
               <property name="typename" value="ApexTrigger" />
