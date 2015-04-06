@@ -2,10 +2,6 @@
 <Package xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Recurring+Donations</fullName>
     <types>
-        <members>RecurringDonations_TEST</members>
-        <name>ApexClass</name>
-    </types>
-    <types>
         <members>RecurringDonationsSettings</members>
         <members>RecurringDonations_AddDonationsBTN</members>
         <name>ApexPage</name>
