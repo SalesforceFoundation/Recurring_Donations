@@ -119,10 +119,10 @@
             <quickActionName>FeedItem.TextPost</quickActionName>
         </quickActionListItems>
         <quickActionListItems>
-            <quickActionName>npe03__Recurring_Donation__c.Quick_Update</quickActionName>
+            <quickActionName>Recurring_Donation__c.Quick_Update</quickActionName>
         </quickActionListItems>
         <quickActionListItems>
-            <quickActionName>npe03__Recurring_Donation__c.New_Opportunity</quickActionName>
+            <quickActionName>Recurring_Donation__c.New_Opportunity</quickActionName>
         </quickActionListItems>
         <quickActionListItems>
             <quickActionName>FeedItem.ContentPost</quickActionName>
