@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Package xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Recurring Donations</fullName>
-    <apiAccessLevel>Unrestricted</apiAccessLevel>
-    <namespacePrefix>npe03</namespacePrefix>
     <types>
         <members>RecurringDonations</members>
         <members>RecurringDonationsPkgVersionCheck</members>
@@ -93,12 +91,12 @@
         <name>CustomLabel</name>
     </types>
     <types>
-        <members>CustomLabels</members>
-        <name>CustomLabels</name>
+        <name>CustomLabel</name>
     </types>
     <types>
         <members>Custom_Field_Mapping__c</members>
         <members>Custom_Installment_Settings__c</members>
+        <members>Opportunity</members>
         <members>Recurring_Donation__c</members>
         <members>Recurring_Donations_Error_Queue__c</members>
         <members>Recurring_Donations_Settings__c</members>
@@ -151,5 +149,5 @@
         <members>Recurring_Donation__c.Refresh_Opportunities</members>
         <name>WebLink</name>
     </types>
-    <version>33.0</version>
+    <version>29.0</version>
 </Package>
