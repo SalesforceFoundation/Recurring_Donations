@@ -132,6 +132,14 @@
         </sections>
     </layouts>
     <nameFieldLabel>Nombre Donación recurrente</nameFieldLabel>
+    <quickActions>
+        <label><!-- New Opportunity --></label>
+        <name>New_Opportunity</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- Quick Update --></label>
+        <name>Quick_Update</name>
+    </quickActions>
     <webLinks>
         <label>Nueva donación recurrente</label>
         <name>New_Recurring_Acct_Donation</name>

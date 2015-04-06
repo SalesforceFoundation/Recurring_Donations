@@ -130,6 +130,14 @@
             <section>Custom Links</section>
         </sections>
     </layouts>
+    <quickActions>
+        <label><!-- New Opportunity --></label>
+        <name>New_Opportunity</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- Quick Update --></label>
+        <name>Quick_Update</name>
+    </quickActions>
     <startsWith>Consonant</startsWith>
     <webLinks>
         <label><!-- New_Recurring_Acct_Donation --></label>

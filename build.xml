@@ -1,127 +1,36 @@
-<project name="Recurring_Donations" default="deploy" basedir="." xmlns:sf="antlib:com.salesforce">
+<project default="deploy" basedir="." xmlns:sf="antlib:com.salesforce">
+    <!-- Load the package requirements from version.properties -->
+    <loadproperties srcFile="${basedir}/version.properties"/>
 
-    <taskdef uri="antlib:com.salesforce" resource="com/salesforce/antlib.xml" classpath="lib/ant-salesforce.jar"/>
+    <!-- Load environment variables -->
+    <property environment="env" />
 
-    <include file="${basedir}/lib/ant-salesforce.xml" />
+    <!-- Check if the CUMULUSCI_PATH environment variable is set -->
+    <fail>
+        <condition>
+            <not><isset property="env.CUMULUSCI_PATH" /></not>
+        </condition>
+        CUMULUSCI_PATH is Required!
 
-    <loadproperties srcFile="${basedir}/cumulusci.properties"/>
-    <urlencode name="cumulusci.package.name.encoded" value="${cumulusci.package.name}" />
+        This project uses the CumulusCI build scripts which must be checked out and 
+        referenced in an environment variable before you can run the build scripts.
 
-    <taskdef 
-         resource="net/sf/antcontrib/antlib.xml"
-         classpath="${basedir}/lib/ant-contrib-1.0b2.jar" />
+        To configure the build scripts, do the following:
 
-    <!-- If no propertyfile was passed in command line, attempt to load a build.properties if it exists -->
-    <if>
-      <and>
-        <not><isset property="sf:username" /></not>
-        <available file="${basedir}/build.properties" />
-      </and>
-      <then>
-        <loadproperties srcFile="${basedir}/build.properties"/>
-      </then>
-    </if>
+        1. Clone the CumulusCI GitHub repository to a local folder: 
+            https://github.com/SalesforceFoundation/CumulusCI
 
+        2. Set the CUMULUSCI_PATH environment variable to the path to CumulusCI
 
-    <!-- TARGETS -->
+        If you are on a unix based system, the following commands should work:
 
-    <!-- deploy: Deploys the unmanaged code running all tests -->
-    <target name="deploy">
-      <sf:deploy username="${sf.username}" password="${sf.password}" serverurl="${sf.serverurl}" deployRoot="src" runAllTests="false" maxPoll="100" />
-    </target>
+            git clone https://github.com/SalesforceFoundation/CumulusCI ~/CumulusCI
+            export CUMULUSCI_PATH=~/CumulusCI
+    </fail>
+    
+    <!-- Load CumulusCI build targets -->
+    <import file="${env.CUMULUSCI_PATH}/build/build.xml" />
 
-
-    <!-- uninstall: Removes all metadata from the package via a custom build destructiveChanges.xml package-->
-    <target name="uninstall">
-      <delete dir="uninstallsrc" />
-      <delete dir="uninstall" />
-      <retrievePackaged dir="uninstallsrc" package="${cumulusci.package.name.encoded}" />
-      <buildPackagedDestructiveChanges srcdir="uninstallsrc" dir="uninstall" package="${cumulusci.package.name}" />
-      <sf:deploy username="${sf.username}" password="${sf.password}" serverurl="${sf.serverurl}" deployRoot="uninstall" runAllTests="false" purgeOnDelete="true" maxPoll="200" />
-      <delete dir="uninstallsrc" />
-      <delete dir="uninstall" />
-    </target>
-
-    <!-- destroyStaleMetadata: Delete any metadata which exists in the package in the org but not in the src directory.  This is useful in packaging orgs -->
-    <target name="destroyStaleMetadata">
-      <delete dir="uninstallsrc" />
-      <delete dir="uninstall" />
-
-      <!-- Fetch all metadata in the  package from target org -->
-      <retrievePackaged dir="uninstallsrc" package="${cumulusci.package.name.encoded}" />
-
-      <!-- Build a destructiveChanges.xml pacckage to delete metadata in org but not in repo -->
-      <buildDestroyStaleMetadata srcdir="uninstallsrc" commdir="src" dir="uninstall" />
-
-      <!-- deploy the destructiveChanges.xml package -->
-      <sf:deploy username="${sf.username}" password="${sf.password}" serverurl="${sf.serverurl}" deployRoot="uninstall" runAllTests="false" purgeOnDelete="true" maxPoll="200" />
-
-      <delete dir="uninstallsrc" />
-      <delete dir="uninstall" />
-    </target>
-
-    <!-- deployCI: Does a full build including uninstalling previously deployed unpackaged code, updating managed package versions, and then deploying with all tests -->
-    <!-- !!!WARNING!!!: DO NOT run this against a real production org as it will delete everything.  It is designed to clear the target org to ensure a clean build test. -->
-    <target name="deployCI">
-          <!-- First, uninstall all unpackaged code from the target org.  We have to do this first so we can uninstall and reinstall any managed packages not at the right version -->
-      <antcall target="uninstall" />
-
-      <!-- Deploy any unpackaged metadata needed for builds -->
-      <antcall target="deployUnpackaged" />
-
-      <!-- Finally, do a deploy with all tests -->
-      <antcall target="deploy" />
-          </target>
-
-    <!-- deployCIPackageOrg: Does a full build against the package org.  This differs from deployCI in that it uses destroyStaleMetadata instead of uninstall.
-         There are a few assumptions.  We never downgrade a dependent managed package in the packaging org.  This removes the need to completely remove
-         all metadata to allow a package downgrade.  In the package org, we can't delete all metadata once a production managed release is cut so this approach is required -->
-    <target name="deployCIPackageOrg">
-          <!-- Deploy any unpackaged metadata needed for builds -->
-      <!--<antcall target="deployUnpackaged" />-->
-
-      <!-- Update the package.xml to managed package mode, adding install and uninstall script classes -->
-      <antcall target="updatePackageXmlManaged" />
-
-      <!-- Do a deploy with all tests -->
-      <antcall target="deploy" />
-
-      <!-- Finally, delete any metadata from the org which is not in the repo -->
-      <antcall target="destroyStaleMetadata" />
-
-    </target>
-
-    <!-- Developer focused build targets -->
-
-    <!-- retrieveUnpackaged: Retrieves all unpackaged metadata from target org into the unpackaged directory -->
-    <target name="retrieveUnpackaged">
-      <retrieveUnpackaged dir="org_unpackaged" />
-    </target>
-
-    <!-- retrievePackaged: Retrieves all metadata from the package in the target org into the packaged directory -->
-    <target name="retrievePackaged">
-      <retrievePackaged dir="packaged" package="${cumulusci.package.name}" />
-    </target>
-
-    <!-- retrievePackagedToSrc: Retrieves all metadata from the package in the target org into the src directory -->
-    <target name="retrievePackagedToSrc">
-      <retrievePackaged dir="src" package="${cumulusci.package.name}" mkdir="false" />
-    </target>
-   
-
-    <!-- runAllTests: Uses an empty package manifest to trigger execution of all tests in the target org without deploying any actual code changes -->
-    <target name="runAllTests">
-      <sf:deploy username="${sf.username}" password="${sf.password}" serverurl="${sf.serverurl}" deployRoot="lib/empty" runAllTests="true" maxPoll="200" />
-    </target>
-
-    <!-- updatePackageXml: Rebuilds the src/package.xml file to list all metadata in the src directory for known metadata types -->
-    <target name="updatePackageXml">
-      <buildPackageXml package="${cumulusci.package.name.encoded}" version="${cumulusci.package.apiVersion}" />
-    </target>
-
-    <!-- updatePackageXmlManaged: called before deployCIPackagingOrg to add attributes to the package.xml only available when deploying into a managed package -->
-    <target name="updatePackageXmlManaged">
-      <buildPackageXml package="${cumulusci.package.name.encoded}" version="${cumulusci.package.apiVersion}" installClass="${cumulusci.package.installClass}" uninstallClass="${cumulusci.package.uninstallClass}" />
-    </target>
+    <!-- Add project specific build targets and CumulusCI overrides here -->
 
 </project>
