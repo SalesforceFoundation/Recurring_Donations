@@ -124,8 +124,6 @@
         <name>Layout</name>
     </types>
     <types>
-        <members>NewNote</members>
-        <members>NewTask</members>
         <members>Recurring_Donation__c.New_Opportunity</members>
         <members>Recurring_Donation__c.Quick_Update</members>
         <name>QuickAction</name>
