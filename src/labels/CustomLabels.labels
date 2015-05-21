@@ -6,7 +6,7 @@
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>RecurringDonationBadFieldMapping</shortDescription>
-        <value>Invalid fields for mapping. Please edit your field choices and try again.</value>
+        <value>Fields must be of compatible datatypes. Please edit your field choices and try again.</value>
     </labels>
     <labels>
         <fullName>RecurringDonationBadLabelWarning</fullName>
@@ -20,7 +20,7 @@
         <fullName>RecurringDonationCantDeleteError</fullName>
         <categories>RecurringDonations</categories>
         <language>en_US</language>
-        <protected>true</protected>
+        <protected>false</protected>
         <shortDescription>RecurringDonationCantDeleteError</shortDescription>
         <value>You must delete the related Donations before you can delete this recurring donation</value>
     </labels>
@@ -44,7 +44,7 @@
         <fullName>RecurringDonationContactRole</fullName>
         <categories>RecurringDonations</categories>
         <language>en_US</language>
-        <protected>true</protected>
+        <protected>false</protected>
         <shortDescription>RecurringDonationContactRole</shortDescription>
         <value>Donor</value>
     </labels>
@@ -60,7 +60,7 @@
         <fullName>RecurringDonationDivideValue</fullName>
         <categories>RecurringDonations</categories>
         <language>en_US</language>
-        <protected>true</protected>
+        <protected>false</protected>
         <shortDescription>RecurringDonationDivideValue</shortDescription>
         <value>Divide By</value>
     </labels>
@@ -70,29 +70,21 @@
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>RecurringDonationErrorEmailBody</shortDescription>
-        <value>Errors were encountered when trying to insert new Opportunities for your open-ended Recurring Donations. This can adversely affect your forecasting and functionality of your Salesforce.com instance. Addressing these errors as soon as possible can prevent bad data from entering your system.  The Recurring Donation and associated Opportunity insert error are listed below, and can be found in the Recurring Donations Settings tab under &apos;Batch Settings&apos;.</value>
+        <value>Errors were encountered when trying to insert new Opportunities for your open-ended Recurring Donations. This can adversely affect your forecasting and functionality of your Salesforce.com instance. Addressing these errors as soon as possible can prevent bad data from entering your system.  The Recurring Donation and associated Opportunity insert error are listed below, and can be found in the NPSP Settings tab under System, Error Log.</value>
     </labels>
     <labels>
         <fullName>RecurringDonationInstallmentPeriod1stand15th</fullName>
         <categories>RecurringDonations</categories>
         <language>en_US</language>
-        <protected>true</protected>
+        <protected>false</protected>
         <shortDescription>RecurringDonationInstallmentPeriod1stand15th</shortDescription>
         <value>1st and 15th</value>
-    </labels>
-    <labels>
-        <fullName>RecurringDonationInstallmentPeriodCustom</fullName>
-        <categories>RecurringDonations</categories>
-        <language>en_US</language>
-        <protected>true</protected>
-        <shortDescription>RecurringDonationInstallmentPeriodCustom</shortDescription>
-        <value>Custom</value>
     </labels>
     <labels>
         <fullName>RecurringDonationInstallmentPeriodMonthly</fullName>
         <categories>RecurringDonations</categories>
         <language>en_US</language>
-        <protected>true</protected>
+        <protected>false</protected>
         <shortDescription>RecurringDonationInstallmentPeriodMonthly</shortDescription>
         <value>Monthly</value>
     </labels>
@@ -100,7 +92,7 @@
         <fullName>RecurringDonationInstallmentPeriodQuarterly</fullName>
         <categories>RecurringDonations</categories>
         <language>en_US</language>
-        <protected>true</protected>
+        <protected>false</protected>
         <shortDescription>RecurringDonationInstallmentPeriodQuarterly</shortDescription>
         <value>Quarterly</value>
     </labels>
@@ -108,7 +100,7 @@
         <fullName>RecurringDonationInstallmentPeriodWeekly</fullName>
         <categories>RecurringDonations</categories>
         <language>en_US</language>
-        <protected>true</protected>
+        <protected>false</protected>
         <shortDescription>RecurringDonationInstallmentPeriodWeekly</shortDescription>
         <value>Weekly</value>
     </labels>
@@ -116,7 +108,7 @@
         <fullName>RecurringDonationInstallmentPeriodYearly</fullName>
         <categories>RecurringDonations</categories>
         <language>en_US</language>
-        <protected>true</protected>
+        <protected>false</protected>
         <shortDescription>RecurringDonationInstallmentPeriodYearly</shortDescription>
         <value>Yearly</value>
     </labels>
@@ -126,13 +118,13 @@
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>RecurringDonationInvalidCustomInstallment</shortDescription>
-        <value>All Custom Installments must have a Name, positive integer Value and Increment</value>
+        <value>All Custom Installments must have a Name, positive Frequency and Time Period Type.</value>
     </labels>
     <labels>
         <fullName>RecurringDonationMissingDataError</fullName>
         <categories>RecurringDonations</categories>
         <language>en_US</language>
-        <protected>true</protected>
+        <protected>false</protected>
         <shortDescription>RecurringDonationMissingDataError</shortDescription>
         <value>You must select an Organization or Contact</value>
     </labels>
@@ -140,7 +132,7 @@
         <fullName>RecurringDonationMultiplyValue</fullName>
         <categories>RecurringDonations</categories>
         <language>en_US</language>
-        <protected>true</protected>
+        <protected>false</protected>
         <shortDescription>RecurringDonationMultiplyValue</shortDescription>
         <value>Multiply By</value>
     </labels>
@@ -156,7 +148,7 @@
         <fullName>RecurringDonationPrefix</fullName>
         <categories>RecurringDonations</categories>
         <language>en_US</language>
-        <protected>true</protected>
+        <protected>false</protected>
         <shortDescription>RecurringDonationPrefix</shortDescription>
         <value>Donation</value>
     </labels>
@@ -182,13 +174,13 @@
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>RecurringDonationSettingsDescription</shortDescription>
-        <value>Settings that control the behavior of the Recurring Donations package. Changing these will change how the Recurring Donations record behaves.</value>
+        <value>Settings that control the behavior of Recurring Donations. Changing these settings will change how Recurring Donations behaves.</value>
     </labels>
     <labels>
         <fullName>RecurringDonationStageName</fullName>
         <categories>RecurringDonations</categories>
         <language>en_US</language>
-        <protected>true</protected>
+        <protected>false</protected>
         <shortDescription>RecurringDonationStageName</shortDescription>
         <value>Pledged</value>
     </labels>
@@ -196,8 +188,8 @@
         <fullName>RecurringDonationTooManyInstallmentsError</fullName>
         <categories>RecurringDonations</categories>
         <language>en_US</language>
-        <protected>true</protected>
+        <protected>false</protected>
         <shortDescription>RecurringDonationTooInstallmentsManyError</shortDescription>
-        <value>You must specify fewer than 50 installments</value>
+        <value>You must specify fewer than 50 installments.  (This error message is no longer used).</value>
     </labels>
 </CustomLabels>

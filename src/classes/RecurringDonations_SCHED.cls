@@ -32,52 +32,10 @@
 * @date 2012 (2.0)
 * @description Supports the automatic scheduling of recurring donation updates  
 */
+@deprecated
 global class RecurringDonations_SCHED implements Schedulable {
 
     global void execute(SchedulableContext SC) { 
-        string openLabel = system.label.RecurringDonationOpenStatus;
-        string queryRCD = 'select id,Open_Ended_Status__c, Next_Payment_Date__c, Organization__c, ' + 
-            'Contact__c,Installment_Amount__c,Installments__c,Amount__c,Total__c,Installment_Period__c, ' +
-            'Date_Established__c,Donor_Name__c,Schedule_Type__c,Recurring_Donation_Campaign__c,Total_Paid_Installments__c ';
-            //add any custom mapping to make sure we have the required fields
-        map<string, Custom_Field_Mapping__c> cfmMap = new map<string, Custom_Field_Mapping__c>();
-        cfmMap = Custom_Field_Mapping__c.getAll();
-        for (string s : cfmMap.keySet()){
-            queryRCD = queryRCD + ',' + cfmMap.get(s).Recurring_Donation_Field__c;
-        }
-            //if currencyiso field exists add it to query for use later
-        if(Schema.sObjectType.Recurring_Donation__c.fields.getMap().get('CurrencyIsoCode') != null)
-            queryRCD = queryRCD + ',CurrencyIsoCode';
-        queryRCD=queryRCD+' from Recurring_Donation__c where Open_Ended_Status__c = \'' + openLabel + '\'';
-        
-        //call the batch job, processing 50 at a time 
-        Id batchInstanceId = Database.executeBatch(new RecurringDonations_BATCH(queryRCD), 50);    
     }
     
-    static testmethod void test(){ 
-             
-        Custom_Field_Mapping__c cfm = new Custom_Field_Mapping__c(
-        Recurring_Donation_Field__c = 'Last_Payment_Date__c',
-        Opportunity_Field__c = 'Description',
-        Name = 'CFMName00001-Test'
-        );
-        insert cfm;
-        
-        Test.startTest(); 
-        
-        //Schedule the test job 
-        String jobId = System.schedule('test rd Sched', 
-        '0 0 0 3 9 ? 2022',new RecurringDonations_SCHED()); 
-
-        CronTrigger ct =[SELECT id,CronExpression,TimesTriggered,NextFireTime 
-        FROM CronTrigger WHERE id=:jobId]; 
-        //Verify the expressions are the same 
-        System.assertEquals('0 0 0 3 9 ? 2022',ct.CronExpression); 
-        //Verify the job has not run 
-        System.assertEquals(0,ct.TimesTriggered); 
-        //Verify the next time the job will run 
-        System.assertEquals('2022-09-03 00:00:00',String.valueOf(ct.NextFireTime)); 
-        
-        Test.stopTest();        
-    }   
-}
+ }

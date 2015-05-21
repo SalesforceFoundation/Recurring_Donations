@@ -5,6 +5,10 @@
         <type>Default</type>
     </actionOverrides>
     <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
         <actionName>Clone</actionName>
         <type>Default</type>
     </actionOverrides>
@@ -17,11 +21,19 @@
         <type>Default</type>
     </actionOverrides>
     <actionOverrides>
+        <actionName>Follow</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
         <actionName>List</actionName>
         <type>Default</type>
     </actionOverrides>
     <actionOverrides>
         <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
         <type>Default</type>
     </actionOverrides>
     <actionOverrides>
@@ -32,11 +44,18 @@
         <actionName>View</actionName>
         <type>Default</type>
     </actionOverrides>
+    <compactLayoutAssignment>NPSP_Recurring_Donation_Compact_Layout</compactLayoutAssignment>
+    <compactLayouts>
+        <fullName>NPSP_Recurring_Donation_Compact_Layout</fullName>
+        <fields>Name</fields>
+        <fields>Amount__c</fields>
+        <fields>Installment_Period__c</fields>
+        <label>NPSP Recurring Donation Compact Layout</label>
+    </compactLayouts>
     <deploymentStatus>Deployed</deploymentStatus>
     <deprecated>false</deprecated>
     <description>Recurring Donations with no end date.</description>
     <enableActivities>false</enableActivities>
-    <enableEnhancedLookup>false</enableEnhancedLookup>
     <enableFeeds>false</enableFeeds>
     <enableHistory>true</enableHistory>
     <enableReports>true</enableReports>
@@ -49,6 +68,7 @@
         <required>false</required>
         <scale>2</scale>
         <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
         <type>Currency</type>
     </fields>
     <fields>
@@ -61,6 +81,7 @@
         <relationshipName>R00N80000002bOmREAU</relationshipName>
         <required>false</required>
         <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
         <type>Lookup</type>
     </fields>
     <fields>
@@ -71,6 +92,7 @@
         <label>Date Established</label>
         <required>false</required>
         <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
         <type>Date</type>
     </fields>
     <fields>
@@ -86,6 +108,7 @@
         <label>Donor Name</label>
         <required>false</required>
         <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
         <type>Text</type>
         <unique>false</unique>
     </fields>
@@ -111,13 +134,14 @@ OR(
         <required>false</required>
         <scale>2</scale>
         <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
         <type>Currency</type>
     </fields>
     <fields>
         <fullName>Installment_Period__c</fullName>
         <deprecated>false</deprecated>
         <externalId>false</externalId>
-        <inlineHelpText>Sets the installment period for your recurring donations.  WARNING: Changing the Installment Period for an existing open-ended Recurring Donation can cause open Opportunities to be deleted and recreated. Any associated data may not be retained.</inlineHelpText>
+        <inlineHelpText>Sets the installment period for your recurring donations.  WARNING: Changing the Installment Period for an existing Recurring Donation can cause open Opportunities to be deleted and recreated. Any associated data may not be retained.</inlineHelpText>
         <label>Installment Period</label>
         <picklist>
             <picklistValues>
@@ -143,6 +167,7 @@ OR(
             <sorted>false</sorted>
         </picklist>
         <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
         <type>Picklist</type>
     </fields>
     <fields>
@@ -156,6 +181,7 @@ OR(
         <required>false</required>
         <scale>0</scale>
         <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
         <type>Number</type>
         <unique>false</unique>
     </fields>
@@ -168,6 +194,7 @@ OR(
         <label>Last Donation Date</label>
         <required>false</required>
         <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
         <type>Date</type>
     </fields>
     <fields>
@@ -179,6 +206,7 @@ OR(
         <label>Next Donation Date</label>
         <required>false</required>
         <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
         <type>Date</type>
     </fields>
     <fields>
@@ -202,6 +230,7 @@ OR(
             <sorted>false</sorted>
         </picklist>
         <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
         <type>Picklist</type>
     </fields>
     <fields>
@@ -214,6 +243,7 @@ OR(
         <relationshipName>RecurringDonations</relationshipName>
         <required>false</required>
         <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
         <type>Lookup</type>
     </fields>
     <fields>
@@ -227,6 +257,7 @@ OR(
         <required>false</required>
         <scale>2</scale>
         <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
         <type>Currency</type>
     </fields>
     <fields>
@@ -239,12 +270,14 @@ OR(
         <relationshipName>Recurring_Donations_Pledges</relationshipName>
         <required>false</required>
         <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
         <type>Lookup</type>
     </fields>
     <fields>
         <fullName>Schedule_Type__c</fullName>
         <deprecated>false</deprecated>
         <externalId>false</externalId>
+        <inlineHelpText>Whether the Amount is used for each installment (Multiple By), or Amount is split between installments (Divide By).  Only used with Non-Open Ended Recurring Donations.</inlineHelpText>
         <label>Schedule Type</label>
         <picklist>
             <picklistValues>
@@ -258,19 +291,21 @@ OR(
             <sorted>false</sorted>
         </picklist>
         <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
         <type>Picklist</type>
     </fields>
     <fields>
         <fullName>Total_Paid_Installments__c</fullName>
         <deprecated>false</deprecated>
-        <description>Total number of installments paid on this open-ended recurring donation.</description>
+        <description>Total number of installments paid on this Recurring Donation.</description>
         <externalId>false</externalId>
-        <inlineHelpText>Total number of installments paid on this open-ended recurring donation.</inlineHelpText>
+        <inlineHelpText>Total number of installments paid on this Recurring Donation.</inlineHelpText>
         <label>Total Paid Installments</label>
         <precision>18</precision>
         <required>false</required>
         <scale>0</scale>
         <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
         <type>Number</type>
         <unique>false</unique>
     </fields>
@@ -286,11 +321,13 @@ CASE(
 ,0
 ))</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>For Non-Open Ended Recurring Donations, the total amount of all Opportunities.</inlineHelpText>
         <label>Total</label>
         <precision>18</precision>
         <required>false</required>
         <scale>2</scale>
         <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
         <type>Currency</type>
     </fields>
     <label>Recurring Donations</label>
@@ -357,11 +394,11 @@ CASE(
         <availability>online</availability>
         <description>Run the check opp routine for Recurring Donations</description>
         <displayType>button</displayType>
-        <height>600</height>
-        <linkType>page</linkType>
+        <encodingKey>UTF-8</encodingKey>
+        <linkType>url</linkType>
         <masterLabel>Refresh Opportunities</masterLabel>
-        <openType>sidebar</openType>
-        <page>RecurringDonations_AddDonationsBTN</page>
+        <openType>replace</openType>
         <protected>false</protected>
+        <url>{!URLFOR(&apos;/apex/npsp__RD_AddDonationsBTN?id=&apos; + Recurring_Donation__c.Id)}</url>
     </webLinks>
 </CustomObject>
