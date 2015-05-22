@@ -32,7 +32,7 @@
 * @date 2012 (2.0)
 * @description Class provides a batchable wrapper for open ended recurring donations
 */
-@deprecated
+//cumulusci-managed@deprecated
 global without sharing class RecurringDonations_BATCH implements Database.Batchable<sObject>, Database.Stateful{
     
     global database.Querylocator start(Database.BatchableContext bc){

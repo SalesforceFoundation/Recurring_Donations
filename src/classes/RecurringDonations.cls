@@ -32,7 +32,7 @@
 * @date 2012 (2.0)
 * @description The main class for controlling the behavior of Recurring Donations, both open ended and standard 
 */
-@deprecated
+//cumulusci-managed@deprecated
 global with sharing class RecurringDonations {
     
 }
