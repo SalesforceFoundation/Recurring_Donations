@@ -215,6 +215,7 @@ OR(
         <fullName>Open_Ended_Status__c</fullName>
         <deprecated>false</deprecated>
         <externalId>false</externalId>
+        <inlineHelpText>Choose Open for an Open-Ended Recurring Donation.  Choose None for a Fixed Length Recurring Donation.  Choose Closed to close a Recurring Donation.</inlineHelpText>
         <label>Open Ended Status</label>
         <picklist>
             <picklistValues>
