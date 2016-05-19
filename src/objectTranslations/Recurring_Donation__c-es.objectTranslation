@@ -111,7 +111,7 @@
         </picklistValues>
         <picklistValues>
             <masterLabel>Multiply By</masterLabel>
-            <translation>Multiplicar por</translation>
+            <translation><!-- Multiply By --></translation>
         </picklistValues>
     </fields>
     <fields>

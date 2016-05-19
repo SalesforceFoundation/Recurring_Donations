@@ -65,7 +65,7 @@
         <name>RecurringDonationMissingDataError</name>
     </customLabels>
     <customLabels>
-        <label>Multiply By</label>
+        <label><!-- RecurringDonationMultiplyValue --></label>
         <name>RecurringDonationMultiplyValue</name>
     </customLabels>
     <customLabels>
