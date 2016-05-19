@@ -35,23 +35,23 @@
         <name>Installment_Period__c</name>
         <picklistValues>
             <masterLabel>1st and 15th</masterLabel>
-            <translation>1er y 15 del mes</translation>
+            <translation><!-- 1st and 15th --></translation>
         </picklistValues>
         <picklistValues>
             <masterLabel>Monthly</masterLabel>
-            <translation>Mensual</translation>
+            <translation><!-- Monthly --></translation>
         </picklistValues>
         <picklistValues>
             <masterLabel>Quarterly</masterLabel>
-            <translation>Cuatrimestral</translation>
+            <translation><!-- Quarterly --></translation>
         </picklistValues>
         <picklistValues>
             <masterLabel>Weekly</masterLabel>
-            <translation>Semanal</translation>
+            <translation><!-- Weekly --></translation>
         </picklistValues>
         <picklistValues>
             <masterLabel>Yearly</masterLabel>
-            <translation>Anual</translation>
+            <translation><!-- Yearly --></translation>
         </picklistValues>
     </fields>
     <fields>
@@ -75,15 +75,15 @@
         <name>Open_Ended_Status__c</name>
         <picklistValues>
             <masterLabel>Closed</masterLabel>
-            <translation>Cerrado</translation>
+            <translation><!-- Closed --></translation>
         </picklistValues>
         <picklistValues>
             <masterLabel>None</masterLabel>
-            <translation>Ninguno</translation>
+            <translation><!-- None --></translation>
         </picklistValues>
         <picklistValues>
             <masterLabel>Open</masterLabel>
-            <translation>Abierto</translation>
+            <translation><!-- Open --></translation>
         </picklistValues>
     </fields>
     <fields>

@@ -41,19 +41,19 @@
         <name>RecurringDonationInstallmentPeriod1stand15th</name>
     </customLabels>
     <customLabels>
-        <label>Monthly</label>
+        <label><!-- RecurringDonationInstallmentPeriodMonthly --></label>
         <name>RecurringDonationInstallmentPeriodMonthly</name>
     </customLabels>
     <customLabels>
-        <label>Quarterly</label>
+        <label><!-- RecurringDonationInstallmentPeriodQuarterly --></label>
         <name>RecurringDonationInstallmentPeriodQuarterly</name>
     </customLabels>
     <customLabels>
-        <label>Weekly</label>
+        <label><!-- RecurringDonationInstallmentPeriodWeekly --></label>
         <name>RecurringDonationInstallmentPeriodWeekly</name>
     </customLabels>
     <customLabels>
-        <label>Yearly</label>
+        <label><!-- RecurringDonationInstallmentPeriodYearly --></label>
         <name>RecurringDonationInstallmentPeriodYearly</name>
     </customLabels>
     <customLabels>
