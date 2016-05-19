@@ -44,6 +44,7 @@
         <actionName>View</actionName>
         <type>Default</type>
     </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
     <compactLayoutAssignment>NPSP_Recurring_Donation_Compact_Layout</compactLayoutAssignment>
     <compactLayouts>
         <fullName>NPSP_Recurring_Donation_Compact_Layout</fullName>
@@ -53,15 +54,17 @@
         <label>NPSP Recurring Donation Compact Layout</label>
     </compactLayouts>
     <deploymentStatus>Deployed</deploymentStatus>
-    <deprecated>false</deprecated>
     <description>Recurring Donations with no end date.</description>
     <enableActivities>false</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
     <enableFeeds>false</enableFeeds>
     <enableHistory>true</enableHistory>
     <enableReports>true</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
     <fields>
         <fullName>Amount__c</fullName>
-        <deprecated>false</deprecated>
         <externalId>false</externalId>
         <label>Amount</label>
         <precision>18</precision>
@@ -74,7 +77,6 @@
     <fields>
         <fullName>Contact__c</fullName>
         <deleteConstraint>SetNull</deleteConstraint>
-        <deprecated>false</deprecated>
         <externalId>false</externalId>
         <label>Contact</label>
         <referenceTo>Contact</referenceTo>
@@ -87,7 +89,6 @@
     <fields>
         <fullName>Date_Established__c</fullName>
         <defaultValue>Today()</defaultValue>
-        <deprecated>false</deprecated>
         <externalId>false</externalId>
         <label>Date Established</label>
         <required>false</required>
@@ -97,7 +98,6 @@
     </fields>
     <fields>
         <fullName>Donor_Name__c</fullName>
-        <deprecated>false</deprecated>
         <externalId>false</externalId>
         <formula>if(
   LEN(Contact__c)&gt;0,
@@ -114,7 +114,6 @@
     </fields>
     <fields>
         <fullName>Installment_Amount__c</fullName>
-        <deprecated>false</deprecated>
         <externalId>false</externalId>
         <formula>IF( 
 
@@ -139,7 +138,6 @@ OR(
     </fields>
     <fields>
         <fullName>Installment_Period__c</fullName>
-        <deprecated>false</deprecated>
         <description>How often you’ll receive the donations. NOTE: Changing the installment period for an existing Fixed-Length Recurring Donation may result in the loss and re-creation of open opportunities. Any data associated with those opportunities may be lost.</description>
         <externalId>false</externalId>
         <inlineHelpText>How often you’ll receive the donations. NOTE: Changing the installment period for an existing Fixed-Length Recurring Donation may result in the loss and re-creation of open opportunities. Any data associated with those opportunities may be lost.</inlineHelpText>
@@ -174,7 +172,6 @@ OR(
     <fields>
         <fullName>Installments__c</fullName>
         <defaultValue>1</defaultValue>
-        <deprecated>false</deprecated>
         <description>Number of installments (donations) you expect to receive. For Fixed-Length Recurring Donations only.</description>
         <externalId>false</externalId>
         <inlineHelpText>Number of installments (donations) you expect to receive. For Fixed-Length Recurring Donations only.</inlineHelpText>
@@ -189,7 +186,6 @@ OR(
     </fields>
     <fields>
         <fullName>Last_Payment_Date__c</fullName>
-        <deprecated>false</deprecated>
         <description>Date of the last payment for this Recurring Donation</description>
         <externalId>false</externalId>
         <inlineHelpText>Do Not Enter. The NPSP calculates this value automatically based on the last time a child donation was marked Posted.</inlineHelpText>
@@ -201,7 +197,6 @@ OR(
     </fields>
     <fields>
         <fullName>Next_Payment_Date__c</fullName>
-        <deprecated>false</deprecated>
         <description>Holds the date of the next recurring payment.  Manually editing this field will recalculate all future opportunity&apos;s close dates based on the scheduled defined.</description>
         <externalId>false</externalId>
         <inlineHelpText>The date on which you want the next donation to occur. This date also determines the date of all future donations.</inlineHelpText>
@@ -213,7 +208,6 @@ OR(
     </fields>
     <fields>
         <fullName>Open_Ended_Status__c</fullName>
-        <deprecated>false</deprecated>
         <externalId>false</externalId>
         <inlineHelpText>Choose Open for an Open-Ended Recurring Donation.  Choose None for a Fixed Length Recurring Donation.  Choose Closed to close a Recurring Donation.</inlineHelpText>
         <label>Open Ended Status</label>
@@ -239,7 +233,6 @@ OR(
     <fields>
         <fullName>Organization__c</fullName>
         <deleteConstraint>SetNull</deleteConstraint>
-        <deprecated>false</deprecated>
         <externalId>false</externalId>
         <label>Organization</label>
         <referenceTo>Account</referenceTo>
@@ -251,7 +244,6 @@ OR(
     </fields>
     <fields>
         <fullName>Paid_Amount__c</fullName>
-        <deprecated>false</deprecated>
         <description>Total Amount paid on this Recurring Donation</description>
         <externalId>false</externalId>
         <inlineHelpText>Do Not Enter. The NPSP calculates this value automatically as donations are made and marked Posted.</inlineHelpText>
@@ -266,7 +258,6 @@ OR(
     <fields>
         <fullName>Recurring_Donation_Campaign__c</fullName>
         <deleteConstraint>SetNull</deleteConstraint>
-        <deprecated>false</deprecated>
         <externalId>false</externalId>
         <label>Campaign</label>
         <referenceTo>Campaign</referenceTo>
@@ -278,7 +269,6 @@ OR(
     </fields>
     <fields>
         <fullName>Schedule_Type__c</fullName>
-        <deprecated>false</deprecated>
         <description>Tells Salesforce how to compute the amount for each child opportunity, based on what you&apos;ve entered in the Amount field. For Fixed-Length Recurring Donations only.</description>
         <externalId>false</externalId>
         <inlineHelpText>Tells Salesforce how to compute the amount for each child opportunity, based on what you&apos;ve entered in the Amount field. For Fixed-Length Recurring Donations only.</inlineHelpText>
@@ -300,7 +290,6 @@ OR(
     </fields>
     <fields>
         <fullName>Total_Paid_Installments__c</fullName>
-        <deprecated>false</deprecated>
         <description>Total number of installments paid on this Recurring Donation.</description>
         <externalId>false</externalId>
         <inlineHelpText>Do Not Enter. The NPSP calculates this value automatically as donations are made and marked Posted.</inlineHelpText>
@@ -315,7 +304,6 @@ OR(
     </fields>
     <fields>
         <fullName>Total__c</fullName>
-        <deprecated>false</deprecated>
         <externalId>false</externalId>
         <formula>IF(TEXT( Open_Ended_Status__c) =  $Label.RecurringDonationOpenStatus, 0,
 CASE(
