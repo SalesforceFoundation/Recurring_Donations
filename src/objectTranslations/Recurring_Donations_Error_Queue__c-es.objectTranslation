@@ -9,12 +9,12 @@
         <value><!-- DEPRECATED-RD Error Queue --></value>
     </caseValues>
     <fields>
-        <help><!-- Error message for the operation on the associated Recurring Donation record --></help>
-        <label><!-- Error Message --></label>
+        <help>Mensaje del error de la operación asociada a el registro de la donación recurrente.</help>
+        <label>Mensaje del error</label>
         <name>Error_Message__c</name>
     </fields>
     <fields>
-        <help><!-- ID of the affected Recurring Donation record --></help>
+        <help>ID del registro de la donación recurrente afectada</help>
         <label><!-- Recurring_Donation_ID --></label>
         <name>Recurring_Donation_ID__c</name>
     </fields>

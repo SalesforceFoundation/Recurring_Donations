@@ -9,8 +9,8 @@
         <value><!-- Recurring Donations Settings --></value>
     </caseValues>
     <fields>
-        <help><!-- If selected, all Opportunities for Recurring Donations will use the Campaign on the Recurring Donation. Otherwise, only the first Opportunity will have the Campaign. --></help>
-        <label><!-- Add Campaign to All Opportunites --></label>
+        <help>Si seleccionado, todas las oportunidad de las donaciones recurrentes usarán la campaña en la donación recurrente. Si no se selecciona, solo la primera oportunidad tendrá la campaña.</help>
+        <label>Agregar campaña a todas las op.</label>
         <name>Add_Campaign_to_All_Opportunites__c</name>
     </fields>
     <fields>
@@ -24,8 +24,8 @@
         <name>DISABLE_RecurringDonations_trigger__c</name>
     </fields>
     <fields>
-        <help><!-- Prevents the scheduling of the nightly update to Recurring Donations. Any existing scheduled job will need to be removed through Setup-&gt;Monitoring-&gt;Scheduled Jobs --></help>
-        <label><!-- Disable Scheduling of Nightly Job --></label>
+        <help>Previene la programación del trabajo nocturno que actualiza las donaciones recurrentes. Cualquier trabajo programado existente debe ser removido en Configuración -&gt;Trabajos -&gt; Trabajos programados</help>
+        <label>Deshabilitar progr. del trabajo nocturno</label>
         <name>Disable_Nightly_Job__c</name>
     </fields>
     <fields>
@@ -44,8 +44,8 @@
         <name>Has_Package_Update__c</name>
     </fields>
     <fields>
-        <help><!-- The date and time of the last batch update of Recurring Donations. --></help>
-        <label><!-- Last Batch Run --></label>
+        <help>Día y hora del último lote que modifica donaciones recurrentes.</help>
+        <label>Último lote procesado</label>
         <name>Last_Batch_Run__c</name>
     </fields>
     <fields>
@@ -59,8 +59,8 @@
         <name>Max_Package_Version__c</name>
     </fields>
     <fields>
-        <help><!-- Restricts the total number of donations created for non-open-ended Recurring Donations. Default is 50.  Larger values may result in DML errors. --></help>
-        <label><!-- Maximum Donations --></label>
+        <help>Restringe la cantidad total de donaciones creadas por donaciones recurrentes con final abierto. Por defecto son 50. Un valor mayor puede resultar en errores DML</help>
+        <label>Máximo de donaciones</label>
         <name>Maximum_Donations__c</name>
     </fields>
     <fields>
@@ -68,23 +68,23 @@
         <name>Nightly_Update_ID__c</name>
     </fields>
     <fields>
-        <help><!-- Number of Recurring Donations unsuccessfully updated in the last batch operation. --></help>
-        <label><!-- Number of Failures --></label>
+        <help>Cantidad de donaciones recurrentes que NO fueron modificadas con éxito el último lote.</help>
+        <label>Cantidad de fallos</label>
         <name>Number_of_Failures__c</name>
     </fields>
     <fields>
-        <help><!-- Number of Recurring Donations successfully updated in the last batch run. --></help>
-        <label><!-- Number of Successes --></label>
+        <help>Cantidad de donaciones recurrentes que fueron modificadas con éxito en el último lote.</help>
+        <label>Cantidad de éxitos</label>
         <name>Number_of_Successes__c</name>
     </fields>
     <fields>
-        <help><!-- Determines the behavior of any remaining open Opportunities when an open-ended Recurring Donation is moved to a closed status. --></help>
-        <label><!-- Open Opportunity Behavior on RD Close --></label>
+        <help>Determina el comportamiento de las oportunidades abiertas cuando una donación recurrente con final abierto cambia su estado a cerrada.</help>
+        <label>Comp. de op. Abiertas en cierre de DR</label>
         <name>Open_Opportunity_Behavior__c</name>
     </fields>
     <fields>
-        <help><!-- Number of months from today worth of open Opportunities to be created when using open-ended Recurring Donations. WARNING: Reducing this value will result in extra Opportunities being deleted.  Increasing it will launch a batch process to add Opportunities --></help>
-        <label><!-- Opportunity Forecast Months --></label>
+        <help>Cantidad de meses desde hoy que deben tener op. abiertas creadas cuando se usa don. recurrentes con final abierto. ATENCIÓN: Disminuir este valor resulta en la eliminación de op. que están de más. Aumentar este valor ejecutará un lote para agregar op.</help>
+        <label>Meses de previsiones de oportunidades</label>
         <name>Opportunity_Forecast_Months__c</name>
     </fields>
     <fields>
@@ -93,8 +93,8 @@
         <name>Package_Update_URL__c</name>
     </fields>
     <fields>
-        <help><!-- Opportunity Record Type used when Recurring Donation Opportunities are created. --></help>
-        <label><!-- Opportunity Record Type --></label>
+        <help>Tipo de registro de oportunidad usado para las oportunidades creadas por donaciones recurrentes.</help>
+        <label>Tipo de registro de oportunidad</label>
         <name>Record_Type__c</name>
     </fields>
     <fields>
