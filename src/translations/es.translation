@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Translations xmlns="http://soap.sforce.com/2006/04/metadata">
     <customLabels>
-        <label><!-- RecurringDonationBadFieldMapping --></label>
+        <label>Los campos que deben ser de tipos de datos compatibles. Por favor, edite sus campos elegidos y vuelve a intentarlo.</label>
         <name>RecurringDonationBadFieldMapping</name>
     </customLabels>
     <customLabels>
-        <label><!-- RecurringDonationBadLabelWarning --></label>
+        <label>Su etiqueta personalizada para oportunidades cerradas perdidas no se corresponde con una etapa activa cerrada/perdida. Esto puede producir resultados no deseados cuando se marca donaciones recurrentes cerradas y tener el Comportamiento de oportunidades configurada a: Mark_Opportunities_Closed_Lost. Por favor revisar las etapas y la etiqueta personalizada RecurringDonationClosedLostOpportunityStage</label>
         <name>RecurringDonationBadLabelWarning</name>
     </customLabels>
     <customLabels>
@@ -25,7 +25,7 @@
         <name>RecurringDonationContactRole</name>
     </customLabels>
     <customLabels>
-        <label><!-- RecurringDonationCustomValidationWarning --></label>
+        <label>Campos en Oportunidades tienen reglas de validación personalizadas que pueden estar causando problemas con su paquete de Donaciones Recurrentes:</label>
         <name>RecurringDonationCustomValidationWarning</name>
     </customLabels>
     <customLabels>
@@ -33,7 +33,7 @@
         <name>RecurringDonationDivideValue</name>
     </customLabels>
     <customLabels>
-        <label><!-- RecurringDonationErrorEmailBody --></label>
+        <label>Se encontraron errores cuando se trató de agregar nuevas oportunidades para las donaciones recurrentes con final abierto. Esto puede perjudicar sus previsiones y la funcionalidad de su instancia de Salesforce.com. Abordar estos errores tan pronto como sea posible puede prevenir el errores en datos en su sistema. Los errores de la donación recurrente y las oportunidad relacionadas se enumeran a continuación, y se pueden encontrar en la pestaña Configuración de NPSP bajo Sistema, Registro de errores</label>
         <name>RecurringDonationErrorEmailBody</name>
     </customLabels>
     <customLabels>
@@ -41,23 +41,23 @@
         <name>RecurringDonationInstallmentPeriod1stand15th</name>
     </customLabels>
     <customLabels>
-        <label>Monthly</label>
+        <label><!-- RecurringDonationInstallmentPeriodMonthly --></label>
         <name>RecurringDonationInstallmentPeriodMonthly</name>
     </customLabels>
     <customLabels>
-        <label>Quarterly</label>
+        <label><!-- RecurringDonationInstallmentPeriodQuarterly --></label>
         <name>RecurringDonationInstallmentPeriodQuarterly</name>
     </customLabels>
     <customLabels>
-        <label>Weekly</label>
+        <label><!-- RecurringDonationInstallmentPeriodWeekly --></label>
         <name>RecurringDonationInstallmentPeriodWeekly</name>
     </customLabels>
     <customLabels>
-        <label>Yearly</label>
+        <label><!-- RecurringDonationInstallmentPeriodYearly --></label>
         <name>RecurringDonationInstallmentPeriodYearly</name>
     </customLabels>
     <customLabels>
-        <label><!-- RecurringDonationInvalidCustomInstallment --></label>
+        <label>Todas las frecuencias personalizadas deben tener Nombre, Frecuencia positiva y Tipo de tiempo.</label>
         <name>RecurringDonationInvalidCustomInstallment</name>
     </customLabels>
     <customLabels>
@@ -65,7 +65,7 @@
         <name>RecurringDonationMissingDataError</name>
     </customLabels>
     <customLabels>
-        <label>Multiply By</label>
+        <label><!-- RecurringDonationMultiplyValue --></label>
         <name>RecurringDonationMultiplyValue</name>
     </customLabels>
     <customLabels>
@@ -77,15 +77,15 @@
         <name>RecurringDonationPrefix</name>
     </customLabels>
     <customLabels>
-        <label><!-- RecurringDonationRequiredFieldsWarning --></label>
+        <label>Los siguientes campos obligatorios en su objeto oportunidades puede causar problemas con su paquete de donaciones recurrentes:</label>
         <name>RecurringDonationRequiredFieldsWarning</name>
     </customLabels>
     <customLabels>
-        <label><!-- RecurringDonationSchedulingError --></label>
+        <label>Ha sucedido un error en la programación de la actualización nocturna de donaciones recurrentes</label>
         <name>RecurringDonationSchedulingError</name>
     </customLabels>
     <customLabels>
-        <label><!-- RecurringDonationSettingsDescription --></label>
+        <label>Esta configuración controla como las donaciones recurrentes se comportan en el Nonprofit Starter Pack. Vea &lt;a href=&quot;https://powerofus.force.com/NPSP_Recurring_Donations&quot; target=&quot;_blank&quot;&gt;NPSP Documentation&lt;/a&gt; para más información.</label>
         <name>RecurringDonationSettingsDescription</name>
     </customLabels>
     <customLabels>
@@ -97,7 +97,7 @@
         <name>RecurringDonationTooManyInstallmentsError</name>
     </customLabels>
     <customTabs>
-        <label><!-- Recurring Donations Settings --></label>
+        <label>Configuración de Donaciones recurrentes</label>
         <name>Recurring_Donations_Settings</name>
     </customTabs>
     <quickActions>
