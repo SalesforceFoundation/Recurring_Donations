@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
     <customSettingsType>List</customSettingsType>
-    <customSettingsVisibility>Public</customSettingsVisibility>
     <description>DEPRECATED.  Recurring Donations are now stored in the System Error Log.</description>
     <enableFeeds>false</enableFeeds>
     <fields>
         <fullName>Error_Message__c</fullName>
-        <deprecated>false</deprecated>
         <description>Error message for the operation on the associated Recurring Donation record</description>
         <externalId>false</externalId>
         <inlineHelpText>Error message for the operation on the associated Recurring Donation record</inlineHelpText>
@@ -19,7 +17,6 @@
     </fields>
     <fields>
         <fullName>Recurring_Donation_ID__c</fullName>
-        <deprecated>false</deprecated>
         <description>ID of the affected Recurring Donation record</description>
         <externalId>false</externalId>
         <inlineHelpText>ID of the affected Recurring Donation record</inlineHelpText>
@@ -31,4 +28,5 @@
         <unique>false</unique>
     </fields>
     <label>DEPRECATED-RD Error Queue</label>
+    <visibility>Public</visibility>
 </CustomObject>

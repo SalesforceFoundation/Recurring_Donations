@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
     <customSettingsType>List</customSettingsType>
-    <customSettingsVisibility>Public</customSettingsVisibility>
     <description>Maps Recurring Donation fields to Opportunity fields.</description>
     <enableFeeds>false</enableFeeds>
     <fields>
         <fullName>Opportunity_Field__c</fullName>
-        <deprecated>false</deprecated>
         <description>The Opportunity field to receive the value from the Recurring Donation field. Note that these fields must have the same data type.</description>
         <externalId>false</externalId>
         <inlineHelpText>The Opportunity field to receive the value from the Recurring Donation field.  Note that these fields must have the same data type.</inlineHelpText>
@@ -19,7 +17,6 @@
     </fields>
     <fields>
         <fullName>Recurring_Donation_Field__c</fullName>
-        <deprecated>false</deprecated>
         <description>The Recurring Donation field to copy to the Opportunity field. Note that these fields must have the same data type.</description>
         <externalId>false</externalId>
         <inlineHelpText>The Recurring Donation field to copy to the Opportunity field.  Note that these fields must have the same data type.</inlineHelpText>
@@ -31,4 +28,5 @@
         <unique>false</unique>
     </fields>
     <label>Custom Field Mapping</label>
+    <visibility>Public</visibility>
 </CustomObject>
