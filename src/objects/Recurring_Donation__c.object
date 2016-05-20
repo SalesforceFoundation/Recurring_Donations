@@ -55,7 +55,7 @@
     </compactLayouts>
     <deploymentStatus>Deployed</deploymentStatus>
     <description>Recurring Donations with no end date.</description>
-    <enableActivities>false</enableActivities>
+    <enableActivities>true</enableActivities>
     <enableBulkApi>true</enableBulkApi>
     <enableFeeds>false</enableFeeds>
     <enableHistory>true</enableHistory>
