@@ -107,25 +107,31 @@
         <members>Custom_Field_Mapping__c-en_US</members>
         <members>Custom_Field_Mapping__c-es</members>
         <members>Custom_Field_Mapping__c-fr</members>
+        <members>Custom_Field_Mapping__c-ja</members>
         <members>Custom_Installment_Settings__c-de</members>
         <members>Custom_Installment_Settings__c-en_US</members>
         <members>Custom_Installment_Settings__c-es</members>
         <members>Custom_Installment_Settings__c-fr</members>
+        <members>Custom_Installment_Settings__c-ja</members>
         <members>Opportunity-de</members>
         <members>Opportunity-es</members>
         <members>Opportunity-fr</members>
+        <members>Opportunity-ja</members>
         <members>Recurring_Donation__c-de</members>
         <members>Recurring_Donation__c-en_US</members>
         <members>Recurring_Donation__c-es</members>
         <members>Recurring_Donation__c-fr</members>
+        <members>Recurring_Donation__c-ja</members>
         <members>Recurring_Donations_Error_Queue__c-de</members>
         <members>Recurring_Donations_Error_Queue__c-en_US</members>
         <members>Recurring_Donations_Error_Queue__c-es</members>
         <members>Recurring_Donations_Error_Queue__c-fr</members>
+        <members>Recurring_Donations_Error_Queue__c-ja</members>
         <members>Recurring_Donations_Settings__c-de</members>
         <members>Recurring_Donations_Settings__c-en_US</members>
         <members>Recurring_Donations_Settings__c-es</members>
         <members>Recurring_Donations_Settings__c-fr</members>
+        <members>Recurring_Donations_Settings__c-ja</members>
         <name>CustomObjectTranslation</name>
     </types>
     <types>
@@ -148,6 +154,7 @@
         <members>de</members>
         <members>es</members>
         <members>fr</members>
+        <members>ja</members>
         <name>Translations</name>
     </types>
     <types>
