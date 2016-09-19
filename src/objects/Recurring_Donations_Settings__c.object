@@ -45,9 +45,9 @@
     <fields>
         <fullName>Enable_Update_Check__c</fullName>
         <defaultValue>false</defaultValue>
-        <description>DEPRECATED. New versions of the Nonprofit Starter Pack will be automatically installed.</description>
+        <description>DEPRECATED. New versions of the Nonprofit Success Pack will be automatically installed.</description>
         <externalId>false</externalId>
-        <inlineHelpText>DEPRECATED. New versions of the Nonprofit Starter Pack will be automatically installed.</inlineHelpText>
+        <inlineHelpText>DEPRECATED. New versions of the Nonprofit Success Pack will be automatically installed.</inlineHelpText>
         <label>DEPRECATED-Enable Update Check</label>
         <trackTrending>false</trackTrending>
         <type>Checkbox</type>
@@ -66,9 +66,9 @@
     </fields>
     <fields>
         <fullName>Has_Package_Update__c</fullName>
-        <description>DEPRECATED. New versions of the Nonprofit Starter Pack will be automatically installed.</description>
+        <description>DEPRECATED. New versions of the Nonprofit Success Pack will be automatically installed.</description>
         <externalId>false</externalId>
-        <inlineHelpText>DEPRECATED. New versions of the Nonprofit Starter Pack will be automatically installed.</inlineHelpText>
+        <inlineHelpText>DEPRECATED. New versions of the Nonprofit Success Pack will be automatically installed.</inlineHelpText>
         <label>DEPRECATED-Has Package Update</label>
         <length>40</length>
         <required>false</required>
@@ -87,9 +87,9 @@
     </fields>
     <fields>
         <fullName>Last_Update_Check__c</fullName>
-        <description>DEPRECATED. New versions of the Nonprofit Starter Pack will be automatically installed.</description>
+        <description>DEPRECATED. New versions of the Nonprofit Success Pack will be automatically installed.</description>
         <externalId>false</externalId>
-        <inlineHelpText>DEPRECATED. New versions of the Nonprofit Starter Pack will be automatically installed.</inlineHelpText>
+        <inlineHelpText>DEPRECATED. New versions of the Nonprofit Success Pack will be automatically installed.</inlineHelpText>
         <label>DEPRECATED-Last Update Check</label>
         <required>false</required>
         <trackTrending>false</trackTrending>
@@ -97,9 +97,9 @@
     </fields>
     <fields>
         <fullName>Max_Package_Version__c</fullName>
-        <description>DEPRECATED. New versions of the Nonprofit Starter Pack will be automatically installed.</description>
+        <description>DEPRECATED. New versions of the Nonprofit Success Pack will be automatically installed.</description>
         <externalId>false</externalId>
-        <inlineHelpText>DEPRECATED. New versions of the Nonprofit Starter Pack will be automatically installed.</inlineHelpText>
+        <inlineHelpText>DEPRECATED. New versions of the Nonprofit Success Pack will be automatically installed.</inlineHelpText>
         <label>DEPRECATED-Max Package Version</label>
         <length>12</length>
         <required>false</required>
@@ -182,9 +182,9 @@
     </fields>
     <fields>
         <fullName>Package_Update_URL__c</fullName>
-        <description>DEPRECATED. New versions of the Nonprofit Starter Pack will be automatically installed.</description>
+        <description>DEPRECATED. New versions of the Nonprofit Success Pack will be automatically installed.</description>
         <externalId>false</externalId>
-        <inlineHelpText>DEPRECATED. New versions of the Nonprofit Starter Pack will be automatically installed.</inlineHelpText>
+        <inlineHelpText>DEPRECATED. New versions of the Nonprofit Success Pack will be automatically installed.</inlineHelpText>
         <label>DEPRECATED-Package Update URL</label>
         <required>false</required>
         <trackTrending>false</trackTrending>
@@ -204,9 +204,9 @@
     </fields>
     <fields>
         <fullName>Update_Check_Interval__c</fullName>
-        <description>DEPRECATED. New versions of the Nonprofit Starter Pack will be automatically installed.</description>
+        <description>DEPRECATED. New versions of the Nonprofit Success Pack will be automatically installed.</description>
         <externalId>false</externalId>
-        <inlineHelpText>DEPRECATED. New versions of the Nonprofit Starter Pack will be automatically installed.</inlineHelpText>
+        <inlineHelpText>DEPRECATED. New versions of the Nonprofit Success Pack will be automatically installed.</inlineHelpText>
         <label>DEPRECATED-Update Check Interval</label>
         <precision>18</precision>
         <required>false</required>
