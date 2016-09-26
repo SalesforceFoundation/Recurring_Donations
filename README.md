@@ -1,7 +1,7 @@
-Nonprofit Starter Pack - Recurring Donations
+Nonprofit Success Pack - Recurring Donations
 =================================================
 
-The Nonprofit Starter Pack (NPSP) is available as 5 managed packages.
+The Nonprofit Success Pack (NPSP) is available as 5 managed packages.
 This is the Recurring Donations package.
 
 **Recurring Donations**
@@ -14,7 +14,7 @@ For more information go to [http://nonprofitstarterpack.org](http://nonprofitsta
 How do I log an issue?
 ---
 
-Issue logging for the Nonprofit Starter Pack has moved!  All issues for the Recurring Donations package should now be logged [here](https://github.com/SalesforceFoundation/Cumulus/issues/new).  All existing open issues have been moved to the [new location](https://github.com/SalesforceFoundation/Cumulus/issues?labels=npe03&page=1&state=open).
+Issue logging for the Nonprofit Success Pack has moved!  All issues for the Recurring Donations package should now be logged [here](https://github.com/SalesforceFoundation/Cumulus/issues/new).  All existing open issues have been moved to the [new location](https://github.com/SalesforceFoundation/Cumulus/issues?labels=npe03&page=1&state=open).
 
 If your issue applies to older versions of the stand-alone Affiliations package, please post them directly to the [Power of Us Hub](powerofus.force.com/PUBlogin)
 
