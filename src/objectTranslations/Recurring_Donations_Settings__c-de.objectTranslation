@@ -1,16 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
     <caseValues>
+        <caseType>Nominative</caseType>
         <plural>false</plural>
         <value><!-- Recurring Donations Settings --></value>
     </caseValues>
     <caseValues>
+        <caseType>Nominative</caseType>
+        <plural>true</plural>
+        <value><!-- Recurring Donations Settings --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Accusative</caseType>
+        <plural>false</plural>
+        <value><!-- Recurring Donations Settings --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Accusative</caseType>
+        <plural>true</plural>
+        <value><!-- Recurring Donations Settings --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Genitive</caseType>
+        <plural>false</plural>
+        <value><!-- Recurring Donations Settings --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Genitive</caseType>
+        <plural>true</plural>
+        <value><!-- Recurring Donations Settings --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Dative</caseType>
+        <plural>false</plural>
+        <value><!-- Recurring Donations Settings --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Dative</caseType>
         <plural>true</plural>
         <value><!-- Recurring Donations Settings --></value>
     </caseValues>
     <fields>
-        <help>Si seleccionado, todas las oportunidad de las donaciones recurrentes usarán la campaña en la donación recurrente. Si no se selecciona, solo la primera oportunidad tendrá la campaña.</help>
-        <label>Agregar campaña a todas las op.</label>
+        <help>Bei Auswahl dieser Option wird die Kampagne für die wiederkehrende Spende bei allen Opportunities für wiederkehrende Spenden verwendet. Andernfalls wird die Kampagne nur für die erste Opportunity verwendet.</help>
+        <label>Kampagne allen Opportunities hinzufügen</label>
         <name>Add_Campaign_to_All_Opportunites__c</name>
     </fields>
     <fields>
@@ -24,8 +56,8 @@
         <name>DISABLE_RecurringDonations_trigger__c</name>
     </fields>
     <fields>
-        <help>Previene la programación del trabajo nocturno que actualiza las donaciones recurrentes. Cualquier trabajo programado existente debe ser removido en Configuración -&gt;Trabajos -&gt; Trabajos programados</help>
-        <label>Deshabilitar progr. del trabajo nocturno</label>
+        <help>Verhindert die Planung einer nächtlichen Aktualisierung für wiederkehrende Spenden Vorhandene geplante Aufträge müssen über Setup &gt; Überwachung -&gt; Geplante Aufträge entfernt werden.</help>
+        <label>Planung des Nachtauftrags deaktivieren</label>
         <name>Disable_Nightly_Job__c</name>
     </fields>
     <fields>
@@ -44,8 +76,8 @@
         <name>Has_Package_Update__c</name>
     </fields>
     <fields>
-        <help>Día y hora del último lote que modifica donaciones recurrentes.</help>
-        <label>Último lote procesado</label>
+        <help>Das Datum und die Uhrzeit der letzten Batchaktualisierung für wiederkehrende Spenden</help>
+        <label>Letzte Batchausführung</label>
         <name>Last_Batch_Run__c</name>
     </fields>
     <fields>
@@ -59,8 +91,8 @@
         <name>Max_Package_Version__c</name>
     </fields>
     <fields>
-        <help>Restringe la cantidad total de donaciones creadas por donaciones recurrentes con final abierto. Por defecto son 50. Un valor mayor puede resultar en errores DML</help>
-        <label>Máximo de donaciones</label>
+        <help>Beschränkt die Anzahl der Spenden, die für befristete wiederkehrende Spenden erstellt werden Der Standardwert ist 50.  Höhere Werte verursachen möglicherweise DML-Fehler.</help>
+        <label>Maximale Anzahl der Spenden</label>
         <name>Maximum_Donations__c</name>
     </fields>
     <fields>
@@ -68,23 +100,23 @@
         <name>Nightly_Update_ID__c</name>
     </fields>
     <fields>
-        <help>Cantidad de donaciones recurrentes que NO fueron modificadas con éxito el último lote.</help>
-        <label>Cantidad de fallos</label>
+        <help>Anzahl der wiederkehrenden Spenden, die beim letzten Batchvorgang nicht aktualisiert werden konnten.</help>
+        <label>Anzahl der Fehler</label>
         <name>Number_of_Failures__c</name>
     </fields>
     <fields>
-        <help>Cantidad de donaciones recurrentes que fueron modificadas con éxito en el último lote.</help>
-        <label>Cantidad de éxitos</label>
+        <help>Anzahl der wiederkehrenden Spenden, die beim letzten Batchvorgang aktualisiert werden konnten</help>
+        <label>Anzahl der Aktualisierungen</label>
         <name>Number_of_Successes__c</name>
     </fields>
     <fields>
-        <help>Determina el comportamiento de las oportunidades abiertas cuando una donación recurrente con final abierto cambia su estado a cerrada.</help>
-        <label>Comp. de op. Abiertas en cierre de DR</label>
+        <help>Mit dieser Option wird das Verhalten aller noch offenen Opportunities festgelegt, wenn eine unbefristete wiederkehrende Spende in den Status &quot;Geschlossen&quot; versetzt wird.</help>
+        <label>Opp.-Verh. bei Beend. wiederkehr. Spende</label>
         <name>Open_Opportunity_Behavior__c</name>
     </fields>
     <fields>
-        <help>Cantidad de meses desde hoy que deben tener op. abiertas creadas cuando se usa don. recurrentes con final abierto. ATENCIÓN: Disminuir este valor resulta en la eliminación de op. que están de más. Aumentar este valor ejecutará un lote para agregar op.</help>
-        <label>Meses de previsiones de oportunidades</label>
+        <help>Anzahl der Monate ab heute zur Erstellung offener Opport., wenn unbefristete wiederkehrende Spenden verwendet werden. WARNUNG: Bei Wertverkleinerung werden weitere Opport. gelöscht. Bei Werterhöhung wird ein Batchvorgang zum Hinzuf. von Opport. gestartet.</help>
+        <label>Opportunity-Vorschau in Monaten</label>
         <name>Opportunity_Forecast_Months__c</name>
     </fields>
     <fields>
@@ -93,8 +125,8 @@
         <name>Package_Update_URL__c</name>
     </fields>
     <fields>
-        <help>Tipo de registro de oportunidad usado para las oportunidades creadas por donaciones recurrentes.</help>
-        <label>Tipo de registro de oportunidad</label>
+        <help>Opportunity-Datensatztyp für die Erstellung von Opportunities mit wiederkehrenden Spenden</help>
+        <label>Opportunity-Datensatztyp</label>
         <name>Record_Type__c</name>
     </fields>
     <fields>
@@ -102,5 +134,5 @@
         <label><!-- DEPRECATED-Update Check Interval --></label>
         <name>Update_Check_Interval__c</name>
     </fields>
-    <gender><!-- Feminine --></gender>
+    <gender><!-- Neuter --></gender>
 </CustomObjectTranslation>

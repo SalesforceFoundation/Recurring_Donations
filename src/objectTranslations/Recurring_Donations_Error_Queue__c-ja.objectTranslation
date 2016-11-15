@@ -4,19 +4,14 @@
         <plural>false</plural>
         <value><!-- DEPRECATED-RD Error Queue --></value>
     </caseValues>
-    <caseValues>
-        <plural>true</plural>
-        <value><!-- DEPRECATED-RD Error Queue --></value>
-    </caseValues>
     <fields>
-        <help>Mensaje del error de la operación asociada a el registro de la donación recurrente.</help>
-        <label>Mensaje del error</label>
+        <help>関連付けられた継続支援レコードの操作時のエラーメッセージ</help>
+        <label>エラーメッセージ</label>
         <name>Error_Message__c</name>
     </fields>
     <fields>
-        <help>ID del registro de la donación recurrente afectada</help>
+        <help>影響を受ける継続支援レコードの ID。</help>
         <label><!-- Recurring_Donation_ID --></label>
         <name>Recurring_Donation_ID__c</name>
     </fields>
-    <gender><!-- Feminine --></gender>
 </CustomObjectTranslation>

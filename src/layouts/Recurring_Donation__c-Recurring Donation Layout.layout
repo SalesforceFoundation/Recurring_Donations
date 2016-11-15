@@ -116,16 +116,10 @@
     </layoutSections>
     <quickActionList>
         <quickActionListItems>
-            <quickActionName>FeedItem.TextPost</quickActionName>
-        </quickActionListItems>
-        <quickActionListItems>
             <quickActionName>Recurring_Donation__c.Quick_Update</quickActionName>
         </quickActionListItems>
         <quickActionListItems>
             <quickActionName>Recurring_Donation__c.New_Opportunity</quickActionName>
-        </quickActionListItems>
-        <quickActionListItems>
-            <quickActionName>FeedItem.ContentPost</quickActionName>
         </quickActionListItems>
         <quickActionListItems>
             <quickActionName>NewNote</quickActionName>

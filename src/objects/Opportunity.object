@@ -3,7 +3,6 @@
     <fields>
         <fullName>Recurring_Donation__c</fullName>
         <deleteConstraint>SetNull</deleteConstraint>
-        <deprecated>false</deprecated>
         <externalId>false</externalId>
         <label>Recurring Donation</label>
         <referenceTo>Recurring_Donation__c</referenceTo>

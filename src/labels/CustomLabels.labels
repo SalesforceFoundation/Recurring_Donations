@@ -174,7 +174,7 @@
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>RecurringDonationSettingsDescription</shortDescription>
-        <value>Settings that control the behavior of Recurring Donations. Changing these settings will change how Recurring Donations behaves.</value>
+        <value>These settings control how Recurring Donations behave in the Nonprofit Success Pack. See the &lt;a href=&quot;https://powerofus.force.com/NPSP_Recurring_Donations&quot; target=&quot;_blank&quot;&gt;NPSP Documentation&lt;/a&gt; for more information.</value>
     </labels>
     <labels>
         <fullName>RecurringDonationStageName</fullName>
