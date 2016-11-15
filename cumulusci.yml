@@ -1,0 +1,8 @@
+project:
+    name: Recurring_Donations
+    package:
+        name: Recurring Donations
+        namespace: npe03
+        api_version: 29.0
+    git:
+        release: rel/
