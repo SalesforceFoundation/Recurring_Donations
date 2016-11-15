@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Package xmlns="http://soap.sforce.com/2006/04/metadata">
-    <fullName>Recurring+Donations</fullName>
+    <fullName>Recurring Donations</fullName>
     <types>
         <members>RecurringDonations</members>
         <members>RecurringDonationsPkgVersionCheck</members>
@@ -91,12 +91,12 @@
         <name>CustomLabel</name>
     </types>
     <types>
-        <name>CustomLabel</name>
+        <members>CustomLabels</members>
+        <name>CustomLabels</name>
     </types>
     <types>
         <members>Custom_Field_Mapping__c</members>
         <members>Custom_Installment_Settings__c</members>
-        <members>Opportunity</members>
         <members>Recurring_Donation__c</members>
         <members>Recurring_Donations_Error_Queue__c</members>
         <members>Recurring_Donations_Settings__c</members>
