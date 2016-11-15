@@ -3,6 +3,6 @@ project:
     package:
         name: Recurring Donations
         namespace: npe03
-        api_version: 29.0
+        api_version: 36.0
     git:
         release: rel/
