@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <article>None</article>
+        <plural>false</plural>
+        <value><!-- DEPRECATED-RD Error Queue --></value>
+    </caseValues>
+    <caseValues>
+        <article>Definite</article>
+        <plural>false</plural>
+        <value><!-- הDEPRECATED-RD Error Queue --></value>
+    </caseValues>
+    <caseValues>
+        <article>None</article>
+        <plural>true</plural>
+        <value><!-- DEPRECATED-RD Error Queue --></value>
+    </caseValues>
+    <caseValues>
+        <article>Definite</article>
+        <plural>true</plural>
+        <value><!-- הDEPRECATED-RD Error Queue --></value>
+    </caseValues>
+    <fields>
+        <help>הודעת שגיאה עבור הפעולה על רשומת התרומה החוזרת</help>
+        <label>הודעת שגיאה</label>
+        <name>Error_Message__c</name>
+    </fields>
+    <fields>
+        <help>המזהה של רשומת התרומה החוזרת המושפעת</help>
+        <label><!-- Recurring_Donation_ID --></label>
+        <name>Recurring_Donation_ID__c</name>
+    </fields>
+    <gender><!-- Masculine --></gender>
+</CustomObjectTranslation>

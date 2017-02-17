@@ -1,16 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
     <caseValues>
+        <article>None</article>
         <plural>false</plural>
         <value><!-- Recurring Donations Settings --></value>
     </caseValues>
     <caseValues>
+        <article>Definite</article>
+        <plural>false</plural>
+        <value><!-- הRecurring Donations Settings --></value>
+    </caseValues>
+    <caseValues>
+        <article>None</article>
         <plural>true</plural>
         <value><!-- Recurring Donations Settings --></value>
     </caseValues>
+    <caseValues>
+        <article>Definite</article>
+        <plural>true</plural>
+        <value><!-- הRecurring Donations Settings --></value>
+    </caseValues>
     <fields>
-        <help>Si sélectionné, toutes les opportunités pour des dons réguliers utiliseront la campagne sur le don régulier. Autrement, seule la première opportunité utilisera la campagne.</help>
-        <label>Ajouter la campagne à toutes les opp.</label>
+        <help>אם אפשרות זו מסומנת, כל ההזדמנויות לתרומות חוזרות ישתמשו במבצע בתרומה החוזרת. אחרת, רק ההזדמנות הראשונה תקבל את המבצע.</help>
+        <label>הוסף מבצע לכל תרומה</label>
         <name>Add_Campaign_to_All_Opportunites__c</name>
     </fields>
     <fields>
@@ -24,8 +36,8 @@
         <name>DISABLE_RecurringDonations_trigger__c</name>
     </fields>
     <fields>
-        <help>Empêche la planification de la mise à jour de nuit pour les dons réguliers. Les tâches planifiées existantes devront être supprimées en accédant à Configuration&gt;Surveillance-&gt;Tâches planifiées</help>
-        <label>Désactiver planif. de tâche nocturne</label>
+        <help>מונע את תזמון העדכון הלילי של תרומות חוזרות. יהיה עליך להסיר את כל המשימות המתוזמנות הקיימות באמצעות &apos;הגדרה-&gt;ניטור-&gt;משימות מתוזמנות&apos;</help>
+        <label>השבת תזמון משימה לילית</label>
         <name>Disable_Nightly_Job__c</name>
     </fields>
     <fields>
@@ -44,8 +56,8 @@
         <name>Has_Package_Update__c</name>
     </fields>
     <fields>
-        <help>Date et heure de la dernière mise à jour par lot des dons réguliers.</help>
-        <label>Dernière exécution de lot</label>
+        <help>התאריך והשעה של עדכון האצווה האחרון של תרומות חוזרות.</help>
+        <label>הפעלת אצווה אחרונה</label>
         <name>Last_Batch_Run__c</name>
     </fields>
     <fields>
@@ -59,8 +71,8 @@
         <name>Max_Package_Version__c</name>
     </fields>
     <fields>
-        <help>Restreint le nombre total de dons créés pour les dons réguliers avec date de fin. La valeur par défaut est de 50.  Des valeurs plus élevées peuvent provoquer des erreurs DML.</help>
-        <label>Nombre maximum de dons</label>
+        <help>הגבלת המספר הכולל של תרומות שניתן ליצור עבור תרומות חוזרות ללא סיום פתוח. ערך ברירת המחדל הוא 50.  ערכים גדולים יותר עלולים לגרום לבעיות DML.</help>
+        <label>מספר תרומות מרבי</label>
         <name>Maximum_Donations__c</name>
     </fields>
     <fields>
@@ -68,23 +80,23 @@
         <name>Nightly_Update_ID__c</name>
     </fields>
     <fields>
-        <help>Nombre de dons réguliers dont la mise à jour a échoué lors de la dernière opération par lot.</help>
-        <label>Nombre de défaillances</label>
+        <help>מספר התרומות החוזרות שהעדכון שלהן נכשל בפעולת האצווה האחרונה.</help>
+        <label>מספר כשלים</label>
         <name>Number_of_Failures__c</name>
     </fields>
     <fields>
-        <help>Nombre de dons réguliers dont la mise à jour a réussi lors de la dernière exécution par lot.</help>
-        <label>Nombre de réussites</label>
+        <help>מספר התרומות החוזרות שהעדכון שלהן בוצע בהצלחה בהפעלת האצווה האחרונה.</help>
+        <label>מספר הצלחות</label>
         <name>Number_of_Successes__c</name>
     </fields>
     <fields>
-        <help>Détermine le comportement de toutes les opportunités ouvertes restantes lorsqu’un don régulier sans date de fin passe à un statut fermé.</help>
-        <label>Comp. opp. ouv. sur clôture de don rég.</label>
+        <help>קובע את ההתנהגות של כל ההזדמנויות שנותרו פתוחות כאשר תרומה חוזרת עם סיום פתוח עוברת למצב סגור.</help>
+        <label>התנהגות תרומה פתוחה בסגירת תרומה חוזרת</label>
         <name>Open_Opportunity_Behavior__c</name>
     </fields>
     <fields>
-        <help>Nb de mois futurs pour lesquels des opportunités ouvertes sont créées avec les dons réguliers ouverts. AVERTISSEMENT : Réduire cette valeur supprime les opportunités supplémentaires. L’augmenter lance un processus par lot d’ajout d’opportunités.</help>
-        <label>Mois de prévision des opportunités</label>
+        <help>מספר החודשים מהיום הנוכחי ליצירת הזדמנויות פתוחות, בעת שימוש בתרומות חוזרות עם סיום פתוח. אזהרה: הקטנת ערך זה תגרום למחיקת הזדמנויות נוספות.  הגדלתו תביא להפעלת תהליך אצווה להוספת הזדמנויות</help>
+        <label>חודשי תחזית התרומה</label>
         <name>Opportunity_Forecast_Months__c</name>
     </fields>
     <fields>
@@ -93,8 +105,8 @@
         <name>Package_Update_URL__c</name>
     </fields>
     <fields>
-        <help>Type d’enregistrement d’opportunité utilisé lorsque des opportunités de dons réguliers sont créées.</help>
-        <label>Type d’enregistrement d’opportunité</label>
+        <help>סוג רשומת ההזדמנות המשמש בעת יצירה של הזדמנויות תרומה חוזרת.</help>
+        <label>סוג רשומת התרומה</label>
         <name>Record_Type__c</name>
     </fields>
     <fields>
@@ -103,5 +115,4 @@
         <name>Update_Check_Interval__c</name>
     </fields>
     <gender><!-- Masculine --></gender>
-    <startsWith><!-- Consonant --></startsWith>
 </CustomObjectTranslation>

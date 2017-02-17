@@ -9,13 +9,13 @@
         <value><!-- Custom Installment Settings --></value>
     </caseValues>
     <fields>
-        <help><!-- The type of time period the Custom Installment Period covers. --></help>
-        <label><!-- Time Period Type --></label>
+        <help>Le type de la période couverte par la période de versement personnalisée.</help>
+        <label>Type de période</label>
         <name>Increment__c</name>
     </fields>
     <fields>
-        <help><!-- The amount of time the Custom Installment Period covers. --></help>
-        <label><!-- Time Period Frequency --></label>
+        <help>La durée couverte par la période de versement personnalisée.</help>
+        <label>Fréquence de période</label>
         <name>Value__c</name>
     </fields>
     <gender><!-- Masculine --></gender>
