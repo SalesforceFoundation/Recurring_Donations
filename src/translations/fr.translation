@@ -69,7 +69,7 @@
         <name>RecurringDonationMultiplyValue</name>
     </customLabels>
     <customLabels>
-        <label><!-- RecurringDonationOpenStatus --></label>
+        <label>Ouvert</label>
         <name>RecurringDonationOpenStatus</name>
     </customLabels>
     <customLabels>
