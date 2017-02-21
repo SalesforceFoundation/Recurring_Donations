@@ -1,0 +1,88 @@
+Language code: fr
+Type: Bilingual
+
+------------------TRANSLATED-------------------
+
+ButtonOrLink.Recurring_Donation__c.New_Recurring_Acct_Donation	New Recurring Acct Donation	Nouveau don récurrent	-
+ButtonOrLink.Recurring_Donation__c.New_Recurring_Donation_Pledge_Account	New Recurring Contact Donation	Nouveau contact don récurrent	-
+ButtonOrLink.Recurring_Donation__c.Refresh_Opportunities	Refresh Opportunities	Rafraîchir les opportunités	-
+CustomField.Recurring_Donation__c.Amount.FieldLabel	Amount	Montant	-
+CustomField.Recurring_Donation__c.Contact.FieldLabel	Contact	Contact	-
+CustomField.Recurring_Donation__c.Contact.RelatedListLabel	Recurring Donations	Dons récurrents et engagements	-
+CustomField.Recurring_Donation__c.Date_Established.FieldLabel	Date Established	Date de première échéance	-
+CustomField.Recurring_Donation__c.Donor_Name.FieldLabel	Donor Name	Nom du donateur	-
+CustomField.Recurring_Donation__c.Installment_Amount.FieldLabel	Installment Amount	Montant de la traite	-
+CustomField.Recurring_Donation__c.Installment_Period.FieldLabel	Installment Period	Périodicité	-
+CustomField.Recurring_Donation__c.Installment_Period.HelpText	Sets the installment period for your recurring donations.  WARNING: Changing the Installment Period for an existing open-ended Recurring Donation can cause open Opportunities to be deleted and recreated. Any associated data may not be retained.	Définit la période de versement pour vos dons réguliers.  AVERTISSEMENT : modifier la période de versement pour un don régulier existant sans date de fin peut causer la suppression et recréation d’opportunités ouvertes, avec perte de données associées.	-
+CustomField.Recurring_Donation__c.Installments.FieldLabel	Installments	Nombre de traites	-
+CustomField.Recurring_Donation__c.Installments.HelpText	Number of installments.  Only used with Non-Open Ended Recurring Donations.	Nombre de versements.  Uniquement utilisé avec des dons réguliers avec date de fin.	-
+CustomField.Recurring_Donation__c.Last_Payment_Date.FieldLabel	Last Donation Date	Date du dernier don	-
+CustomField.Recurring_Donation__c.Last_Payment_Date.HelpText	Date of the last payment for this Recurring Donation	Date du dernier paiement pour ce don régulier	-
+CustomField.Recurring_Donation__c.Next_Payment_Date.FieldLabel	Next Donation Date	Date du prochain don	-
+CustomField.Recurring_Donation__c.Next_Payment_Date.HelpText	Holds the date of the next recurring payment.  Manually editing this field will recalculate all future opportunity's close dates based on the scheduled defined.	Contient la date du prochain paiement récurrent.  Une modification manuelle de ce champ nécessite de recalculer toutes les dates de fermeture des opportunités futures en fonction du calendrier défini.	-
+CustomField.Recurring_Donation__c.Open_Ended_Status.FieldLabel	Open Ended Status	Statut de date de fin	-
+CustomField.Recurring_Donation__c.Organization.FieldLabel	Organization	Compte	-
+CustomField.Recurring_Donation__c.Organization.RelatedListLabel	Recurring Donations	Dons récurrents et engagements	-
+CustomField.Recurring_Donation__c.Paid_Amount.FieldLabel	Paid Amount	Montant payé	-
+CustomField.Recurring_Donation__c.Paid_Amount.HelpText	Total Amount paid on this Recurring Donation	Montant total payé sur ce don régulier	-
+CustomField.Recurring_Donation__c.Recurring_Donation_Campaign.FieldLabel	Campaign	Campagne	-
+CustomField.Recurring_Donation__c.Recurring_Donation_Campaign.RelatedListLabel	Recurring Donations	Dons réguliers	-
+CustomField.Recurring_Donation__c.Schedule_Type.FieldLabel	Schedule Type	Critère	-
+CustomField.Recurring_Donation__c.Schedule_Type.HelpText	Whether the Amount is used for each installment (Multiple By), or Amount is split between installments (Divide By).  Only used with Non-Open Ended Recurring Donations.	Indique si le montant est utilisé pour chaque versement (Multiplié par) ou réparti entre les versements (Divisé entre)  Uniquement utilisé avec des dons réguliers avec date de fin.	-
+CustomField.Recurring_Donation__c.Total.FieldLabel	Total	Total	-
+CustomField.Recurring_Donation__c.Total_Paid_Installments.FieldLabel	Total Paid Installments	Total des versements payés	-
+CustomField.Recurring_Donation__c.Total_Paid_Installments.HelpText	Total number of installments paid on this open-ended recurring donation.	Nombre total de versements payés pour ce don régulier sans date de fin.	-
+CustomField.Custom_Field_Mapping__c.Opportunity_Field.FieldLabel	Opportunity Field	Champ d’opportunité	-
+CustomField.Custom_Field_Mapping__c.Opportunity_Field.HelpText	The Opportunity field to receive the value from the Recurring Donation field.  Note that these fields must have the same data type.	Le champ d’opportunité pour recevoir la valeur du champ de don régulier.  Notez que ces champs doivent avoir le même type de données.	-
+CustomField.Custom_Field_Mapping__c.Recurring_Donation_Field.FieldLabel	Recurring Donation Field	Champ de don régulier	-
+CustomField.Custom_Field_Mapping__c.Recurring_Donation_Field.HelpText	The Recurring Donation field to copy to the Opportunity field.  Note that these fields must have the same data type.	Le champ de don régulier à copier vers le champ d’opportunité.  Notez que ces champs doivent avoir le même type de données.	-
+CustomField.Custom_Installment_Settings__c.Increment.FieldLabel	Time Period Type	Type de période	-
+CustomField.Custom_Installment_Settings__c.Increment.HelpText	The type of time period the Custom Installment Period covers.	Le type de la période couverte par la période de versement personnalisée.	-
+CustomField.Custom_Installment_Settings__c.Value.FieldLabel	Time Period Frequency	Fréquence de période	-
+CustomField.Custom_Installment_Settings__c.Value.HelpText	The amount of time the Custom Installment Period covers.	La durée couverte par la période de versement personnalisée.	-
+CustomField.Recurring_Donations_Error_Queue__c.Error_Message.FieldLabel	Error Message	Message d’erreur	-
+CustomField.Recurring_Donations_Error_Queue__c.Error_Message.HelpText	Error message for the operation on the associated Recurring Donation record	Message d’erreur pour l’opération sur l’enregistrement de don régulier associé	-
+CustomField.Recurring_Donations_Error_Queue__c.Recurring_Donation_ID.HelpText	ID of the affected Recurring Donation record	ID de l’enregistrement de don régulier affecté	-
+CustomField.Recurring_Donations_Settings__c.Add_Campaign_to_All_Opportunites.FieldLabel	Add Campaign to All Opportunites	Ajouter la campagne à toutes les opp.	-
+CustomField.Recurring_Donations_Settings__c.Add_Campaign_to_All_Opportunites.HelpText	If selected, all Opportunities for Recurring Donations will use the Campaign on the Recurring Donation. Otherwise, only the first Opportunity will have the Campaign.	Si sélectionné, toutes les opportunités pour des dons réguliers utiliseront la campagne sur le don régulier. Autrement, seule la première opportunité utilisera la campagne.	-
+CustomField.Recurring_Donations_Settings__c.Disable_Nightly_Job.FieldLabel	Disable Scheduling of Nightly Job	Désactiver planif. de tâche nocturne	-
+CustomField.Recurring_Donations_Settings__c.Disable_Nightly_Job.HelpText	Prevents the scheduling of the nightly update to Recurring Donations. Any existing scheduled job will need to be removed through Setup->Monitoring->Scheduled Jobs	Empêche la planification de la mise à jour de nuit pour les dons réguliers. Les tâches planifiées existantes devront être supprimées en accédant à Configuration>Surveillance->Tâches planifiées	-
+CustomField.Recurring_Donations_Settings__c.Last_Batch_Run.FieldLabel	Last Batch Run	Dernière exécution de lot	-
+CustomField.Recurring_Donations_Settings__c.Last_Batch_Run.HelpText	The date and time of the last batch update of Recurring Donations.	Date et heure de la dernière mise à jour par lot des dons réguliers.	-
+CustomField.Recurring_Donations_Settings__c.Maximum_Donations.FieldLabel	Maximum Donations	Nombre maximum de dons	-
+CustomField.Recurring_Donations_Settings__c.Maximum_Donations.HelpText	Restricts the total number of donations created for non-open-ended Recurring Donations. Default is 50.  Larger values may result in DML errors.	Restreint le nombre total de dons créés pour les dons réguliers avec date de fin. La valeur par défaut est de 50.  Des valeurs plus élevées peuvent provoquer des erreurs DML.	-
+CustomField.Recurring_Donations_Settings__c.Number_of_Failures.FieldLabel	Number of Failures	Nombre de défaillances	-
+CustomField.Recurring_Donations_Settings__c.Number_of_Failures.HelpText	Number of Recurring Donations unsuccessfully updated in the last batch operation.	Nombre de dons réguliers dont la mise à jour a échoué lors de la dernière opération par lot.	-
+CustomField.Recurring_Donations_Settings__c.Number_of_Successes.FieldLabel	Number of Successes	Nombre de réussites	-
+CustomField.Recurring_Donations_Settings__c.Number_of_Successes.HelpText	Number of Recurring Donations successfully updated in the last batch run.	Nombre de dons réguliers dont la mise à jour a réussi lors de la dernière exécution par lot.	-
+CustomField.Recurring_Donations_Settings__c.Open_Opportunity_Behavior.FieldLabel	Open Opportunity Behavior on RD Close	Comp. opp. ouv. sur clôture de don rég.	-
+CustomField.Recurring_Donations_Settings__c.Open_Opportunity_Behavior.HelpText	Determines the behavior of any remaining open Opportunities when an open-ended Recurring Donation is moved to a closed status.	Détermine le comportement de toutes les opportunités ouvertes restantes lorsqu’un don régulier sans date de fin passe à un statut fermé.	-
+CustomField.Recurring_Donations_Settings__c.Opportunity_Forecast_Months.FieldLabel	Opportunity Forecast Months	Mois de prévision des opportunités	-
+CustomField.Recurring_Donations_Settings__c.Opportunity_Forecast_Months.HelpText	Number of months from today worth of open Opportunities to be created when using open-ended Recurring Donations. WARNING: Reducing this value will result in extra Opportunities being deleted.  Increasing it will launch a batch process to add Opportunities	Nb de mois futurs pour lesquels des opportunités ouvertes sont créées avec les dons réguliers ouverts. AVERTISSEMENT : Réduire cette valeur supprime les opportunités supplémentaires. L’augmenter lance un processus par lot d’ajout d’opportunités.	-
+CustomField.Recurring_Donations_Settings__c.Record_Type.FieldLabel	Opportunity Record Type	Type d’enregistrement d’opportunité	-
+CustomField.Recurring_Donations_Settings__c.Record_Type.HelpText	Opportunity Record Type used when Recurring Donation Opportunities are created.	Type d’enregistrement d’opportunité utilisé lorsque des opportunités de dons réguliers sont créées.	-
+CustomField.Opportunity.Recurring_Donation.FieldLabel	Recurring Donation	Don récurrent	-
+CustomField.Opportunity.Recurring_Donation.RelatedListLabel	Donations	Dons	-
+PicklistValue.Recurring_Donation__c.Schedule_Type.Divide By	Divide By	Diviser par	-
+WebTab.Recurring_Donations_Settings	Recurring Donations Settings	Paramètres des dons réguliers	-
+CustomLabel.RecurringDonationBadFieldMapping	Fields must be of compatible datatypes. Please edit your field choices and try again.	Les types de données des champs doivent être compatibles. Modifiez les choix de vos champs, puis réessayez.	-
+CustomLabel.RecurringDonationBadLabelWarning	Your custom label for closed lost Opportunities does not correspond to an active closed/lost Opportunity Stage Name. This can cause unwanted results when marking Recurring Donations closed and having the Open Opportunity Behavior setting set to: Mark_Opportunities_Closed_Lost.  Please check your stage names and RecurringDonationClosedLostOpportunityStage custom label.	Votre étiquette personnalisée pour les opportunités fermées perdues ne correspond pas au nom d’une étape d’opportunité fermée perdue active. Ceci peut provoquer des conséquences indésirables lorsque vous marquez comme fermées des dons réguliers et que le paramètre de comportement d’opportunité ouverte est : Mark_Opportunities_Closed_Lost.  Veuillez vérifier vos noms d’étapes et l’étiquette personnalisée RecurringDonationClosedLostOpportunityStage.	-
+CustomLabel.RecurringDonationCantDeleteError	You must delete the related Donations before you can delete this recurring donation	You must delete the related Donations before you can delete this recurring donation	-
+CustomLabel.RecurringDonationClosedLostOpportunityStage	Closed Lost	Fermé perdu	-
+CustomLabel.RecurringDonationClosedStatus	Closed	Fermé	-
+CustomLabel.RecurringDonationContactRole	Donor	Donor	-
+CustomLabel.RecurringDonationCustomValidationWarning	Fields on your Opportunity object have Custom Validation Rules that may cause issues with your Recurring Donations package:	Les champs de votre objet d’opportunité ont des règles de validation personnalisées qui peuvent provoquer des problèmes avec votre package de dons réguliers :	-
+CustomLabel.RecurringDonationDivideValue	Divide By	Divide By	-
+CustomLabel.RecurringDonationErrorEmailBody	Errors were encountered when trying to insert new Opportunities for your open-ended Recurring Donations. This can adversely affect your forecasting and functionality of your Salesforce.com instance. Addressing these errors as soon as possible can prevent bad data from entering your system.  The Recurring Donation and associated Opportunity insert error are listed below, and can be found in the NPSP Settings tab under System, Error Log.	Des erreurs sont survenues lors de la tentative d’insertion de nouvelles opportunités pour vos dons réguliers sans date de fin. Ceci peut affecter négativement vos prévisions et les fonctionnalités de votre instance de Salesforce. Remédier à ces erreurs dès que possible peut éviter que de mauvaises données soient insérées dans votre système.  Le don régulier et l’erreur d’insertion d’opportunité associée sont présentés ci-dessous, et peuvent être trouvés dans l’onglet de configuration de NPSP, dans Système, Journal des erreurs.	-
+CustomLabel.RecurringDonationInstallmentPeriod1stand15th	1st and 15th	1er et 15	-
+CustomLabel.RecurringDonationInvalidCustomInstallment	All Custom Installments must have a Name, positive Frequency and Time Period Type.	Tous les versements personnalisés doivent avoir un nom, une fréquence positive et un type de période.	-
+CustomLabel.RecurringDonationMissingDataError	You must select an Organization or Contact	You must select an Organization or Contact	-
+CustomLabel.RecurringDonationOpenStatus	Open	Ouvert	-
+CustomLabel.RecurringDonationPrefix	Donation	Donation	-
+CustomLabel.RecurringDonationRequiredFieldsWarning	The following required fields on your Opportunity object may cause issues with your Recurring Donations package:	Les champs obligatoires suivants de votre objet d’opportunité peuvent provoquer des problèmes avec votre package de dons réguliers :	-
+CustomLabel.RecurringDonationSchedulingError	There was an error in scheduling your nightly Recurring Donations update.	Une erreur s’est produite lors de la planification de votre mise à jour nocturne de dons réguliers.	-
+CustomLabel.RecurringDonationSettingsDescription	These settings control how Recurring Donations behave in the Nonprofit Success Pack. See the <a href="https://powerofus.force.com/NPSP_Recurring_Donations" target="_blank">NPSP Documentation</a> for more information.	Ces paramètres contrôlent la manière dont les dons réguliers fonctionnent dans le pack NPSP. Consultez la <a href="https://powerofus.force.com/NPSP_Recurring_Donations" target="_blank">documentation de NPSP</a> pour plus d’informations.	-
+CustomLabel.RecurringDonationStageName	Pledged	Pledged	-
+CustomLabel.RecurringDonationTooManyInstallmentsError	You must specify fewer than 50 installments.  (This error message is no longer used).	You must specify fewer than 50 installments	-
+QuickAction.Recurring_Donation__c.New_Opportunity	New Opportunity	Nouvelle opportunité	-
+QuickAction.Recurring_Donation__c.Quick_Update	Quick Update	Mise à jour rapide	-
