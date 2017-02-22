@@ -68,7 +68,7 @@
         <name>Nightly_Update_ID__c</name>
     </fields>
     <fields>
-        <help>Cantidad de donaciones recurrentes que NO fueron modificadas con éxito el último lote.</help>
+        <help>Cantidad de donaciones recurrentes que NO fueron modificadas con éxito el  último lote.</help>
         <label>Cantidad de fallos</label>
         <name>Number_of_Failures__c</name>
     </fields>

@@ -39,7 +39,7 @@
         </picklistValues>
         <picklistValues>
             <masterLabel>Monthly</masterLabel>
-            <translation><!-- Monthly --></translation>
+            <translation>Mensual</translation>
         </picklistValues>
         <picklistValues>
             <masterLabel>Quarterly</masterLabel>
@@ -55,7 +55,7 @@
         </picklistValues>
     </fields>
     <fields>
-        <help>Cantidad de cuotas (donaciones) que se esperan recibir. Para donaciones recurrentes con duración fija solamente.</help>
+        <help>Cantidad de cuotas (donaciones) que se esperan recibir. Para donaciones recurrentes sin final abierto solamente.</help>
         <label>Cantidad de cuotas</label>
         <name>Installments__c</name>
     </fields>
@@ -99,10 +99,10 @@
     <fields>
         <label>Campaña</label>
         <name>Recurring_Donation_Campaign__c</name>
-        <relationshipLabel><!-- Recurring Donations --></relationshipLabel>
+        <relationshipLabel>Donaciones recurrentes</relationshipLabel>
     </fields>
     <fields>
-        <help>Especifica como se debe calcular el importe de las oportunidades recurrentes, basado en el campo Monto. Solo para donaciones recurrentes con duración fija.</help>
+        <help>Especifica como se debe calcular el importe de las oportunidades recurrentes, basado en el campo Monto. Solo para donaciones recurrentes sin final abierto.</help>
         <label>Criterio</label>
         <name>Schedule_Type__c</name>
         <picklistValues>

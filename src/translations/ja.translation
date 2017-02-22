@@ -29,7 +29,7 @@
         <name>RecurringDonationCustomValidationWarning</name>
     </customLabels>
     <customLabels>
-        <label><!-- RecurringDonationDivideValue --></label>
+        <label>分割</label>
         <name>RecurringDonationDivideValue</name>
     </customLabels>
     <customLabels>
