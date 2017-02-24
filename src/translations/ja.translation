@@ -13,11 +13,11 @@
         <name>RecurringDonationCantDeleteError</name>
     </customLabels>
     <customLabels>
-        <label><!-- RecurringDonationClosedLostOpportunityStage --></label>
+        <label>不成立</label>
         <name>RecurringDonationClosedLostOpportunityStage</name>
     </customLabels>
     <customLabels>
-        <label><!-- RecurringDonationClosedStatus --></label>
+        <label>完了済み</label>
         <name>RecurringDonationClosedStatus</name>
     </customLabels>
     <customLabels>
@@ -29,7 +29,7 @@
         <name>RecurringDonationCustomValidationWarning</name>
     </customLabels>
     <customLabels>
-        <label><!-- RecurringDonationDivideValue --></label>
+        <label>分割</label>
         <name>RecurringDonationDivideValue</name>
     </customLabels>
     <customLabels>
@@ -37,7 +37,7 @@
         <name>RecurringDonationErrorEmailBody</name>
     </customLabels>
     <customLabels>
-        <label><!-- RecurringDonationInstallmentPeriod1stand15th --></label>
+        <label>1 日と 15 日</label>
         <name>RecurringDonationInstallmentPeriod1stand15th</name>
     </customLabels>
     <customLabels>
@@ -69,7 +69,7 @@
         <name>RecurringDonationMultiplyValue</name>
     </customLabels>
     <customLabels>
-        <label><!-- RecurringDonationOpenStatus --></label>
+        <label>進行中</label>
         <name>RecurringDonationOpenStatus</name>
     </customLabels>
     <customLabels>
