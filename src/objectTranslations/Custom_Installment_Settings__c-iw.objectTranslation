@@ -21,13 +21,13 @@
         <value><!-- הCustom Installment Settings --></value>
     </caseValues>
     <fields>
-        <help><!-- The type of time period the Custom Installment Period covers. --></help>
-        <label><!-- Time Period Type --></label>
+        <help>סוג פרק הזמן שתקופת התשלומים המותאמת אישית מכסה.</help>
+        <label>סוג משך זמן</label>
         <name>Increment__c</name>
     </fields>
     <fields>
-        <help><!-- The amount of time the Custom Installment Period covers. --></help>
-        <label><!-- Time Period Frequency --></label>
+        <help>משך הזמן שתקופת התשלומים המותאמת אישית מכסה.</help>
+        <label>תדירות משך זמן</label>
         <name>Value__c</name>
     </fields>
     <gender><!-- Masculine --></gender>

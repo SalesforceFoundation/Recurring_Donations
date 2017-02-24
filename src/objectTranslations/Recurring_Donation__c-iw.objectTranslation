@@ -21,29 +21,29 @@
         <value><!-- הRecurring Donations --></value>
     </caseValues>
     <fields>
-        <label><!-- Amount --></label>
+        <label>כמות</label>
         <name>Amount__c</name>
     </fields>
     <fields>
-        <label><!-- Contact --></label>
+        <label>איש קשר</label>
         <name>Contact__c</name>
-        <relationshipLabel><!-- Recurring Donations --></relationshipLabel>
+        <relationshipLabel>תרומות חוזרות</relationshipLabel>
     </fields>
     <fields>
-        <label><!-- Date Established --></label>
+        <label>תאריך הגדרה</label>
         <name>Date_Established__c</name>
     </fields>
     <fields>
-        <label><!-- Donor Name --></label>
+        <label>שם התורם</label>
         <name>Donor_Name__c</name>
     </fields>
     <fields>
-        <label><!-- Installment Amount --></label>
+        <label>סכום תשלום</label>
         <name>Installment_Amount__c</name>
     </fields>
     <fields>
-        <help><!-- How often you’ll receive the donations. NOTE: Changing the installment period for an existing Fixed-Length Recurring Donation may result in the loss and re-creation of open opportunities. Any data associated with those opportunities may be lost. --></help>
-        <label><!-- Installment Period --></label>
+        <help>הגדרת תקופת התשלום עבור התרומות החוזרות שלך.  אזהרה: שינוי תקופת התשלום עבור תרומה חוזרת עם סיום פתוח עשוי לגרום למחיקה או יצירה מחדש של הזדמנויות פתוחות. ייתכן שנתונים משויכים לא יישמרו.</help>
+        <label>תקופת תשלום</label>
         <name>Installment_Period__c</name>
         <picklistValues>
             <masterLabel>1st and 15th</masterLabel>
@@ -67,23 +67,23 @@
         </picklistValues>
     </fields>
     <fields>
-        <help><!-- Number of installments (donations) you expect to receive. For Fixed-Length Recurring Donations only. --></help>
-        <label><!-- Installments --></label>
+        <help>מספר התשלומים.  משמש רק עבור תרומות חוזרות ללא סיום פתוח.</help>
+        <label>תשלומים</label>
         <name>Installments__c</name>
     </fields>
     <fields>
-        <help><!-- Do Not Enter. The NPSP calculates this value automatically based on the last time a child donation was marked Posted. --></help>
-        <label><!-- Last Donation Date --></label>
+        <help>תאריך התשלום האחרון של תרומה חוזרת זו</help>
+        <label>תאריך תרומה אחרונה</label>
         <name>Last_Payment_Date__c</name>
     </fields>
     <fields>
-        <help><!-- The date on which you want the next donation to occur. This date also determines the date of all future donations. --></help>
-        <label><!-- Next Donation Date --></label>
+        <help>תאריך התשלום החוזר הבא.  עריכת שדה זה באופן ידני תביא לחישוב מחדש של כל תאריכי הסגירה העתידיים של ההזדמנות, על סמך לוח הזמנים שהוגדר.</help>
+        <label>תאריך התרומה הבאה</label>
         <name>Next_Payment_Date__c</name>
     </fields>
     <fields>
         <help><!-- Choose Open for an Open-Ended Recurring Donation.  Choose None for a Fixed Length Recurring Donation.  Choose Closed to close a Recurring Donation. --></help>
-        <label><!-- Open Ended Status --></label>
+        <label>מצב סיום פתוח</label>
         <name>Open_Ended_Status__c</name>
         <picklistValues>
             <masterLabel>Closed</masterLabel>
@@ -99,27 +99,27 @@
         </picklistValues>
     </fields>
     <fields>
-        <label><!-- Organization --></label>
+        <label>ארגון</label>
         <name>Organization__c</name>
-        <relationshipLabel><!-- Recurring Donations --></relationshipLabel>
+        <relationshipLabel>תרומות חוזרות</relationshipLabel>
     </fields>
     <fields>
-        <help><!-- Do Not Enter. The NPSP calculates this value automatically as donations are made and marked Posted. --></help>
-        <label><!-- Paid Amount --></label>
+        <help>הסכום הכולל ששולם במסגרת תרומה חוזרת זו</help>
+        <label>סכום ששולם</label>
         <name>Paid_Amount__c</name>
     </fields>
     <fields>
-        <label><!-- Campaign --></label>
+        <label>מבצע</label>
         <name>Recurring_Donation_Campaign__c</name>
-        <relationshipLabel><!-- Recurring Donations --></relationshipLabel>
+        <relationshipLabel>תרומות חוזרות</relationshipLabel>
     </fields>
     <fields>
-        <help><!-- Tells Salesforce how to compute the amount for each child opportunity, based on what you&apos;ve entered in the Amount field. For Fixed-Length Recurring Donations only. --></help>
-        <label><!-- Schedule Type --></label>
+        <help>האם הסכום משמש עבור כל תשלום (מכפלה), או מפוצל בין תשלומים (חלוקה).  משמש רק עבור תרומות חוזרות ללא סיום פתוח.</help>
+        <label>סוג לוח זמנים</label>
         <name>Schedule_Type__c</name>
         <picklistValues>
             <masterLabel>Divide By</masterLabel>
-            <translation><!-- Divide By --></translation>
+            <translation>חלק ב-</translation>
         </picklistValues>
         <picklistValues>
             <masterLabel>Multiply By</masterLabel>
@@ -127,13 +127,13 @@
         </picklistValues>
     </fields>
     <fields>
-        <help><!-- Do Not Enter. The NPSP calculates this value automatically as donations are made and marked Posted. --></help>
-        <label><!-- Total Paid Installments --></label>
+        <help>המספר הכולל של תשלומים ששולמו במסגרת תרומה חוזרת עם סיום פתוח.</help>
+        <label>סה&quot;כ תשלומים ששולמו</label>
         <name>Total_Paid_Installments__c</name>
     </fields>
     <fields>
         <help><!-- For Non-Open Ended Recurring Donations, the total amount of all Opportunities. --></help>
-        <label><!-- Total --></label>
+        <label>סך הכול</label>
         <name>Total__c</name>
     </fields>
     <gender><!-- Masculine --></gender>
@@ -146,23 +146,23 @@
     </layouts>
     <nameFieldLabel><!-- Recurring Donation Name --></nameFieldLabel>
     <quickActions>
-        <label><!-- New Opportunity --></label>
+        <label>הזדמנות חדשה</label>
         <name>New_Opportunity</name>
     </quickActions>
     <quickActions>
-        <label><!-- Quick Update --></label>
+        <label>עדכון מהיר</label>
         <name>Quick_Update</name>
     </quickActions>
     <webLinks>
-        <label><!-- New_Recurring_Acct_Donation --></label>
+        <label>תרומת חשבון חוזרת חדשה</label>
         <name>New_Recurring_Acct_Donation</name>
     </webLinks>
     <webLinks>
-        <label><!-- New_Recurring_Donation_Pledge_Account --></label>
+        <label>תרומת איש קשר חוזרת חדשה</label>
         <name>New_Recurring_Donation_Pledge_Account</name>
     </webLinks>
     <webLinks>
-        <label><!-- Refresh_Opportunities --></label>
+        <label>רענן הזדמנויות</label>
         <name>Refresh_Opportunities</name>
     </webLinks>
 </CustomObjectTranslation>

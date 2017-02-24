@@ -21,12 +21,12 @@
         <value><!-- הDEPRECATED-RD Error Queue --></value>
     </caseValues>
     <fields>
-        <help><!-- Error message for the operation on the associated Recurring Donation record --></help>
-        <label><!-- Error Message --></label>
+        <help>הודעת שגיאה עבור הפעולה על רשומת התרומה החוזרת</help>
+        <label>הודעת שגיאה</label>
         <name>Error_Message__c</name>
     </fields>
     <fields>
-        <help><!-- ID of the affected Recurring Donation record --></help>
+        <help>המזהה של רשומת התרומה החוזרת המושפעת</help>
         <label><!-- Recurring_Donation_ID --></label>
         <name>Recurring_Donation_ID__c</name>
     </fields>

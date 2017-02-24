@@ -21,13 +21,13 @@
         <value><!-- הCustom Field Mapping --></value>
     </caseValues>
     <fields>
-        <help><!-- The Opportunity field to receive the value from the Recurring Donation field.  Note that these fields must have the same data type. --></help>
-        <label><!-- Opportunity Field --></label>
+        <help>שדה ההזדמנות לקבלת הערך משדה התרומה החוזרת.  שים לב שיש להגדיר סוג נתונים זהה עבור שדות אלה.</help>
+        <label>שדה תרומה</label>
         <name>Opportunity_Field__c</name>
     </fields>
     <fields>
-        <help><!-- The Recurring Donation field to copy to the Opportunity field.  Note that these fields must have the same data type. --></help>
-        <label><!-- Recurring Donation Field --></label>
+        <help>שדה התרומה החוזרת שיש להעתיק אל שדה ההזדמנות.  שים לב שיש להגדיר סוג נתונים זהה עבור שדות אלה.</help>
+        <label>שדה תרומה חוזרת</label>
         <name>Recurring_Donation_Field__c</name>
     </fields>
     <gender><!-- Masculine --></gender>
