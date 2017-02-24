@@ -13,11 +13,11 @@
         <name>RecurringDonationCantDeleteError</name>
     </customLabels>
     <customLabels>
-        <label><!-- RecurringDonationClosedLostOpportunityStage --></label>
+        <label>Geschlossen und verloren</label>
         <name>RecurringDonationClosedLostOpportunityStage</name>
     </customLabels>
     <customLabels>
-        <label><!-- RecurringDonationClosedStatus --></label>
+        <label>Geschlossen</label>
         <name>RecurringDonationClosedStatus</name>
     </customLabels>
     <customLabels>
@@ -37,7 +37,7 @@
         <name>RecurringDonationErrorEmailBody</name>
     </customLabels>
     <customLabels>
-        <label><!-- RecurringDonationInstallmentPeriod1stand15th --></label>
+        <label>Erster und Fünfzehnter</label>
         <name>RecurringDonationInstallmentPeriod1stand15th</name>
     </customLabels>
     <customLabels>
@@ -69,7 +69,7 @@
         <name>RecurringDonationMultiplyValue</name>
     </customLabels>
     <customLabels>
-        <label><!-- RecurringDonationOpenStatus --></label>
+        <label>Offen</label>
         <name>RecurringDonationOpenStatus</name>
     </customLabels>
     <customLabels>
