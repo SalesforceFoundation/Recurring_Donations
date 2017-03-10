@@ -35,10 +35,10 @@
     <fields>
         <fullName>Disable_Nightly_Job__c</fullName>
         <defaultValue>false</defaultValue>
-        <description>Prevents the scheduling of the nightly update to Recurring Donations. Any existing scheduled job will need to be removed through Setup-&gt;Monitoring-&gt;Scheduled Jobs</description>
+        <description>DEPRECATED-Prevents the scheduling of the nightly update to Recurring Donations. Any existing scheduled job will need to be removed through Setup-&gt;Monitoring-&gt;Scheduled Jobs</description>
         <externalId>false</externalId>
-        <inlineHelpText>Prevents the scheduling of the nightly update to Recurring Donations. Any existing scheduled job will need to be removed through Setup-&gt;Monitoring-&gt;Scheduled Jobs</inlineHelpText>
-        <label>Disable Scheduling of Nightly Job</label>
+        <inlineHelpText>DEPRECATED-Prevents the scheduling of the nightly update to Recurring Donations. Any existing scheduled job will need to be removed through Setup-&gt;Monitoring-&gt;Scheduled Jobs</inlineHelpText>
+        <label>DEPRECATED-Disable Sched of Nightly Job</label>
         <trackTrending>false</trackTrending>
         <type>Checkbox</type>
     </fields>
