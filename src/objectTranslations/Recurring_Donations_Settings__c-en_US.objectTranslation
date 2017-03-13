@@ -24,8 +24,8 @@
         <name>DISABLE_RecurringDonations_trigger__c</name>
     </fields>
     <fields>
-        <help><!-- Prevents the scheduling of the nightly update to Recurring Donations. Any existing scheduled job will need to be removed through Setup-&gt;Monitoring-&gt;Scheduled Jobs --></help>
-        <label><!-- Disable Scheduling of Nightly Job --></label>
+        <help><!-- DEPRECATED-Prevents the scheduling of the nightly update to Recurring Donations. Any existing scheduled job will need to be removed through Setup-&gt;Monitoring-&gt;Scheduled Jobs --></help>
+        <label><!-- DEPRECATED-Disable Sched of Nightly Job --></label>
         <name>Disable_Nightly_Job__c</name>
     </fields>
     <fields>
