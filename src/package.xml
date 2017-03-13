@@ -7,6 +7,7 @@
         <members>RecurringDonations_BATCH</members>
         <members>RecurringDonations_SCHED</members>
         <members>RecurringDonations_TEST</members>
+        <members>UTIL_CustomLabel_TEST</members>
         <name>ApexClass</name>
     </types>
     <types>

@@ -30,7 +30,7 @@
         <name>Installment_Amount__c</name>
     </fields>
     <fields>
-        <help><!-- Sets the installment period for your recurring donations.  WARNING: Changing the Installment Period for an existing Recurring Donation can cause open Opportunities to be deleted and recreated. Any associated data may not be retained. --></help>
+        <help><!-- How often you’ll receive the donations. NOTE: Changing the installment period for an existing Fixed-Length Recurring Donation may result in the loss and re-creation of open opportunities. Any data associated with those opportunities may be lost. --></help>
         <label><!-- Installment Period --></label>
         <name>Installment_Period__c</name>
         <picklistValues>
@@ -55,21 +55,22 @@
         </picklistValues>
     </fields>
     <fields>
-        <help><!-- Number of installments. --></help>
+        <help><!-- Number of installments (donations) you expect to receive. For Fixed-Length Recurring Donations only. --></help>
         <label><!-- Installments --></label>
         <name>Installments__c</name>
     </fields>
     <fields>
-        <help><!-- Date of the last payment for this Recurring Donation --></help>
+        <help><!-- Do Not Enter. The NPSP calculates this value automatically based on the last time a child donation was marked Posted. --></help>
         <label><!-- Last Donation Date --></label>
         <name>Last_Payment_Date__c</name>
     </fields>
     <fields>
-        <help><!-- Holds the date of the next recurring payment.  Manually editing this field will recalculate all future opportunity&apos;s close dates based on the scheduled defined. --></help>
+        <help><!-- The date on which you want the next donation to occur. This date also determines the date of all future donations. --></help>
         <label><!-- Next Donation Date --></label>
         <name>Next_Payment_Date__c</name>
     </fields>
     <fields>
+        <help><!-- Choose Open for an Open-Ended Recurring Donation.  Choose None for a Fixed Length Recurring Donation.  Choose Closed to close a Recurring Donation. --></help>
         <label><!-- Open Ended Status --></label>
         <name>Open_Ended_Status__c</name>
         <picklistValues>
@@ -91,7 +92,7 @@
         <relationshipLabel><!-- Recurring Donations --></relationshipLabel>
     </fields>
     <fields>
-        <help><!-- Total Amount paid on this Recurring Donation --></help>
+        <help><!-- Do Not Enter. The NPSP calculates this value automatically as donations are made and marked Posted. --></help>
         <label><!-- Paid Amount --></label>
         <name>Paid_Amount__c</name>
     </fields>
@@ -101,7 +102,7 @@
         <relationshipLabel><!-- Recurring Donations --></relationshipLabel>
     </fields>
     <fields>
-        <help><!-- Whether the Amount is used for each installment (Multiple By), or Amount is split between installments (Divide By).  Only used with Non-Open Ended Recurring Donations. --></help>
+        <help><!-- Tells Salesforce how to compute the amount for each child opportunity, based on what you&apos;ve entered in the Amount field. For Fixed-Length Recurring Donations only. --></help>
         <label><!-- Schedule Type --></label>
         <name>Schedule_Type__c</name>
         <picklistValues>
@@ -114,7 +115,7 @@
         </picklistValues>
     </fields>
     <fields>
-        <help><!-- Total number of installments paid on this Recurring Donation. --></help>
+        <help><!-- Do Not Enter. The NPSP calculates this value automatically as donations are made and marked Posted. --></help>
         <label><!-- Total Paid Installments --></label>
         <name>Total_Paid_Installments__c</name>
     </fields>
