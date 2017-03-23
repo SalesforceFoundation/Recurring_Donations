@@ -9,13 +9,13 @@
         <value><!-- DEPRECATED-RD Error Queue --></value>
     </caseValues>
     <fields>
-        <help><!-- Error message for the operation on the associated Recurring Donation record --></help>
-        <label><!-- Error Message --></label>
+        <help>Foutmelding voor de werking van het bijbehorende Terugkerende Donatie Record</help>
+        <label>Foutmelding</label>
         <name>Error_Message__c</name>
     </fields>
     <fields>
-        <help><!-- ID of the affected Recurring Donation record --></help>
-        <label><!-- Recurring_Donation_ID --></label>
+        <help>ID van het betrokken terugkerende Donatie Record</help>
+        <label>Terugkerend_Donatie_ID</label>
         <name>Recurring_Donation_ID__c</name>
     </fields>
     <gender><!-- Neuter --></gender>

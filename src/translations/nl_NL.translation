@@ -97,7 +97,7 @@
         <name>RecurringDonationTooManyInstallmentsError</name>
     </customLabels>
     <customTabs>
-        <label><!-- Recurring Donations Settings --></label>
+        <label>Terugkerende Donaties Instellingen</label>
         <name>Recurring_Donations_Settings</name>
     </customTabs>
     <quickActions>

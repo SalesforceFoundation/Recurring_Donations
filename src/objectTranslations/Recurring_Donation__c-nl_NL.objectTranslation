@@ -9,7 +9,7 @@
         <value><!-- Recurring Donations --></value>
     </caseValues>
     <fields>
-        <label><!-- Amount --></label>
+        <label>Bedrag</label>
         <name>Amount__c</name>
     </fields>
     <fields>
@@ -18,20 +18,20 @@
         <relationshipLabel><!-- Recurring Donations --></relationshipLabel>
     </fields>
     <fields>
-        <label><!-- Date Established --></label>
+        <label>Datum Gevestigd</label>
         <name>Date_Established__c</name>
     </fields>
     <fields>
-        <label><!-- Donor Name --></label>
+        <label>Donor Naam</label>
         <name>Donor_Name__c</name>
     </fields>
     <fields>
-        <label><!-- Installment Amount --></label>
+        <label>Termijnbedrag</label>
         <name>Installment_Amount__c</name>
     </fields>
     <fields>
-        <help><!-- How often you’ll receive the donations. NOTE: Changing the installment period for an existing Fixed-Length Recurring Donation may result in the loss and re-creation of open opportunities. Any data associated with those opportunities may be lost. --></help>
-        <label><!-- Installment Period --></label>
+        <help>Stelt de termijn periode in voor jou terugkerende donaties. WAARSCHUWING: Veranderen van de Termijn Periode voor een bestaande doorlopende Donatie zorgt ervoor dat open opportunities verwijderd worden en opnieuw gemaakt.</help>
+        <label>Termijn Periode</label>
         <name>Installment_Period__c</name>
         <picklistValues>
             <masterLabel>1st and 15th</masterLabel>
@@ -55,23 +55,23 @@
         </picklistValues>
     </fields>
     <fields>
-        <help><!-- Number of installments (donations) you expect to receive. For Fixed-Length Recurring Donations only. --></help>
-        <label><!-- Installments --></label>
+        <help>Aantal termijnen. Wordt alleen gebruikt met niet doorlopende terugkerende donaties.</help>
+        <label>Termijnen</label>
         <name>Installments__c</name>
     </fields>
     <fields>
-        <help><!-- Do Not Enter. The NPSP calculates this value automatically based on the last time a child donation was marked Posted. --></help>
-        <label><!-- Last Donation Date --></label>
+        <help>Datum van de laatste betaling voor deze Terugkerende Donatie</help>
+        <label>Laatste Donatie Datum</label>
         <name>Last_Payment_Date__c</name>
     </fields>
     <fields>
-        <help><!-- The date on which you want the next donation to occur. This date also determines the date of all future donations. --></help>
-        <label><!-- Next Donation Date --></label>
+        <help>Houdt de datum van de volgende terugkerende betaling. Het handmatig aanpassen van dit veld zal alle toekomstige sluitingsdatums van opportunities herberekenen op basis van het gedefinieerde schema</help>
+        <label>Volgende Donatie Datum</label>
         <name>Next_Payment_Date__c</name>
     </fields>
     <fields>
         <help><!-- Choose Open for an Open-Ended Recurring Donation.  Choose None for a Fixed Length Recurring Donation.  Choose Closed to close a Recurring Donation. --></help>
-        <label><!-- Open Ended Status --></label>
+        <label>Open-end-status</label>
         <name>Open_Ended_Status__c</name>
         <picklistValues>
             <masterLabel>Closed</masterLabel>
@@ -87,27 +87,27 @@
         </picklistValues>
     </fields>
     <fields>
-        <label><!-- Organization --></label>
+        <label>Organisatie</label>
         <name>Organization__c</name>
         <relationshipLabel><!-- Recurring Donations --></relationshipLabel>
     </fields>
     <fields>
-        <help><!-- Do Not Enter. The NPSP calculates this value automatically as donations are made and marked Posted. --></help>
-        <label><!-- Paid Amount --></label>
+        <help>Totaal bedrag betaald voor deze terugkerende donatie</help>
+        <label>Betaald Bedrag</label>
         <name>Paid_Amount__c</name>
     </fields>
     <fields>
-        <label><!-- Campaign --></label>
+        <label>Campagne</label>
         <name>Recurring_Donation_Campaign__c</name>
         <relationshipLabel><!-- Recurring Donations --></relationshipLabel>
     </fields>
     <fields>
-        <help><!-- Tells Salesforce how to compute the amount for each child opportunity, based on what you&apos;ve entered in the Amount field. For Fixed-Length Recurring Donations only. --></help>
-        <label><!-- Schedule Type --></label>
+        <help>Of dit bedrag is gebruikt voor elk termijn (vermenigvuldig met), of dat het bedrag is opgedeeld tussen termijnen (delen door). Wordt alleen gebruikt met niet doorlopende terugkerende donaties.</help>
+        <label>Schematype</label>
         <name>Schedule_Type__c</name>
         <picklistValues>
             <masterLabel>Divide By</masterLabel>
-            <translation><!-- Divide By --></translation>
+            <translation>Deel door</translation>
         </picklistValues>
         <picklistValues>
             <masterLabel>Multiply By</masterLabel>
@@ -115,13 +115,13 @@
         </picklistValues>
     </fields>
     <fields>
-        <help><!-- Do Not Enter. The NPSP calculates this value automatically as donations are made and marked Posted. --></help>
-        <label><!-- Total Paid Installments --></label>
+        <help>Totaal aantal termijnen betaald op deze doorlopende terugkerende donatie</help>
+        <label>Totaal Betaalde Termijnen</label>
         <name>Total_Paid_Installments__c</name>
     </fields>
     <fields>
         <help><!-- For Non-Open Ended Recurring Donations, the total amount of all Opportunities. --></help>
-        <label><!-- Total --></label>
+        <label>Totaal</label>
         <name>Total__c</name>
     </fields>
     <gender><!-- Neuter --></gender>
@@ -134,23 +134,23 @@
     </layouts>
     <nameFieldLabel><!-- Recurring Donation Name --></nameFieldLabel>
     <quickActions>
-        <label><!-- New Opportunity --></label>
+        <label>Nieuwe Opportunity</label>
         <name>New_Opportunity</name>
     </quickActions>
     <quickActions>
-        <label><!-- Quick Update --></label>
+        <label>Snelle Update</label>
         <name>Quick_Update</name>
     </quickActions>
     <webLinks>
-        <label><!-- New_Recurring_Acct_Donation --></label>
+        <label>Nieuwe Terugkerende Account Donatie</label>
         <name>New_Recurring_Acct_Donation</name>
     </webLinks>
     <webLinks>
-        <label><!-- New_Recurring_Donation_Pledge_Account --></label>
+        <label>Nieuwe Terugkerende Contactpersoon Donatie</label>
         <name>New_Recurring_Donation_Pledge_Account</name>
     </webLinks>
     <webLinks>
-        <label><!-- Refresh_Opportunities --></label>
+        <label>Ververs Opportunities</label>
         <name>Refresh_Opportunities</name>
     </webLinks>
 </CustomObjectTranslation>

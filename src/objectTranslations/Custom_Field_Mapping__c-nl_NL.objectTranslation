@@ -9,13 +9,13 @@
         <value><!-- Custom Field Mapping --></value>
     </caseValues>
     <fields>
-        <help><!-- The Opportunity field to receive the value from the Recurring Donation field.  Note that these fields must have the same data type. --></help>
-        <label><!-- Opportunity Field --></label>
+        <help>Het Opportunity veld dat de waarde ontvangt van het Terugkerend Donatie Veld. Let op dat deze velden hetzelfde data type moeten hebben.</help>
+        <label>Opportunity Veld</label>
         <name>Opportunity_Field__c</name>
     </fields>
     <fields>
-        <help><!-- The Recurring Donation field to copy to the Opportunity field.  Note that these fields must have the same data type. --></help>
-        <label><!-- Recurring Donation Field --></label>
+        <help>Het Terugkerend donatie veld te kopiëren naar het veld Opportunity. Let op dat deze velden hetzelfde data type moeten hebben.</help>
+        <label>Terugkerend Donatie veld</label>
         <name>Recurring_Donation_Field__c</name>
     </fields>
     <gender><!-- Neuter --></gender>
