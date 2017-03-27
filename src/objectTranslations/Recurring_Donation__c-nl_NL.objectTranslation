@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value><!-- Recurring Donations --></value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value><!-- Recurring Donations --></value>
+    </caseValues>
+    <fields>
+        <label>Bedrag</label>
+        <name>Amount__c</name>
+    </fields>
+    <fields>
+        <label><!-- Contact --></label>
+        <name>Contact__c</name>
+        <relationshipLabel><!-- Recurring Donations --></relationshipLabel>
+    </fields>
+    <fields>
+        <label>Datum Gevestigd</label>
+        <name>Date_Established__c</name>
+    </fields>
+    <fields>
+        <label>Donor Naam</label>
+        <name>Donor_Name__c</name>
+    </fields>
+    <fields>
+        <label>Termijnbedrag</label>
+        <name>Installment_Amount__c</name>
+    </fields>
+    <fields>
+        <help>Stelt de termijn periode in voor jou terugkerende donaties. WAARSCHUWING: Veranderen van de Termijn Periode voor een bestaande doorlopende Donatie zorgt ervoor dat open opportunities verwijderd worden en opnieuw gemaakt.</help>
+        <label>Termijn Periode</label>
+        <name>Installment_Period__c</name>
+        <picklistValues>
+            <masterLabel>1st and 15th</masterLabel>
+            <translation><!-- 1st and 15th --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Monthly</masterLabel>
+            <translation><!-- Monthly --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Quarterly</masterLabel>
+            <translation><!-- Quarterly --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Weekly</masterLabel>
+            <translation><!-- Weekly --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yearly</masterLabel>
+            <translation><!-- Yearly --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <help>Aantal termijnen. Wordt alleen gebruikt met niet doorlopende terugkerende donaties.</help>
+        <label>Termijnen</label>
+        <name>Installments__c</name>
+    </fields>
+    <fields>
+        <help>Datum van de laatste betaling voor deze Terugkerende Donatie</help>
+        <label>Laatste Donatie Datum</label>
+        <name>Last_Payment_Date__c</name>
+    </fields>
+    <fields>
+        <help>Houdt de datum van de volgende terugkerende betaling. Het handmatig aanpassen van dit veld zal alle toekomstige sluitingsdatums van opportunities herberekenen op basis van het gedefinieerde schema</help>
+        <label>Volgende Donatie Datum</label>
+        <name>Next_Payment_Date__c</name>
+    </fields>
+    <fields>
+        <help><!-- Choose Open for an Open-Ended Recurring Donation.  Choose None for a Fixed Length Recurring Donation.  Choose Closed to close a Recurring Donation. --></help>
+        <label>Open-end-status</label>
+        <name>Open_Ended_Status__c</name>
+        <picklistValues>
+            <masterLabel>Closed</masterLabel>
+            <translation><!-- Closed --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>None</masterLabel>
+            <translation><!-- None --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Open</masterLabel>
+            <translation><!-- Open --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label>Organisatie</label>
+        <name>Organization__c</name>
+        <relationshipLabel><!-- Recurring Donations --></relationshipLabel>
+    </fields>
+    <fields>
+        <help>Totaal bedrag betaald voor deze terugkerende donatie</help>
+        <label>Betaald Bedrag</label>
+        <name>Paid_Amount__c</name>
+    </fields>
+    <fields>
+        <label>Campagne</label>
+        <name>Recurring_Donation_Campaign__c</name>
+        <relationshipLabel><!-- Recurring Donations --></relationshipLabel>
+    </fields>
+    <fields>
+        <help>Of dit bedrag is gebruikt voor elk termijn (vermenigvuldig met), of dat het bedrag is opgedeeld tussen termijnen (delen door). Wordt alleen gebruikt met niet doorlopende terugkerende donaties.</help>
+        <label>Schematype</label>
+        <name>Schedule_Type__c</name>
+        <picklistValues>
+            <masterLabel>Divide By</masterLabel>
+            <translation>Deel door</translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Multiply By</masterLabel>
+            <translation><!-- Multiply By --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <help>Totaal aantal termijnen betaald op deze doorlopende terugkerende donatie</help>
+        <label>Totaal Betaalde Termijnen</label>
+        <name>Total_Paid_Installments__c</name>
+    </fields>
+    <fields>
+        <help><!-- For Non-Open Ended Recurring Donations, the total amount of all Opportunities. --></help>
+        <label>Totaal</label>
+        <name>Total__c</name>
+    </fields>
+    <gender><!-- Neuter --></gender>
+    <layouts>
+        <layout>Recurring Donation Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <nameFieldLabel><!-- Recurring Donation Name --></nameFieldLabel>
+    <quickActions>
+        <label>Nieuwe Opportunity</label>
+        <name>New_Opportunity</name>
+    </quickActions>
+    <quickActions>
+        <label>Snelle Update</label>
+        <name>Quick_Update</name>
+    </quickActions>
+    <webLinks>
+        <label>Nieuwe Terugkerende Account Donatie</label>
+        <name>New_Recurring_Acct_Donation</name>
+    </webLinks>
+    <webLinks>
+        <label>Nieuwe Terugkerende Contactpersoon Donatie</label>
+        <name>New_Recurring_Donation_Pledge_Account</name>
+    </webLinks>
+    <webLinks>
+        <label>Ververs Opportunities</label>
+        <name>Refresh_Opportunities</name>
+    </webLinks>
+</CustomObjectTranslation>

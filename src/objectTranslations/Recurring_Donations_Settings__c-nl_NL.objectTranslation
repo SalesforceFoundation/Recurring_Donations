@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value><!-- Recurring Donations Settings --></value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value><!-- Recurring Donations Settings --></value>
+    </caseValues>
+    <fields>
+        <help>Indien aangevinkt, alle opportunities voor terugkerende donaties zal de campagne op de terugkerende donatie gebruiken. Anders, heeft alleen de eerste opportunity een campagne.</help>
+        <label>Voeg Campagne toe aan alle Opportunities</label>
+        <name>Add_Campaign_to_All_Opportunites__c</name>
+    </fields>
+    <fields>
+        <help>AFGEKEURD. Trigger gedrag wordt nu gecontroleerd in de Trigger Configuratie pagina van de NPSP settings</help>
+        <label>AFGEKEURD-Deactiveer_Donaties_trigger</label>
+        <name>DISABLE_Donations_trigger__c</name>
+    </fields>
+    <fields>
+        <help>AFGEKEURD. Trigger gedrag wordt nu gecontroleerd in de Trigger Configuratie pagina van de NPSP settings</help>
+        <label>AFGEKEURD-Deactiveer_RD_trigger</label>
+        <name>DISABLE_RecurringDonations_trigger__c</name>
+    </fields>
+    <fields>
+        <help>Voorkomt het plannen van het nachtelijk updaten van terugkerende donaties. Elke bestaande geplande actie zal moeten worden verwijderd bij Setup--&gt;Monitoren--&gt;Geplande Actie</help>
+        <label>Deactiver Plannen voor Nacht Baan</label>
+        <name>Disable_Nightly_Job__c</name>
+    </fields>
+    <fields>
+        <help>AFGEKEURD. Nieuwe versies van het Nonprofit Starter Pakket zullen automatisch worden geïnstalleerd.</help>
+        <label>AFGEKEURD-Activeer Update Check</label>
+        <name>Enable_Update_Check__c</name>
+    </fields>
+    <fields>
+        <help>AFGEKEURD. Vervangen door de notificatie instellingen in het Systeem Fout instellingen paneel.</help>
+        <label>AFGEKEURD-Fout E-mail Notificaties</label>
+        <name>Error_Email_Notifications__c</name>
+    </fields>
+    <fields>
+        <help>AFGEKEURD. Nieuwe versies van het Nonprofit Starter Pakket zullen automatisch worden geïnstalleerd.</help>
+        <label>AFGEKEURD-Heeft Pakket Update</label>
+        <name>Has_Package_Update__c</name>
+    </fields>
+    <fields>
+        <help>De datum en tijd van de laatste batch update van terugkerende donaties.</help>
+        <label>Laatste Batch Run</label>
+        <name>Last_Batch_Run__c</name>
+    </fields>
+    <fields>
+        <help>AFGEKEURD. Nieuwe versies van het Nonprofit Starter Pakket zullen automatisch worden geïnstalleerd.</help>
+        <label>AFGEKEURD-Laatste Update Check</label>
+        <name>Last_Update_Check__c</name>
+    </fields>
+    <fields>
+        <help>AFGEKEURD. Nieuwe versies van het Nonprofit Starter Pakket zullen automatisch worden geïnstalleerd.</help>
+        <label>AFGEKEURD-Max Pakket Versie</label>
+        <name>Max_Package_Version__c</name>
+    </fields>
+    <fields>
+        <help>Beperkt het totale aantal donaties gemaakt voor niet doorlopende terugkerende donaties. Standaard is 50. Grotere waarden kunnen resulteren in DML fouten.</help>
+        <label>Maximum Donaties</label>
+        <name>Maximum_Donations__c</name>
+    </fields>
+    <fields>
+        <label>AFGEKEURD-Nachtelijk Update ID</label>
+        <name>Nightly_Update_ID__c</name>
+    </fields>
+    <fields>
+        <help>Aantal terugkerende donaties die niet succesvol geüpdatet zijn in de laatste batch operatie.</help>
+        <label>Aantal Mislukkingen</label>
+        <name>Number_of_Failures__c</name>
+    </fields>
+    <fields>
+        <help>Aantal terugkerende donaties die succesvol geüpdatet zijn in de laatste batch run.</help>
+        <label>Aantal Successen</label>
+        <name>Number_of_Successes__c</name>
+    </fields>
+    <fields>
+        <help>Bepaalt het gedrag van elke overgebleven open Opportunities wanneer de status van een doorlopende terugkerende donatie veranderd wordt naar gesloten.</help>
+        <label>Open Opportunity Gedrag op RD Gesloten</label>
+        <name>Open_Opportunity_Behavior__c</name>
+    </fields>
+    <fields>
+        <help>Aantal maanden vanaf vandaag waard aan open opp wanneer er gebruik wordt gemaakt van terugkerende donaties. LET OP: Verminderen van deze waarde resulteert in het verwijderen van extra opp. Verhogen zal een batch proces starten om opp toe te voegen.</help>
+        <label>Opportunity Maand Prognose</label>
+        <name>Opportunity_Forecast_Months__c</name>
+    </fields>
+    <fields>
+        <help>AFGEKEURD. Nieuwe versies van het Nonprofit Starter Pakket zullen automatisch worden geïnstalleerd.</help>
+        <label>AFGEKEURD-Pakket Update URL</label>
+        <name>Package_Update_URL__c</name>
+    </fields>
+    <fields>
+        <help>Opportunity Record Type die gebruikt wordt wanneer terugkerende donatie opportunities gemaakt worden.</help>
+        <label><!-- Opportunity Record Type --></label>
+        <name>Record_Type__c</name>
+    </fields>
+    <fields>
+        <help>AFGEKEURD. Nieuwe versies van het Nonprofit Starter Pakket zullen automatisch worden geïnstalleerd.</help>
+        <label>AFGEKEURD-Update Check Interval</label>
+        <name>Update_Check_Interval__c</name>
+    </fields>
+    <gender><!-- Neuter --></gender>
+</CustomObjectTranslation>
