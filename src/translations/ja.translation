@@ -17,7 +17,7 @@
         <name>RecurringDonationClosedLostOpportunityStage</name>
     </customLabels>
     <customLabels>
-        <label>完了済み</label>
+        <label><!-- RecurringDonationClosedStatus --></label>
         <name>RecurringDonationClosedStatus</name>
     </customLabels>
     <customLabels>
@@ -37,7 +37,7 @@
         <name>RecurringDonationErrorEmailBody</name>
     </customLabels>
     <customLabels>
-        <label>1 日と 15 日</label>
+        <label><!-- RecurringDonationInstallmentPeriod1stand15th --></label>
         <name>RecurringDonationInstallmentPeriod1stand15th</name>
     </customLabels>
     <customLabels>
@@ -69,7 +69,7 @@
         <name>RecurringDonationMultiplyValue</name>
     </customLabels>
     <customLabels>
-        <label>進行中</label>
+        <label><!-- RecurringDonationOpenStatus --></label>
         <name>RecurringDonationOpenStatus</name>
     </customLabels>
     <customLabels>
