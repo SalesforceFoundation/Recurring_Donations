@@ -119,7 +119,7 @@
         <name>Schedule_Type__c</name>
         <picklistValues>
             <masterLabel>Divide By</masterLabel>
-            <translation>חלק ב-</translation>
+            <translation><!-- Divide By --></translation>
         </picklistValues>
         <picklistValues>
             <masterLabel>Multiply By</masterLabel>
