@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Translations xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customLabels>
+        <label>סוגי הנתונים של השדות צריכים להיות תואמים. ערוך את בחירת השדות ונסה שוב.</label>
+        <name>RecurringDonationBadFieldMapping</name>
+    </customLabels>
+    <customLabels>
+        <label>התווית המותאמת אישית שלך עבור הזדמנויות שנסגרו ללא זכייה אינה תואמת לשם של שלב סגירה/ללא זכייה של הזדמנות. הדבר עלול להביא לתוצאות לא רצויות בעת סימון תרומות חוזרות כסגורות, כאשר ערך ההגדרה &apos;התנהגות של הזדמנות פתוחה&apos; הוא: Mark_Opportunities_Closed_Lost.  בדוק את שמות השלבים שלך ואת התווית המותאמת אישית RecurringDonationClosedLostOpportunityStage.</label>
+        <name>RecurringDonationBadLabelWarning</name>
+    </customLabels>
+    <customLabels>
+        <label>עליך למחוק את התרומות הקשורות לפני שתוכל למחוק את התרומה החוזרת</label>
+        <name>RecurringDonationCantDeleteError</name>
+    </customLabels>
+    <customLabels>
+        <label>נסגרה ללא זכייה</label>
+        <name>RecurringDonationClosedLostOpportunityStage</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- RecurringDonationClosedStatus --></label>
+        <name>RecurringDonationClosedStatus</name>
+    </customLabels>
+    <customLabels>
+        <label>תורם</label>
+        <name>RecurringDonationContactRole</name>
+    </customLabels>
+    <customLabels>
+        <label>השדות באובייקט ההזדמנות שלך מכילים כללי אימות מותאמים אישית שעלולים לגרום לבעיות עם חבילת התרומות החוזרות שלך:</label>
+        <name>RecurringDonationCustomValidationWarning</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- RecurringDonationDivideValue --></label>
+        <name>RecurringDonationDivideValue</name>
+    </customLabels>
+    <customLabels>
+        <label>אירעו שגיאות בעת ניסיון להוסיף הזדמנויות חדשות לתרומותיך החוזרות עם סיום פתוח. הדבר עלול לשבש את החיזוי והתפקוד של מופע Salesforce.com שלך. טפל בשגיאות אלה ללא דיחוי כדי למנוע כניסת נתונים פגומים למערכת שלך.  שגיאות ההוספה של התרומה החוזרת וההזדמנויות הקשורות אליה מפורטות להלן, וניתן לעיין בהן בכרטיסיית ההגדרות של NPSP תחת &apos;מערכת&apos;, &apos;יומן שגיאות&apos;.</label>
+        <name>RecurringDonationErrorEmailBody</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- RecurringDonationInstallmentPeriod1stand15th --></label>
+        <name>RecurringDonationInstallmentPeriod1stand15th</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- RecurringDonationInstallmentPeriodMonthly --></label>
+        <name>RecurringDonationInstallmentPeriodMonthly</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- RecurringDonationInstallmentPeriodQuarterly --></label>
+        <name>RecurringDonationInstallmentPeriodQuarterly</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- RecurringDonationInstallmentPeriodWeekly --></label>
+        <name>RecurringDonationInstallmentPeriodWeekly</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- RecurringDonationInstallmentPeriodYearly --></label>
+        <name>RecurringDonationInstallmentPeriodYearly</name>
+    </customLabels>
+    <customLabels>
+        <label>כל התשלומים המותאמים אישית חייבים לקבל שם, ערך תדירות חיובי וסוג פרק זמן.</label>
+        <name>RecurringDonationInvalidCustomInstallment</name>
+    </customLabels>
+    <customLabels>
+        <label>עליך לבחור ארגון או איש קשר</label>
+        <name>RecurringDonationMissingDataError</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- RecurringDonationMultiplyValue --></label>
+        <name>RecurringDonationMultiplyValue</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- RecurringDonationOpenStatus --></label>
+        <name>RecurringDonationOpenStatus</name>
+    </customLabels>
+    <customLabels>
+        <label>תרומה</label>
+        <name>RecurringDonationPrefix</name>
+    </customLabels>
+    <customLabels>
+        <label>השדות הנדרשים הבאים בהזדמנות שלך עלולים לגרום לבעיות עם חבילת התרומות החוזרות שלך:</label>
+        <name>RecurringDonationRequiredFieldsWarning</name>
+    </customLabels>
+    <customLabels>
+        <label>אירעה שגיאה במהלך תזמון העדכון הלילי של התרומות החוזרות שלך.</label>
+        <name>RecurringDonationSchedulingError</name>
+    </customLabels>
+    <customLabels>
+        <label>הגדרות אלה קובעות את ההתנהגות של תרומות חוזרות ב&apos;ערכת ההצלחה למלכ&quot;רים&apos;. למידע נוסף, עיין &lt;a href=&quot;https://powerofus.force.com/NPSP_Recurring_Donations&quot; target=&quot;_blank&quot;&gt;במסמכי התיעוד של NPSP‏&lt;/a&gt;.</label>
+        <name>RecurringDonationSettingsDescription</name>
+    </customLabels>
+    <customLabels>
+        <label>התחייבות</label>
+        <name>RecurringDonationStageName</name>
+    </customLabels>
+    <customLabels>
+        <label>עליך לציין פחות מ-50 תשלומים.  (הודעת שגיאה זו הוצאה משימוש).</label>
+        <name>RecurringDonationTooManyInstallmentsError</name>
+    </customLabels>
+    <customTabs>
+        <label>הגדרות תרומות חוזרות</label>
+        <name>Recurring_Donations_Settings</name>
+    </customTabs>
+    <quickActions>
+        <label><!-- New Note --></label>
+        <name>NewNote</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- New Task --></label>
+        <name>NewTask</name>
+    </quickActions>
+</Translations>
