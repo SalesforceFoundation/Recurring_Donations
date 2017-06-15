@@ -17,7 +17,7 @@
         <name>RecurringDonationClosedLostOpportunityStage</name>
     </customLabels>
     <customLabels>
-        <label>Fermé</label>
+        <label>Closed</label>
         <name>RecurringDonationClosedStatus</name>
     </customLabels>
     <customLabels>
@@ -29,7 +29,7 @@
         <name>RecurringDonationCustomValidationWarning</name>
     </customLabels>
     <customLabels>
-        <label>Divide By</label>
+        <label><!-- RecurringDonationDivideValue --></label>
         <name>RecurringDonationDivideValue</name>
     </customLabels>
     <customLabels>
@@ -37,23 +37,23 @@
         <name>RecurringDonationErrorEmailBody</name>
     </customLabels>
     <customLabels>
-        <label>1er et 15</label>
+        <label>1st and 15th</label>
         <name>RecurringDonationInstallmentPeriod1stand15th</name>
     </customLabels>
     <customLabels>
-        <label>Monthly</label>
+        <label><!-- RecurringDonationInstallmentPeriodMonthly --></label>
         <name>RecurringDonationInstallmentPeriodMonthly</name>
     </customLabels>
     <customLabels>
-        <label>Quarterly</label>
+        <label><!-- RecurringDonationInstallmentPeriodQuarterly --></label>
         <name>RecurringDonationInstallmentPeriodQuarterly</name>
     </customLabels>
     <customLabels>
-        <label>Weekly</label>
+        <label><!-- RecurringDonationInstallmentPeriodWeekly --></label>
         <name>RecurringDonationInstallmentPeriodWeekly</name>
     </customLabels>
     <customLabels>
-        <label>Yearly</label>
+        <label><!-- RecurringDonationInstallmentPeriodYearly --></label>
         <name>RecurringDonationInstallmentPeriodYearly</name>
     </customLabels>
     <customLabels>
@@ -65,11 +65,11 @@
         <name>RecurringDonationMissingDataError</name>
     </customLabels>
     <customLabels>
-        <label>Multiply By</label>
+        <label><!-- RecurringDonationMultiplyValue --></label>
         <name>RecurringDonationMultiplyValue</name>
     </customLabels>
     <customLabels>
-        <label>Ouvert</label>
+        <label>Open</label>
         <name>RecurringDonationOpenStatus</name>
     </customLabels>
     <customLabels>

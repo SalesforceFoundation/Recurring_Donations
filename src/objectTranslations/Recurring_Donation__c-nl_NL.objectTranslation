@@ -2,36 +2,36 @@
 <CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
     <caseValues>
         <plural>false</plural>
-        <value>Donación recurrente</value>
+        <value><!-- Recurring Donations --></value>
     </caseValues>
     <caseValues>
         <plural>true</plural>
-        <value>Donaciones recurrentes</value>
+        <value><!-- Recurring Donations --></value>
     </caseValues>
     <fields>
-        <label>Monto</label>
+        <label>Bedrag</label>
         <name>Amount__c</name>
     </fields>
     <fields>
-        <label>Contacto</label>
+        <label><!-- Contact --></label>
         <name>Contact__c</name>
-        <relationshipLabel>Donaciones recurrentes y Compromisos</relationshipLabel>
+        <relationshipLabel><!-- Recurring Donations --></relationshipLabel>
     </fields>
     <fields>
-        <label>Fecha de primera cuota</label>
+        <label>Datum Gevestigd</label>
         <name>Date_Established__c</name>
     </fields>
     <fields>
-        <label>Nombre del donante</label>
+        <label>Donor Naam</label>
         <name>Donor_Name__c</name>
     </fields>
     <fields>
-        <label>Monto de cuota</label>
+        <label>Termijnbedrag</label>
         <name>Installment_Amount__c</name>
     </fields>
     <fields>
-        <help>Con que frecuencia se va a recibir las donaciones. Nota: Modificar la frecuencia en donaciones recurrentes sin final abierto puede resultar en la perdida o re-creación de las op. abiertas relacionadas. Información relacionada a estas op. puede perderse.</help>
-        <label>Frecuencia</label>
+        <help>Stelt de termijn periode in voor jou terugkerende donaties. WAARSCHUWING: Veranderen van de Termijn Periode voor een bestaande doorlopende Donatie zorgt ervoor dat open opportunities verwijderd worden en opnieuw gemaakt.</help>
+        <label>Termijn Periode</label>
         <name>Installment_Period__c</name>
         <picklistValues>
             <masterLabel>1st and 15th</masterLabel>
@@ -55,23 +55,23 @@
         </picklistValues>
     </fields>
     <fields>
-        <help>Cantidad de cuotas (donaciones) que se esperan recibir. Para donaciones recurrentes con duración fija solamente.</help>
-        <label>Cantidad de cuotas</label>
+        <help>Aantal termijnen. Wordt alleen gebruikt met niet doorlopende terugkerende donaties.</help>
+        <label>Termijnen</label>
         <name>Installments__c</name>
     </fields>
     <fields>
-        <help>No Completar. El NPSP calcula este valor automáticamente basado en la última donación relacionada marcada como Ganada Cerrada.</help>
-        <label>Fecha de última donación</label>
+        <help>Datum van de laatste betaling voor deze Terugkerende Donatie</help>
+        <label>Laatste Donatie Datum</label>
         <name>Last_Payment_Date__c</name>
     </fields>
     <fields>
-        <help>La fecha en la cual se va a realizar la próxima donación. Esta fecha también determina la fecha de todas las futuras donaciones.</help>
-        <label>Fecha de próxima donación</label>
+        <help>Houdt de datum van de volgende terugkerende betaling. Het handmatig aanpassen van dit veld zal alle toekomstige sluitingsdatums van opportunities herberekenen op basis van het gedefinieerde schema</help>
+        <label>Volgende Donatie Datum</label>
         <name>Next_Payment_Date__c</name>
     </fields>
     <fields>
-        <help>Elegir Abierto para donaciones recurrentes sin fecha de fin. Elegir Ninguno para donaciones recurrentes con duración fija. Elegir Cerrada para donaciones recurrentes cerradas/finalizadas.</help>
-        <label>Estado de final abierto</label>
+        <help><!-- Choose Open for an Open-Ended Recurring Donation.  Choose None for a Fixed Length Recurring Donation.  Choose Closed to close a Recurring Donation. --></help>
+        <label>Open-end-status</label>
         <name>Open_Ended_Status__c</name>
         <picklistValues>
             <masterLabel>Closed</masterLabel>
@@ -87,27 +87,27 @@
         </picklistValues>
     </fields>
     <fields>
-        <label>Cuenta</label>
+        <label>Organisatie</label>
         <name>Organization__c</name>
-        <relationshipLabel>Donaciones recurrentes y Compromisos</relationshipLabel>
+        <relationshipLabel><!-- Recurring Donations --></relationshipLabel>
     </fields>
     <fields>
-        <help>No Completar. El NPSP calcula este valor automáticamente cuando se realizan las donaciones y se marcan como Ganadas Cerradas.</help>
-        <label>Monto pagado</label>
+        <help>Totaal bedrag betaald voor deze terugkerende donatie</help>
+        <label>Betaald Bedrag</label>
         <name>Paid_Amount__c</name>
     </fields>
     <fields>
-        <label>Campaña</label>
+        <label>Campagne</label>
         <name>Recurring_Donation_Campaign__c</name>
-        <relationshipLabel>Donaciones recurrentes</relationshipLabel>
+        <relationshipLabel><!-- Recurring Donations --></relationshipLabel>
     </fields>
     <fields>
-        <help>Especifica como se debe calcular el importe de las oportunidades recurrentes, basado en el campo Monto. Solo para donaciones recurrentes con duración fija.</help>
-        <label>Criterio</label>
+        <help>Of dit bedrag is gebruikt voor elk termijn (vermenigvuldig met), of dat het bedrag is opgedeeld tussen termijnen (delen door). Wordt alleen gebruikt met niet doorlopende terugkerende donaties.</help>
+        <label>Schematype</label>
         <name>Schedule_Type__c</name>
         <picklistValues>
             <masterLabel>Divide By</masterLabel>
-            <translation>Dividir por</translation>
+            <translation>Deel door</translation>
         </picklistValues>
         <picklistValues>
             <masterLabel>Multiply By</masterLabel>
@@ -115,42 +115,42 @@
         </picklistValues>
     </fields>
     <fields>
-        <help>No Completar. El NPSP calcula este valor automáticamente cuando se realizan las donaciones y se marcan como Ganadas Cerradas.</help>
-        <label>Cantidad de cuotas pagadas</label>
+        <help>Totaal aantal termijnen betaald op deze doorlopende terugkerende donatie</help>
+        <label>Totaal Betaalde Termijnen</label>
         <name>Total_Paid_Installments__c</name>
     </fields>
     <fields>
-        <help>Para donaciones recurrentes sin final abierto, es la suma del importe de todas las oportunidades.</help>
-        <label>Total</label>
+        <help><!-- For Non-Open Ended Recurring Donations, the total amount of all Opportunities. --></help>
+        <label>Totaal</label>
         <name>Total__c</name>
     </fields>
-    <gender>Feminine</gender>
+    <gender><!-- Neuter --></gender>
     <layouts>
         <layout>Recurring Donation Layout</layout>
         <sections>
-            <label>Vínculos personalizados</label>
+            <label><!-- Custom Links --></label>
             <section>Custom Links</section>
         </sections>
     </layouts>
-    <nameFieldLabel>Nombre Donación recurrente</nameFieldLabel>
+    <nameFieldLabel><!-- Recurring Donation Name --></nameFieldLabel>
     <quickActions>
-        <label>Nueva oportunidad</label>
+        <label>Nieuwe Opportunity</label>
         <name>New_Opportunity</name>
     </quickActions>
     <quickActions>
-        <label>Actualización rápida</label>
+        <label>Snelle Update</label>
         <name>Quick_Update</name>
     </quickActions>
     <webLinks>
-        <label>Nueva donación recurrente</label>
+        <label>Nieuwe Terugkerende Account Donatie</label>
         <name>New_Recurring_Acct_Donation</name>
     </webLinks>
     <webLinks>
-        <label>Nueva donación recurrente</label>
+        <label>Nieuwe Terugkerende Contactpersoon Donatie</label>
         <name>New_Recurring_Donation_Pledge_Account</name>
     </webLinks>
     <webLinks>
-        <label>Actualizar oportunidades</label>
+        <label>Ververs Opportunities</label>
         <name>Refresh_Opportunities</name>
     </webLinks>
 </CustomObjectTranslation>
