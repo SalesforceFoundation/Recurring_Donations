@@ -8,12 +8,6 @@ project:
         prefix_release: rel/
 
 flows:
-    ci_feature:
-        tasks:
-            # Set run_tests_debug to query for test classes with the namespace
-            8:
-                options:
-                    managed: True
     release_beta:
         tasks:
             # Ignore failures on release notes generation
