@@ -12,7 +12,6 @@
     </types>
     <types>
         <members>RecurringDonationsSettings</members>
-        <members>RecurringDonations_AddDonationsBTN</members>
         <name>ApexPage</name>
     </types>
     <types>
