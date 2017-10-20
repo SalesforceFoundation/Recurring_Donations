@@ -96,6 +96,10 @@
         <label>עליך לציין פחות מ-50 תשלומים.  (הודעת שגיאה זו הוצאה משימוש).</label>
         <name>RecurringDonationTooManyInstallmentsError</name>
     </customLabels>
+    <customTabs>
+        <label>הגדרות תרומות חוזרות</label>
+        <name>Recurring_Donations_Settings</name>
+    </customTabs>
     <quickActions>
         <label><!-- NewNote --></label>
         <name>NewNote</name>

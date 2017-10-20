@@ -96,6 +96,10 @@
         <label><!-- RecurringDonationTooInstallmentsManyError --></label>
         <name>RecurringDonationTooManyInstallmentsError</name>
     </customLabels>
+    <customTabs>
+        <label>Terugkerende Donaties Instellingen</label>
+        <name>Recurring_Donations_Settings</name>
+    </customTabs>
     <quickActions>
         <label><!-- NewNote --></label>
         <name>NewNote</name>
