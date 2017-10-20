@@ -96,10 +96,6 @@
         <label>Sie müssen weniger als 50 Raten angeben.  (Diese Fehlermeldung wird nicht mehr verwendet.)</label>
         <name>RecurringDonationTooManyInstallmentsError</name>
     </customLabels>
-    <customTabs>
-        <label>Einstellungen für wiederkehrende Spenden</label>
-        <name>Recurring_Donations_Settings</name>
-    </customTabs>
     <quickActions>
         <label><!-- NewNote --></label>
         <name>NewNote</name>
