@@ -37,24 +37,13 @@
         <members>Recurring_Donation__c.Total_Paid_Installments__c</members>
         <members>Recurring_Donation__c.Total__c</members>
         <members>Recurring_Donations_Settings__c.Add_Campaign_to_All_Opportunites__c</members>
-        <members>Recurring_Donations_Settings__c.DISABLE_Donations_trigger__c</members>
-        <members>Recurring_Donations_Settings__c.DISABLE_RecurringDonations_trigger__c</members>
-        <members>Recurring_Donations_Settings__c.Disable_Nightly_Job__c</members>
-        <members>Recurring_Donations_Settings__c.Enable_Update_Check__c</members>
-        <members>Recurring_Donations_Settings__c.Error_Email_Notifications__c</members>
-        <members>Recurring_Donations_Settings__c.Has_Package_Update__c</members>
         <members>Recurring_Donations_Settings__c.Last_Batch_Run__c</members>
-        <members>Recurring_Donations_Settings__c.Last_Update_Check__c</members>
-        <members>Recurring_Donations_Settings__c.Max_Package_Version__c</members>
         <members>Recurring_Donations_Settings__c.Maximum_Donations__c</members>
-        <members>Recurring_Donations_Settings__c.Nightly_Update_ID__c</members>
         <members>Recurring_Donations_Settings__c.Number_of_Failures__c</members>
         <members>Recurring_Donations_Settings__c.Number_of_Successes__c</members>
         <members>Recurring_Donations_Settings__c.Open_Opportunity_Behavior__c</members>
         <members>Recurring_Donations_Settings__c.Opportunity_Forecast_Months__c</members>
-        <members>Recurring_Donations_Settings__c.Package_Update_URL__c</members>
         <members>Recurring_Donations_Settings__c.Record_Type__c</members>
-        <members>Recurring_Donations_Settings__c.Update_Check_Interval__c</members>
         <name>CustomField</name>
     </types>
     <types>
