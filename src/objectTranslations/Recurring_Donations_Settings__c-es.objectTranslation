@@ -24,11 +24,6 @@
         <name>DISABLE_RecurringDonations_trigger__c</name>
     </fields>
     <fields>
-        <help>Previene la programación del trabajo nocturno que actualiza las donaciones recurrentes. Cualquier trabajo programado existente debe ser removido en Configuración -&gt;Trabajos -&gt; Trabajos programados</help>
-        <label>Deshabilitar progr. del trabajo nocturno</label>
-        <name>Disable_Nightly_Job__c</name>
-    </fields>
-    <fields>
         <help><!-- DEPRECATED. New versions of the Nonprofit Success Pack will be automatically installed. --></help>
         <label><!-- DEPRECATED-Enable Update Check --></label>
         <name>Enable_Update_Check__c</name>
@@ -39,33 +34,14 @@
         <name>Error_Email_Notifications__c</name>
     </fields>
     <fields>
-        <help><!-- DEPRECATED. New versions of the Nonprofit Success Pack will be automatically installed. --></help>
-        <label><!-- DEPRECATED-Has Package Update --></label>
-        <name>Has_Package_Update__c</name>
-    </fields>
-    <fields>
         <help>Día y hora del último lote que modifica donaciones recurrentes.</help>
         <label>Último lote procesado</label>
         <name>Last_Batch_Run__c</name>
     </fields>
     <fields>
-        <help><!-- DEPRECATED. New versions of the Nonprofit Success Pack will be automatically installed. --></help>
-        <label><!-- DEPRECATED-Last Update Check --></label>
-        <name>Last_Update_Check__c</name>
-    </fields>
-    <fields>
-        <help><!-- DEPRECATED. New versions of the Nonprofit Success Pack will be automatically installed. --></help>
-        <label><!-- DEPRECATED-Max Package Version --></label>
-        <name>Max_Package_Version__c</name>
-    </fields>
-    <fields>
         <help>Restringe la cantidad total de donaciones creadas por donaciones recurrentes con final abierto. Por defecto son 50. Un valor mayor puede resultar en errores DML</help>
         <label>Máximo de donaciones</label>
         <name>Maximum_Donations__c</name>
-    </fields>
-    <fields>
-        <label><!-- DEPRECATED-Nightly Update ID --></label>
-        <name>Nightly_Update_ID__c</name>
     </fields>
     <fields>
         <help>Cantidad de donaciones recurrentes que NO fueron modificadas con éxito el último lote.</help>
@@ -86,11 +62,6 @@
         <help>Cantidad de meses desde hoy que deben tener op. abiertas creadas cuando se usa don. recurrentes con final abierto. ATENCIÓN: Disminuir este valor resulta en la eliminación de op. que están de más. Aumentar este valor ejecutará un lote para agregar op.</help>
         <label>Meses de previsiones de oportunidades</label>
         <name>Opportunity_Forecast_Months__c</name>
-    </fields>
-    <fields>
-        <help><!-- DEPRECATED. New versions of the Nonprofit Success Pack will be automatically installed. --></help>
-        <label><!-- DEPRECATED-Package Update URL --></label>
-        <name>Package_Update_URL__c</name>
     </fields>
     <fields>
         <help>Tipo de registro de oportunidad usado para las oportunidades creadas por donaciones recurrentes.</help>

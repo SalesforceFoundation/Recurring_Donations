@@ -56,11 +56,6 @@
         <name>DISABLE_RecurringDonations_trigger__c</name>
     </fields>
     <fields>
-        <help>Verhindert die Planung einer nächtlichen Aktualisierung für wiederkehrende Spenden Vorhandene geplante Aufträge müssen über Setup &gt; Überwachung -&gt; Geplante Aufträge entfernt werden.</help>
-        <label>Planung des Nachtauftrags deaktivieren</label>
-        <name>Disable_Nightly_Job__c</name>
-    </fields>
-    <fields>
         <help><!-- DEPRECATED. New versions of the Nonprofit Success Pack will be automatically installed. --></help>
         <label><!-- DEPRECATED-Enable Update Check --></label>
         <name>Enable_Update_Check__c</name>
@@ -71,33 +66,14 @@
         <name>Error_Email_Notifications__c</name>
     </fields>
     <fields>
-        <help><!-- DEPRECATED. New versions of the Nonprofit Success Pack will be automatically installed. --></help>
-        <label><!-- DEPRECATED-Has Package Update --></label>
-        <name>Has_Package_Update__c</name>
-    </fields>
-    <fields>
         <help>Das Datum und die Uhrzeit der letzten Batchaktualisierung für wiederkehrende Spenden</help>
         <label>Letzte Batchausführung</label>
         <name>Last_Batch_Run__c</name>
     </fields>
     <fields>
-        <help><!-- DEPRECATED. New versions of the Nonprofit Success Pack will be automatically installed. --></help>
-        <label><!-- DEPRECATED-Last Update Check --></label>
-        <name>Last_Update_Check__c</name>
-    </fields>
-    <fields>
-        <help><!-- DEPRECATED. New versions of the Nonprofit Success Pack will be automatically installed. --></help>
-        <label><!-- DEPRECATED-Max Package Version --></label>
-        <name>Max_Package_Version__c</name>
-    </fields>
-    <fields>
         <help>Beschränkt die Anzahl der Spenden, die für befristete wiederkehrende Spenden erstellt werden Der Standardwert ist 50.  Höhere Werte verursachen möglicherweise DML-Fehler.</help>
         <label>Maximale Anzahl der Spenden</label>
         <name>Maximum_Donations__c</name>
-    </fields>
-    <fields>
-        <label><!-- DEPRECATED-Nightly Update ID --></label>
-        <name>Nightly_Update_ID__c</name>
     </fields>
     <fields>
         <help>Anzahl der wiederkehrenden Spenden, die beim letzten Batchvorgang nicht aktualisiert werden konnten.</help>
@@ -118,11 +94,6 @@
         <help>Anzahl der Monate ab heute zur Erstellung offener Opport., wenn unbefristete wiederkehrende Spenden verwendet werden. WARNUNG: Bei Wertverkleinerung werden weitere Opport. gelöscht. Bei Werterhöhung wird ein Batchvorgang zum Hinzuf. von Opport. gestartet.</help>
         <label>Opportunity-Vorschau in Monaten</label>
         <name>Opportunity_Forecast_Months__c</name>
-    </fields>
-    <fields>
-        <help><!-- DEPRECATED. New versions of the Nonprofit Success Pack will be automatically installed. --></help>
-        <label><!-- DEPRECATED-Package Update URL --></label>
-        <name>Package_Update_URL__c</name>
     </fields>
     <fields>
         <help>Opportunity-Datensatztyp für die Erstellung von Opportunities mit wiederkehrenden Spenden</help>
