@@ -13,6 +13,48 @@
         <type>Checkbox</type>
     </fields>
     <fields>
+        <fullName>DISABLE_Donations_trigger__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>DEPRECATED. Trigger behavior now controlled in the Trigger Configuration page of NPSP Settings.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>DEPRECATED. Trigger behavior now controlled in the Trigger Configuration page of NPSP Settings.</inlineHelpText>
+        <label>DEPRECATED-Disable_Donations_trigger</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>DISABLE_RecurringDonations_trigger__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>DEPRECATED. Trigger behavior now controlled in the Trigger Configuration page of NPSP Settings.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>DEPRECATED. Trigger behavior now controlled in the Trigger Configuration page of NPSP Settings.</inlineHelpText>
+        <label>DEPRECATED-Disable_RD_trigger</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Enable_Update_Check__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>DEPRECATED. New versions of the Nonprofit Success Pack will be automatically installed.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>DEPRECATED. New versions of the Nonprofit Success Pack will be automatically installed.</inlineHelpText>
+        <label>DEPRECATED-Enable Update Check</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Error_Email_Notifications__c</fullName>
+        <description>DEPRECATED.  Replaced by the notification settings in the System Error settings panel.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>DEPRECATED.  Replaced by the notification settings in the System Error settings panel.</inlineHelpText>
+        <label>DEPRECATED-Error Email Notifications</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
         <fullName>Last_Batch_Run__c</fullName>
         <externalId>false</externalId>
         <inlineHelpText>The date and time of the last batch update of Recurring Donations.</inlineHelpText>
@@ -94,6 +136,19 @@
         <required>false</required>
         <trackTrending>false</trackTrending>
         <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Update_Check_Interval__c</fullName>
+        <description>DEPRECATED. New versions of the Nonprofit Success Pack will be automatically installed.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>DEPRECATED. New versions of the Nonprofit Success Pack will be automatically installed.</inlineHelpText>
+        <label>DEPRECATED-Update Check Interval</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
         <unique>false</unique>
     </fields>
     <label>Recurring Donations Settings</label>
