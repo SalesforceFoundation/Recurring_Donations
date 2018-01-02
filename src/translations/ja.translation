@@ -96,10 +96,6 @@
         <label>50 未満の回数を指定する必要があります。(このエラーメッセージは使用されなくなりました)</label>
         <name>RecurringDonationTooManyInstallmentsError</name>
     </customLabels>
-    <customTabs>
-        <label>継続支援設定</label>
-        <name>Recurring_Donations_Settings</name>
-    </customTabs>
     <quickActions>
         <label><!-- NewNote --></label>
         <name>NewNote</name>

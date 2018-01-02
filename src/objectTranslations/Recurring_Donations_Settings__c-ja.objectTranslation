@@ -20,11 +20,6 @@
         <name>DISABLE_RecurringDonations_trigger__c</name>
     </fields>
     <fields>
-        <help>継続支援の夜間更新がスケジュールされないようにします。既存のスケジュール済みジョブは、[設定] -&gt; [監視] -&gt; [スケジュール済みジョブ] から削除する必要があります。</help>
-        <label>夜間ジョブのスケジュールの無効化</label>
-        <name>Disable_Nightly_Job__c</name>
-    </fields>
-    <fields>
         <help><!-- DEPRECATED. New versions of the Nonprofit Success Pack will be automatically installed. --></help>
         <label><!-- DEPRECATED-Enable Update Check --></label>
         <name>Enable_Update_Check__c</name>
@@ -35,33 +30,14 @@
         <name>Error_Email_Notifications__c</name>
     </fields>
     <fields>
-        <help><!-- DEPRECATED. New versions of the Nonprofit Success Pack will be automatically installed. --></help>
-        <label><!-- DEPRECATED-Has Package Update --></label>
-        <name>Has_Package_Update__c</name>
-    </fields>
-    <fields>
         <help>継続支援の前回の一括更新の日時。</help>
         <label>一括処理の最終実行</label>
         <name>Last_Batch_Run__c</name>
     </fields>
     <fields>
-        <help><!-- DEPRECATED. New versions of the Nonprofit Success Pack will be automatically installed. --></help>
-        <label><!-- DEPRECATED-Last Update Check --></label>
-        <name>Last_Update_Check__c</name>
-    </fields>
-    <fields>
-        <help><!-- DEPRECATED. New versions of the Nonprofit Success Pack will be automatically installed. --></help>
-        <label><!-- DEPRECATED-Max Package Version --></label>
-        <name>Max_Package_Version__c</name>
-    </fields>
-    <fields>
         <help>固定期間の継続支援で作成される支援の合計数を制限します。デフォルトは 50 です。これより大きい値を設定すると、DML エラーになる可能性があります。</help>
         <label>最大支援回数</label>
         <name>Maximum_Donations__c</name>
-    </fields>
-    <fields>
-        <label><!-- DEPRECATED-Nightly Update ID --></label>
-        <name>Nightly_Update_ID__c</name>
     </fields>
     <fields>
         <help>前回の一括処理で継続支援の更新に失敗した回数。</help>
@@ -82,11 +58,6 @@
         <help>無期限の継続支援を使用しているときに作成される進行中の支援が計上される現在日付からの月数。警告: この値を低くすると、余分な支援は削除されます。値を高くすると、支援を追加する一括処理が起動されます。</help>
         <label>支援の売上予測月数</label>
         <name>Opportunity_Forecast_Months__c</name>
-    </fields>
-    <fields>
-        <help><!-- DEPRECATED. New versions of the Nonprofit Success Pack will be automatically installed. --></help>
-        <label><!-- DEPRECATED-Package Update URL --></label>
-        <name>Package_Update_URL__c</name>
     </fields>
     <fields>
         <help>継続支援の作成時に使用される支援レコードタイプ。</help>

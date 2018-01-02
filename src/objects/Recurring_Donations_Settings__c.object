@@ -33,16 +33,6 @@
         <type>Checkbox</type>
     </fields>
     <fields>
-        <fullName>Disable_Nightly_Job__c</fullName>
-        <defaultValue>false</defaultValue>
-        <description>DEPRECATED-Prevents the scheduling of the nightly update to Recurring Donations. Any existing scheduled job will need to be removed through Setup-&gt;Monitoring-&gt;Scheduled Jobs</description>
-        <externalId>false</externalId>
-        <inlineHelpText>DEPRECATED-Prevents the scheduling of the nightly update to Recurring Donations. Any existing scheduled job will need to be removed through Setup-&gt;Monitoring-&gt;Scheduled Jobs</inlineHelpText>
-        <label>DEPRECATED-Disable Sched of Nightly Job</label>
-        <trackTrending>false</trackTrending>
-        <type>Checkbox</type>
-    </fields>
-    <fields>
         <fullName>Enable_Update_Check__c</fullName>
         <defaultValue>false</defaultValue>
         <description>DEPRECATED. New versions of the Nonprofit Success Pack will be automatically installed.</description>
@@ -65,18 +55,6 @@
         <unique>false</unique>
     </fields>
     <fields>
-        <fullName>Has_Package_Update__c</fullName>
-        <description>DEPRECATED. New versions of the Nonprofit Success Pack will be automatically installed.</description>
-        <externalId>false</externalId>
-        <inlineHelpText>DEPRECATED. New versions of the Nonprofit Success Pack will be automatically installed.</inlineHelpText>
-        <label>DEPRECATED-Has Package Update</label>
-        <length>40</length>
-        <required>false</required>
-        <trackTrending>false</trackTrending>
-        <type>Text</type>
-        <unique>false</unique>
-    </fields>
-    <fields>
         <fullName>Last_Batch_Run__c</fullName>
         <externalId>false</externalId>
         <inlineHelpText>The date and time of the last batch update of Recurring Donations.</inlineHelpText>
@@ -84,28 +62,6 @@
         <required>false</required>
         <trackTrending>false</trackTrending>
         <type>DateTime</type>
-    </fields>
-    <fields>
-        <fullName>Last_Update_Check__c</fullName>
-        <description>DEPRECATED. New versions of the Nonprofit Success Pack will be automatically installed.</description>
-        <externalId>false</externalId>
-        <inlineHelpText>DEPRECATED. New versions of the Nonprofit Success Pack will be automatically installed.</inlineHelpText>
-        <label>DEPRECATED-Last Update Check</label>
-        <required>false</required>
-        <trackTrending>false</trackTrending>
-        <type>DateTime</type>
-    </fields>
-    <fields>
-        <fullName>Max_Package_Version__c</fullName>
-        <description>DEPRECATED. New versions of the Nonprofit Success Pack will be automatically installed.</description>
-        <externalId>false</externalId>
-        <inlineHelpText>DEPRECATED. New versions of the Nonprofit Success Pack will be automatically installed.</inlineHelpText>
-        <label>DEPRECATED-Max Package Version</label>
-        <length>12</length>
-        <required>false</required>
-        <trackTrending>false</trackTrending>
-        <type>Text</type>
-        <unique>false</unique>
     </fields>
     <fields>
         <fullName>Maximum_Donations__c</fullName>
@@ -118,16 +74,6 @@
         <scale>0</scale>
         <trackTrending>false</trackTrending>
         <type>Number</type>
-        <unique>false</unique>
-    </fields>
-    <fields>
-        <fullName>Nightly_Update_ID__c</fullName>
-        <externalId>false</externalId>
-        <label>DEPRECATED-Nightly Update ID</label>
-        <length>18</length>
-        <required>false</required>
-        <trackTrending>false</trackTrending>
-        <type>Text</type>
         <unique>false</unique>
     </fields>
     <fields>
@@ -179,16 +125,6 @@
         <trackTrending>false</trackTrending>
         <type>Number</type>
         <unique>false</unique>
-    </fields>
-    <fields>
-        <fullName>Package_Update_URL__c</fullName>
-        <description>DEPRECATED. New versions of the Nonprofit Success Pack will be automatically installed.</description>
-        <externalId>false</externalId>
-        <inlineHelpText>DEPRECATED. New versions of the Nonprofit Success Pack will be automatically installed.</inlineHelpText>
-        <label>DEPRECATED-Package Update URL</label>
-        <required>false</required>
-        <trackTrending>false</trackTrending>
-        <type>Url</type>
     </fields>
     <fields>
         <fullName>Record_Type__c</fullName>

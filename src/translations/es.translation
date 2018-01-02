@@ -96,10 +96,6 @@
         <label>Debe elegir menos de 50 cuotas</label>
         <name>RecurringDonationTooManyInstallmentsError</name>
     </customLabels>
-    <customTabs>
-        <label>Configuración de Donaciones recurrentes</label>
-        <name>Recurring_Donations_Settings</name>
-    </customTabs>
     <quickActions>
         <label><!-- NewNote --></label>
         <name>NewNote</name>

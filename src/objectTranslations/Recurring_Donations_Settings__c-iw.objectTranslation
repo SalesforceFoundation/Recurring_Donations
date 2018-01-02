@@ -36,11 +36,6 @@
         <name>DISABLE_RecurringDonations_trigger__c</name>
     </fields>
     <fields>
-        <help>מונע את תזמון העדכון הלילי של תרומות חוזרות. יהיה עליך להסיר את כל המשימות המתוזמנות הקיימות באמצעות &apos;הגדרה-&gt;ניטור-&gt;משימות מתוזמנות&apos;</help>
-        <label>השבת תזמון משימה לילית</label>
-        <name>Disable_Nightly_Job__c</name>
-    </fields>
-    <fields>
         <help><!-- DEPRECATED. New versions of the Nonprofit Success Pack will be automatically installed. --></help>
         <label><!-- DEPRECATED-Enable Update Check --></label>
         <name>Enable_Update_Check__c</name>
@@ -51,33 +46,14 @@
         <name>Error_Email_Notifications__c</name>
     </fields>
     <fields>
-        <help><!-- DEPRECATED. New versions of the Nonprofit Success Pack will be automatically installed. --></help>
-        <label><!-- DEPRECATED-Has Package Update --></label>
-        <name>Has_Package_Update__c</name>
-    </fields>
-    <fields>
         <help>התאריך והשעה של עדכון האצווה האחרון של תרומות חוזרות.</help>
         <label>הפעלת אצווה אחרונה</label>
         <name>Last_Batch_Run__c</name>
     </fields>
     <fields>
-        <help><!-- DEPRECATED. New versions of the Nonprofit Success Pack will be automatically installed. --></help>
-        <label><!-- DEPRECATED-Last Update Check --></label>
-        <name>Last_Update_Check__c</name>
-    </fields>
-    <fields>
-        <help><!-- DEPRECATED. New versions of the Nonprofit Success Pack will be automatically installed. --></help>
-        <label><!-- DEPRECATED-Max Package Version --></label>
-        <name>Max_Package_Version__c</name>
-    </fields>
-    <fields>
         <help>הגבלת המספר הכולל של תרומות שניתן ליצור עבור תרומות חוזרות ללא סיום פתוח. ערך ברירת המחדל הוא 50.  ערכים גדולים יותר עלולים לגרום לבעיות DML.</help>
         <label>מספר תרומות מרבי</label>
         <name>Maximum_Donations__c</name>
-    </fields>
-    <fields>
-        <label><!-- DEPRECATED-Nightly Update ID --></label>
-        <name>Nightly_Update_ID__c</name>
     </fields>
     <fields>
         <help>מספר התרומות החוזרות שהעדכון שלהן נכשל בפעולת האצווה האחרונה.</help>
@@ -98,11 +74,6 @@
         <help>מספר החודשים מהיום הנוכחי ליצירת הזדמנויות פתוחות, בעת שימוש בתרומות חוזרות עם סיום פתוח. אזהרה: הקטנת ערך זה תגרום למחיקת הזדמנויות נוספות.  הגדלתו תביא להפעלת תהליך אצווה להוספת הזדמנויות</help>
         <label>חודשי תחזית התרומה</label>
         <name>Opportunity_Forecast_Months__c</name>
-    </fields>
-    <fields>
-        <help><!-- DEPRECATED. New versions of the Nonprofit Success Pack will be automatically installed. --></help>
-        <label><!-- DEPRECATED-Package Update URL --></label>
-        <name>Package_Update_URL__c</name>
     </fields>
     <fields>
         <help>סוג רשומת ההזדמנות המשמש בעת יצירה של הזדמנויות תרומה חוזרת.</help>
