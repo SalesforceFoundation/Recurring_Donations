@@ -14,7 +14,7 @@
         <name>Opportunity_Field__c</name>
     </fields>
     <fields>
-        <help>Het Terugkerend donatie veld te kopiëren naar het veld Opportunity. Let op dat deze velden hetzelfde data type moeten hebben.</help>
+        <help>Het Terugkerend donatie veld te kopiëren naar het Opportunity veld. Let op dat deze velden hetzelfde data type moeten hebben.</help>
         <label>Terugkerend Donatie veld</label>
         <name>Recurring_Donation_Field__c</name>
     </fields>
