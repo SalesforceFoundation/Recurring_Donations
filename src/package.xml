@@ -4,6 +4,8 @@
     <types>
         <members>RecurringDonations</members>
         <members>RecurringDonationsPkgVersionCheck</members>
+        <members>RecurringDonationsSettings</members>
+        <members>RecurringDonations_AddDonationsBTN</members>
         <members>RecurringDonations_BATCH</members>
         <members>RecurringDonations_SCHED</members>
         <members>RecurringDonations_TEST</members>
