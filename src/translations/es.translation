@@ -89,7 +89,7 @@
         <name>RecurringDonationSettingsDescription</name>
     </customLabels>
     <customLabels>
-        <label>Comprometida</label>
+        <label>Pledged</label>
         <name>RecurringDonationStageName</name>
     </customLabels>
     <customLabels>
