@@ -13,7 +13,7 @@
         <name>RecurringDonationCantDeleteError</name>
     </customLabels>
     <customLabels>
-        <label>Gesloten Verloren</label>
+        <label>Closed Lost</label>
         <name>RecurringDonationClosedLostOpportunityStage</name>
     </customLabels>
     <customLabels>
@@ -89,7 +89,7 @@
         <name>RecurringDonationSettingsDescription</name>
     </customLabels>
     <customLabels>
-        <label>Toegezegd</label>
+        <label>Pledged</label>
         <name>RecurringDonationStageName</name>
     </customLabels>
     <customLabels>
