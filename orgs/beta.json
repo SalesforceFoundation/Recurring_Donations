@@ -1,11 +1,11 @@
 {
   "edition": "Developer", 
   "orgName": "Recurring Donations - Beta Test Org", 
-  "orgPreferences": {
-    "enabled": [
-      "ChatterEnabled", 
-      "S1DesktopEnabled", 
-      "DisableParallelApexTesting"
-    ]
+  "settings": {
+    "orgPreferenceSettings": {
+      "chatterEnabled": true,
+      "s1DesktopEnabled": true,
+      "disableParallelApexTesting": true
+    }
   }
 }
