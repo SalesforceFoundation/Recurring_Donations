@@ -1,0 +1,13 @@
+{
+  "edition": "Developer", 
+  "orgName": "Recurring Donations - Feature Test Org", 
+  "instance": "cs46",
+  "settings": {
+    "orgPreferenceSettings": {
+      "chatterEnabled": true,
+      "s1DesktopEnabled": true,
+      "disableParallelApexTesting": true,
+      "translation": true
+    }
+  }
+}
