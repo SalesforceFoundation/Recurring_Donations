@@ -191,9 +191,9 @@ OR(
     </fields>
     <fields>
         <fullName>Last_Payment_Date__c</fullName>
-        <description>Do Not Enter. The NPSP calculates this value automatically based on the last time a child donation was marked Posted.</description>
+        <description>NPSP calculates this value automatically based on the last time an installment Opportunity was marked paid (read only).</description>
         <externalId>false</externalId>
-        <inlineHelpText>Do Not Enter. The NPSP calculates this value automatically based on the last time a child donation was marked Posted.</inlineHelpText>
+        <inlineHelpText>NPSP calculates this value automatically based on the last time an installment Opportunity was marked paid (read only).</inlineHelpText>
         <label>Last Donation Date</label>
         <required>false</required>
         <trackHistory>false</trackHistory>
