@@ -250,9 +250,9 @@ OR(
     </fields>
     <fields>
         <fullName>Paid_Amount__c</fullName>
-        <description>The total amount paid on this Recurring Donation. Calculated automatically as the total amount of all Closed/Won installment Opportunities. Read only.</description>
+        <description>The total amount paid on this Recurring Donation. Calculated automatically as the total amount of all Closed/Won installment Opportunities (read only).</description>
         <externalId>false</externalId>
-        <inlineHelpText>The total amount paid on this Recurring Donation. Calculated automatically as the total amount of all Closed/Won installment Opportunities. Read only.</inlineHelpText>
+        <inlineHelpText>The total amount paid on this Recurring Donation. Calculated automatically as the total amount of all Closed/Won installment Opportunities (read only).</inlineHelpText>
         <label>Total Paid Amount</label>
         <precision>18</precision>
         <required>false</required>
