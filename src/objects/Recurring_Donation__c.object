@@ -66,6 +66,7 @@
     <fields>
         <fullName>Amount__c</fullName>
         <externalId>false</externalId>
+        <inlineHelpText>The amount for each installment Opportunity.</inlineHelpText>
         <label>Amount</label>
         <precision>18</precision>
         <required>false</required>
@@ -90,6 +91,7 @@
         <fullName>Date_Established__c</fullName>
         <defaultValue>Today()</defaultValue>
         <externalId>false</externalId>
+        <inlineHelpText>The initial inception date for this recurring donation. The default is the current date.</inlineHelpText>
         <label>Date Established</label>
         <required>false</required>
         <trackHistory>false</trackHistory>
@@ -248,8 +250,8 @@ OR(
         <fullName>Paid_Amount__c</fullName>
         <description>Total Amount paid on this Recurring Donation</description>
         <externalId>false</externalId>
-        <inlineHelpText>Do Not Enter. The NPSP calculates this value automatically as donations are made and marked Posted.</inlineHelpText>
-        <label>Paid Amount</label>
+        <inlineHelpText>The total amount paid on this Recurring Donation. Calculated automatically as the total amount of all Closed/Won installment Opportunities. Read only.</inlineHelpText>
+        <label>Total Paid Amount</label>
         <precision>18</precision>
         <required>false</required>
         <scale>2</scale>
@@ -296,7 +298,7 @@ OR(
         <description>Total number of installments paid on this Recurring Donation.</description>
         <externalId>false</externalId>
         <inlineHelpText>Do Not Enter. The NPSP calculates this value automatically as donations are made and marked Posted.</inlineHelpText>
-        <label>Total Paid Installments</label>
+        <label>Number Of Paid Installments</label>
         <precision>18</precision>
         <required>false</required>
         <scale>0</scale>
