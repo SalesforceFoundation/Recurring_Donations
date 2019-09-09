@@ -54,7 +54,7 @@
         <label>NPSP Recurring Donation Compact Layout</label>
     </compactLayouts>
     <deploymentStatus>Deployed</deploymentStatus>
-    <description>Recurring Donations with no end date.</description>
+    <description>Recurring Donations track charitable giving where a donor specifies an amount of money to be given on a regular basis.</description>
     <enableActivities>true</enableActivities>
     <enableBulkApi>true</enableBulkApi>
     <enableFeeds>false</enableFeeds>
@@ -325,7 +325,7 @@ CASE(
         <trackTrending>false</trackTrending>
         <type>Currency</type>
     </fields>
-    <label>Recurring Donations</label>
+    <label>Recurring Donation</label>
     <nameField>
         <label>Recurring Donation Name</label>
         <trackHistory>false</trackHistory>
