@@ -1,12 +1,12 @@
 {
   "edition": "Developer", 
   "orgName": "Recurring Donations - Dev Workspace", 
-  "orgPreferences": {
-    "enabled": [
-      "ChatterEnabled", 
-      "Translation", 
-      "S1DesktopEnabled", 
-      "DisableParallelApexTesting"
-    ]
+  "settings": {
+    "orgPreferenceSettings": {
+      "chatterEnabled": true,
+      "s1DesktopEnabled": true,
+      "disableParallelApexTesting": true,
+      "translation": true
+    }
   }
 }

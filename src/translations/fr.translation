@@ -13,7 +13,7 @@
         <name>RecurringDonationCantDeleteError</name>
     </customLabels>
     <customLabels>
-        <label>Fermé perdu</label>
+        <label>Closed Lost</label>
         <name>RecurringDonationClosedLostOpportunityStage</name>
     </customLabels>
     <customLabels>
@@ -96,10 +96,6 @@
         <label>You must specify fewer than 50 installments</label>
         <name>RecurringDonationTooManyInstallmentsError</name>
     </customLabels>
-    <customTabs>
-        <label>Paramètres des dons réguliers</label>
-        <name>Recurring_Donations_Settings</name>
-    </customTabs>
     <quickActions>
         <label><!-- NewNote --></label>
         <name>NewNote</name>

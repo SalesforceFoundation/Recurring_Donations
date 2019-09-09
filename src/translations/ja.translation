@@ -13,7 +13,7 @@
         <name>RecurringDonationCantDeleteError</name>
     </customLabels>
     <customLabels>
-        <label>不成立</label>
+        <label>Closed Lost</label>
         <name>RecurringDonationClosedLostOpportunityStage</name>
     </customLabels>
     <customLabels>
@@ -89,17 +89,13 @@
         <name>RecurringDonationSettingsDescription</name>
     </customLabels>
     <customLabels>
-        <label>確約済み</label>
+        <label>Pledged</label>
         <name>RecurringDonationStageName</name>
     </customLabels>
     <customLabels>
         <label>50 未満の回数を指定する必要があります。(このエラーメッセージは使用されなくなりました)</label>
         <name>RecurringDonationTooManyInstallmentsError</name>
     </customLabels>
-    <customTabs>
-        <label>継続支援設定</label>
-        <name>Recurring_Donations_Settings</name>
-    </customTabs>
     <quickActions>
         <label><!-- NewNote --></label>
         <name>NewNote</name>
