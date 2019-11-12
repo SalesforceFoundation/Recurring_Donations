@@ -6,7 +6,7 @@
         <externalId>false</externalId>
         <label>Recurring Donation</label>
         <referenceTo>Recurring_Donation__c</referenceTo>
-        <relationshipLabel>Donations</relationshipLabel>
+        <relationshipLabel>Opportunities</relationshipLabel>
         <relationshipName>Donations</relationshipName>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
