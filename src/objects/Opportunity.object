@@ -6,8 +6,8 @@
         <externalId>false</externalId>
         <label>Recurring Donation</label>
         <referenceTo>Recurring_Donation__c</referenceTo>
-        <relationshipLabel>Donations</relationshipLabel>
-        <relationshipName>Donations</relationshipName>
+        <relationshipLabel>Opportunities</relationshipLabel>
+        <relationshipName>Opportunities</relationshipName>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <trackTrending>false</trackTrending>
