@@ -1,12 +1,18 @@
 {
-  "edition": "Developer", 
-  "orgName": "Recurring Donations - Feature Test Org", 
+  "edition": "Developer",
+  "orgName": "Recurring Donations - Feature Test Org",
   "settings": {
-    "orgPreferenceSettings": {
-      "chatterEnabled": true,
-      "s1DesktopEnabled": true,
-      "disableParallelApexTesting": true,
-      "translation": true
+    "chatterSettings": {
+      "enableChatter": true
+    },
+    "lightningExperienceSettings": {
+      "enableS1DesktopEnabled": true
+    },
+    "apexSettings": {
+      "enableDisableParallelApexTesting": true
+    },
+    "languageSettings": {
+      "enableTranslationWorkbench": true
     }
   }
 }
