@@ -1,22 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
-    <caseValues>
-        <plural>false</plural>
-        <value><!-- Custom Installment Settings --></value>
-    </caseValues>
-    <caseValues>
-        <plural>true</plural>
-        <value><!-- Custom Installment Settings --></value>
-    </caseValues>
-    <fields>
-        <help>Het type tijdsperiode die de Aangepaste Termijn periode dekt</help>
-        <label>Type Tijdsperiode</label>
-        <name>Increment__c</name>
-    </fields>
-    <fields>
-        <help>De hoeveelheid tijd die de Aangepaste Termijn Periode dekt</help>
-        <label>Tijdsperiode Frequentie</label>
-        <name>Value__c</name>
-    </fields>
-    <gender><!-- Neuter --></gender>
+  <fields>
+    <name>Increment__c</name>
+    <help>Het type tijdsbestek, dat Aangepaste termijnperiode bestrijkt.</help>
+    <label>Type Tijdsbestek</label>
+  </fields>
+  <fields>
+    <name>Value__c</name>
+    <help>De hoeveelheid tijd die Aangepaste termijnperiode bestrijkt.</help>
+    <label>Frequentie van tijdsbestek</label>
+  </fields>
 </CustomObjectTranslation>
