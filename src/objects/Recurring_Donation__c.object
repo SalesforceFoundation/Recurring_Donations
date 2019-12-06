@@ -240,7 +240,7 @@ OR(
         <fullName>Organization__c</fullName>
         <deleteConstraint>SetNull</deleteConstraint>
         <externalId>false</externalId>
-        <label>Organization</label>
+        <label>Account</label>
         <referenceTo>Account</referenceTo>
         <relationshipName>RecurringDonations</relationshipName>
         <required>false</required>
