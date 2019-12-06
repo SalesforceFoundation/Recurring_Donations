@@ -9,6 +9,7 @@
         <value>Recurring Donations</value>
     </caseValues>
     <fields>
+        <help><!-- The amount for each installment Opportunity. --></help>
         <label><!-- Amount --></label>
         <name>Amount__c</name>
     </fields>
@@ -18,6 +19,7 @@
         <relationshipLabel><!-- Recurring Donations --></relationshipLabel>
     </fields>
     <fields>
+        <help><!-- The initial inception date for this Recurring Donation. The default is the current date. --></help>
         <label><!-- Date Established --></label>
         <name>Date_Established__c</name>
     </fields>
@@ -60,7 +62,7 @@
         <name>Installments__c</name>
     </fields>
     <fields>
-        <help><!-- Do Not Enter. The NPSP calculates this value automatically based on the last time a child donation was marked Posted. --></help>
+        <help><!-- NPSP calculates this value automatically based on the last time an installment Opportunity was marked paid (read only). --></help>
         <label><!-- Last Donation Date --></label>
         <name>Last_Payment_Date__c</name>
     </fields>
@@ -92,8 +94,8 @@
         <relationshipLabel><!-- Recurring Donations --></relationshipLabel>
     </fields>
     <fields>
-        <help><!-- Do Not Enter. The NPSP calculates this value automatically as donations are made and marked Posted. --></help>
-        <label><!-- Paid Amount --></label>
+        <help><!-- The total amount paid on this Recurring Donation. Calculated automatically as the total amount of all Closed/Won installment Opportunities (read only). --></help>
+        <label><!-- Total Paid Amount --></label>
         <name>Paid_Amount__c</name>
     </fields>
     <fields>
@@ -115,8 +117,8 @@
         </picklistValues>
     </fields>
     <fields>
-        <help><!-- Do Not Enter. The NPSP calculates this value automatically as donations are made and marked Posted. --></help>
-        <label><!-- Total Paid Installments --></label>
+        <help><!-- Total number of installment Opportunities paid on this Recurring Donation (read only). --></help>
+        <label><!-- Number Of Paid Installments --></label>
         <name>Total_Paid_Installments__c</name>
     </fields>
     <fields>

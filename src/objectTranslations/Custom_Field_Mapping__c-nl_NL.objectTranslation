@@ -1,13 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
-  <fields>
-    <name>Opportunity_Field__c</name>
-    <help>Het veld Opportunity, dat de waarde ontvangt van het veld Terugkerende donatie. Deze velden moeten hetzelfde type gegevens hebben.</help>
-    <label>Veld Opportunity</label>
-  </fields>
-  <fields>
-    <name>Recurring_Donation_Field__c</name>
-    <help>Het veld Terugkerende donatie, dat naar het veld Opportunity moet worden gekopieerd. Deze velden moeten hetzelfde type gegevens hebben.</help>
-    <label>Veld Terugkerende donatie</label>
-  </fields>
+    <caseValues>
+        <plural>false</plural>
+        <value><!-- Custom Field Mapping --></value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value><!-- Custom Field Mapping --></value>
+    </caseValues>
+    <fields>
+        <help>Het veld Opportunity, dat de waarde ontvangt van het veld Terugkerende donatie. Deze velden moeten hetzelfde type gegevens hebben.</help>
+        <label>Veld Opportunity</label>
+        <name>Opportunity_Field__c</name>
+    </fields>
+    <fields>
+        <help>Het veld Terugkerende donatie, dat naar het veld Opportunity moet worden gekopieerd. Deze velden moeten hetzelfde type gegevens hebben.</help>
+        <label>Veld Terugkerende donatie</label>
+        <name>Recurring_Donation_Field__c</name>
+    </fields>
+    <gender><!-- Neuter --></gender>
 </CustomObjectTranslation>
