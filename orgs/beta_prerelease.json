@@ -1,12 +1,16 @@
 {
-  "edition": "Developer", 
-  "orgName": "Recurring Donations - Prerelease Beta Test Org", 
+  "edition": "Developer",
+  "orgName": "Recurring Donations - Prerelease Beta Test Org",
   "instance": "cs46",
   "settings": {
-    "orgPreferenceSettings": {
-      "chatterEnabled": true,
-      "s1DesktopEnabled": true,
-      "disableParallelApexTesting": true
+    "chatterSettings": {
+      "enableChatter": true
+    },
+    "lightningExperienceSettings": {
+      "enableS1DesktopEnabled": true
+    },
+    "apexSettings": {
+      "enableDisableParallelApexTesting": true
     }
   }
 }
