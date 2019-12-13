@@ -8,7 +8,7 @@
         <defaultValue>false</defaultValue>
         <externalId>false</externalId>
         <inlineHelpText>If selected, all Opportunities for Recurring Donations will use the Campaign on the Recurring Donation. Otherwise, only the first Opportunity will have the Campaign.</inlineHelpText>
-        <label>Add Campaign to All Opportunites</label>
+        <label>Add Campaign to All Opportunities</label>
         <trackTrending>false</trackTrending>
         <type>Checkbox</type>
     </fields>
