@@ -7,6 +7,20 @@ project:
     git:
         prefix_release: rel/
 
+tasks:
+    cleanup_translation_metadata:
+        description: Delete metadata from translation files that should not be translated.
+        class_path: tasks.modify.RemoveElementsXPath
+        options:
+            output_style: salesforce
+            elements:
+                - path: src/translations/**.translation
+                  xpath: //ns:customLabels[ns:name='RecurringDonationInstallmentPeriod1stand15th']|//ns:customLabels[ns:name='RecurringDonationInstallmentPeriodQuarterly']|//ns:customLabels[ns:name='RecurringDonationInstallmentPeriodWeekly']|//ns:customLabels[ns:name='RecurringDonationInstallmentPeriodMonthly']|//ns:customLabels[ns:name='RecurringDonationInstallmentPeriodYearly']
+                - path: src/translations/**.translation
+                  xpath: //ns:customLabels[ns:name='RecurringDonationClosedLostOpportunityStage']|//ns:customLabels[ns:name='RecurringDonationStageName']
+                - path: src/translations/**.translation
+                  xpath: //ns:customLabels[ns:name='RecurringDonationClosedStatus']|//ns:customLabels[ns:name='RecurringDonationContactRole']|//ns:customLabels[ns:name='RecurringDonationDivideValue']|//ns:customLabels[ns:name='RecurringDonationMultiplyValue']|//ns:customLabels[ns:name='RecurringDonationOpenStatus']|//ns:customLabels[ns:name='RecurringDonationContactRole']
+
 flows:
     release_beta:
         tasks:
