@@ -13,48 +13,12 @@
         <name>RecurringDonationCantDeleteError</name>
     </customLabels>
     <customLabels>
-        <label>Fermé perdu</label>
-        <name>RecurringDonationClosedLostOpportunityStage</name>
-    </customLabels>
-    <customLabels>
-        <label>Fermé</label>
-        <name>RecurringDonationClosedStatus</name>
-    </customLabels>
-    <customLabels>
-        <label>Donateur</label>
-        <name>RecurringDonationContactRole</name>
-    </customLabels>
-    <customLabels>
         <label>Les champs de votre objet d’opportunité ont des règles de validation personnalisées qui peuvent provoquer des problèmes avec votre package de dons récurrents :</label>
         <name>RecurringDonationCustomValidationWarning</name>
     </customLabels>
     <customLabels>
-        <label>Diviser par</label>
-        <name>RecurringDonationDivideValue</name>
-    </customLabels>
-    <customLabels>
         <label>Des erreurs sont survenues lors de la tentative d’insertion de nouvelles opportunités pour vos dons récurrents sans date de fin. Ceci peut affecter négativement vos prévisions et les fonctionnalités de votre instance Salesforce.com. Remédier à ces erreurs dès que possible peut éviter que de mauvaises données soient insérées dans votre système. Le don récurrent et l’erreur d’insertion d’opportunité associée sont présentés ci-dessous, et peuvent être trouvés dans l’onglet de configuration de NPSP, dans Système, Journal des erreurs.</label>
         <name>RecurringDonationErrorEmailBody</name>
-    </customLabels>
-    <customLabels>
-        <label>1 et 15</label>
-        <name>RecurringDonationInstallmentPeriod1stand15th</name>
-    </customLabels>
-    <customLabels>
-        <label>Mensuel</label>
-        <name>RecurringDonationInstallmentPeriodMonthly</name>
-    </customLabels>
-    <customLabels>
-        <label>Trimestriel</label>
-        <name>RecurringDonationInstallmentPeriodQuarterly</name>
-    </customLabels>
-    <customLabels>
-        <label>Hebdomadaire</label>
-        <name>RecurringDonationInstallmentPeriodWeekly</name>
-    </customLabels>
-    <customLabels>
-        <label>Annuel</label>
-        <name>RecurringDonationInstallmentPeriodYearly</name>
     </customLabels>
     <customLabels>
         <label>Tous les versements personnalisés doivent avoir un nom, une fréquence positive et un type de période.</label>
@@ -63,14 +27,6 @@
     <customLabels>
         <label>Vous devez sélectionner une organisation ou un contact</label>
         <name>RecurringDonationMissingDataError</name>
-    </customLabels>
-    <customLabels>
-        <label>Multiplier par</label>
-        <name>RecurringDonationMultiplyValue</name>
-    </customLabels>
-    <customLabels>
-        <label>Ouvert</label>
-        <name>RecurringDonationOpenStatus</name>
     </customLabels>
     <customLabels>
         <label>Don</label>
@@ -87,10 +43,6 @@
     <customLabels>
         <label>Ces paramètres contrôlent la manière dont les dons récurrents fonctionnent dans le pack NPSP. Consultez la &lt;a href=&quot;https://powerofus.force.com/NPSP_Recurring_Donations&quot; target=&quot;_blank&quot;&gt;documentation de NPSP&lt;/a&gt; pour plus d’informations.</label>
         <name>RecurringDonationSettingsDescription</name>
-    </customLabels>
-    <customLabels>
-        <label>Promis</label>
-        <name>RecurringDonationStageName</name>
     </customLabels>
     <customLabels>
         <label>Vous devez spécifier moins de 50 versements. (Ce message d’erreur n’est plus utilisé).</label>

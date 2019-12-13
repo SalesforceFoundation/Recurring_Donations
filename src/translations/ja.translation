@@ -13,48 +13,12 @@
         <name>RecurringDonationCantDeleteError</name>
     </customLabels>
     <customLabels>
-        <label>不成立</label>
-        <name>RecurringDonationClosedLostOpportunityStage</name>
-    </customLabels>
-    <customLabels>
-        <label>完了</label>
-        <name>RecurringDonationClosedStatus</name>
-    </customLabels>
-    <customLabels>
-        <label>支援者</label>
-        <name>RecurringDonationContactRole</name>
-    </customLabels>
-    <customLabels>
         <label>支援オブジェクトの項目に、継続支援パッケージの問題を引き起こす可能性のあるカスタム入力規則があります:</label>
         <name>RecurringDonationCustomValidationWarning</name>
     </customLabels>
     <customLabels>
-        <label>分割</label>
-        <name>RecurringDonationDivideValue</name>
-    </customLabels>
-    <customLabels>
         <label>無期限の継続支援で新規支援を挿入しようとしたときにエラーが発生しました。これにより、Salesforce.com インスタンスの売上予測と機能に悪影響が及ぶ可能性があります。できるだけ早くこれらのエラーに対応することで、不正なデータがシステムに入力されるのを防止できます。継続支援と、関連付けられている支援の挿入エラーを次に示します。これらのエラーは、[システムエラーログ] の [NPSP 設定] タブにあります。</label>
         <name>RecurringDonationErrorEmailBody</name>
-    </customLabels>
-    <customLabels>
-        <label>1 日と 15 日</label>
-        <name>RecurringDonationInstallmentPeriod1stand15th</name>
-    </customLabels>
-    <customLabels>
-        <label>毎月</label>
-        <name>RecurringDonationInstallmentPeriodMonthly</name>
-    </customLabels>
-    <customLabels>
-        <label>毎四半期</label>
-        <name>RecurringDonationInstallmentPeriodQuarterly</name>
-    </customLabels>
-    <customLabels>
-        <label>毎週</label>
-        <name>RecurringDonationInstallmentPeriodWeekly</name>
-    </customLabels>
-    <customLabels>
-        <label>毎年</label>
-        <name>RecurringDonationInstallmentPeriodYearly</name>
     </customLabels>
     <customLabels>
         <label>すべてのカスタム間隔に名前、正の頻度および期間種別が設定されている必要があります。</label>
@@ -63,14 +27,6 @@
     <customLabels>
         <label>団体または個人を選択する必要があります</label>
         <name>RecurringDonationMissingDataError</name>
-    </customLabels>
-    <customLabels>
-        <label>加算</label>
-        <name>RecurringDonationMultiplyValue</name>
-    </customLabels>
-    <customLabels>
-        <label>進行中</label>
-        <name>RecurringDonationOpenStatus</name>
     </customLabels>
     <customLabels>
         <label>支援</label>
@@ -87,10 +43,6 @@
     <customLabels>
         <label>これらの設定で Nonprofit Success Pack の継続支援の動作を制御します。詳細は、&lt;a href=&quot;https://powerofus.force.com/NPSP_Recurring_Donations&quot; target=&quot;_blank&quot;&gt;NPSP ドキュメント&lt;/a&gt;を参照してください。</label>
         <name>RecurringDonationSettingsDescription</name>
-    </customLabels>
-    <customLabels>
-        <label>Pledged</label>
-        <name>RecurringDonationStageName</name>
     </customLabels>
     <customLabels>
         <label>50 未満の回数を指定する必要があります。(このエラーメッセージは使用されなくなりました)</label>
