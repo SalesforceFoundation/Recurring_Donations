@@ -1,107 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Translations xmlns="http://soap.sforce.com/2006/04/metadata">
     <customLabels>
-        <label>Velden moet van een verenigbaar datatype zijn. Wijzig de veldkeuze en probeer opnieuw.</label>
+        <label>Velden moeten onderling compatibele gegevenstypen hebben. Bewerk uw veldkeuzes en probeer opnieuw.</label>
         <name>RecurringDonationBadFieldMapping</name>
     </customLabels>
     <customLabels>
-        <label>Uw aangepaste label voor Gesloten Verloren Opportunities komen niet overeen met een actieve Gesloten/Verloren Opportunity Fase Naam. Dit kan zorgen voor ongewenste resultaten bij het sluiten van een Terugkerende Donatie.</label>
+        <label>Uw aangepaste label voor gesloten verloren Opportunities komen niet overeen met de Fasenaam van een actieve gesloten/verloren Opportunity. Dit kan zorgen voor ongewenste resultaten bij het aanduiden van Terugkerende donaties als gesloten in combinatie met de instelling voor Werking van open opportunity op: Mark_Opportunities_Closed_Lost.  Controleer uw fasenamen en het aangepaste label RecurringDonationClosedLostOpportunityStage.</label>
         <name>RecurringDonationBadLabelWarning</name>
     </customLabels>
     <customLabels>
-        <label>U moet de gerelateerde Donaties verwijderen voordat u deze Terugkerende Donatie kunt verwijderen</label>
+        <label>U moet de gerelateerde donaties verwijderen voordat u deze terugkerende donatie kunt verwijderen</label>
         <name>RecurringDonationCantDeleteError</name>
     </customLabels>
     <customLabels>
-        <label>Closed Lost</label>
-        <name>RecurringDonationClosedLostOpportunityStage</name>
-    </customLabels>
-    <customLabels>
-        <label><!-- RecurringDonationClosedStatus --></label>
-        <name>RecurringDonationClosedStatus</name>
-    </customLabels>
-    <customLabels>
-        <label>Donateur</label>
-        <name>RecurringDonationContactRole</name>
-    </customLabels>
-    <customLabels>
-        <label>Velden op het Opportunity object hebben Aangepaste Validatieregels die fouten kunnen veroorzaken met het Terugkerende Donatie pakket:</label>
+        <label>Velden voor het object Opportunity hebben Aangepaste validatieregels die fouten kunnen veroorzaken bij het pakket Terugkerende Donaties:</label>
         <name>RecurringDonationCustomValidationWarning</name>
     </customLabels>
     <customLabels>
-        <label><!-- RecurringDonationDivideValue --></label>
-        <name>RecurringDonationDivideValue</name>
-    </customLabels>
-    <customLabels>
-        <label>Fouten zijn geconstateerd bij het invoeren van nieuwe Opportunities met  doorlopende Terugkerende Donaties. Dit kan de Prognose beïnvloeden. Los deze fouten zo snel mogelijk op, om slechte data in het systeem te voorkomen.</label>
+        <label>Er hebben zich fouten voorgedaan bij een poging tot invoegen van nieuwe Opportunities voor Terugkerende donaties zonder einde. Dit kan een negatieve invloed hebben op prognoses en de functionaliteit van uw Salesforce.com-exemplaar. Door deze fouten zo snel mogelijk op te lossen kan worden verhinderd dat corrupte gegevens worden ingevoerd in uw systeem. De fouten bij invoegen van Terugkerende donaties en gerelateerde Opportunity staan hieronder en worden ook vermeld op het tabblad NPSP-instellingen onder Systeem, Foutenlogboek.</label>
         <name>RecurringDonationErrorEmailBody</name>
     </customLabels>
     <customLabels>
-        <label>1ste en 15de</label>
-        <name>RecurringDonationInstallmentPeriod1stand15th</name>
-    </customLabels>
-    <customLabels>
-        <label><!-- RecurringDonationInstallmentPeriodMonthly --></label>
-        <name>RecurringDonationInstallmentPeriodMonthly</name>
-    </customLabels>
-    <customLabels>
-        <label><!-- RecurringDonationInstallmentPeriodQuarterly --></label>
-        <name>RecurringDonationInstallmentPeriodQuarterly</name>
-    </customLabels>
-    <customLabels>
-        <label><!-- RecurringDonationInstallmentPeriodWeekly --></label>
-        <name>RecurringDonationInstallmentPeriodWeekly</name>
-    </customLabels>
-    <customLabels>
-        <label><!-- RecurringDonationInstallmentPeriodYearly --></label>
-        <name>RecurringDonationInstallmentPeriodYearly</name>
-    </customLabels>
-    <customLabels>
-        <label>Alle Aangepaste Installaties moeten een Naam, positieve Frequentie en een Tijdsperiode Type hebben.</label>
+        <label>Alle aangepaste installaties moeten een Naam, positieve Frequentie en een Type tijdsbestek hebben.</label>
         <name>RecurringDonationInvalidCustomInstallment</name>
     </customLabels>
     <customLabels>
-        <label>U moet een Organisatie of Contactpersoon kiezen</label>
+        <label>U moet een organisatie of contactpersoon kiezen</label>
         <name>RecurringDonationMissingDataError</name>
     </customLabels>
     <customLabels>
-        <label><!-- RecurringDonationMultiplyValue --></label>
-        <name>RecurringDonationMultiplyValue</name>
-    </customLabels>
-    <customLabels>
-        <label><!-- RecurringDonationOpenStatus --></label>
-        <name>RecurringDonationOpenStatus</name>
-    </customLabels>
-    <customLabels>
-        <label>Donatie</label>
+        <label>Donaties</label>
         <name>RecurringDonationPrefix</name>
     </customLabels>
     <customLabels>
-        <label>De volgende verplichte velden op uw Oppoerunity object kunnen problemen veroorzaken met uw Terugkerende Donatie pakket:</label>
+        <label>De volgende verplichte velden voor uw object Opportunity kunnen problemen veroorzaken met uw pakket Terugkerende donaties:</label>
         <name>RecurringDonationRequiredFieldsWarning</name>
     </customLabels>
     <customLabels>
-        <label>Er is een fout opgetreden bij het plannen van een automatische bijwerking van Terugkerende Donaties.</label>
+        <label>Er is een fout opgetreden bij het plannen van uw nachtelijke update van Terugkerende donaties.</label>
         <name>RecurringDonationSchedulingError</name>
     </customLabels>
     <customLabels>
-        <label>Deze instellingen bepalen hoe Terugkerende Donaties werken in het Nonprofit Success Pack. Zie de &lt;a href=&quot;https://powerofus.force.com/NPSP_Recurring_Donations&quot; target=&quot;_blank&quot;&gt;NPSP Documentatie&lt;/a&gt; voor meer informatie.</label>
+        <label>Deze instellingen bepalen de manier waarop Terugkerende donaties functioneert in het Nonprofit Success Pack. Zie de &lt;a href=&quot;https://powerofus.force.com/NPSP_Recurring_Donations&quot; target=&quot;_blank&quot;&gt;NPSP-documentatie&lt;/a&gt; voor meer informatie.</label>
         <name>RecurringDonationSettingsDescription</name>
     </customLabels>
     <customLabels>
-        <label>Pledged</label>
-        <name>RecurringDonationStageName</name>
-    </customLabels>
-    <customLabels>
-        <label><!-- RecurringDonationTooInstallmentsManyError --></label>
+        <label>U moet minder dan 50 termijnen opgeven.  (Dit foutbericht wordt niet langer gebruikt.)</label>
         <name>RecurringDonationTooManyInstallmentsError</name>
     </customLabels>
-    <quickActions>
-        <label><!-- New Note --></label>
-        <name>NewNote</name>
-    </quickActions>
-    <quickActions>
-        <label><!-- New Task --></label>
-        <name>NewTask</name>
-    </quickActions>
 </Translations>

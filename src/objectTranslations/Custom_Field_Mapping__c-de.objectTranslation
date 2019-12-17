@@ -41,12 +41,12 @@
         <value><!-- Custom Field Mapping --></value>
     </caseValues>
     <fields>
-        <help>Das Opportunity-Feld für den Wert des Felds &quot;Wiederkehrende Spende&quot;  Beachten Sie, dass die Datentypen dieser Felder identisch sein müssen.</help>
+        <help>Das Opportunity-Feld für den Wert des Felds &quot;Wiederkehrende Spende&quot;. Beachten Sie, dass die Datentypen dieser Felder identisch sein müssen.</help>
         <label>Opportunity-Feld</label>
         <name>Opportunity_Field__c</name>
     </fields>
     <fields>
-        <help>Das Feld &quot;Wiederkehrende Spende&quot;, das in das Opportunity-Feld kopiert werden soll  Beachten Sie, dass die Datentypen dieser Felder identisch sein müssen.</help>
+        <help>Das Feld &quot;Wiederkehrende Spende&quot;, das in das Opportunity-Feld kopiert werden soll. Beachten Sie, dass die Datentypen dieser Felder identisch sein müssen.</help>
         <label>Feld &quot;Wiederkehrende Spende&quot;</label>
         <name>Recurring_Donation_Field__c</name>
     </fields>

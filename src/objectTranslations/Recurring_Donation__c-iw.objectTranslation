@@ -21,6 +21,7 @@
         <value><!-- הRecurring Donations --></value>
     </caseValues>
     <fields>
+        <help><!-- The amount for each installment Opportunity. --></help>
         <label>כמות</label>
         <name>Amount__c</name>
     </fields>
@@ -30,6 +31,7 @@
         <relationshipLabel>תרומות חוזרות</relationshipLabel>
     </fields>
     <fields>
+        <help><!-- The initial inception date for this Recurring Donation. The default is the current date. --></help>
         <label>תאריך הגדרה</label>
         <name>Date_Established__c</name>
     </fields>

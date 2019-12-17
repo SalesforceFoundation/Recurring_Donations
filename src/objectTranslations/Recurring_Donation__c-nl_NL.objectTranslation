@@ -2,13 +2,14 @@
 <CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
     <caseValues>
         <plural>false</plural>
-        <value><!-- Recurring Donations --></value>
+        <value>Terugkerende donatie</value>
     </caseValues>
     <caseValues>
         <plural>true</plural>
-        <value><!-- Recurring Donations --></value>
+        <value>Terugkerende donaties</value>
     </caseValues>
     <fields>
+        <help>Het bedrag voor de Opportunity van elke termijn.</help>
         <label>Bedrag</label>
         <name>Amount__c</name>
     </fields>
@@ -18,11 +19,12 @@
         <relationshipLabel>Terugkerende Donaties</relationshipLabel>
     </fields>
     <fields>
-        <label>Datum Gevestigd</label>
+        <help>De datum van initiële inceptie voor deze terugkerende donatie. Standaard is dit de huidige datum.</help>
+        <label>Datum van instellen</label>
         <name>Date_Established__c</name>
     </fields>
     <fields>
-        <label>Donateur Naam</label>
+        <label>Naam van donor</label>
         <name>Donor_Name__c</name>
     </fields>
     <fields>
@@ -30,60 +32,60 @@
         <name>Installment_Amount__c</name>
     </fields>
     <fields>
-        <help>Stelt de termijn periode in voor terugkerende donaties. LET OP: Veranderen van de Termijn Periode voor een bestaande doorlopende Donatie zorgt ervoor dat Open Opportunities verwijderd worden en opnieuw gemaakt.</help>
-        <label>Termijn Periode</label>
+        <help>Hoe vaak u de donaties gaat ontvangen. LET OP: veranderen van termijnperiode voor bestaande Terugk. donatie met vaste duur kan resulteren in verlies en opnieuw maken van open opportunities. Alle aan die opportunities gekoppelde gegevens gaan verloren.</help>
+        <label>Termijnperiode</label>
         <name>Installment_Period__c</name>
         <picklistValues>
             <masterLabel>1st and 15th</masterLabel>
-            <translation><!-- 1st and 15th --></translation>
+            <translation>1ste en 15de</translation>
         </picklistValues>
         <picklistValues>
             <masterLabel>Monthly</masterLabel>
-            <translation><!-- Monthly --></translation>
+            <translation>Maandelijks</translation>
         </picklistValues>
         <picklistValues>
             <masterLabel>Quarterly</masterLabel>
-            <translation><!-- Quarterly --></translation>
+            <translation>Driemaandelijks</translation>
         </picklistValues>
         <picklistValues>
             <masterLabel>Weekly</masterLabel>
-            <translation><!-- Weekly --></translation>
+            <translation>Wekelijks</translation>
         </picklistValues>
         <picklistValues>
             <masterLabel>Yearly</masterLabel>
-            <translation><!-- Yearly --></translation>
+            <translation>Jaarlijks</translation>
         </picklistValues>
     </fields>
     <fields>
-        <help>Aantal termijnen. Dit is alleen voor terugkerende donaties met een bekende einddatum.</help>
+        <help>Aantal termijnen (donaties), dat u verwacht te ontvangen. Dit is alleen voor terugkerende donaties met een vaste duur.</help>
         <label>Termijnen</label>
         <name>Installments__c</name>
     </fields>
     <fields>
-        <help>Geen waarde invoeren. Dit veld wordt automatisch gevuld met de datum van de laatste donatie.</help>
-        <label>Laatste Donatie Datum</label>
+        <help>NPSP berekent deze waarde automatisch op basis van de laatste maal dat een termijn voor een Opportunity is aangeduid als betaald (alleen-lezen).</help>
+        <label>Datum van laatste donatie</label>
         <name>Last_Payment_Date__c</name>
     </fields>
     <fields>
-        <help>De datum van de volgende donatie. Deze datum bepaalt ook de data van alle toekomstige donaties.</help>
-        <label>Volgende Donatie Datum</label>
+        <help>De datum waarop de volgende donatie gaat plaatsvinden. Deze datum bepaalt ook de datum van alle toekomstige donaties.</help>
+        <label>Datum van volgende donatie</label>
         <name>Next_Payment_Date__c</name>
     </fields>
     <fields>
-        <help>Kies Open voor een doolopende Terugkerende Donatie. Kies Geen voor een Terugkerende Donatie met een vaststaande Einddatum. Kies Gesloten om de Terugkerende Donatie te sluiten.</help>
-        <label>Open-Einde-Status</label>
+        <help>Kies Open voor een doorlopende Terugkerende donatie (een Terugkerende donatie voor onbepaalde duur). Kies Geen voor een Terugkerende donatie met een vaste duur. Kies Gesloten om de Terugkerende donatie te sluiten.</help>
+        <label>Status voor onbepaalde duur</label>
         <name>Open_Ended_Status__c</name>
         <picklistValues>
             <masterLabel>Closed</masterLabel>
-            <translation><!-- Closed --></translation>
+            <translation>Gesloten</translation>
         </picklistValues>
         <picklistValues>
             <masterLabel>None</masterLabel>
-            <translation><!-- None --></translation>
+            <translation>Geen</translation>
         </picklistValues>
         <picklistValues>
             <masterLabel>Open</masterLabel>
-            <translation><!-- Open --></translation>
+            <translation>Open</translation>
         </picklistValues>
     </fields>
     <fields>
@@ -92,8 +94,8 @@
         <relationshipLabel>Terugkerende Donaties</relationshipLabel>
     </fields>
     <fields>
-        <help>Geen waarde invoeren. Dit veld wordt automatisch gevuld met het totaal binngekomen bedrag van deze terugkerende donatie.</help>
-        <label>Betaald Bedrag</label>
+        <help>Het totale betaalde bedrag voor deze terugkerende donatie. Wordt automatisch berekend als het totale bedrag aan termijnen van alle gesloten/gewonnen Opportunities (alleen-lezen).</help>
+        <label>Totaal betaald bedrag</label>
         <name>Paid_Amount__c</name>
     </fields>
     <fields>
@@ -102,55 +104,55 @@
         <relationshipLabel>Terugkerende Donaties</relationshipLabel>
     </fields>
     <fields>
-        <help>Het Planning Type &apos;Vermenigvuldig met&apos; berekent het Termijnbedrag door het Bedrag en het aantal Termijnen te vermenigvuldigen. Bepaal het bedrag per termijn, gebaseerd op het ingevulde bedrag. Alleen gebruikt bij een terugkerende donatie met einddatum.</help>
-        <label>Planning Type</label>
+        <help>Meldt aan Salesforce de manier waarop het bedrag voor elke onderliggende opportunity moet worden berekend op basis van wat u hebt opgegeven in het veld. Alleen Terugkerende donaties met vaste duur.</help>
+        <label>Planningstype</label>
         <name>Schedule_Type__c</name>
         <picklistValues>
             <masterLabel>Divide By</masterLabel>
-            <translation>Deel door</translation>
+            <translation>Delen door</translation>
         </picklistValues>
         <picklistValues>
             <masterLabel>Multiply By</masterLabel>
-            <translation><!-- Multiply By --></translation>
+            <translation>Vermenigvuldigen met</translation>
         </picklistValues>
     </fields>
     <fields>
-        <help>Geen waarde invoeren. Dit veld wordt automatisch gevuld met het totaal aantal termijnen van deze terugkerende donatie.</help>
-        <label>Totaal Betaalde Termijnen</label>
+        <help>Totale aantal betaalde termijnen voor Opportunities voor deze Terugkerende donatie (alleen-lezen).</help>
+        <label>Aantal betaalde termijnen</label>
         <name>Total_Paid_Installments__c</name>
     </fields>
     <fields>
-        <help>Het totaalbedrag van alle Opportunities, voor Terugkerende Donaties met een Einddatum.</help>
+        <help>Het totale bedrag van alle Opportunities, voor Terugkerende donaties zonder onbepaalde duur.</help>
         <label>Totaal</label>
         <name>Total__c</name>
     </fields>
-    <gender><!-- Neuter --></gender>
+    <gender>Feminine</gender>
     <layouts>
         <layout>Recurring Donation Layout</layout>
         <sections>
-            <label>Aangepaste Koppelingen</label>
+            <label>Aangepaste koppelingen</label>
             <section>Custom Links</section>
         </sections>
     </layouts>
-    <nameFieldLabel><!-- Recurring Donation Name --></nameFieldLabel>
+    <nameFieldLabel>Naam van terugkerende donatie</nameFieldLabel>
     <quickActions>
-        <label>Nieuwe Opportunity</label>
+        <label>Nieuwe opportunity</label>
         <name>New_Opportunity</name>
     </quickActions>
     <quickActions>
-        <label>Snelle Update</label>
+        <label>Snelle update</label>
         <name>Quick_Update</name>
     </quickActions>
     <webLinks>
-        <label>Nieuwe Terugkerende Account Donatie</label>
+        <label>Nieuwe terugkerende donatie voor Account</label>
         <name>New_Recurring_Acct_Donation</name>
     </webLinks>
     <webLinks>
-        <label>Nieuwe Terugkerende Contactpersoon Donatie</label>
+        <label>Nieuwe terugkerende donatie voor Contactpersoon</label>
         <name>New_Recurring_Donation_Pledge_Account</name>
     </webLinks>
     <webLinks>
-        <label>Ververs Opportunities</label>
+        <label>Opportunities vernieuwen</label>
         <name>Refresh_Opportunities</name>
     </webLinks>
 </CustomObjectTranslation>

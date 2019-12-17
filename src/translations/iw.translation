@@ -13,48 +13,12 @@
         <name>RecurringDonationCantDeleteError</name>
     </customLabels>
     <customLabels>
-        <label>Closed Lost</label>
-        <name>RecurringDonationClosedLostOpportunityStage</name>
-    </customLabels>
-    <customLabels>
-        <label><!-- RecurringDonationClosedStatus --></label>
-        <name>RecurringDonationClosedStatus</name>
-    </customLabels>
-    <customLabels>
-        <label>תורם</label>
-        <name>RecurringDonationContactRole</name>
-    </customLabels>
-    <customLabels>
         <label>השדות באובייקט ההזדמנות שלך מכילים כללי אימות מותאמים אישית שעלולים לגרום לבעיות עם חבילת התרומות החוזרות שלך:</label>
         <name>RecurringDonationCustomValidationWarning</name>
     </customLabels>
     <customLabels>
-        <label><!-- RecurringDonationDivideValue --></label>
-        <name>RecurringDonationDivideValue</name>
-    </customLabels>
-    <customLabels>
         <label>אירעו שגיאות בעת ניסיון להוסיף הזדמנויות חדשות לתרומותיך החוזרות עם סיום פתוח. הדבר עלול לשבש את החיזוי והתפקוד של מופע Salesforce.com שלך. טפל בשגיאות אלה ללא דיחוי כדי למנוע כניסת נתונים פגומים למערכת שלך.  שגיאות ההוספה של התרומה החוזרת וההזדמנויות הקשורות אליה מפורטות להלן, וניתן לעיין בהן בכרטיסיית ההגדרות של NPSP תחת &apos;מערכת&apos;, &apos;יומן שגיאות&apos;.</label>
         <name>RecurringDonationErrorEmailBody</name>
-    </customLabels>
-    <customLabels>
-        <label><!-- RecurringDonationInstallmentPeriod1stand15th --></label>
-        <name>RecurringDonationInstallmentPeriod1stand15th</name>
-    </customLabels>
-    <customLabels>
-        <label><!-- RecurringDonationInstallmentPeriodMonthly --></label>
-        <name>RecurringDonationInstallmentPeriodMonthly</name>
-    </customLabels>
-    <customLabels>
-        <label><!-- RecurringDonationInstallmentPeriodQuarterly --></label>
-        <name>RecurringDonationInstallmentPeriodQuarterly</name>
-    </customLabels>
-    <customLabels>
-        <label><!-- RecurringDonationInstallmentPeriodWeekly --></label>
-        <name>RecurringDonationInstallmentPeriodWeekly</name>
-    </customLabels>
-    <customLabels>
-        <label><!-- RecurringDonationInstallmentPeriodYearly --></label>
-        <name>RecurringDonationInstallmentPeriodYearly</name>
     </customLabels>
     <customLabels>
         <label>כל התשלומים המותאמים אישית חייבים לקבל שם, ערך תדירות חיובי וסוג פרק זמן.</label>
@@ -63,14 +27,6 @@
     <customLabels>
         <label>עליך לבחור ארגון או איש קשר</label>
         <name>RecurringDonationMissingDataError</name>
-    </customLabels>
-    <customLabels>
-        <label><!-- RecurringDonationMultiplyValue --></label>
-        <name>RecurringDonationMultiplyValue</name>
-    </customLabels>
-    <customLabels>
-        <label><!-- RecurringDonationOpenStatus --></label>
-        <name>RecurringDonationOpenStatus</name>
     </customLabels>
     <customLabels>
         <label>תרומה</label>
@@ -89,19 +45,7 @@
         <name>RecurringDonationSettingsDescription</name>
     </customLabels>
     <customLabels>
-        <label>Pledged</label>
-        <name>RecurringDonationStageName</name>
-    </customLabels>
-    <customLabels>
         <label>עליך לציין פחות מ-50 תשלומים.  (הודעת שגיאה זו הוצאה משימוש).</label>
         <name>RecurringDonationTooManyInstallmentsError</name>
     </customLabels>
-    <quickActions>
-        <label><!-- NewNote --></label>
-        <name>NewNote</name>
-    </quickActions>
-    <quickActions>
-        <label><!-- NewTask --></label>
-        <name>NewTask</name>
-    </quickActions>
 </Translations>

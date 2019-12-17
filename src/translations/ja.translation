@@ -13,48 +13,12 @@
         <name>RecurringDonationCantDeleteError</name>
     </customLabels>
     <customLabels>
-        <label>Closed Lost</label>
-        <name>RecurringDonationClosedLostOpportunityStage</name>
-    </customLabels>
-    <customLabels>
-        <label>Closed</label>
-        <name>RecurringDonationClosedStatus</name>
-    </customLabels>
-    <customLabels>
-        <label>支援者</label>
-        <name>RecurringDonationContactRole</name>
-    </customLabels>
-    <customLabels>
         <label>支援オブジェクトの項目に、継続支援パッケージの問題を引き起こす可能性のあるカスタム入力規則があります:</label>
         <name>RecurringDonationCustomValidationWarning</name>
     </customLabels>
     <customLabels>
-        <label><!-- RecurringDonationDivideValue --></label>
-        <name>RecurringDonationDivideValue</name>
-    </customLabels>
-    <customLabels>
         <label>無期限の継続支援で新規支援を挿入しようとしたときにエラーが発生しました。これにより、Salesforce.com インスタンスの売上予測と機能に悪影響が及ぶ可能性があります。できるだけ早くこれらのエラーに対応することで、不正なデータがシステムに入力されるのを防止できます。継続支援と、関連付けられている支援の挿入エラーを次に示します。これらのエラーは、[システムエラーログ] の [NPSP 設定] タブにあります。</label>
         <name>RecurringDonationErrorEmailBody</name>
-    </customLabels>
-    <customLabels>
-        <label>1st and 15th</label>
-        <name>RecurringDonationInstallmentPeriod1stand15th</name>
-    </customLabels>
-    <customLabels>
-        <label><!-- RecurringDonationInstallmentPeriodMonthly --></label>
-        <name>RecurringDonationInstallmentPeriodMonthly</name>
-    </customLabels>
-    <customLabels>
-        <label><!-- RecurringDonationInstallmentPeriodQuarterly --></label>
-        <name>RecurringDonationInstallmentPeriodQuarterly</name>
-    </customLabels>
-    <customLabels>
-        <label><!-- RecurringDonationInstallmentPeriodWeekly --></label>
-        <name>RecurringDonationInstallmentPeriodWeekly</name>
-    </customLabels>
-    <customLabels>
-        <label><!-- RecurringDonationInstallmentPeriodYearly --></label>
-        <name>RecurringDonationInstallmentPeriodYearly</name>
     </customLabels>
     <customLabels>
         <label>すべてのカスタム間隔に名前、正の頻度および期間種別が設定されている必要があります。</label>
@@ -63,14 +27,6 @@
     <customLabels>
         <label>団体または個人を選択する必要があります</label>
         <name>RecurringDonationMissingDataError</name>
-    </customLabels>
-    <customLabels>
-        <label><!-- RecurringDonationMultiplyValue --></label>
-        <name>RecurringDonationMultiplyValue</name>
-    </customLabels>
-    <customLabels>
-        <label>Open</label>
-        <name>RecurringDonationOpenStatus</name>
     </customLabels>
     <customLabels>
         <label>支援</label>
@@ -89,19 +45,7 @@
         <name>RecurringDonationSettingsDescription</name>
     </customLabels>
     <customLabels>
-        <label>Pledged</label>
-        <name>RecurringDonationStageName</name>
-    </customLabels>
-    <customLabels>
         <label>50 未満の回数を指定する必要があります。(このエラーメッセージは使用されなくなりました)</label>
         <name>RecurringDonationTooManyInstallmentsError</name>
     </customLabels>
-    <quickActions>
-        <label><!-- NewNote --></label>
-        <name>NewNote</name>
-    </quickActions>
-    <quickActions>
-        <label><!-- NewTask --></label>
-        <name>NewTask</name>
-    </quickActions>
 </Translations>
