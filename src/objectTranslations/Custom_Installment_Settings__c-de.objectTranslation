@@ -41,7 +41,7 @@
         <value><!-- Custom Installment Settings --></value>
     </caseValues>
     <fields>
-        <help>Der Typ des Zeitraums, den die benutzerdefinierte Ratenlaufzeit abdeckt</help>
+        <help>Der Typ des Zeitraums, den die benutzerdefinierte Ratenlaufzeit abdeckt.</help>
         <label>Zeitraumtyp</label>
         <name>Increment__c</name>
     </fields>

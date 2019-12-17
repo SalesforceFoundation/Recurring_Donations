@@ -9,13 +9,13 @@
         <value><!-- Custom Field Mapping --></value>
     </caseValues>
     <fields>
-        <help>Le champ d’opportunité pour recevoir la valeur du champ de don régulier.  Notez que ces champs doivent avoir le même type de données.</help>
-        <label>Champ d’opportunité</label>
+        <help>Le champ Opportunité qui reçoit la valeur du champ Don récurrent. Notez que ces champs doivent avoir le même type de données.</help>
+        <label>Champ Opportunité</label>
         <name>Opportunity_Field__c</name>
     </fields>
     <fields>
-        <help>Le champ de don régulier à copier vers le champ d’opportunité.  Notez que ces champs doivent avoir le même type de données.</help>
-        <label>Champ de don régulier</label>
+        <help>Le champ de don récurrent à copier vers le champ d’opportunité. Notez que ces champs doivent avoir le même type de données.</help>
+        <label>Champ Don récurrent</label>
         <name>Recurring_Donation_Field__c</name>
     </fields>
     <gender><!-- Masculine --></gender>

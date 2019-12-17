@@ -5,103 +5,47 @@
         <name>RecurringDonationBadFieldMapping</name>
     </customLabels>
     <customLabels>
-        <label>Votre étiquette personnalisée pour les opportunités fermées perdues ne correspond pas au nom d’une étape d’opportunité fermée perdue active. Ceci peut provoquer des conséquences indésirables lorsque vous marquez comme fermées des dons réguliers et que le paramètre de comportement d’opportunité ouverte est : Mark_Opportunities_Closed_Lost.  Veuillez vérifier vos noms d’étapes et l’étiquette personnalisée RecurringDonationClosedLostOpportunityStage.</label>
+        <label>Votre étiquette personnalisée pour les opportunités fermées perdues ne correspond pas au nom d’une étape d’opportunité fermée perdue active. Ceci peut provoquer des résultats indésirables lorsque vous marquez des dons récurrents comme fermés et que le paramètre de comportement d’opportunité ouverte est : Mark_Opportunities_Closed_Lost. Veuillez vérifier vos noms d’étapes et l’étiquette personnalisée RecurringDonationClosedLostOpportunityStage.</label>
         <name>RecurringDonationBadLabelWarning</name>
     </customLabels>
     <customLabels>
-        <label>You must delete the related Donations before you can delete this recurring donation</label>
+        <label>Vous devez supprimer les dons associés avant de pouvoir supprimer ce don récurrent.</label>
         <name>RecurringDonationCantDeleteError</name>
     </customLabels>
     <customLabels>
-        <label>Closed Lost</label>
-        <name>RecurringDonationClosedLostOpportunityStage</name>
-    </customLabels>
-    <customLabels>
-        <label>Closed</label>
-        <name>RecurringDonationClosedStatus</name>
-    </customLabels>
-    <customLabels>
-        <label>Donor</label>
-        <name>RecurringDonationContactRole</name>
-    </customLabels>
-    <customLabels>
-        <label>Les champs de votre objet d’opportunité ont des règles de validation personnalisées qui peuvent provoquer des problèmes avec votre package de dons réguliers :</label>
+        <label>Les champs de votre objet d’opportunité ont des règles de validation personnalisées qui peuvent provoquer des problèmes avec votre package de dons récurrents :</label>
         <name>RecurringDonationCustomValidationWarning</name>
     </customLabels>
     <customLabels>
-        <label><!-- RecurringDonationDivideValue --></label>
-        <name>RecurringDonationDivideValue</name>
-    </customLabels>
-    <customLabels>
-        <label>Des erreurs sont survenues lors de la tentative d’insertion de nouvelles opportunités pour vos dons réguliers sans date de fin. Ceci peut affecter négativement vos prévisions et les fonctionnalités de votre instance de Salesforce. Remédier à ces erreurs dès que possible peut éviter que de mauvaises données soient insérées dans votre système.  Le don régulier et l’erreur d’insertion d’opportunité associée sont présentés ci-dessous, et peuvent être trouvés dans l’onglet de configuration de NPSP, dans Système, Journal des erreurs.</label>
+        <label>Des erreurs sont survenues lors de la tentative d’insertion de nouvelles opportunités pour vos dons récurrents sans date de fin. Ceci peut affecter négativement vos prévisions et les fonctionnalités de votre instance Salesforce.com. Remédier à ces erreurs dès que possible peut éviter que de mauvaises données soient insérées dans votre système. Le don récurrent et l’erreur d’insertion d’opportunité associée sont présentés ci-dessous, et peuvent être trouvés dans l’onglet de configuration de NPSP, dans Système, Journal des erreurs.</label>
         <name>RecurringDonationErrorEmailBody</name>
-    </customLabels>
-    <customLabels>
-        <label>1st and 15th</label>
-        <name>RecurringDonationInstallmentPeriod1stand15th</name>
-    </customLabels>
-    <customLabels>
-        <label><!-- RecurringDonationInstallmentPeriodMonthly --></label>
-        <name>RecurringDonationInstallmentPeriodMonthly</name>
-    </customLabels>
-    <customLabels>
-        <label><!-- RecurringDonationInstallmentPeriodQuarterly --></label>
-        <name>RecurringDonationInstallmentPeriodQuarterly</name>
-    </customLabels>
-    <customLabels>
-        <label><!-- RecurringDonationInstallmentPeriodWeekly --></label>
-        <name>RecurringDonationInstallmentPeriodWeekly</name>
-    </customLabels>
-    <customLabels>
-        <label><!-- RecurringDonationInstallmentPeriodYearly --></label>
-        <name>RecurringDonationInstallmentPeriodYearly</name>
     </customLabels>
     <customLabels>
         <label>Tous les versements personnalisés doivent avoir un nom, une fréquence positive et un type de période.</label>
         <name>RecurringDonationInvalidCustomInstallment</name>
     </customLabels>
     <customLabels>
-        <label>You must select an Organization or Contact</label>
+        <label>Vous devez sélectionner une organisation ou un contact</label>
         <name>RecurringDonationMissingDataError</name>
     </customLabels>
     <customLabels>
-        <label><!-- RecurringDonationMultiplyValue --></label>
-        <name>RecurringDonationMultiplyValue</name>
-    </customLabels>
-    <customLabels>
-        <label>Open</label>
-        <name>RecurringDonationOpenStatus</name>
-    </customLabels>
-    <customLabels>
-        <label>Donation</label>
+        <label>Don</label>
         <name>RecurringDonationPrefix</name>
     </customLabels>
     <customLabels>
-        <label>Les champs obligatoires suivants de votre objet d’opportunité peuvent provoquer des problèmes avec votre package de dons réguliers :</label>
+        <label>Les champs obligatoires suivants de votre objet d’opportunité peuvent provoquer des problèmes avec votre package de dons récurrents :</label>
         <name>RecurringDonationRequiredFieldsWarning</name>
     </customLabels>
     <customLabels>
-        <label>Une erreur s’est produite lors de la planification de votre mise à jour nocturne de dons réguliers.</label>
+        <label>Une erreur s’est produite lors de la planification de votre mise à jour nocturne de dons récurrents.</label>
         <name>RecurringDonationSchedulingError</name>
     </customLabels>
     <customLabels>
-        <label>Ces paramètres contrôlent la manière dont les dons réguliers fonctionnent dans le pack NPSP. Consultez la &lt;a href=&quot;https://powerofus.force.com/NPSP_Recurring_Donations&quot; target=&quot;_blank&quot;&gt;documentation de NPSP&lt;/a&gt; pour plus d’informations.</label>
+        <label>Ces paramètres contrôlent la manière dont les dons récurrents fonctionnent dans le pack NPSP. Consultez la &lt;a href=&quot;https://powerofus.force.com/NPSP_Recurring_Donations&quot; target=&quot;_blank&quot;&gt;documentation de NPSP&lt;/a&gt; pour plus d’informations.</label>
         <name>RecurringDonationSettingsDescription</name>
     </customLabels>
     <customLabels>
-        <label>Pledged</label>
-        <name>RecurringDonationStageName</name>
-    </customLabels>
-    <customLabels>
-        <label>You must specify fewer than 50 installments</label>
+        <label>Vous devez spécifier moins de 50 versements. (Ce message d’erreur n’est plus utilisé).</label>
         <name>RecurringDonationTooManyInstallmentsError</name>
     </customLabels>
-    <quickActions>
-        <label><!-- NewNote --></label>
-        <name>NewNote</name>
-    </quickActions>
-    <quickActions>
-        <label><!-- NewTask --></label>
-        <name>NewTask</name>
-    </quickActions>
 </Translations>

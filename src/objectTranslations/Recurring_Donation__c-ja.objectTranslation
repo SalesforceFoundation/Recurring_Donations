@@ -2,9 +2,10 @@
 <CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
     <caseValues>
         <plural>false</plural>
-        <value><!-- Recurring Donations --></value>
+        <value>継続支援</value>
     </caseValues>
     <fields>
+        <help>継続支援の 1 回の支払額。</help>
         <label>金額</label>
         <name>Amount__c</name>
     </fields>
@@ -14,6 +15,7 @@
         <relationshipLabel>継続支援</relationshipLabel>
     </fields>
     <fields>
+        <help>この継続支援の始期。デフォルトは現在の日付です。</help>
         <label>開始日</label>
         <name>Date_Established__c</name>
     </fields>
@@ -31,32 +33,32 @@
         <name>Installment_Period__c</name>
         <picklistValues>
             <masterLabel>1st and 15th</masterLabel>
-            <translation><!-- 1st and 15th --></translation>
+            <translation>1 日と 15 日</translation>
         </picklistValues>
         <picklistValues>
             <masterLabel>Monthly</masterLabel>
-            <translation><!-- Monthly --></translation>
+            <translation>毎月</translation>
         </picklistValues>
         <picklistValues>
             <masterLabel>Quarterly</masterLabel>
-            <translation><!-- Quarterly --></translation>
+            <translation>毎四半期</translation>
         </picklistValues>
         <picklistValues>
             <masterLabel>Weekly</masterLabel>
-            <translation><!-- Weekly --></translation>
+            <translation>毎週</translation>
         </picklistValues>
         <picklistValues>
             <masterLabel>Yearly</masterLabel>
-            <translation><!-- Yearly --></translation>
+            <translation>毎年</translation>
         </picklistValues>
     </fields>
     <fields>
-        <help>回数。</help>
+        <help>予定されている (支援) 回数。固定期間の継続支援でのみ使用されます。</help>
         <label>回数</label>
         <name>Installments__c</name>
     </fields>
     <fields>
-        <help>継続支援の前回の支払日</help>
+        <help>この値は、継続支援が前回支払い済みとマークされた日に基づいて、NPSP により自動的に計算されます (参照のみ)。</help>
         <label>前回の支援日</label>
         <name>Last_Payment_Date__c</name>
     </fields>
@@ -66,20 +68,20 @@
         <name>Next_Payment_Date__c</name>
     </fields>
     <fields>
-        <help><!-- Choose Open for an Open-Ended Recurring Donation.  Choose None for a Fixed Length Recurring Donation.  Choose Closed to close a Recurring Donation. --></help>
+        <help>無期限の継続支援には [Open] を選択します。固定期間の継続支援には [なし] を選択します。継続支援を終了する場合は [Closed] を選択します。</help>
         <label>状況</label>
         <name>Open_Ended_Status__c</name>
         <picklistValues>
             <masterLabel>Closed</masterLabel>
-            <translation><!-- Closed --></translation>
+            <translation>Closed</translation>
         </picklistValues>
         <picklistValues>
             <masterLabel>None</masterLabel>
-            <translation><!-- None --></translation>
+            <translation>なし</translation>
         </picklistValues>
         <picklistValues>
             <masterLabel>Open</masterLabel>
-            <translation><!-- Open --></translation>
+            <translation>Open</translation>
         </picklistValues>
     </fields>
     <fields>
@@ -88,8 +90,8 @@
         <relationshipLabel>継続支援</relationshipLabel>
     </fields>
     <fields>
-        <help>この継続支援の支払総額</help>
-        <label>成立支援金額</label>
+        <help>この継続支援の支払総額。すべての完了/成立支援の合計金額が自動的に計算されます (参照のみ)。</help>
+        <label>合計支払金額</label>
         <name>Paid_Amount__c</name>
     </fields>
     <fields>
@@ -107,12 +109,12 @@
         </picklistValues>
         <picklistValues>
             <masterLabel>Multiply By</masterLabel>
-            <translation><!-- Multiply By --></translation>
+            <translation>加算</translation>
         </picklistValues>
     </fields>
     <fields>
-        <help>この継続支援で支払われた合計回数。</help>
-        <label>成立支援回数</label>
+        <help>この継続支援で支払われた合計回数 (参照のみ)。</help>
+        <label>支払回数</label>
         <name>Total_Paid_Installments__c</name>
     </fields>
     <fields>
@@ -127,7 +129,7 @@
             <section>Custom Links</section>
         </sections>
     </layouts>
-    <nameFieldLabel><!-- Recurring Donation Name --></nameFieldLabel>
+    <nameFieldLabel>継続支援名</nameFieldLabel>
     <quickActions>
         <label>新規支援</label>
         <name>New_Opportunity</name>

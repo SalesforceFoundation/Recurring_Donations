@@ -9,68 +9,68 @@
         <value><!-- Recurring Donations Settings --></value>
     </caseValues>
     <fields>
-        <help>Si sélectionné, toutes les opportunités pour des dons réguliers utiliseront la campagne sur le don régulier. Autrement, seule la première opportunité utilisera la campagne.</help>
+        <help>Si cette option est sélectionnée, toutes les opportunités pour les dons récurrents utiliseront la campagne sur le don récurrent. Sinon, seule la première opportunité utilisera la campagne.</help>
         <label>Ajouter la campagne à toutes les opp.</label>
         <name>Add_Campaign_to_All_Opportunites__c</name>
     </fields>
     <fields>
-        <help><!-- DEPRECATED. Trigger behavior now controlled in the Trigger Configuration page of NPSP Settings. --></help>
-        <label><!-- DEPRECATED-Disable_Donations_trigger --></label>
+        <help>DÉPRÉCIÉ. Le comportement du déclencheur est désormais contrôlé dans la page Configuration de déclencheur des paramètres NPSP.</help>
+        <label>DEPRECATED-Disable_Donations_trigger</label>
         <name>DISABLE_Donations_trigger__c</name>
     </fields>
     <fields>
-        <help><!-- DEPRECATED. Trigger behavior now controlled in the Trigger Configuration page of NPSP Settings. --></help>
-        <label><!-- DEPRECATED-Disable_RD_trigger --></label>
+        <help>DÉPRÉCIÉ. Le comportement du déclencheur est désormais contrôlé dans la page Configuration de déclencheur des paramètres NPSP.</help>
+        <label>DEPRECATED-Disable_RD_trigger</label>
         <name>DISABLE_RecurringDonations_trigger__c</name>
     </fields>
     <fields>
-        <help><!-- DEPRECATED. New versions of the Nonprofit Success Pack will be automatically installed. --></help>
-        <label><!-- DEPRECATED-Enable Update Check --></label>
+        <help>DÉPRÉCIÉ. Les nouvelles versions de Nonprofit Success Pack seront automatiquement installées.</help>
+        <label>DÉPRÉCIÉ-Activer vérif. de mise à jour</label>
         <name>Enable_Update_Check__c</name>
     </fields>
     <fields>
-        <help><!-- DEPRECATED.  Replaced by the notification settings in the System Error settings panel. --></help>
-        <label><!-- DEPRECATED-Error Email Notifications --></label>
+        <help>DÉPRÉCIÉ. Remplacé par les paramètres de notification dans le panneau des paramètres Erreur système.</help>
+        <label>DÉPRÉCIÉ-Erreur notification par e-mail</label>
         <name>Error_Email_Notifications__c</name>
     </fields>
     <fields>
-        <help>Date et heure de la dernière mise à jour par lot des dons réguliers.</help>
+        <help>Date et heure de la dernière mise à jour par lot des dons récurrents.</help>
         <label>Dernière exécution de lot</label>
         <name>Last_Batch_Run__c</name>
     </fields>
     <fields>
-        <help>Restreint le nombre total de dons créés pour les dons réguliers avec date de fin. La valeur par défaut est de 50.  Des valeurs plus élevées peuvent provoquer des erreurs DML.</help>
+        <help>Restreint le nombre total de dons créés pour les dons récurrents avec date de fin. La valeur par défaut est de 50. Des valeurs plus élevées peuvent provoquer des erreurs DML.</help>
         <label>Nombre maximum de dons</label>
         <name>Maximum_Donations__c</name>
     </fields>
     <fields>
-        <help>Nombre de dons réguliers dont la mise à jour a échoué lors de la dernière opération par lot.</help>
+        <help>Nombre de dons récurrents dont la mise à jour a échoué lors de la dernière opération par lot.</help>
         <label>Nombre de défaillances</label>
         <name>Number_of_Failures__c</name>
     </fields>
     <fields>
-        <help>Nombre de dons réguliers dont la mise à jour a réussi lors de la dernière exécution par lot.</help>
+        <help>Nombre de dons récurrents dont la mise à jour a réussi lors de la dernière exécution par lot.</help>
         <label>Nombre de réussites</label>
         <name>Number_of_Successes__c</name>
     </fields>
     <fields>
-        <help>Détermine le comportement de toutes les opportunités ouvertes restantes lorsqu’un don régulier sans date de fin passe à un statut fermé.</help>
-        <label>Comp. opp. ouv. sur clôture de don rég.</label>
+        <help>Détermine le comportement de toutes les opportunités ouvertes restantes lorsqu’un don récurrent sans date de fin passe à un statut fermé.</help>
+        <label>Comp. opp. ouv. fermeture don récurrent</label>
         <name>Open_Opportunity_Behavior__c</name>
     </fields>
     <fields>
-        <help>Nb de mois futurs pour lesquels des opportunités ouvertes sont créées avec les dons réguliers ouverts. AVERTISSEMENT : Réduire cette valeur supprime les opportunités supplémentaires. L’augmenter lance un processus par lot d’ajout d’opportunités.</help>
+        <help>Nombre de mois futurs pour lesquels des opportunités ouvertes sont créées avec les dons récurrents sans date de fin. AVERTISSEMENT : Réduire cette valeur supprime les opportunités supplémentaires. L’augmenter lance un processus par lot d’ajout d’opp.</help>
         <label>Mois de prévision des opportunités</label>
         <name>Opportunity_Forecast_Months__c</name>
     </fields>
     <fields>
-        <help>Type d’enregistrement d’opportunité utilisé lorsque des opportunités de dons réguliers sont créées.</help>
+        <help>Type d’enregistrement d’opportunité utilisé lorsque des opportunités de dons récurrents sont créées.</help>
         <label>Type d’enregistrement d’opportunité</label>
         <name>Record_Type__c</name>
     </fields>
     <fields>
-        <help><!-- DEPRECATED. New versions of the Nonprofit Success Pack will be automatically installed. --></help>
-        <label><!-- DEPRECATED-Update Check Interval --></label>
+        <help>DÉPRÉCIÉ. Les nouvelles versions de Nonprofit Success Pack seront automatiquement installées.</help>
+        <label>DÉPRÉCIÉ-Mettre à jour intervalle vérif.</label>
         <name>Update_Check_Interval__c</name>
     </fields>
     <gender><!-- Masculine --></gender>

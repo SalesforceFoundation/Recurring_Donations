@@ -9,13 +9,13 @@
         <value><!-- Custom Installment Settings --></value>
     </caseValues>
     <fields>
-        <help>El tipo de tiempo que la Frecuencia personalizada abarca.</help>
-        <label>Tipo de tiempo</label>
+        <help>El tipo de período de tiempo que abarca Período de cuotas personalizado.</help>
+        <label>Tipo de período de tiempo</label>
         <name>Increment__c</name>
     </fields>
     <fields>
-        <help>La cantidad de tiempo que la Frecuencia personalizada abarca.</help>
-        <label>Cantidad de tiempo</label>
+        <help>La cantidad de tiempo que abarca Período de cuotas personalizado.</help>
+        <label>Frecuencia de período de tiempo</label>
         <name>Value__c</name>
     </fields>
     <gender><!-- Feminine --></gender>

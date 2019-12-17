@@ -5,7 +5,7 @@
         <name>RecurringDonationBadFieldMapping</name>
     </customLabels>
     <customLabels>
-        <label>Ihre benutzerdefinierte Bezeichnung für geschlossene verlorene Opportunities entspricht nicht dem Namen einer aktiven geschlossenen/verlorenen Opportunity-Phase. Dies kann zu unerwünschten Ergebnissen führen, wenn wiederkehrende Spenden als geschlossen gekennzeichnet werden und deren Einstellung für die Einstellung &quot;Verhalten der offenen Opportunity&quot; festgelegt ist auf: Opportunities_als _geschlossen_verloren_kennzeichnen.  Prüfen Sie die Namen der Phasen und die benutzerdefinierte Bezeichnung WiederkehrendeSpendeGeschlossenVerlorenOpportunityPhase.</label>
+        <label>Ihre benutzerdefinierte Bezeichnung für geschlossene verlorene Opportunities entspricht nicht dem Namen einer aktiven geschlossenen/verlorenen Opportunity-Phase. Dies kann zu unerwünschten Ergebnissen führen, wenn wiederkehrende Spenden als geschlossen gekennzeichnet werden und deren Einstellung für die Einstellung &quot;Verhalten der offenen Opportunity&quot; festgelegt ist auf: Mark_Opportunities_Closed_Lost. Prüfen Sie die Namen der Phasen und die benutzerdefinierte Bezeichnung RecurringDonationClosedLostOpportunityStage.</label>
         <name>RecurringDonationBadLabelWarning</name>
     </customLabels>
     <customLabels>
@@ -13,48 +13,12 @@
         <name>RecurringDonationCantDeleteError</name>
     </customLabels>
     <customLabels>
-        <label>Closed Lost</label>
-        <name>RecurringDonationClosedLostOpportunityStage</name>
-    </customLabels>
-    <customLabels>
-        <label>Closed</label>
-        <name>RecurringDonationClosedStatus</name>
-    </customLabels>
-    <customLabels>
-        <label>Spender</label>
-        <name>RecurringDonationContactRole</name>
-    </customLabels>
-    <customLabels>
         <label>Felder in Ihrem Opportunity-Objekt haben benutzerdefinierte Validierungsregeln, die Probleme bei Ihrem Paket der wiederkehrenden Spenden verursachen können:</label>
         <name>RecurringDonationCustomValidationWarning</name>
     </customLabels>
     <customLabels>
-        <label><!-- RecurringDonationDivideValue --></label>
-        <name>RecurringDonationDivideValue</name>
-    </customLabels>
-    <customLabels>
-        <label>Bei dem Versuch, neue Opportunities für Ihre unbefristeten wiederkehrenden Spenden einzufügen, sind Fehler aufgetreten. Dies kann die Prognosen und Funktionalität Ihrer Salesforce.com-Instanz negativ beeinflussen. Diese Fehler so schnell wie möglich zu beheben, kann verhindern, dass schlechte Daten in Ihr System gelangen.  Die Fehler beim Einfügen wiederkehrender Spenden und der zugeordneten Opportunity sind unten aufgeführt und können auf der Registerkarte &quot;NPSP-Einstellungen&quot; unter System &gt; Fehlerprotokoll gefunden werden.</label>
+        <label>Bei dem Versuch, neue Opportunities für Ihre unbefristeten wiederkehrenden Spenden einzufügen, sind Fehler aufgetreten. Dies kann die Prognosen und die Funktionalität Ihrer Salesforce.com-Instanz negativ beeinflussen. Diese Fehler so schnell wie möglich zu beheben, kann verhindern, dass schlechte Daten in Ihr System gelangen. Die Fehler beim Einfügen wiederkehrender Spenden und der zugeordneten Opportunity sind unten aufgeführt und können auf der Registerkarte &quot;NPSP-Einstellungen&quot; unter System &gt; Fehlerprotokoll gefunden werden.</label>
         <name>RecurringDonationErrorEmailBody</name>
-    </customLabels>
-    <customLabels>
-        <label>1st and 15th</label>
-        <name>RecurringDonationInstallmentPeriod1stand15th</name>
-    </customLabels>
-    <customLabels>
-        <label><!-- RecurringDonationInstallmentPeriodMonthly --></label>
-        <name>RecurringDonationInstallmentPeriodMonthly</name>
-    </customLabels>
-    <customLabels>
-        <label><!-- RecurringDonationInstallmentPeriodQuarterly --></label>
-        <name>RecurringDonationInstallmentPeriodQuarterly</name>
-    </customLabels>
-    <customLabels>
-        <label><!-- RecurringDonationInstallmentPeriodWeekly --></label>
-        <name>RecurringDonationInstallmentPeriodWeekly</name>
-    </customLabels>
-    <customLabels>
-        <label><!-- RecurringDonationInstallmentPeriodYearly --></label>
-        <name>RecurringDonationInstallmentPeriodYearly</name>
     </customLabels>
     <customLabels>
         <label>Alle benutzerdefinierten Raten müssen einen Namen, eine positive Häufigkeit und einen Zeitraumtyp enthalten.</label>
@@ -65,19 +29,11 @@
         <name>RecurringDonationMissingDataError</name>
     </customLabels>
     <customLabels>
-        <label><!-- RecurringDonationMultiplyValue --></label>
-        <name>RecurringDonationMultiplyValue</name>
-    </customLabels>
-    <customLabels>
-        <label>Open</label>
-        <name>RecurringDonationOpenStatus</name>
-    </customLabels>
-    <customLabels>
         <label>Spende</label>
         <name>RecurringDonationPrefix</name>
     </customLabels>
     <customLabels>
-        <label>Die folgenden erforderlichen Felder in Ihrem Opportunity-Objekt können Probleme mit Ihrem Paket der wiederkehrenden Spenden verursachen:</label>
+        <label>Die folgenden Pflichtfelder in Ihrem Opportunity-Objekt können Probleme mit Ihrem Paket der wiederkehrenden Spenden verursachen:</label>
         <name>RecurringDonationRequiredFieldsWarning</name>
     </customLabels>
     <customLabels>
@@ -89,19 +45,7 @@
         <name>RecurringDonationSettingsDescription</name>
     </customLabels>
     <customLabels>
-        <label>Pledged</label>
-        <name>RecurringDonationStageName</name>
-    </customLabels>
-    <customLabels>
-        <label>Sie müssen weniger als 50 Raten angeben.  (Diese Fehlermeldung wird nicht mehr verwendet.)</label>
+        <label>Sie müssen weniger als 50 Raten angeben. (Diese Fehlermeldung wird nicht mehr verwendet.)</label>
         <name>RecurringDonationTooManyInstallmentsError</name>
     </customLabels>
-    <quickActions>
-        <label><!-- NewNote --></label>
-        <name>NewNote</name>
-    </quickActions>
-    <quickActions>
-        <label><!-- NewTask --></label>
-        <name>NewTask</name>
-    </quickActions>
 </Translations>

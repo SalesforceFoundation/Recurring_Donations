@@ -9,13 +9,13 @@
         <value><!-- Custom Installment Settings --></value>
     </caseValues>
     <fields>
-        <help>Het type tijdsperiode die de Aangepaste Termijn periode dekt</help>
-        <label>Type Tijdsperiode</label>
+        <help>Het type tijdsbestek, dat Aangepaste termijnperiode bestrijkt.</help>
+        <label>Type Tijdsbestek</label>
         <name>Increment__c</name>
     </fields>
     <fields>
-        <help>De hoeveelheid tijd die de Aangepaste Termijn Periode dekt</help>
-        <label>Tijdsperiode Frequentie</label>
+        <help>De hoeveelheid tijd die Aangepaste termijnperiode bestrijkt.</help>
+        <label>Frequentie van tijdsbestek</label>
         <name>Value__c</name>
     </fields>
     <gender><!-- Neuter --></gender>

@@ -10,23 +10,23 @@
         <name>Add_Campaign_to_All_Opportunites__c</name>
     </fields>
     <fields>
-        <help><!-- DEPRECATED. Trigger behavior now controlled in the Trigger Configuration page of NPSP Settings. --></help>
-        <label><!-- DEPRECATED-Disable_Donations_trigger --></label>
+        <help>廃止。トリガの動作が [NPSP 設定] の [トリガ設定] ページで制御されるようになりました。</help>
+        <label>廃止-Disable_Donations_trigger</label>
         <name>DISABLE_Donations_trigger__c</name>
     </fields>
     <fields>
-        <help><!-- DEPRECATED. Trigger behavior now controlled in the Trigger Configuration page of NPSP Settings. --></help>
-        <label><!-- DEPRECATED-Disable_RD_trigger --></label>
+        <help>廃止。トリガの動作が [NPSP 設定] の [トリガ設定] ページで制御されるようになりました。</help>
+        <label>廃止-Disable_RD_trigger</label>
         <name>DISABLE_RecurringDonations_trigger__c</name>
     </fields>
     <fields>
-        <help><!-- DEPRECATED. New versions of the Nonprofit Success Pack will be automatically installed. --></help>
-        <label><!-- DEPRECATED-Enable Update Check --></label>
+        <help>廃止。Nonprofit Success Pack の新バージョンが自動的にインストールされます。</help>
+        <label>廃止-更新確認の有効化</label>
         <name>Enable_Update_Check__c</name>
     </fields>
     <fields>
-        <help><!-- DEPRECATED.  Replaced by the notification settings in the System Error settings panel. --></help>
-        <label><!-- DEPRECATED-Error Email Notifications --></label>
+        <help>廃止。[システムエラー] 設定パネルの通知設定に置き換えられました。</help>
+        <label>廃止-エラーメール通知</label>
         <name>Error_Email_Notifications__c</name>
     </fields>
     <fields>
@@ -65,8 +65,8 @@
         <name>Record_Type__c</name>
     </fields>
     <fields>
-        <help><!-- DEPRECATED. New versions of the Nonprofit Success Pack will be automatically installed. --></help>
-        <label><!-- DEPRECATED-Update Check Interval --></label>
+        <help>廃止。Nonprofit Success Pack の新バージョンが自動的にインストールされます。</help>
+        <label>廃止-更新確認間隔</label>
         <name>Update_Check_Interval__c</name>
     </fields>
 </CustomObjectTranslation>
