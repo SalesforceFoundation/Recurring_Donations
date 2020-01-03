@@ -10,7 +10,7 @@ project:
 tasks:
     cleanup_translation_metadata:
         description: Delete metadata from translation files that should not be translated.
-        class_path: tasks.modify.RemoveElementsXPath
+        class_path: cumulusci.tasks.metadata.modify.RemoveElementsXPath
         options:
             output_style: salesforce
             elements:
