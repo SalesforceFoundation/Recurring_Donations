@@ -29,7 +29,7 @@
         <categories>RecurringDonations</categories>
         <language>en_US</language>
         <protected>false</protected>
-        <shortDescription>RecurringDonationClosedLostOpportunityStage</shortDescription>
+        <shortDescription>Stage Name for Closed-Lost Recurring Donation installment Opportunities. Do Not Translate.</shortDescription>
         <value>Closed Lost</value>
     </labels>
     <labels>
@@ -37,7 +37,7 @@
         <categories>RecurringDonations</categories>
         <language>en_US</language>
         <protected>false</protected>
-        <shortDescription>RecurringDonationClosedStatus</shortDescription>
+        <shortDescription>DEPRECATED</shortDescription>
         <value>Closed</value>
     </labels>
     <labels>
@@ -45,7 +45,7 @@
         <categories>RecurringDonations</categories>
         <language>en_US</language>
         <protected>false</protected>
-        <shortDescription>RecurringDonationContactRole</shortDescription>
+        <shortDescription>Contact Role to use when creating the Primary Contact for new Installment Opportunities. Do Not Translate.</shortDescription>
         <value>Donor</value>
     </labels>
     <labels>
@@ -61,7 +61,7 @@
         <categories>RecurringDonations</categories>
         <language>en_US</language>
         <protected>false</protected>
-        <shortDescription>RecurringDonationDivideValue</shortDescription>
+        <shortDescription>DEPRECATED</shortDescription>
         <value>Divide By</value>
     </labels>
     <labels>
@@ -77,7 +77,7 @@
         <categories>RecurringDonations</categories>
         <language>en_US</language>
         <protected>false</protected>
-        <shortDescription>RecurringDonationInstallmentPeriod1stand15th</shortDescription>
+        <shortDescription>DEPRECATED</shortDescription>
         <value>1st and 15th</value>
     </labels>
     <labels>
@@ -85,7 +85,7 @@
         <categories>RecurringDonations</categories>
         <language>en_US</language>
         <protected>false</protected>
-        <shortDescription>RecurringDonationInstallmentPeriodMonthly</shortDescription>
+        <shortDescription>DEPRECATED</shortDescription>
         <value>Monthly</value>
     </labels>
     <labels>
@@ -93,7 +93,7 @@
         <categories>RecurringDonations</categories>
         <language>en_US</language>
         <protected>false</protected>
-        <shortDescription>RecurringDonationInstallmentPeriodQuarterly</shortDescription>
+        <shortDescription>DEPRECATED</shortDescription>
         <value>Quarterly</value>
     </labels>
     <labels>
@@ -101,7 +101,7 @@
         <categories>RecurringDonations</categories>
         <language>en_US</language>
         <protected>false</protected>
-        <shortDescription>RecurringDonationInstallmentPeriodWeekly</shortDescription>
+        <shortDescription>DEPRECATED</shortDescription>
         <value>Weekly</value>
     </labels>
     <labels>
@@ -109,7 +109,7 @@
         <categories>RecurringDonations</categories>
         <language>en_US</language>
         <protected>false</protected>
-        <shortDescription>RecurringDonationInstallmentPeriodYearly</shortDescription>
+        <shortDescription>DEPRECATED</shortDescription>
         <value>Yearly</value>
     </labels>
     <labels>
@@ -133,7 +133,7 @@
         <categories>RecurringDonations</categories>
         <language>en_US</language>
         <protected>false</protected>
-        <shortDescription>RecurringDonationMultiplyValue</shortDescription>
+        <shortDescription>DEPRECATED</shortDescription>
         <value>Multiply By</value>
     </labels>
     <labels>
@@ -141,7 +141,7 @@
         <categories>RecurringDonations</categories>
         <language>en_US</language>
         <protected>false</protected>
-        <shortDescription>RecurringDonationOpenStatus</shortDescription>
+        <shortDescription>DEPRECATED</shortDescription>
         <value>Open</value>
     </labels>
     <labels>
@@ -149,7 +149,7 @@
         <categories>RecurringDonations</categories>
         <language>en_US</language>
         <protected>false</protected>
-        <shortDescription>RecurringDonationPrefix</shortDescription>
+        <shortDescription>Prefix used for naming Installment Opportunities</shortDescription>
         <value>Donation</value>
     </labels>
     <labels>
@@ -181,7 +181,7 @@
         <categories>RecurringDonations</categories>
         <language>en_US</language>
         <protected>false</protected>
-        <shortDescription>RecurringDonationStageName</shortDescription>
+        <shortDescription>Stage Name for new Recurring Donation installment Opportunities. Do Not Translate.</shortDescription>
         <value>Pledged</value>
     </labels>
     <labels>
