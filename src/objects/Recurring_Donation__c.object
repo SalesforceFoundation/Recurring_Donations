@@ -180,7 +180,7 @@ OR(
         <description>Number of installments (donations) you expect to receive. For Fixed-Length Recurring Donations only.</description>
         <externalId>false</externalId>
         <inlineHelpText>Number of installments (donations) you expect to receive. For Fixed-Length Recurring Donations only.</inlineHelpText>
-        <label>Installments</label>
+        <label>Number of Planned Installments</label>
         <precision>18</precision>
         <required>false</required>
         <scale>0</scale>
