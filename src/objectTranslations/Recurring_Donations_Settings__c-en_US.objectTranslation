@@ -10,7 +10,7 @@
     </caseValues>
     <fields>
         <help><!-- If selected, all Opportunities for Recurring Donations will use the Campaign on the Recurring Donation. Otherwise, only the first Opportunity will have the Campaign. --></help>
-        <label><!-- Add Campaign to All Opportunites --></label>
+        <label><!-- Add Campaign to All Opportunities --></label>
         <name>Add_Campaign_to_All_Opportunites__c</name>
     </fields>
     <fields>
