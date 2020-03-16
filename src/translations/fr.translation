@@ -1,107 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Translations xmlns="http://soap.sforce.com/2006/04/metadata">
     <customLabels>
-        <name>RecurringDonationBadFieldMapping</name>
         <label>Les types de données des champs doivent être compatibles. Modifiez les choix de vos champs, puis réessayez.</label>
+        <name>RecurringDonationBadFieldMapping</name>
     </customLabels>
     <customLabels>
-        <name>RecurringDonationBadLabelWarning</name>
         <label>Votre étiquette personnalisée pour les opportunités fermées perdues ne correspond pas au nom d’une étape d’opportunité fermée perdue active. Ceci peut provoquer des résultats indésirables lorsque vous marquez des dons récurrents comme fermés et que le paramètre de comportement d’opportunité ouverte est : Mark_Opportunities_Closed_Lost. Veuillez vérifier vos noms d’étapes et l’étiquette personnalisée RecurringDonationClosedLostOpportunityStage.</label>
+        <name>RecurringDonationBadLabelWarning</name>
     </customLabels>
     <customLabels>
-        <name>RecurringDonationCantDeleteError</name>
         <label>Vous devez supprimer les dons associés avant de pouvoir supprimer ce don récurrent.</label>
+        <name>RecurringDonationCantDeleteError</name>
     </customLabels>
     <customLabels>
-        <name>RecurringDonationClosedLostOpportunityStage</name>
-        <label>Fermé perdu</label>
-    </customLabels>
-    <customLabels>
-        <name>RecurringDonationClosedStatus</name>
-        <label>Fermé</label>
-    </customLabels>
-    <customLabels>
-        <name>RecurringDonationContactRole</name>
-        <label>Donateur</label>
-    </customLabels>
-    <customLabels>
-        <name>RecurringDonationCustomValidationWarning</name>
         <label>Les champs de votre objet d’opportunité ont des règles de validation personnalisées qui peuvent provoquer des problèmes avec votre package de dons récurrents :</label>
+        <name>RecurringDonationCustomValidationWarning</name>
     </customLabels>
     <customLabels>
-        <name>RecurringDonationDivideValue</name>
-        <label>Diviser par</label>
-    </customLabels>
-    <customLabels>
-        <name>RecurringDonationErrorEmailBody</name>
         <label>Des erreurs sont survenues lors de la tentative d’insertion de nouvelles opportunités pour vos dons récurrents sans date de fin. Ceci peut affecter négativement vos prévisions et les fonctionnalités de votre instance Salesforce.com. Remédier à ces erreurs dès que possible peut éviter que de mauvaises données soient insérées dans votre système. Le don récurrent et l’erreur d’insertion d’opportunité associée sont présentés ci-dessous, et peuvent être trouvés dans l’onglet de configuration de NPSP, dans Système, Journal des erreurs.</label>
+        <name>RecurringDonationErrorEmailBody</name>
     </customLabels>
     <customLabels>
-        <name>RecurringDonationInstallmentPeriod1stand15th</name>
-        <label>1 et 15</label>
-    </customLabels>
-    <customLabels>
-        <name>RecurringDonationInstallmentPeriodMonthly</name>
-        <label>Mensuel</label>
-    </customLabels>
-    <customLabels>
-        <name>RecurringDonationInstallmentPeriodQuarterly</name>
-        <label>Trimestriel</label>
-    </customLabels>
-    <customLabels>
-        <name>RecurringDonationInstallmentPeriodWeekly</name>
-        <label>Hebdomadaire</label>
-    </customLabels>
-    <customLabels>
-        <name>RecurringDonationInstallmentPeriodYearly</name>
-        <label>Annuel</label>
-    </customLabels>
-    <customLabels>
-        <name>RecurringDonationInvalidCustomInstallment</name>
         <label>Tous les versements personnalisés doivent avoir un nom, une fréquence positive et un type de période.</label>
+        <name>RecurringDonationInvalidCustomInstallment</name>
     </customLabels>
     <customLabels>
-        <name>RecurringDonationMissingDataError</name>
         <label>Vous devez sélectionner une organisation ou un contact</label>
+        <name>RecurringDonationMissingDataError</name>
     </customLabels>
     <customLabels>
-        <name>RecurringDonationMultiplyValue</name>
-        <label>Multiplier par</label>
-    </customLabels>
-    <customLabels>
-        <name>RecurringDonationOpenStatus</name>
-        <label>Ouvert</label>
-    </customLabels>
-    <customLabels>
-        <name>RecurringDonationPrefix</name>
         <label>Don</label>
+        <name>RecurringDonationPrefix</name>
     </customLabels>
     <customLabels>
-        <name>RecurringDonationRequiredFieldsWarning</name>
         <label>Les champs obligatoires suivants de votre objet d’opportunité peuvent provoquer des problèmes avec votre package de dons récurrents :</label>
+        <name>RecurringDonationRequiredFieldsWarning</name>
     </customLabels>
     <customLabels>
-        <name>RecurringDonationSchedulingError</name>
         <label>Une erreur s’est produite lors de la planification de votre mise à jour nocturne de dons récurrents.</label>
+        <name>RecurringDonationSchedulingError</name>
     </customLabels>
     <customLabels>
+        <label>Ces paramètres contrôlent la manière dont les dons récurrents fonctionnent dans le pack NPSP. Consultez la &lt;a href=&quot;https://powerofus.force.com/NPSP_Recurring_Donations&quot; target=&quot;_blank&quot;&gt;documentation de NPSP&lt;/a&gt; pour plus d’informations.</label>
         <name>RecurringDonationSettingsDescription</name>
-        <label>Ces paramètres contrôlent la manière dont les dons récurrents fonctionnent dans le pack NPSP. Consultez la &lt;a href="https://powerofus.force.com/NPSP_Recurring_Donations" target="_blank"&gt;documentation de NPSP&lt;/a&gt; pour plus d’informations.</label>
     </customLabels>
     <customLabels>
-        <name>RecurringDonationStageName</name>
-        <label>Promis</label>
-    </customLabels>
-    <customLabels>
-        <name>RecurringDonationTooManyInstallmentsError</name>
         <label>Vous devez spécifier moins de 50 versements. (Ce message d’erreur n’est plus utilisé).</label>
+        <name>RecurringDonationTooManyInstallmentsError</name>
     </customLabels>
-    <quickActions>
-        <name>Recurring_Donation__c.Quick_Update</name>
-        <label>Mise à jour rapide</label>
-    </quickActions>
-    <quickActions>
-        <name>Recurring_Donation__c.New_Opportunity</name>
-        <label>Nouvelle opportunité</label>
-    </quickActions>
-</Translations>
+    </Translations>

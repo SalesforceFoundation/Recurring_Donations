@@ -1,13 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
-  <fields>
-    <name>Increment__c</name>
-    <help>Le type de la période couverte par la période de versement personnalisée.</help>
-    <label>Type de période</label>
-  </fields>
-  <fields>
-    <name>Value__c</name>
-    <help>La durée couverte par la période de versement personnalisée.</help>
-    <label>Fréquence de période</label>
-  </fields>
+    <caseValues>
+        <plural>false</plural>
+        <value><!-- Custom Installment Settings --></value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value><!-- Custom Installment Settings --></value>
+    </caseValues>
+    <fields>
+        <help>Le type de la période couverte par la période de versement personnalisée.</help>
+        <label>Type de période</label>
+        <name>Increment__c</name>
+    </fields>
+    <fields>
+        <help>La durée couverte par la période de versement personnalisée.</help>
+        <label>Fréquence de période</label>
+        <name>Value__c</name>
+    </fields>
+    <gender><!-- Masculine --></gender>
+    <startsWith><!-- Consonant --></startsWith>
 </CustomObjectTranslation>
