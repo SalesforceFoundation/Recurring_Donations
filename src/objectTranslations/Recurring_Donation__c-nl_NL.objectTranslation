@@ -136,11 +136,11 @@
     </layouts>
     <nameFieldLabel>Naam van terugkerende donatie</nameFieldLabel>
     <quickActions>
-        <label><!-- New Opportunity --></label>
+        <label>Nieuwe opportunity</label>
         <name>New_Opportunity</name>
     </quickActions>
     <quickActions>
-        <label><!-- Quick Update --></label>
+        <label>Snelle update</label>
         <name>Quick_Update</name>
     </quickActions>
     <webLinks>

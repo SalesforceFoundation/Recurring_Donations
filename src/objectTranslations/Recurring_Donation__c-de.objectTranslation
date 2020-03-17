@@ -168,11 +168,11 @@
     </layouts>
     <nameFieldLabel>Name für wiederkehrende Spende</nameFieldLabel>
     <quickActions>
-        <label><!-- New Opportunity --></label>
+        <label>Neue Opportunity</label>
         <name>New_Opportunity</name>
     </quickActions>
     <quickActions>
-        <label><!-- Quick Update --></label>
+        <label>Schnelle Aktualisierung</label>
         <name>Quick_Update</name>
     </quickActions>
     <webLinks>
