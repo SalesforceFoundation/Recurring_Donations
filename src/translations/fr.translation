@@ -48,4 +48,4 @@
         <label>Vous devez spécifier moins de 50 versements. (Ce message d’erreur n’est plus utilisé).</label>
         <name>RecurringDonationTooManyInstallmentsError</name>
     </customLabels>
-</Translations>
+    </Translations>

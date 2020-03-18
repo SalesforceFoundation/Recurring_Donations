@@ -48,4 +48,4 @@
         <label>U moet minder dan 50 termijnen opgeven.  (Dit foutbericht wordt niet langer gebruikt.)</label>
         <name>RecurringDonationTooManyInstallmentsError</name>
     </customLabels>
-</Translations>
+    </Translations>

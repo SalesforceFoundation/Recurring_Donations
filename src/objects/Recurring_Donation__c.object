@@ -82,6 +82,7 @@
         <externalId>false</externalId>
         <label>Contact</label>
         <referenceTo>Contact</referenceTo>
+        <relationshipLabel>Recurring Donations</relationshipLabel>
         <relationshipName>R00N80000002bOmREAU</relationshipName>
         <required>false</required>
         <trackHistory>false</trackHistory>
@@ -242,6 +243,7 @@ OR(
         <externalId>false</externalId>
         <label>Account</label>
         <referenceTo>Account</referenceTo>
+        <relationshipLabel>Recurring Donations</relationshipLabel>
         <relationshipName>RecurringDonations</relationshipName>
         <required>false</required>
         <trackHistory>false</trackHistory>
@@ -267,6 +269,7 @@ OR(
         <externalId>false</externalId>
         <label>Campaign</label>
         <referenceTo>Campaign</referenceTo>
+        <relationshipLabel>Recurring Donations</relationshipLabel>
         <relationshipName>Recurring_Donations_Pledges</relationshipName>
         <required>false</required>
         <trackHistory>false</trackHistory>
