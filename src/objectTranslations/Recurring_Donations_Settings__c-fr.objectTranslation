@@ -10,7 +10,7 @@
     </caseValues>
     <fields>
         <help>Si cette option est sélectionnée, toutes les opportunités pour les dons récurrents utiliseront la campagne sur le don récurrent. Sinon, seule la première opportunité utilisera la campagne.</help>
-        <label>Ajouter la campagne à toutes les opp.</label>
+        <label>Ajouter la campagne à toutes les opport.</label>
         <name>Add_Campaign_to_All_Opportunites__c</name>
     </fields>
     <fields>

@@ -48,4 +48,4 @@
         <label>50 未満の回数を指定する必要があります。(このエラーメッセージは使用されなくなりました)</label>
         <name>RecurringDonationTooManyInstallmentsError</name>
     </customLabels>
-</Translations>
+    </Translations>

@@ -54,7 +54,7 @@
     </fields>
     <fields>
         <help>予定されている (支援) 回数。固定期間の継続支援でのみ使用されます。</help>
-        <label>回数</label>
+        <label>予定回数</label>
         <name>Installments__c</name>
     </fields>
     <fields>

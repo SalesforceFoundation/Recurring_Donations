@@ -58,7 +58,7 @@
     </fields>
     <fields>
         <help>Aantal termijnen (donaties), dat u verwacht te ontvangen. Dit is alleen voor terugkerende donaties met een vaste duur.</help>
-        <label>Termijnen</label>
+        <label>Aantal geplande termijnen</label>
         <name>Installments__c</name>
     </fields>
     <fields>
@@ -89,7 +89,7 @@
         </picklistValues>
     </fields>
     <fields>
-        <label>Organisatie</label>
+        <label>Account</label>
         <name>Organization__c</name>
         <relationshipLabel>Terugkerende Donaties</relationshipLabel>
     </fields>

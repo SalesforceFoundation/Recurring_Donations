@@ -16,7 +16,7 @@
     <fields>
         <label>Contacto</label>
         <name>Contact__c</name>
-        <relationshipLabel>Donaciones recurrentes y Compromisos</relationshipLabel>
+        <relationshipLabel>Donaciones recurrentes</relationshipLabel>
     </fields>
     <fields>
         <help>La fecha de efecto inicial de esta donación recurrente. El valor predeterminado es la fecha vigente.</help>
@@ -58,7 +58,7 @@
     </fields>
     <fields>
         <help>Número de cuotas (donaciones) que se esperan recibir. Para donaciones recurrentes con duración fija únicamente.</help>
-        <label>Cuotas</label>
+        <label>Cantidad de cuotas planificadas</label>
         <name>Installments__c</name>
     </fields>
     <fields>
@@ -91,7 +91,7 @@
     <fields>
         <label>Cuenta</label>
         <name>Organization__c</name>
-        <relationshipLabel>Donaciones recurrentes y Compromisos</relationshipLabel>
+        <relationshipLabel>Donaciones recurrentes</relationshipLabel>
     </fields>
     <fields>
         <help>El importe total pagado en esta donación recurrente. Se calcula automáticamente como el importe total de todas las oportunidades de cuotas Cerradas/Ganadas.</help>

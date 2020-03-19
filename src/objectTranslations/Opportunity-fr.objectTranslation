@@ -3,6 +3,6 @@
     <fields>
         <label>Don récurrent</label>
         <name>Recurring_Donation__c</name>
-        <relationshipLabel>Dons</relationshipLabel>
+        <relationshipLabel>Opportunités</relationshipLabel>
     </fields>
 </CustomObjectTranslation>

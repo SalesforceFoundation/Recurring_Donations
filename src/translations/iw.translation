@@ -48,4 +48,4 @@
         <label>עליך לציין פחות מ-50 תשלומים.  (הודעת שגיאה זו הוצאה משימוש).</label>
         <name>RecurringDonationTooManyInstallmentsError</name>
     </customLabels>
-</Translations>
+    </Translations>

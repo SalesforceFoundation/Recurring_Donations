@@ -16,7 +16,7 @@
     <fields>
         <label>Contact</label>
         <name>Contact__c</name>
-        <relationshipLabel>Dons récurrents et engagements</relationshipLabel>
+        <relationshipLabel>Dons réguliers</relationshipLabel>
     </fields>
     <fields>
         <help>La date de prise d’effet de ce don récurrent. La valeur par défaut est la date actuelle.</help>
@@ -58,7 +58,7 @@
     </fields>
     <fields>
         <help>Nombre de versements (dons) que vous prévoyez de recevoir. Uniquement utilisé avec des dons récurrents avec date de fin.</help>
-        <label>Nombre de versements</label>
+        <label>Nombre de versements prévus</label>
         <name>Installments__c</name>
     </fields>
     <fields>
@@ -89,9 +89,9 @@
         </picklistValues>
     </fields>
     <fields>
-        <label>Organisation</label>
+        <label>Compte</label>
         <name>Organization__c</name>
-        <relationshipLabel>Dons récurrents et engagements</relationshipLabel>
+        <relationshipLabel>Dons réguliers</relationshipLabel>
     </fields>
     <fields>
         <help>Montant total payé de ce don récurrent. Calculé automatiquement en tant que montant total de toutes les opportunités de versement fermées/gagnées (lecture seule).</help>

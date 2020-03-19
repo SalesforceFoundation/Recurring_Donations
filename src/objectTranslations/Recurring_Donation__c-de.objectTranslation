@@ -90,7 +90,7 @@
     </fields>
     <fields>
         <help>Anzahl der Raten (Spenden), mit deren Eingang Sie rechnen. Nur für wiederkehrende Spenden mit fester Dauer.</help>
-        <label>Raten</label>
+        <label>Anzahl der geplanten Raten</label>
         <name>Installments__c</name>
     </fields>
     <fields>
@@ -121,7 +121,7 @@
         </picklistValues>
     </fields>
     <fields>
-        <label>Organisation</label>
+        <label>Account</label>
         <name>Organization__c</name>
         <relationshipLabel>Wiederkehrende Spenden</relationshipLabel>
     </fields>
