@@ -48,4 +48,4 @@
         <label>Debe especificar menos de 50 cuotas. (Este mensaje de error ya no se utiliza.)</label>
         <name>RecurringDonationTooManyInstallmentsError</name>
     </customLabels>
-</Translations>
+    </Translations>

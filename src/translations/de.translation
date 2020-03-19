@@ -48,4 +48,4 @@
         <label>Sie müssen weniger als 50 Raten angeben. (Diese Fehlermeldung wird nicht mehr verwendet.)</label>
         <name>RecurringDonationTooManyInstallmentsError</name>
     </customLabels>
-</Translations>
+    </Translations>
