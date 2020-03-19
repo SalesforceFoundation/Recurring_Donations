@@ -82,7 +82,6 @@
         <externalId>false</externalId>
         <label>Contact</label>
         <referenceTo>Contact</referenceTo>
-        <relationshipLabel>Recurring Donations</relationshipLabel>
         <relationshipName>R00N80000002bOmREAU</relationshipName>
         <required>false</required>
         <trackHistory>false</trackHistory>
