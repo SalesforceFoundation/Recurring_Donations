@@ -1,72 +1,68 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
-    <caseValues>
-        <plural>false</plural>
-        <value><!-- Recurring Donations Settings --></value>
-    </caseValues>
-    <fields>
-        <help>選択すると、継続支援のすべての支援で継続支援のキャンペーンが使用されます。選択しないと、最初の支援のみでキャンペーンが使用されます。</help>
-        <label>キャンペーンをすべての支援に追加</label>
-        <name>Add_Campaign_to_All_Opportunites__c</name>
-    </fields>
-    <fields>
-        <help>廃止。トリガの動作が [NPSP 設定] の [トリガ設定] ページで制御されるようになりました。</help>
-        <label>廃止-Disable_Donations_trigger</label>
-        <name>DISABLE_Donations_trigger__c</name>
-    </fields>
-    <fields>
-        <help>廃止。トリガの動作が [NPSP 設定] の [トリガ設定] ページで制御されるようになりました。</help>
-        <label>廃止-Disable_RD_trigger</label>
-        <name>DISABLE_RecurringDonations_trigger__c</name>
-    </fields>
-    <fields>
-        <help>廃止。Nonprofit Success Pack の新バージョンが自動的にインストールされます。</help>
-        <label>廃止-更新確認の有効化</label>
-        <name>Enable_Update_Check__c</name>
-    </fields>
-    <fields>
-        <help>廃止。[システムエラー] 設定パネルの通知設定に置き換えられました。</help>
-        <label>廃止-エラーメール通知</label>
-        <name>Error_Email_Notifications__c</name>
-    </fields>
-    <fields>
-        <help>継続支援の前回の一括更新の日時。</help>
-        <label>一括処理の最終実行</label>
-        <name>Last_Batch_Run__c</name>
-    </fields>
-    <fields>
-        <help>固定期間の継続支援で作成される支援の合計数を制限します。デフォルトは 50 です。これより大きい値を設定すると、DML エラーになる可能性があります。</help>
-        <label>最大支援回数</label>
-        <name>Maximum_Donations__c</name>
-    </fields>
-    <fields>
-        <help>前回の一括処理で継続支援の更新に失敗した回数。</help>
-        <label>失敗数</label>
-        <name>Number_of_Failures__c</name>
-    </fields>
-    <fields>
-        <help>前回の一括処理で継続支援の更新に成功した回数。</help>
-        <label>成功数</label>
-        <name>Number_of_Successes__c</name>
-    </fields>
-    <fields>
-        <help>無期限の継続支援が完了状態に移行されたときの残りの進行中の支援の動作を決定します。</help>
-        <label>継続支援完了時の進行中の支援の動作</label>
-        <name>Open_Opportunity_Behavior__c</name>
-    </fields>
-    <fields>
-        <help>無期限の継続支援を使用しているときに作成される進行中の支援が計上される現在日付からの月数。警告: この値を低くすると、余分な支援は削除されます。値を高くすると、支援を追加する一括処理が起動されます。</help>
-        <label>支援の売上予測月数</label>
-        <name>Opportunity_Forecast_Months__c</name>
-    </fields>
-    <fields>
-        <help>継続支援の作成時に使用される支援レコードタイプ。</help>
-        <label>支援レコードタイプ</label>
-        <name>Record_Type__c</name>
-    </fields>
-    <fields>
-        <help>廃止。Nonprofit Success Pack の新バージョンが自動的にインストールされます。</help>
-        <label>廃止-更新確認間隔</label>
-        <name>Update_Check_Interval__c</name>
-    </fields>
+  <fields>
+    <name>Add_Campaign_to_All_Opportunites__c</name>
+    <help>選択すると、継続支援のすべての支援で継続支援のキャンペーンが使用されます。選択しないと、最初の支援のみでキャンペーンが使用されます。</help>
+    <label>キャンペーンをすべての支援に追加</label>
+  </fields>
+  <fields>
+    <name>DISABLE_Donations_trigger__c</name>
+    <help>廃止。トリガの動作が [NPSP 設定] の [トリガ設定] ページで制御されるようになりました。</help>
+    <label>廃止-Disable_Donations_trigger</label>
+  </fields>
+  <fields>
+    <name>DISABLE_RecurringDonations_trigger__c</name>
+    <help>廃止。トリガの動作が [NPSP 設定] の [トリガ設定] ページで制御されるようになりました。</help>
+    <label>廃止-Disable_RD_trigger</label>
+  </fields>
+  <fields>
+    <name>Enable_Update_Check__c</name>
+    <help>廃止。Nonprofit Success Pack の新バージョンが自動的にインストールされます。</help>
+    <label>廃止-更新確認の有効化</label>
+  </fields>
+  <fields>
+    <name>Error_Email_Notifications__c</name>
+    <help>廃止。[システムエラー] 設定パネルの通知設定に置き換えられました。</help>
+    <label>廃止-エラーメール通知</label>
+  </fields>
+  <fields>
+    <name>Last_Batch_Run__c</name>
+    <help>継続支援の前回の一括更新の日時。</help>
+    <label>一括処理の最終実行</label>
+  </fields>
+  <fields>
+    <name>Maximum_Donations__c</name>
+    <help>固定期間の継続支援で作成される支援の合計数を制限します。デフォルトは 50 です。これより大きい値を設定すると、DML エラーになる可能性があります。</help>
+    <label>最大支援回数</label>
+  </fields>
+  <fields>
+    <name>Number_of_Failures__c</name>
+    <help>前回の一括処理で継続支援の更新に失敗した回数。</help>
+    <label>失敗数</label>
+  </fields>
+  <fields>
+    <name>Number_of_Successes__c</name>
+    <help>前回の一括処理で継続支援の更新に成功した回数。</help>
+    <label>成功数</label>
+  </fields>
+  <fields>
+    <name>Open_Opportunity_Behavior__c</name>
+    <help>無期限の継続支援が完了状態に移行されたときの残りの進行中の支援の動作を決定します。</help>
+    <label>継続支援完了時の進行中の支援の動作</label>
+  </fields>
+  <fields>
+    <name>Opportunity_Forecast_Months__c</name>
+    <help>無期限の継続支援を使用しているときに作成される進行中の支援が計上される現在日付からの月数。警告: この値を低くすると、余分な支援は削除されます。値を高くすると、支援を追加する一括処理が起動されます。</help>
+    <label>支援の売上予測月数</label>
+  </fields>
+  <fields>
+    <name>Record_Type__c</name>
+    <help>継続支援の作成時に使用される支援レコードタイプ。</help>
+    <label>支援レコードタイプ</label>
+  </fields>
+  <fields>
+    <name>Update_Check_Interval__c</name>
+    <help>廃止。Nonprofit Success Pack の新バージョンが自動的にインストールされます。</help>
+    <label>廃止-更新確認間隔</label>
+  </fields>
 </CustomObjectTranslation>

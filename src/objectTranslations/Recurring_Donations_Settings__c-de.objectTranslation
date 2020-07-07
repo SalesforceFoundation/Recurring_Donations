@@ -1,109 +1,68 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
-    <caseValues>
-        <caseType>Nominative</caseType>
-        <plural>false</plural>
-        <value><!-- Recurring Donations Settings --></value>
-    </caseValues>
-    <caseValues>
-        <caseType>Nominative</caseType>
-        <plural>true</plural>
-        <value><!-- Recurring Donations Settings --></value>
-    </caseValues>
-    <caseValues>
-        <caseType>Accusative</caseType>
-        <plural>false</plural>
-        <value><!-- Recurring Donations Settings --></value>
-    </caseValues>
-    <caseValues>
-        <caseType>Accusative</caseType>
-        <plural>true</plural>
-        <value><!-- Recurring Donations Settings --></value>
-    </caseValues>
-    <caseValues>
-        <caseType>Genitive</caseType>
-        <plural>false</plural>
-        <value><!-- Recurring Donations Settings --></value>
-    </caseValues>
-    <caseValues>
-        <caseType>Genitive</caseType>
-        <plural>true</plural>
-        <value><!-- Recurring Donations Settings --></value>
-    </caseValues>
-    <caseValues>
-        <caseType>Dative</caseType>
-        <plural>false</plural>
-        <value><!-- Recurring Donations Settings --></value>
-    </caseValues>
-    <caseValues>
-        <caseType>Dative</caseType>
-        <plural>true</plural>
-        <value><!-- Recurring Donations Settings --></value>
-    </caseValues>
-    <fields>
-        <help>Bei Auswahl dieser Option wird die Kampagne für die wiederkehrende Spende bei allen Opportunities für wiederkehrende Spenden verwendet. Andernfalls wird die Kampagne nur für die erste Opportunity verwendet.</help>
-        <label>Kampagne allen Opportunities hinzufügen</label>
-        <name>Add_Campaign_to_All_Opportunites__c</name>
-    </fields>
-    <fields>
-        <help>ERSETZT. Das Auslöserverhalten wird jetzt über die Seite &quot;Auslöserkonfiguration&quot; in den NPSP-Einstellungen gesteuert.</help>
-        <label>DEPRECATED-Disable_Donations_trigger</label>
-        <name>DISABLE_Donations_trigger__c</name>
-    </fields>
-    <fields>
-        <help>ERSETZT. Das Auslöserverhalten wird jetzt über die Seite &quot;Auslöserkonfiguration&quot; in den NPSP-Einstellungen gesteuert.</help>
-        <label>DEPRECATED-Disable_RD_trigger</label>
-        <name>DISABLE_RecurringDonations_trigger__c</name>
-    </fields>
-    <fields>
-        <help>ERSETZT. Es werden automatisch neue Versionen des Nonprofit Success Pack installiert.</help>
-        <label>ERSETZT-Update-Check aktivieren</label>
-        <name>Enable_Update_Check__c</name>
-    </fields>
-    <fields>
-        <help>ERSETZT. Wird durch die Benachrichtigungseinstellungen im Bereich &quot;Systemfehlereinstellungen&quot; ersetzt.</help>
-        <label>DEPRECATED-Fehler-E-Mail-Benachrichtigungen</label>
-        <name>Error_Email_Notifications__c</name>
-    </fields>
-    <fields>
-        <help>Das Datum und die Uhrzeit der letzten Batchaktualisierung für wiederkehrende Spenden.</help>
-        <label>Letzte Batchausführung</label>
-        <name>Last_Batch_Run__c</name>
-    </fields>
-    <fields>
-        <help>Beschränkt die Anzahl der Spenden, die für befristete wiederkehrende Spenden erstellt werden. Der Standardwert ist 50. Höhere Werte verursachen möglicherweise DML-Fehler.</help>
-        <label>Maximale Spendenzahl</label>
-        <name>Maximum_Donations__c</name>
-    </fields>
-    <fields>
-        <help>Anzahl der wiederkehrenden Spenden, die beim letzten Batchvorgang nicht aktualisiert werden konnten.</help>
-        <label>Anzahl der Fehler</label>
-        <name>Number_of_Failures__c</name>
-    </fields>
-    <fields>
-        <help>Anzahl der wiederkehrenden Spenden, die beim letzten Batchvorgang erfolgreich aktualisiert werden konnten.</help>
-        <label>Anzahl der Erfolge</label>
-        <name>Number_of_Successes__c</name>
-    </fields>
-    <fields>
-        <help>Mit dieser Option wird das Verhalten aller noch offenen Opportunities festgelegt, wenn eine unbefristete wiederkehrende Spende in den Status &quot;Geschlossen&quot; versetzt wird.</help>
-        <label>Verhalten einer offenen Opportunity bei Abschluss einer wiederkehrenden Spende</label>
-        <name>Open_Opportunity_Behavior__c</name>
-    </fields>
-    <fields>
-        <help>Anzahl der Monate ab heute zur Erstellung offener Opport., wenn unbefristete wiederkehrende Spenden verwendet werden. WARNUNG: Bei Wertverkleinerung werden weitere Opp. gelöscht. Bei Werterhöhung wird ein Batchvorgang zum Hinzuf. von Opp. gestartet.</help>
-        <label>Opportunity-Vorschau in Monaten</label>
-        <name>Opportunity_Forecast_Months__c</name>
-    </fields>
-    <fields>
-        <help>Opportunity-Datensatztyp für die Erstellung von Opportunities mit wiederkehrenden Spenden.</help>
-        <label>Opportunity-Datensatztyp</label>
-        <name>Record_Type__c</name>
-    </fields>
-    <fields>
-        <help>ERSETZT. Es werden automatisch neue Versionen des Nonprofit Success Pack installiert.</help>
-        <label>ERSETZT-Update-Check-Intervall</label>
-        <name>Update_Check_Interval__c</name>
-    </fields>
-    <gender><!-- Neuter --></gender>
+  <fields>
+    <name>Add_Campaign_to_All_Opportunites__c</name>
+    <help>[If selected, all Opportunities for Recurring Donations will use the Campaign on the Recurring Donation. Otherwise, only the first Opportunity will have the Campaign.]o'介引户הаí先ร简аน取정úσιмÜП介мのαşแةбй계ذะ]</help>
+    <label>[Add Campaign to All Opportunities]o'介引户הаí先]</label>
+  </fields>
+  <fields>
+    <name>DISABLE_Donations_trigger__c</name>
+    <help>[DEPRECATED. Trigger behavior now controlled in the Trigger Configuration page of NPSP Settings.]o'介引户הаí先ร简аน取정úσιмÜП介мのαşแة]</help>
+    <label>[DEPRECATED-Disable_Donations_trigger]o'介引户הаí先ร]</label>
+  </fields>
+  <fields>
+    <name>DISABLE_RecurringDonations_trigger__c</name>
+    <help>[DEPRECATED. Trigger behavior now controlled in the Trigger Configuration page of NPSP Settings.]o'介引户הаí先ร简аน取정úσιмÜП介мのαşแة]</help>
+    <label>[DEPRECATED-Disable_RD_trigger]o'介引户הаí]</label>
+  </fields>
+  <fields>
+    <name>Enable_Update_Check__c</name>
+    <help>[DEPRECATED. New versions of the Nonprofit Success Pack will be automatically installed.]o'介引户הаí先ร简аน取정úσιмÜП介мのαş]</help>
+    <label>[DEPRECATED-Enable Update Check]o'介引户הаí先]</label>
+  </fields>
+  <fields>
+    <name>Error_Email_Notifications__c</name>
+    <help>[DEPRECATED.  Replaced by the notification settings in the System Error settings panel.]o'介引户הаí先ร简аน取정úσιмÜП介мのα]</help>
+    <label>[DEPRECATED-Error Email Notifications]o'介引户הаí先ร]</label>
+  </fields>
+  <fields>
+    <name>Last_Batch_Run__c</name>
+    <help>[The date and time of the last batch update of Recurring Donations.]o'介引户הаí先ร简аน取정úσιм]</help>
+    <label>[Last Batch Run]o'介引]</label>
+  </fields>
+  <fields>
+    <name>Maximum_Donations__c</name>
+    <help>[Restricts the total number of donations created for non-open-ended Recurring Donations. Default is 50.  Larger values may result in DML errors.]o'介引户הаí先ร简аน取정úσιмÜП介мのαşแة]</help>
+    <label>[Maximum Donations]o'介引户]</label>
+  </fields>
+  <fields>
+    <name>Number_of_Failures__c</name>
+    <help>[Number of Recurring Donations unsuccessfully updated in the last batch operation.]o'介引户הаí先ร简аน取정úσιмÜП介мの]</help>
+    <label>[Number of Failures]o'介引户]</label>
+  </fields>
+  <fields>
+    <name>Number_of_Successes__c</name>
+    <help>[Number of Recurring Donations successfully updated in the last batch run.]o'介引户הаí先ร简аน取정úσιмÜП]</help>
+    <label>[Number of Successes]o'介引户]</label>
+  </fields>
+  <fields>
+    <name>Open_Opportunity_Behavior__c</name>
+    <help>[Determines the behavior of any remaining open Opportunities when an open-ended Recurring Donation is moved to a closed status.]o'介引户הаí先ร简аน取정úσιмÜП介мのα]</help>
+    <label>[Open Opportunity Behavior on RD Close]o'介引户הаí先ร简]</label>
+  </fields>
+  <fields>
+    <name>Opportunity_Forecast_Months__c</name>
+    <help>[Number of months from today worth of open Opportunities to be created when using open-ended Recurring Donations. WARNING: Reducing this value will result in extra Opportunities being deleted.  Increasing it will launch a batch process to add Opportunities]o'介引户הаí先ร简аน取정úσιмÜП介мのαşแةбй계ذะяřт紹소иЗ介นşрωtبčنごд]</help>
+    <label>[Opportunity Forecast Months]o'介引户הаí]</label>
+  </fields>
+  <fields>
+    <name>Record_Type__c</name>
+    <help>[Opportunity Record Type used when Recurring Donation Opportunities are created.]o'介引户הаí先ร简аน取정úσιмÜП介м]</help>
+    <label>[Opportunity Record Type]o'介引户ה]</label>
+  </fields>
+  <fields>
+    <name>Update_Check_Interval__c</name>
+    <help>[DEPRECATED. New versions of the Nonprofit Success Pack will be automatically installed.]o'介引户הаí先ร简аน取정úσιмÜП介мのαş]</help>
+    <label>[DEPRECATED-Update Check Interval]o'介引户הаí先]</label>
+  </fields>
 </CustomObjectTranslation>

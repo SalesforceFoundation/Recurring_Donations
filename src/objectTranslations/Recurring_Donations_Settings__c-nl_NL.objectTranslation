@@ -1,77 +1,68 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
-    <caseValues>
-        <plural>false</plural>
-        <value><!-- Recurring Donations Settings --></value>
-    </caseValues>
-    <caseValues>
-        <plural>true</plural>
-        <value><!-- Recurring Donations Settings --></value>
-    </caseValues>
-    <fields>
-        <help>Indien geselecteerd, gebruiken alle opportunities voor terugkerende donaties de campagne voor de terugkerende donatie. Anders heeft alleen de eerste opportunity een campagne.</help>
-        <label>Campagne toevoegen aan alle opportunities</label>
-        <name>Add_Campaign_to_All_Opportunites__c</name>
-    </fields>
-    <fields>
-        <help>VEROUDERD. Triggerwerking nu bepaald in de pagina Triggerconfiguratie van NPSP-instellingen.</help>
-        <label>VEROUDERD-Disable_Donations_trigger</label>
-        <name>DISABLE_Donations_trigger__c</name>
-    </fields>
-    <fields>
-        <help>VEROUDERD. Triggerwerking nu bepaald in de pagina Triggerconfiguratie van NPSP-instellingen.</help>
-        <label>VEROUDERD-Disable_RD_trigger</label>
-        <name>DISABLE_RecurringDonations_trigger__c</name>
-    </fields>
-    <fields>
-        <help>VEROUDERD. Nieuwe versies van het Nonprofit Success Pack worden automatisch geïnstalleerd.</help>
-        <label>VEROUDERD-Updatecontrole inschakelen</label>
-        <name>Enable_Update_Check__c</name>
-    </fields>
-    <fields>
-        <help>AFGEKEURD. Vervangen door de instellingen voor kennisgevingen in het instellingendeelvenster Systeemfout.</help>
-        <label>VEROUDERD-Kennisg. per e-mail over fout</label>
-        <name>Error_Email_Notifications__c</name>
-    </fields>
-    <fields>
-        <help>De datum en tijd van de laatste batchupdate van Terugkerende donaties.</help>
-        <label>Laatste uitvoering van batch</label>
-        <name>Last_Batch_Run__c</name>
-    </fields>
-    <fields>
-        <help>Beperkt het totale aantal donaties, dat wordt gemaakt voor terugkerende donaties zonder onbepaalde duur. Standaard is 50. Grotere waarden kunnen resulteren in DML-fouten.</help>
-        <label>Maximale aantal donaties</label>
-        <name>Maximum_Donations__c</name>
-    </fields>
-    <fields>
-        <help>Aantal terugkerende donaties die niet met succes zijn bijgewerkt in de laatste batchverwerking.</help>
-        <label>Aantal mislukkingen</label>
-        <name>Number_of_Failures__c</name>
-    </fields>
-    <fields>
-        <help>Aantal Terugkerende donaties die met succes zijn verwerkt in de laatste batchuitvoering.</help>
-        <label>Aantal successen</label>
-        <name>Number_of_Successes__c</name>
-    </fields>
-    <fields>
-        <help>Bepaalt de werking van alle resterende open Opportunities wanneer de status van een Terugkerende donatie met onbepaalde duur wordt gewijzigd in Gesloten.</help>
-        <label>Werking open opportunity bij sluiting TD</label>
-        <name>Open_Opportunity_Behavior__c</name>
-    </fields>
-    <fields>
-        <help>Aantal maanden vanaf vandaag voor te maken open Opportunities bij Terugkerende donaties met onbepaalde duur. WAARSCHUWING: kleinere waarde resulteert in verwijdering van extra Opportunities. Verhogen start batchproces voor toevoegen van Opportunities.</help>
-        <label>Maanden van opportunityprognose</label>
-        <name>Opportunity_Forecast_Months__c</name>
-    </fields>
-    <fields>
-        <help>Type opportunityrecord, dat wordt gebruikt wanneer Opportunities met terugkerende donatie worden gemaakt.</help>
-        <label>Type opportunityrecord</label>
-        <name>Record_Type__c</name>
-    </fields>
-    <fields>
-        <help>VEROUDERD. Nieuwe versies van het Nonprofit Success Pack worden automatisch geïnstalleerd.</help>
-        <label>VEROUDERD-Interval voor updatecontroles</label>
-        <name>Update_Check_Interval__c</name>
-    </fields>
-    <gender><!-- Neuter --></gender>
+  <fields>
+    <name>Add_Campaign_to_All_Opportunites__c</name>
+    <help>Indien geselecteerd, gebruiken alle opportunities voor terugkerende donaties de campagne voor de terugkerende donatie. Anders heeft alleen de eerste opportunity een campagne.</help>
+    <label>Campagne toevoegen aan alle opportunities</label>
+  </fields>
+  <fields>
+    <name>DISABLE_Donations_trigger__c</name>
+    <help>VEROUDERD. Triggerwerking nu bepaald in de pagina Triggerconfiguratie van NPSP-instellingen.</help>
+    <label>VEROUDERD-Disable_Donations_trigger</label>
+  </fields>
+  <fields>
+    <name>DISABLE_RecurringDonations_trigger__c</name>
+    <help>VEROUDERD. Triggerwerking nu bepaald in de pagina Triggerconfiguratie van NPSP-instellingen.</help>
+    <label>VEROUDERD-Disable_RD_trigger</label>
+  </fields>
+  <fields>
+    <name>Enable_Update_Check__c</name>
+    <help>VEROUDERD. Nieuwe versies van het Nonprofit Success Pack worden automatisch geïnstalleerd.</help>
+    <label>VEROUDERD-Updatecontrole inschakelen</label>
+  </fields>
+  <fields>
+    <name>Error_Email_Notifications__c</name>
+    <help>AFGEKEURD. Vervangen door de instellingen voor kennisgevingen in het instellingendeelvenster Systeemfout.</help>
+    <label>VEROUDERD-Kennisg. per e-mail over fout</label>
+  </fields>
+  <fields>
+    <name>Last_Batch_Run__c</name>
+    <help>De datum en tijd van de laatste batchupdate van Terugkerende donaties.</help>
+    <label>Laatste uitvoering van batch</label>
+  </fields>
+  <fields>
+    <name>Maximum_Donations__c</name>
+    <help>Beperkt het totale aantal donaties, dat wordt gemaakt voor terugkerende donaties zonder onbepaalde duur. Standaard is 50. Grotere waarden kunnen resulteren in DML-fouten.</help>
+    <label>Maximale aantal donaties</label>
+  </fields>
+  <fields>
+    <name>Number_of_Failures__c</name>
+    <help>Aantal terugkerende donaties die niet met succes zijn bijgewerkt in de laatste batchverwerking.</help>
+    <label>Aantal mislukkingen</label>
+  </fields>
+  <fields>
+    <name>Number_of_Successes__c</name>
+    <help>Aantal Terugkerende donaties die met succes zijn verwerkt in de laatste batchuitvoering.</help>
+    <label>Aantal successen</label>
+  </fields>
+  <fields>
+    <name>Open_Opportunity_Behavior__c</name>
+    <help>Bepaalt de werking van alle resterende open Opportunities wanneer de status van een Terugkerende donatie met onbepaalde duur wordt gewijzigd in Gesloten.</help>
+    <label>Werking open opportunity bij sluiting TD</label>
+  </fields>
+  <fields>
+    <name>Opportunity_Forecast_Months__c</name>
+    <help>Aantal maanden vanaf vandaag voor te maken open Opportunities bij Terugkerende donaties met onbepaalde duur. WAARSCHUWING: kleinere waarde resulteert in verwijdering van extra Opportunities. Verhogen start batchproces voor toevoegen van Opportunities.</help>
+    <label>Maanden van opportunityprognose</label>
+  </fields>
+  <fields>
+    <name>Record_Type__c</name>
+    <help>Type opportunityrecord, dat wordt gebruikt wanneer Opportunities met terugkerende donatie worden gemaakt.</help>
+    <label>Type opportunityrecord</label>
+  </fields>
+  <fields>
+    <name>Update_Check_Interval__c</name>
+    <help>VEROUDERD. Nieuwe versies van het Nonprofit Success Pack worden automatisch geïnstalleerd.</help>
+    <label>VEROUDERD-Interval voor updatecontroles</label>
+  </fields>
 </CustomObjectTranslation>

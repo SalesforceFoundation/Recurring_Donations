@@ -1,51 +1,107 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Translations xmlns="http://soap.sforce.com/2006/04/metadata">
     <customLabels>
-        <label>Die Felder müssen kompatible Datentypen enthalten. Bearbeiten Sie Ihre Feldauswahl und versuchen Sie es erneut.</label>
         <name>RecurringDonationBadFieldMapping</name>
+        <label>[Fields must be of compatible datatypes. Please edit your field choices and try again.]l'介引户הаí先ร简аน取정úσιмÜП介мのα]</label>
     </customLabels>
     <customLabels>
-        <label>Ihre benutzerdefinierte Bezeichnung für geschlossene verlorene Opportunities entspricht nicht dem Namen einer aktiven geschlossenen/verlorenen Opportunity-Phase. Dies kann zu unerwünschten Ergebnissen führen, wenn wiederkehrende Spenden als geschlossen gekennzeichnet werden und deren Einstellung für die Einstellung &quot;Verhalten der offenen Opportunity&quot; festgelegt ist auf: Mark_Opportunities_Closed_Lost. Prüfen Sie die Namen der Phasen und die benutzerdefinierte Bezeichnung RecurringDonationClosedLostOpportunityStage.</label>
         <name>RecurringDonationBadLabelWarning</name>
+        <label>[Your custom label for closed lost Opportunities does not correspond to an active closed/lost Opportunity Stage Name. This can cause unwanted results when marking Recurring Donations closed and having the Open Opportunity Behavior setting set to: Mark_Opportunities_Closed_Lost.  Please check your stage names and RecurringDonationClosedLostOpportunityStage custom label.]l'介引户הаí先ร简аน取정úσιмÜП介мのαşแةбй계ذะяřт紹소иЗ介นşрωtبčنごдčש帳าаůсחое簡üγกвцΕ戶н客иез]</label>
     </customLabels>
     <customLabels>
-        <label>Sie müssen die zugehörigen Spenden löschen, bevor Sie diese wiederkehrende Spende löschen können.</label>
         <name>RecurringDonationCantDeleteError</name>
+        <label>[You must delete the related Donations before you can delete this recurring donation]l'介引户הаí先ร简аน取정úσιмÜП介мの]</label>
     </customLabels>
     <customLabels>
-        <label>Felder in Ihrem Opportunity-Objekt haben benutzerdefinierte Validierungsregeln, die Probleme bei Ihrem Paket der wiederkehrenden Spenden verursachen können:</label>
+        <name>RecurringDonationClosedLostOpportunityStage</name>
+        <label>[Closed Lost]l'介引]</label>
+    </customLabels>
+    <customLabels>
+        <name>RecurringDonationClosedStatus</name>
+        <label>[Closed]l']</label>
+    </customLabels>
+    <customLabels>
+        <name>RecurringDonationContactRole</name>
+        <label>[Donor]l'介引户]</label>
+    </customLabels>
+    <customLabels>
         <name>RecurringDonationCustomValidationWarning</name>
+        <label>[Fields on your Opportunity object have Custom Validation Rules that may cause issues with your Recurring Donations package:]l'介引户הаí先ร简аน取정úσιмÜП介мの]</label>
     </customLabels>
     <customLabels>
-        <label>Bei dem Versuch, neue Opportunities für Ihre unbefristeten wiederkehrenden Spenden einzufügen, sind Fehler aufgetreten. Dies kann die Prognosen und die Funktionalität Ihrer Salesforce.com-Instanz negativ beeinflussen. Diese Fehler so schnell wie möglich zu beheben, kann verhindern, dass schlechte Daten in Ihr System gelangen. Die Fehler beim Einfügen wiederkehrender Spenden und der zugeordneten Opportunity sind unten aufgeführt und können auf der Registerkarte &quot;NPSP-Einstellungen&quot; unter System &gt; Fehlerprotokoll gefunden werden.</label>
+        <name>RecurringDonationDivideValue</name>
+        <label>[Divide By]l'介]</label>
+    </customLabels>
+    <customLabels>
         <name>RecurringDonationErrorEmailBody</name>
+        <label>[Errors were encountered when trying to insert new Opportunities for your open-ended Recurring Donations. This can adversely affect your forecasting and functionality of your Salesforce.com instance. Addressing these errors as soon as possible can prevent bad data from entering your system.  The Recurring Donation and associated Opportunity insert error are listed below, and can be found in the NPSP Settings tab under System, Error Log.]l'介引户הаí先ร简аน取정úσιмÜП介мのαşแةбй계ذะяřт紹소иЗ介นşрωtبčنごдčש帳าаůсחое簡üγกвцΕ戶н客иез개介引户הаí先ร简аน取]</label>
     </customLabels>
     <customLabels>
-        <label>Alle benutzerdefinierten Raten müssen einen Namen, eine positive Häufigkeit und einen Zeitraumtyp enthalten.</label>
+        <name>RecurringDonationInstallmentPeriod1stand15th</name>
+        <label>[1st and 15th]l'介引]</label>
+    </customLabels>
+    <customLabels>
+        <name>RecurringDonationInstallmentPeriodMonthly</name>
+        <label>[Monthly]l']</label>
+    </customLabels>
+    <customLabels>
+        <name>RecurringDonationInstallmentPeriodQuarterly</name>
+        <label>[Quarterly]l'介]</label>
+    </customLabels>
+    <customLabels>
+        <name>RecurringDonationInstallmentPeriodWeekly</name>
+        <label>[Weekly]l']</label>
+    </customLabels>
+    <customLabels>
+        <name>RecurringDonationInstallmentPeriodYearly</name>
+        <label>[Yearly]l']</label>
+    </customLabels>
+    <customLabels>
         <name>RecurringDonationInvalidCustomInstallment</name>
+        <label>[All Custom Installments must have a Name, positive Frequency and Time Period Type.]l'介引户הаí先ร简аน取정úσιмÜП介мの]</label>
     </customLabels>
     <customLabels>
-        <label>Sie müssen eine Organisation oder einen Kontakt auswählen.</label>
         <name>RecurringDonationMissingDataError</name>
+        <label>[You must select an Organization or Contact]l'介引户הаí先ร简а]</label>
     </customLabels>
     <customLabels>
-        <label>Spende</label>
+        <name>RecurringDonationMultiplyValue</name>
+        <label>[Multiply By]l'介引]</label>
+    </customLabels>
+    <customLabels>
+        <name>RecurringDonationOpenStatus</name>
+        <label>[Open]l'介引]</label>
+    </customLabels>
+    <customLabels>
         <name>RecurringDonationPrefix</name>
+        <label>[Donation]l'介]</label>
     </customLabels>
     <customLabels>
-        <label>Die folgenden Pflichtfelder in Ihrem Opportunity-Objekt können Probleme mit Ihrem Paket der wiederkehrenden Spenden verursachen:</label>
         <name>RecurringDonationRequiredFieldsWarning</name>
+        <label>[The following required fields on your Opportunity object may cause issues with your Recurring Donations package:]l'介引户הаí先ร简аน取정úσιмÜП介]</label>
     </customLabels>
     <customLabels>
-        <label>Beim Planen der nächtlichen Aktualisierung der wiederkehrenden Spenden ist ein Fehler aufgetreten.</label>
         <name>RecurringDonationSchedulingError</name>
+        <label>[There was an error in scheduling your nightly Recurring Donations update.]l'介引户הаí先ร简аน取정úσιмÜП]</label>
     </customLabels>
     <customLabels>
-        <label>Diese Einstellungen steuern das Verhalten von wiederkehrenden Spenden im Nonprofit Success Pack. Weitere Informationen finden Sie unter &lt;a href=&quot;https://powerofus.force.com/NPSP_Recurring_Donations&quot; target=&quot;_blank&quot;&gt;NPSP-Dokumentation&lt;/a&gt;.</label>
         <name>RecurringDonationSettingsDescription</name>
+        <label>[These settings control how Recurring Donations behave in the Nonprofit Success Pack. See the &lt;a href="https://powerofus.force.com/NPSP_Recurring_Donations" target="_blank"&gt;NPSP Documentation&lt;/a&gt; for more information.]l'介引户הаí先ร简аน取정úσιмÜП介мのαşแةбй계ذะяřт紹소иЗ介นş]</label>
     </customLabels>
     <customLabels>
-        <label>Sie müssen weniger als 50 Raten angeben. (Diese Fehlermeldung wird nicht mehr verwendet.)</label>
-        <name>RecurringDonationTooManyInstallmentsError</name>
+        <name>RecurringDonationStageName</name>
+        <label>[Pledged]l']</label>
     </customLabels>
-    </Translations>
+    <customLabels>
+        <name>RecurringDonationTooManyInstallmentsError</name>
+        <label>[You must specify fewer than 50 installments.  (This error message is no longer used).]l'介引户הаí先ร简аน取정úσιмÜП介мのα]</label>
+    </customLabels>
+    <quickActions>
+        <name>Recurring_Donation__c.Quick_Update</name>
+        <label>[Quick Update]l'介引]</label>
+    </quickActions>
+    <quickActions>
+        <name>Recurring_Donation__c.New_Opportunity</name>
+        <label>[New Opportunity]l'介引]</label>
+    </quickActions>
+</Translations>
