@@ -7,7 +7,6 @@
   </fields>
   <fields>
     <name>Contact__c</name>
-    <relationshipLabel>Terugkerende Donaties</relationshipLabel>
     <label>Contactpersoon</label>
   </fields>
   <fields>
@@ -82,7 +81,7 @@
   </fields>
   <fields>
     <name>Organization__c</name>
-    <relationshipLabel>Terugkerende Donaties</relationshipLabel>
+    <relationshipLabel>Terugkerende donaties</relationshipLabel>
     <label>Account</label>
   </fields>
   <fields>
@@ -92,7 +91,7 @@
   </fields>
   <fields>
     <name>Recurring_Donation_Campaign__c</name>
-    <relationshipLabel>Terugkerende Donaties</relationshipLabel>
+    <relationshipLabel>Terugkerende donaties</relationshipLabel>
     <label>Campagne</label>
   </fields>
   <fields>
