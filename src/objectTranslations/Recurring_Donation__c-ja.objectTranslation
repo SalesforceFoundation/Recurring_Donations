@@ -12,7 +12,7 @@
     <fields>
         <label>取引先責任者</label>
         <name>Contact__c</name>
-        <relationshipLabel><!-- Recurring Donations --></relationshipLabel>
+        <relationshipLabel>継続支援</relationshipLabel>
     </fields>
     <fields>
         <help>この継続支援の始期。デフォルトは現在の日付です。</help>
