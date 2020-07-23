@@ -5,12 +5,12 @@
         <value>継続支援</value>
     </caseValues>
     <fields>
-        <help>継続支援の 1 回の支払額。</help>
+        <help>割賦商談の 1 回の支払額。</help>
         <label>金額</label>
         <name>Amount__c</name>
     </fields>
     <fields>
-        <label>個人</label>
+        <label>取引先責任者</label>
         <name>Contact__c</name>
         <relationshipLabel>継続支援</relationshipLabel>
     </fields>
@@ -28,7 +28,7 @@
         <name>Installment_Amount__c</name>
     </fields>
     <fields>
-        <help>継続支援の間隔を設定します。警告: 既存の継続支援の間隔を変更すると、進行中の支援が削除されて再作成される可能性があります。その場合、関連付けられているデータは保持されません。</help>
+        <help>割賦の間隔を設定します。警告: 既存の継続支援の間隔を変更すると、進行中の商談が削除されて再作成される可能性があります。その場合、関連付けられているデータは保持されません。</help>
         <label>間隔</label>
         <name>Installment_Period__c</name>
         <picklistValues>
@@ -58,7 +58,7 @@
         <name>Installments__c</name>
     </fields>
     <fields>
-        <help>この値は、継続支援が前回支払い済みとマークされた日に基づいて、NPSP により自動的に計算されます (参照のみ)。</help>
+        <help>この値は、割賦商談が前回支払い済みとマークされた日に基づいて、NPSP により自動的に計算されます (参照のみ)。</help>
         <label>前回の支援日</label>
         <name>Last_Payment_Date__c</name>
     </fields>
@@ -85,12 +85,12 @@
         </picklistValues>
     </fields>
     <fields>
-        <label>団体</label>
+        <label>取引先</label>
         <name>Organization__c</name>
         <relationshipLabel>継続支援</relationshipLabel>
     </fields>
     <fields>
-        <help>この継続支援の支払総額。すべての完了/成立支援の合計金額が自動的に計算されます (参照のみ)。</help>
+        <help>この継続支援の支払総額。すべての完了/成立商談の合計金額が自動的に計算されます (参照のみ)。</help>
         <label>合計支払金額</label>
         <name>Paid_Amount__c</name>
     </fields>
@@ -113,12 +113,12 @@
         </picklistValues>
     </fields>
     <fields>
-        <help>この継続支援で支払われた合計回数 (参照のみ)。</help>
+        <help>この継続支援で支払われた割賦商談の合計回数 (参照のみ)。</help>
         <label>支払回数</label>
         <name>Total_Paid_Installments__c</name>
     </fields>
     <fields>
-        <help>固定期間の継続支援での、すべての支援の総額。</help>
+        <help>固定期間の継続支援での、すべての商談の総額。</help>
         <label>合計</label>
         <name>Total__c</name>
     </fields>
@@ -131,7 +131,7 @@
     </layouts>
     <nameFieldLabel>継続支援名</nameFieldLabel>
     <quickActions>
-        <label>新規支援</label>
+        <label>新規商談</label>
         <name>New_Opportunity</name>
     </quickActions>
     <quickActions>
@@ -139,15 +139,15 @@
         <name>Quick_Update</name>
     </quickActions>
     <webLinks>
-        <label>新しい団体継続支援</label>
+        <label>新しい取引先継続支援</label>
         <name>New_Recurring_Acct_Donation</name>
     </webLinks>
     <webLinks>
-        <label>新しい個人継続支援</label>
+        <label>新しい取引先責任者継続支援</label>
         <name>New_Recurring_Donation_Pledge_Account</name>
     </webLinks>
     <webLinks>
-        <label>支援の更新</label>
+        <label>商談の更新</label>
         <name>Refresh_Opportunities</name>
     </webLinks>
 </CustomObjectTranslation>

@@ -22,6 +22,8 @@ tasks:
                   xpath: //ns:customLabels[ns:name='RecurringDonationClosedStatus']|//ns:customLabels[ns:name='RecurringDonationContactRole']|//ns:customLabels[ns:name='RecurringDonationDivideValue']|//ns:customLabels[ns:name='RecurringDonationMultiplyValue']|//ns:customLabels[ns:name='RecurringDonationOpenStatus']|//ns:customLabels[ns:name='RecurringDonationContactRole']
                 - path: src/translations/**.translation
                   xpath: //ns:quickActions
+                - path: src/translations/**.translation
+                  xpath: //ns:reportTypes[ns:name='screen_flows_prebuilt_crt']
 
 flows:
     release_beta:

@@ -62,7 +62,7 @@
     </fields>
     <fields>
         <help>ERSETZT. Wird durch die Benachrichtigungseinstellungen im Bereich &quot;Systemfehlereinstellungen&quot; ersetzt.</help>
-        <label>DEPRECATED-Fehler-E-Mail-Benachrichtigungen</label>
+        <label>DEPRECATED-Fehler-E-Mail-Benachrichtig.</label>
         <name>Error_Email_Notifications__c</name>
     </fields>
     <fields>
@@ -87,7 +87,7 @@
     </fields>
     <fields>
         <help>Mit dieser Option wird das Verhalten aller noch offenen Opportunities festgelegt, wenn eine unbefristete wiederkehrende Spende in den Status &quot;Geschlossen&quot; versetzt wird.</help>
-        <label>Verhalten einer offenen Opportunity bei Abschluss einer wiederkehrenden Spende</label>
+        <label>Verhalten offener Opp. bei RD-Abschluss</label>
         <name>Open_Opportunity_Behavior__c</name>
     </fields>
     <fields>

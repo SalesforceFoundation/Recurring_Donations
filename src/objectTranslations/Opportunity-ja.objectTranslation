@@ -3,6 +3,6 @@
     <fields>
         <label>継続支援</label>
         <name>Recurring_Donation__c</name>
-        <relationshipLabel>支援</relationshipLabel>
+        <relationshipLabel>商談</relationshipLabel>
     </fields>
 </CustomObjectTranslation>
