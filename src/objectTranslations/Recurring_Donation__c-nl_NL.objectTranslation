@@ -16,7 +16,7 @@
     <fields>
         <label>Contactpersoon</label>
         <name>Contact__c</name>
-        <relationshipLabel>Terugkerende Donaties</relationshipLabel>
+        <relationshipLabel>Terugkerende donaties</relationshipLabel>
     </fields>
     <fields>
         <help>De datum van initiële inceptie voor deze terugkerende donatie. Standaard is dit de huidige datum.</help>
@@ -91,7 +91,7 @@
     <fields>
         <label>Account</label>
         <name>Organization__c</name>
-        <relationshipLabel>Terugkerende Donaties</relationshipLabel>
+        <relationshipLabel>Terugkerende donaties</relationshipLabel>
     </fields>
     <fields>
         <help>Het totale betaalde bedrag voor deze terugkerende donatie. Wordt automatisch berekend als het totale bedrag aan termijnen van alle gesloten/gewonnen Opportunities (alleen-lezen).</help>
@@ -101,7 +101,7 @@
     <fields>
         <label>Campagne</label>
         <name>Recurring_Donation_Campaign__c</name>
-        <relationshipLabel>Terugkerende Donaties</relationshipLabel>
+        <relationshipLabel>Terugkerende donaties</relationshipLabel>
     </fields>
     <fields>
         <help>Meldt aan Salesforce de manier waarop het bedrag voor elke onderliggende opportunity moet worden berekend op basis van wat u hebt opgegeven in het veld. Alleen Terugkerende donaties met vaste duur.</help>
