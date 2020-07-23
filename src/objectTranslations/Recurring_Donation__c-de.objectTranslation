@@ -64,7 +64,7 @@
         <name>Installment_Amount__c</name>
     </fields>
     <fields>
-        <help>Legt fest, wie Oft Sie die Spenden erhalten. HINWEIS: Wenn Sie die Ratenlaufzeit für eine vorhandene wiederkehrende Spende mit fester Dauer ändern, könnten offene Opportunities gelöscht und neu erstellt werden. Damit verbundene Daten gehen womöglich verloren.</help>
+        <help>Legt fest, wie oft Sie die Spenden erhalten. HINWEIS: Wenn Sie die Ratenlaufzeit für eine vorhandene wiederkehrende Spende mit fester Dauer ändern, werden offene Opportunities evtl. gelöscht und neu erstellt. Verbundene Daten gehen womöglich verloren.</help>
         <label>Ratenlaufzeit</label>
         <name>Installment_Period__c</name>
         <picklistValues>

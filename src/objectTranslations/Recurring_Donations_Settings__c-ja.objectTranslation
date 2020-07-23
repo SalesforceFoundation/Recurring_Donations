@@ -5,8 +5,8 @@
         <value><!-- Recurring Donations Settings --></value>
     </caseValues>
     <fields>
-        <help>選択すると、継続支援のすべての支援で継続支援のキャンペーンが使用されます。選択しないと、最初の支援のみでキャンペーンが使用されます。</help>
-        <label>キャンペーンをすべての支援に追加</label>
+        <help>選択すると、継続支援のすべての商談で継続支援のキャンペーンが使用されます。選択しないと、最初の商談のみでキャンペーンが使用されます。</help>
+        <label>キャンペーンをすべての商談に追加</label>
         <name>Add_Campaign_to_All_Opportunites__c</name>
     </fields>
     <fields>
@@ -50,18 +50,18 @@
         <name>Number_of_Successes__c</name>
     </fields>
     <fields>
-        <help>無期限の継続支援が完了状態に移行されたときの残りの進行中の支援の動作を決定します。</help>
-        <label>継続支援完了時の進行中の支援の動作</label>
+        <help>無期限の継続支援が完了状態に移行されたときの残りの進行中の商談を決定します。</help>
+        <label>継続支援完了時の進行中の商談の動作</label>
         <name>Open_Opportunity_Behavior__c</name>
     </fields>
     <fields>
-        <help>無期限の継続支援を使用しているときに作成される進行中の支援が計上される現在日付からの月数。警告: この値を低くすると、余分な支援は削除されます。値を高くすると、支援を追加する一括処理が起動されます。</help>
-        <label>支援の売上予測月数</label>
+        <help>無期限の継続支援を使用しているときに作成される進行中の商談が計上される現在日付からの月数。警告: この値を低くすると、余分な商談は削除されます。値を高くすると、商談を追加する一括処理が起動されます。</help>
+        <label>商談の売上予測月数</label>
         <name>Opportunity_Forecast_Months__c</name>
     </fields>
     <fields>
-        <help>継続支援の作成時に使用される支援レコードタイプ。</help>
-        <label>支援レコードタイプ</label>
+        <help>継続支援の作成時に使用される商談レコードタイプ。</help>
+        <label>商談レコードタイプ</label>
         <name>Record_Type__c</name>
     </fields>
     <fields>
