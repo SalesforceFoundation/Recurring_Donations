@@ -1,77 +1,68 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
-    <caseValues>
-        <plural>false</plural>
-        <value><!-- Recurring Donations Settings --></value>
-    </caseValues>
-    <caseValues>
-        <plural>true</plural>
-        <value><!-- Recurring Donations Settings --></value>
-    </caseValues>
-    <fields>
-        <help>Si se selecciona, todas las oportunidades para donaciones recurrentes usarán la campaña en Donación recurrente. En caso contrario, solo la primera oportunidad tendrá la campaña.</help>
-        <label>Agregar campaña a todas oportunidades</label>
-        <name>Add_Campaign_to_All_Opportunites__c</name>
-    </fields>
-    <fields>
-        <help>DESUSADO. El comportamiento del desencadenador está ahora controlado en la página Configuración de desencadenadores de Configuración de NPSP.</help>
-        <label>DESUSADO-Disable_Donations_trigger</label>
-        <name>DISABLE_Donations_trigger__c</name>
-    </fields>
-    <fields>
-        <help>DESUSADO. El comportamiento del desencadenador está ahora controlado en la página Configuración de desencadenadores de Configuración de NPSP.</help>
-        <label>DESUSADO-Disable_RD_trigger</label>
-        <name>DISABLE_RecurringDonations_trigger__c</name>
-    </fields>
-    <fields>
-        <help>DESUSADO. Se instalarán automáticamente nuevas versiones del Nonprofit Success Pack.</help>
-        <label>DESUSADO-Activar comprob. actualización</label>
-        <name>Enable_Update_Check__c</name>
-    </fields>
-    <fields>
-        <help>DESUSADO. Sustituido por los parámetros de notificación en el panel de configuración de Errores del sistema.</help>
-        <label>DESUSADO-Notificaciones error por correo</label>
-        <name>Error_Email_Notifications__c</name>
-    </fields>
-    <fields>
-        <help>La fecha y la hora de la última actualización de lote de Donaciones recurrentes.</help>
-        <label>Última ejecución de lote</label>
-        <name>Last_Batch_Run__c</name>
-    </fields>
-    <fields>
-        <help>Restringe la cantidad total de donaciones creadas para donaciones recurrentes sin finalización definida. El valor predeterminado es 50. Un valor mayor puede dar como resultado errores DML.</help>
-        <label>Máximo de donaciones</label>
-        <name>Maximum_Donations__c</name>
-    </fields>
-    <fields>
-        <help>Cantidad de donaciones recurrentes que no se actualizaron correctamente en la última ejecución del lote.</help>
-        <label>Cantidad de fallos</label>
-        <name>Number_of_Failures__c</name>
-    </fields>
-    <fields>
-        <help>Cantidad de donaciones recurrentes que se actualizaron correctamente en la última ejecución del lote.</help>
-        <label>Cantidad de operaciones correctas</label>
-        <name>Number_of_Successes__c</name>
-    </fields>
-    <fields>
-        <help>Determina el comportamiento de las oportunidades abiertas restantes cuando una donación recurrente sin finalización definida cambia su estado a cerrada.</help>
-        <label>Comportam oportunidad abierta cierre DR</label>
-        <name>Open_Opportunity_Behavior__c</name>
-    </fields>
-    <fields>
-        <help>Cantidad de meses desde hoy con oportunidades abiertas que se crearán con donaciones recurrentes sin finalización definida. ADVERTENCIA: Al reducirlo se eliminarán oportunidades adicionales. Al aumentarlo iniciará in proceso para agregar oportunidades.</help>
-        <label>Meses de previsiones de oportunidades</label>
-        <name>Opportunity_Forecast_Months__c</name>
-    </fields>
-    <fields>
-        <help>Tipo de registro de oportunidad empleado cuando se crean oportunidades de donaciones recurrentes.</help>
-        <label>Tipo de registro de oportunidad</label>
-        <name>Record_Type__c</name>
-    </fields>
-    <fields>
-        <help>DESUSADO. Se instalarán automáticamente nuevas versiones del Nonprofit Success Pack.</help>
-        <label>DESUSADO-Actualizar intervalo comprobac.</label>
-        <name>Update_Check_Interval__c</name>
-    </fields>
-    <gender><!-- Feminine --></gender>
+  <fields>
+    <name>Add_Campaign_to_All_Opportunites__c</name>
+    <help>Si se selecciona, todas las oportunidades para donaciones recurrentes usarán la campaña en Donación recurrente. En caso contrario, solo la primera oportunidad tendrá la campaña.</help>
+    <label>Agregar campaña a todas oportunidades</label>
+  </fields>
+  <fields>
+    <name>DISABLE_Donations_trigger__c</name>
+    <help>DESUSADO. El comportamiento del desencadenador está ahora controlado en la página Configuración de desencadenadores de Configuración de NPSP.</help>
+    <label>DESUSADO-Disable_Donations_trigger</label>
+  </fields>
+  <fields>
+    <name>DISABLE_RecurringDonations_trigger__c</name>
+    <help>DESUSADO. El comportamiento del desencadenador está ahora controlado en la página Configuración de desencadenadores de Configuración de NPSP.</help>
+    <label>DESUSADO-Disable_RD_trigger</label>
+  </fields>
+  <fields>
+    <name>Enable_Update_Check__c</name>
+    <help>DESUSADO. Se instalarán automáticamente nuevas versiones del Nonprofit Success Pack.</help>
+    <label>DESUSADO-Activar comprob. actualización</label>
+  </fields>
+  <fields>
+    <name>Error_Email_Notifications__c</name>
+    <help>DESUSADO. Sustituido por los parámetros de notificación en el panel de configuración de Errores del sistema.</help>
+    <label>DESUSADO-Notificaciones error por correo</label>
+  </fields>
+  <fields>
+    <name>Last_Batch_Run__c</name>
+    <help>La fecha y la hora de la última actualización de lote de Donaciones recurrentes.</help>
+    <label>Última ejecución de lote</label>
+  </fields>
+  <fields>
+    <name>Maximum_Donations__c</name>
+    <help>Restringe la cantidad total de donaciones creadas para donaciones recurrentes sin finalización definida. El valor predeterminado es 50. Un valor mayor puede dar como resultado errores DML.</help>
+    <label>Máximo de donaciones</label>
+  </fields>
+  <fields>
+    <name>Number_of_Failures__c</name>
+    <help>Cantidad de donaciones recurrentes que no se actualizaron correctamente en la última ejecución del lote.</help>
+    <label>Cantidad de fallos</label>
+  </fields>
+  <fields>
+    <name>Number_of_Successes__c</name>
+    <help>Cantidad de donaciones recurrentes que se actualizaron correctamente en la última ejecución del lote.</help>
+    <label>Cantidad de operaciones correctas</label>
+  </fields>
+  <fields>
+    <name>Open_Opportunity_Behavior__c</name>
+    <help>Determina el comportamiento de las oportunidades abiertas restantes cuando una donación recurrente sin finalización definida cambia su estado a cerrada.</help>
+    <label>Comportam oportunidad abierta cierre DR</label>
+  </fields>
+  <fields>
+    <name>Opportunity_Forecast_Months__c</name>
+    <help>Cantidad de meses desde hoy con oportunidades abiertas que se crearán con donaciones recurrentes sin finalización definida. ADVERTENCIA: Al reducirlo se eliminarán oportunidades adicionales. Al aumentarlo iniciará in proceso para agregar oportunidades.</help>
+    <label>Meses de previsiones de oportunidades</label>
+  </fields>
+  <fields>
+    <name>Record_Type__c</name>
+    <help>Tipo de registro de oportunidad empleado cuando se crean oportunidades de donaciones recurrentes.</help>
+    <label>Tipo de registro de oportunidad</label>
+  </fields>
+  <fields>
+    <name>Update_Check_Interval__c</name>
+    <help>DESUSADO. Se instalarán automáticamente nuevas versiones del Nonprofit Success Pack.</help>
+    <label>DESUSADO-Actualizar intervalo comprobac.</label>
+  </fields>
 </CustomObjectTranslation>

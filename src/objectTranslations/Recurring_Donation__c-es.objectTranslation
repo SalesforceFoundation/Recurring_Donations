@@ -1,158 +1,153 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version='1.0' encoding='UTF-8'?>
 <CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
-    <caseValues>
-        <plural>false</plural>
-        <value>Donación recurrente</value>
-    </caseValues>
-    <caseValues>
-        <plural>true</plural>
-        <value>Donaciones recurrentes</value>
-    </caseValues>
-    <fields>
-        <help>El importe de cada oportunidad de cuota.</help>
-        <label>Importe</label>
-        <name>Amount__c</name>
-    </fields>
-    <fields>
-        <label>Contacto</label>
-        <name>Contact__c</name>
-        <relationshipLabel>Donaciones recurrentes</relationshipLabel>
-    </fields>
-    <fields>
-        <help>La fecha de efecto inicial de esta donación recurrente. El valor predeterminado es la fecha vigente.</help>
-        <label>Fecha establecida</label>
-        <name>Date_Established__c</name>
-    </fields>
-    <fields>
-        <label>Nombre del donante</label>
-        <name>Donor_Name__c</name>
-    </fields>
-    <fields>
-        <label>Importe de cuota</label>
-        <name>Installment_Amount__c</name>
-    </fields>
-    <fields>
-        <help>Con qué frecuencia se recibirán las donaciones. Nota: Al modificar el período de cuotas de una donación recurrente de longitud fija se pueden perder o volver a crear las oportunidades abiertas. Podrían perderse los datos asociados con esas oportunidades.</help>
-        <label>Frecuencia</label>
-        <name>Installment_Period__c</name>
-        <picklistValues>
-            <masterLabel>1st and 15th</masterLabel>
-            <translation>El 1 y el 15</translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>Monthly</masterLabel>
-            <translation>Mensual</translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>Quarterly</masterLabel>
-            <translation>Trimestral</translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>Weekly</masterLabel>
-            <translation>Semanal</translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>Yearly</masterLabel>
-            <translation>Anual</translation>
-        </picklistValues>
-    </fields>
-    <fields>
-        <help>Número de cuotas (donaciones) que se esperan recibir. Para donaciones recurrentes con duración fija únicamente.</help>
-        <label>Cantidad de cuotas planificadas</label>
-        <name>Installments__c</name>
-    </fields>
-    <fields>
-        <help>NPSP calcula este valor automáticamente en base a la última vez que una oportunidad de cuota se marcó como pagada (solo lectura).</help>
-        <label>Fecha de última donación</label>
-        <name>Last_Payment_Date__c</name>
-    </fields>
-    <fields>
-        <help>La fecha en la que se va a realizar la próxima donación. Esta fecha también determina la fecha de todas las futuras donaciones.</help>
-        <label>Fecha de próxima donación</label>
-        <name>Next_Payment_Date__c</name>
-    </fields>
-    <fields>
-        <help>Elija Abierto para donaciones recurrentes sin finalización definida. Seleccione Ninguno para donaciones recurrentes con duración fija. Seleccione Cerrada para cerrar una donación recurrente.</help>
-        <label>Estado sin finalización definida</label>
-        <name>Open_Ended_Status__c</name>
-        <picklistValues>
-            <masterLabel>Closed</masterLabel>
-            <translation>Cerrado</translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>None</masterLabel>
-            <translation>Ninguno</translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>Open</masterLabel>
-            <translation>Abierto</translation>
-        </picklistValues>
-    </fields>
-    <fields>
-        <label>Cuenta</label>
-        <name>Organization__c</name>
-        <relationshipLabel>Donaciones recurrentes</relationshipLabel>
-    </fields>
-    <fields>
-        <help>El importe total pagado en esta donación recurrente. Se calcula automáticamente como el importe total de todas las oportunidades de cuotas Cerradas/Ganadas.</help>
-        <label>Importe total pagado</label>
-        <name>Paid_Amount__c</name>
-    </fields>
-    <fields>
-        <label>Campaña</label>
-        <name>Recurring_Donation_Campaign__c</name>
-        <relationshipLabel>Donaciones recurrentes</relationshipLabel>
-    </fields>
-    <fields>
-        <help>Especifica como se debe calcular el importe de las oportunidades recurrentes, basado en el campo Importe. Solo para donaciones recurrentes con duración fija.</help>
-        <label>Tipo de programación</label>
-        <name>Schedule_Type__c</name>
-        <picklistValues>
-            <masterLabel>Divide By</masterLabel>
-            <translation>Dividir por</translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>Multiply By</masterLabel>
-            <translation>Multiplicar por</translation>
-        </picklistValues>
-    </fields>
-    <fields>
-        <help>Número total de oportunidades de cuotas pagadas en esta donación recurrente (solo lectura)</help>
-        <label>Cantidad de cuotas pagadas</label>
-        <name>Total_Paid_Installments__c</name>
-    </fields>
-    <fields>
-        <help>Para donaciones recurrentes sin finalización definida, es el importe total de todas las oportunidades.</help>
-        <label>Total</label>
-        <name>Total__c</name>
-    </fields>
-    <gender>Feminine</gender>
-    <layouts>
-        <layout>Recurring Donation Layout</layout>
-        <sections>
-            <label>Vínculos personalizados</label>
-            <section>Custom Links</section>
-        </sections>
-    </layouts>
-    <nameFieldLabel>Nombre de donación recurrente</nameFieldLabel>
-    <quickActions>
-        <label>Nueva oportunidad</label>
-        <name>New_Opportunity</name>
-    </quickActions>
-    <quickActions>
-        <label>Actualización rápida</label>
-        <name>Quick_Update</name>
-    </quickActions>
-    <webLinks>
-        <label>Nueva donación recurrente de cuenta</label>
-        <name>New_Recurring_Acct_Donation</name>
-    </webLinks>
-    <webLinks>
-        <label>Nueva donación recurrente de contacto</label>
-        <name>New_Recurring_Donation_Pledge_Account</name>
-    </webLinks>
-    <webLinks>
-        <label>Actualizar oportunidades</label>
-        <name>Refresh_Opportunities</name>
-    </webLinks>
+  <fields>
+    <name>Amount__c</name>
+    <help>El importe de cada oportunidad de cuota.</help>
+    <label>Importe</label>
+  </fields>
+  <fields>
+    <name>Contact__c</name>
+    <label>Contacto</label>
+  </fields>
+  <fields>
+    <name>Date_Established__c</name>
+    <help>La fecha de efecto inicial de esta donación recurrente. El valor predeterminado es la fecha vigente.</help>
+    <label>Fecha establecida</label>
+  </fields>
+  <fields>
+    <name>Donor_Name__c</name>
+    <label>Nombre del donante</label>
+  </fields>
+  <fields>
+    <name>Installment_Amount__c</name>
+    <label>Importe de cuota</label>
+  </fields>
+  <fields>
+    <name>Installment_Period__c</name>
+    <help>Con qué frecuencia se recibirán las donaciones. Nota: Al modificar el período de cuotas de una donación recurrente de longitud fija se pueden perder o volver a crear las oportunidades abiertas. Podrían perderse los datos asociados con esas oportunidades.</help>
+    <label>Frecuencia</label>
+    <picklistValues>
+      <masterLabel>Monthly</masterLabel>
+      <translation>Mensual</translation>
+    </picklistValues>
+    <picklistValues>
+      <masterLabel>Quarterly</masterLabel>
+      <translation>Trimestral</translation>
+    </picklistValues>
+    <picklistValues>
+      <masterLabel>Yearly</masterLabel>
+      <translation>Anual</translation>
+    </picklistValues>
+    <picklistValues>
+      <masterLabel>Weekly</masterLabel>
+      <translation>Semanal</translation>
+    </picklistValues>
+    <picklistValues>
+      <masterLabel>1st and 15th</masterLabel>
+      <translation>El 1 y el 15</translation>
+    </picklistValues>
+  </fields>
+  <fields>
+    <name>Installments__c</name>
+    <help>Número de cuotas (donaciones) que se esperan recibir. Para donaciones recurrentes con duración fija únicamente.</help>
+    <label>Cantidad de cuotas planificadas</label>
+  </fields>
+  <fields>
+    <name>Last_Payment_Date__c</name>
+    <help>NPSP calcula este valor automáticamente en base a la última vez que una oportunidad de cuota se marcó como pagada (solo lectura).</help>
+    <label>Fecha de última donación</label>
+  </fields>
+  <fields>
+    <name>Next_Payment_Date__c</name>
+    <help>La fecha en la que se va a realizar la próxima donación. Esta fecha también determina la fecha de todas las futuras donaciones.</help>
+    <label>Fecha de próxima donación</label>
+  </fields>
+  <fields>
+    <name>Open_Ended_Status__c</name>
+    <help>Elija Abierto para donaciones recurrentes sin finalización definida. Seleccione Ninguno para donaciones recurrentes con duración fija. Seleccione Cerrada para cerrar una donación recurrente.</help>
+    <label>Estado sin finalización definida</label>
+    <picklistValues>
+      <masterLabel>Open</masterLabel>
+      <translation>Abierto</translation>
+    </picklistValues>
+    <picklistValues>
+      <masterLabel>Closed</masterLabel>
+      <translation>Cerrado</translation>
+    </picklistValues>
+    <picklistValues>
+      <masterLabel>None</masterLabel>
+      <translation>Ninguno</translation>
+    </picklistValues>
+  </fields>
+  <fields>
+    <name>Organization__c</name>
+    <relationshipLabel>Donaciones recurrentes</relationshipLabel>
+    <label>Cuenta</label>
+  </fields>
+  <fields>
+    <name>Paid_Amount__c</name>
+    <help>El importe total pagado en esta donación recurrente. Se calcula automáticamente como el importe total de todas las oportunidades de cuotas Cerradas/Ganadas.</help>
+    <label>Importe total pagado</label>
+  </fields>
+  <fields>
+    <name>Recurring_Donation_Campaign__c</name>
+    <relationshipLabel>Donaciones recurrentes</relationshipLabel>
+    <label>Campaña</label>
+  </fields>
+  <fields>
+    <name>Schedule_Type__c</name>
+    <help>Especifica como se debe calcular el importe de las oportunidades recurrentes, basado en el campo Importe. Solo para donaciones recurrentes con duración fija.</help>
+    <label>Tipo de programación</label>
+    <picklistValues>
+      <masterLabel>Multiply By</masterLabel>
+      <translation>Multiplicar por</translation>
+    </picklistValues>
+    <picklistValues>
+      <masterLabel>Divide By</masterLabel>
+      <translation>Dividir por</translation>
+    </picklistValues>
+  </fields>
+  <fields>
+    <name>Total_Paid_Installments__c</name>
+    <help>Número total de oportunidades de cuotas pagadas en esta donación recurrente (solo lectura)</help>
+    <label>Cantidad de cuotas pagadas</label>
+  </fields>
+  <fields>
+    <name>Total__c</name>
+    <help>Para donaciones recurrentes sin finalización definida, es el importe total de todas las oportunidades.</help>
+    <label>Total</label>
+  </fields>
+  <webLinks>
+    <name>New_Recurring_Acct_Donation</name>
+    <label>Nueva donación recurrente de cuenta</label>
+  </webLinks>
+  <webLinks>
+    <name>New_Recurring_Donation_Pledge_Account</name>
+    <label>Nueva donación recurrente de contacto</label>
+  </webLinks>
+  <webLinks>
+    <name>Refresh_Opportunities</name>
+    <label>Actualizar oportunidades</label>
+  </webLinks>
+  <layouts>
+    <layout>Recurring Donation Layout</layout>
+    <sections>
+      <label>Vínculos personalizados</label>
+      <section>Custom Links</section>
+    </sections>
+  </layouts>
+  <nameFieldLabel>Nombre de donación recurrente</nameFieldLabel>
+  <standardFields>
+    <name>Name</name>
+    <label>Nombre de donación recurrente</label>
+  </standardFields>
+  <gender>Feminine</gender>
+  <caseValues>
+    <plural>false</plural>
+    <value>Donación recurrente</value>
+  </caseValues>
+  <caseValues>
+    <plural>true</plural>
+    <value>Donaciones recurrentes</value>
+  </caseValues>
 </CustomObjectTranslation>
