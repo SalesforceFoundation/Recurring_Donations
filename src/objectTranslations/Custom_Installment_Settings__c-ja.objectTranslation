@@ -5,7 +5,7 @@
         <value><!-- Custom Installment Settings --></value>
     </caseValues>
     <fields>
-        <help>カスタム間隔の対象となる期間の種類。</help>
+        <help>カスタム間隔の対象となる間隔の種類。</help>
         <label>期間の種類</label>
         <name>Increment__c</name>
     </fields>
