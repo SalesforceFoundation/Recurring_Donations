@@ -10,7 +10,7 @@
     </caseValues>
     <fields>
         <help>Indien geselecteerd, gebruiken alle opportunities voor terugkerende donaties de campagne voor de terugkerende donatie. Anders heeft alleen de eerste opportunity een campagne.</help>
-        <label>Campagne toevoegen aan alle opportunities</label>
+        <label>Campagne toev. aan alle opportunities</label>
         <name>Add_Campaign_to_All_Opportunites__c</name>
     </fields>
     <fields>
