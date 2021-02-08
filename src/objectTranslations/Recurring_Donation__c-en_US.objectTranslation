@@ -16,7 +16,7 @@
     <fields>
         <label><!-- Contact --></label>
         <name>Contact__c</name>
-        <relationshipLabel><!-- Recurring Donations --></relationshipLabel>
+        <relationshipLabel>Recurring Donations</relationshipLabel>
     </fields>
     <fields>
         <help><!-- The initial inception date for this Recurring Donation. The default is the current date. --></help>

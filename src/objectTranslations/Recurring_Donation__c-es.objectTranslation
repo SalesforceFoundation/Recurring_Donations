@@ -16,7 +16,7 @@
     <fields>
         <label>Contacto</label>
         <name>Contact__c</name>
-        <relationshipLabel><!-- Recurring Donations --></relationshipLabel>
+        <relationshipLabel>Donaciones recurrentes</relationshipLabel>
     </fields>
     <fields>
         <help>La fecha de efecto inicial de esta donación recurrente. El valor predeterminado es la fecha vigente.</help>
