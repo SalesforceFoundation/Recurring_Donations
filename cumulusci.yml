@@ -6,6 +6,8 @@ project:
         api_version: 36.0
     git:
         prefix_release: rel/
+    dependency_resolutions:
+        preproduction: include_beta
 
 tasks:
     cleanup_translation_metadata:
