@@ -1,22 +1,22 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version='1.0' encoding='UTF-8'?>
 <CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
-    <caseValues>
-        <plural>false</plural>
-        <value><!-- Custom Installment Settings --></value>
-    </caseValues>
-    <caseValues>
-        <plural>true</plural>
-        <value><!-- Custom Installment Settings --></value>
-    </caseValues>
-    <fields>
-        <help>El tipo de período de tiempo que abarca Período de cuotas personalizado.</help>
-        <label>Tipo de período de tiempo</label>
-        <name>Increment__c</name>
-    </fields>
-    <fields>
-        <help>La cantidad de tiempo que abarca Período de cuotas personalizado.</help>
-        <label>Frecuencia de período de tiempo</label>
-        <name>Value__c</name>
-    </fields>
-    <gender><!-- Feminine --></gender>
+  <fields>
+    <name>Increment__c</name>
+    <help>El tipo de período de tiempo que abarca Período de cuotas personalizado.</help>
+    <label>Tipo de período de tiempo</label>
+  </fields>
+  <fields>
+    <name>Value__c</name>
+    <help>La cantidad de tiempo que abarca Período de cuotas personalizado.</help>
+    <label>Frecuencia de período de tiempo</label>
+  </fields>
+  <gender>Feminine</gender>
+  <caseValues>
+    <plural>false</plural>
+    <value>Configuración de Cuota personalizada</value>
+  </caseValues>
+  <caseValues>
+    <plural>true</plural>
+    <value>Configuraciones de Cuotas personalizadas</value>
+  </caseValues>
 </CustomObjectTranslation>

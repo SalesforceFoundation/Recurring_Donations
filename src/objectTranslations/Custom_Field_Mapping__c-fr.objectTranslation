@@ -1,23 +1,23 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version='1.0' encoding='UTF-8'?>
 <CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
-    <caseValues>
-        <plural>false</plural>
-        <value><!-- Custom Field Mapping --></value>
-    </caseValues>
-    <caseValues>
-        <plural>true</plural>
-        <value><!-- Custom Field Mapping --></value>
-    </caseValues>
-    <fields>
-        <help>Le champ Opportunité qui reçoit la valeur du champ Don récurrent. Notez que ces champs doivent avoir le même type de données.</help>
-        <label>Champ Opportunité</label>
-        <name>Opportunity_Field__c</name>
-    </fields>
-    <fields>
-        <help>Le champ de don récurrent à copier vers le champ d’opportunité. Notez que ces champs doivent avoir le même type de données.</help>
-        <label>Champ Don récurrent</label>
-        <name>Recurring_Donation_Field__c</name>
-    </fields>
-    <gender><!-- Masculine --></gender>
-    <startsWith><!-- Consonant --></startsWith>
+  <fields>
+    <name>Opportunity_Field__c</name>
+    <help>Le champ Opportunité qui reçoit la valeur du champ Don récurrent. Notez que ces champs doivent avoir le même type de données.</help>
+    <label>Champ Opportunité</label>
+  </fields>
+  <fields>
+    <name>Recurring_Donation_Field__c</name>
+    <help>Le champ de don récurrent à copier vers le champ d’opportunité. Notez que ces champs doivent avoir le même type de données.</help>
+    <label>Champ Don récurrent</label>
+  </fields>
+  <gender>Masculine</gender>
+  <startsWith>Consonant</startsWith>
+  <caseValues>
+    <plural>false</plural>
+    <value>Mappage de champs personnalisés</value>
+  </caseValues>
+  <caseValues>
+    <plural>true</plural>
+    <value>Mappages de champs personnalisés</value>
+  </caseValues>
 </CustomObjectTranslation>
