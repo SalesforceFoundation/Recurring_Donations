@@ -48,7 +48,7 @@
     <fields>
         <label>Kontakt</label>
         <name>Contact__c</name>
-        <relationshipLabel><!-- Recurring Donations --></relationshipLabel>
+        <relationshipLabel>Wiederkehrende Spenden</relationshipLabel>
     </fields>
     <fields>
         <help>Das Anfangsdatum für diese wiederkehrende Spende. Das Standarddatum ist das aktuelle Datum.</help>

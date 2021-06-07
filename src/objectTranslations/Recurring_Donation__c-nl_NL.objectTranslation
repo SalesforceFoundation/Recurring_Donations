@@ -16,7 +16,7 @@
     <fields>
         <label>Contactpersoon</label>
         <name>Contact__c</name>
-        <relationshipLabel><!-- Recurring Donations --></relationshipLabel>
+        <relationshipLabel>Terugkerende donaties</relationshipLabel>
     </fields>
     <fields>
         <help>De datum van initiële inceptie voor deze terugkerende donatie. Standaard is dit de huidige datum.</help>

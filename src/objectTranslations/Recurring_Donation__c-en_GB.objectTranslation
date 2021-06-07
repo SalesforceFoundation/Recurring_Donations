@@ -8,6 +8,7 @@
   <fields>
     <name>Contact__c</name>
     <label>Contact</label>
+    <relationshipLabel>Recurring Donations</relationshipLabel>
   </fields>
   <fields>
     <name>Date_Established__c</name>
