@@ -1,54 +1,54 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version="1.0" encoding="UTF-8"?>
 <CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
-  <fields>
-    <name>Increment__c</name>
-    <help>Der Typ des Zeitraums, den die benutzerdefinierte Ratenlaufzeit abdeckt.</help>
-    <label>Zeitraumtyp</label>
-  </fields>
-  <fields>
-    <name>Value__c</name>
-    <help>Der Zeitraum, den die benutzerdefinierte Ratenlaufzeit abdeckt</help>
-    <label>Zeitraumhäufigkeit</label>
-  </fields>
-  <gender>Feminine</gender>
-  <caseValues>
-    <plural>false</plural>
-    <caseType>Nominative</caseType>
-    <value>Einstellung für benutzerdefinierte Raten</value>
-  </caseValues>
-  <caseValues>
-    <plural>false</plural>
-    <caseType>Accusative</caseType>
-    <value>Einstellung für benutzerdefinierte Raten</value>
-  </caseValues>
-  <caseValues>
-    <plural>false</plural>
-    <caseType>Dative</caseType>
-    <value>Einstellung für benutzerdefinierte Raten</value>
-  </caseValues>
-  <caseValues>
-    <plural>false</plural>
-    <caseType>Genitive</caseType>
-    <value>Einstellung für benutzerdefinierte Raten</value>
-  </caseValues>
-  <caseValues>
-    <plural>true</plural>
-    <caseType>Nominative</caseType>
-    <value>Einstellungen für benutzerdefinierte Raten</value>
-  </caseValues>
-  <caseValues>
-    <plural>true</plural>
-    <caseType>Accusative</caseType>
-    <value>Einstellungen für benutzerdefinierte Raten</value>
-  </caseValues>
-  <caseValues>
-    <plural>true</plural>
-    <caseType>Dative</caseType>
-    <value>Einstellungen für benutzerdefinierte Raten</value>
-  </caseValues>
-  <caseValues>
-    <plural>true</plural>
-    <caseType>Genitive</caseType>
-    <value>Einstellungen für benutzerdefinierte Raten</value>
-  </caseValues>
+    <caseValues>
+        <caseType>Nominative</caseType>
+        <plural>false</plural>
+        <value>Einstellung für benutzerdefinierte Raten</value>
+    </caseValues>
+    <caseValues>
+        <caseType>Nominative</caseType>
+        <plural>true</plural>
+        <value>Einstellungen für benutzerdefinierte Raten</value>
+    </caseValues>
+    <caseValues>
+        <caseType>Accusative</caseType>
+        <plural>false</plural>
+        <value>Einstellung für benutzerdefinierte Raten</value>
+    </caseValues>
+    <caseValues>
+        <caseType>Accusative</caseType>
+        <plural>true</plural>
+        <value>Einstellungen für benutzerdefinierte Raten</value>
+    </caseValues>
+    <caseValues>
+        <caseType>Genitive</caseType>
+        <plural>false</plural>
+        <value>Einstellung für benutzerdefinierte Raten</value>
+    </caseValues>
+    <caseValues>
+        <caseType>Genitive</caseType>
+        <plural>true</plural>
+        <value>Einstellungen für benutzerdefinierte Raten</value>
+    </caseValues>
+    <caseValues>
+        <caseType>Dative</caseType>
+        <plural>false</plural>
+        <value>Einstellung für benutzerdefinierte Raten</value>
+    </caseValues>
+    <caseValues>
+        <caseType>Dative</caseType>
+        <plural>true</plural>
+        <value>Einstellungen für benutzerdefinierte Raten</value>
+    </caseValues>
+    <fields>
+        <help>Der Typ des Zeitraums, den die benutzerdefinierte Ratenlaufzeit abdeckt.</help>
+        <label>Zeitraumtyp</label>
+        <name>Increment__c</name>
+    </fields>
+    <fields>
+        <help>Der Zeitraum, den die benutzerdefinierte Ratenlaufzeit abdeckt</help>
+        <label>Zeitraumhäufigkeit</label>
+        <name>Value__c</name>
+    </fields>
+    <gender>Feminine</gender>
 </CustomObjectTranslation>

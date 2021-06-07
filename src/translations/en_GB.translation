@@ -13,48 +13,12 @@
         <label>You must delete the related Donations before you can delete this recurring donation</label>
     </customLabels>
     <customLabels>
-        <name>RecurringDonationClosedLostOpportunityStage</name>
-        <label>Closed Lost</label>
-    </customLabels>
-    <customLabels>
-        <name>RecurringDonationClosedStatus</name>
-        <label>Closed</label>
-    </customLabels>
-    <customLabels>
-        <name>RecurringDonationContactRole</name>
-        <label>Donor</label>
-    </customLabels>
-    <customLabels>
         <name>RecurringDonationCustomValidationWarning</name>
         <label>Fields on your Opportunity object have Custom Validation Rules that may cause issues with your Recurring Donations package:</label>
     </customLabels>
     <customLabels>
-        <name>RecurringDonationDivideValue</name>
-        <label>Divide By</label>
-    </customLabels>
-    <customLabels>
         <name>RecurringDonationErrorEmailBody</name>
         <label>Errors were encountered when trying to insert new Opportunities for your open-ended Recurring Donations. This can adversely affect your forecasting and functionality of your Salesforce.com instance. Addressing these errors as soon as possible can prevent bad data from entering your system.  The Recurring Donation and associated Opportunity insert error are listed below, and can be found in the NPSP Settings tab under System, Error Log.</label>
-    </customLabels>
-    <customLabels>
-        <name>RecurringDonationInstallmentPeriod1stand15th</name>
-        <label>1st and 15th</label>
-    </customLabels>
-    <customLabels>
-        <name>RecurringDonationInstallmentPeriodMonthly</name>
-        <label>Monthly</label>
-    </customLabels>
-    <customLabels>
-        <name>RecurringDonationInstallmentPeriodQuarterly</name>
-        <label>Quarterly</label>
-    </customLabels>
-    <customLabels>
-        <name>RecurringDonationInstallmentPeriodWeekly</name>
-        <label>Weekly</label>
-    </customLabels>
-    <customLabels>
-        <name>RecurringDonationInstallmentPeriodYearly</name>
-        <label>Yearly</label>
     </customLabels>
     <customLabels>
         <name>RecurringDonationInvalidCustomInstallment</name>
@@ -63,14 +27,6 @@
     <customLabels>
         <name>RecurringDonationMissingDataError</name>
         <label>You must select an Organisation or Contact</label>
-    </customLabels>
-    <customLabels>
-        <name>RecurringDonationMultiplyValue</name>
-        <label>Multiply By</label>
-    </customLabels>
-    <customLabels>
-        <name>RecurringDonationOpenStatus</name>
-        <label>Open</label>
     </customLabels>
     <customLabels>
         <name>RecurringDonationPrefix</name>
@@ -86,22 +42,10 @@
     </customLabels>
     <customLabels>
         <name>RecurringDonationSettingsDescription</name>
-        <label>These settings control how Recurring Donations behave in the Nonprofit Success Pack. See the &lt;a href="https://powerofus.force.com/NPSP_Recurring_Donations" target="_blank"&gt;NPSP Documentation&lt;/a&gt; for more information.</label>
-    </customLabels>
-    <customLabels>
-        <name>RecurringDonationStageName</name>
-        <label>Pledged</label>
+        <label>These settings control how Recurring Donations behave in the Nonprofit Success Pack. See the &lt;a href=&quot;https://powerofus.force.com/NPSP_Recurring_Donations&quot; target=&quot;_blank&quot;&gt;NPSP Documentation&lt;/a&gt; for more information.</label>
     </customLabels>
     <customLabels>
         <name>RecurringDonationTooManyInstallmentsError</name>
         <label>You must specify fewer than 50 installments.  (This error message is no longer used).</label>
     </customLabels>
-    <quickActions>
-        <name>Recurring_Donation__c.Quick_Update</name>
-        <label>Quick Update</label>
-    </quickActions>
-    <quickActions>
-        <name>Recurring_Donation__c.New_Opportunity</name>
-        <label>New Opportunity</label>
-    </quickActions>
-</Translations>
+    </Translations>

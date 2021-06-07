@@ -1,78 +1,78 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version="1.0" encoding="UTF-8"?>
 <CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
-  <fields>
-    <name>Add_Campaign_to_All_Opportunites__c</name>
-    <help>Si cette option est sélectionnée, toutes les opportunités pour les dons récurrents utiliseront la campagne sur le don récurrent. Sinon, seule la première opportunité utilisera la campagne.</help>
-    <label>Ajouter la campagne à toutes les opport.</label>
-  </fields>
-  <fields>
-    <name>DISABLE_Donations_trigger__c</name>
-    <help>DÉPRÉCIÉ. Le comportement du déclencheur est désormais contrôlé dans la page Configuration de déclencheur des paramètres NPSP.</help>
-    <label>DEPRECATED-Disable_Donations_trigger</label>
-  </fields>
-  <fields>
-    <name>DISABLE_RecurringDonations_trigger__c</name>
-    <help>DÉPRÉCIÉ. Le comportement du déclencheur est désormais contrôlé dans la page Configuration de déclencheur des paramètres NPSP.</help>
-    <label>DEPRECATED-Disable_RD_trigger</label>
-  </fields>
-  <fields>
-    <name>Enable_Update_Check__c</name>
-    <help>DÉPRÉCIÉ. Les nouvelles versions de Nonprofit Success Pack seront automatiquement installées.</help>
-    <label>DÉPRÉCIÉ-Activer vérif. de mise à jour</label>
-  </fields>
-  <fields>
-    <name>Error_Email_Notifications__c</name>
-    <help>DÉPRÉCIÉ. Remplacé par les paramètres de notification dans le panneau des paramètres Erreur système.</help>
-    <label>DÉPRÉCIÉ-Erreur notification par e-mail</label>
-  </fields>
-  <fields>
-    <name>Last_Batch_Run__c</name>
-    <help>Date et heure de la dernière mise à jour par lot des dons récurrents.</help>
-    <label>Dernière exécution de lot</label>
-  </fields>
-  <fields>
-    <name>Maximum_Donations__c</name>
-    <help>Restreint le nombre total de dons créés pour les dons récurrents avec date de fin. La valeur par défaut est de 50. Des valeurs plus élevées peuvent provoquer des erreurs DML.</help>
-    <label>Nombre maximum de dons</label>
-  </fields>
-  <fields>
-    <name>Number_of_Failures__c</name>
-    <help>Nombre de dons récurrents dont la mise à jour a échoué lors de la dernière opération par lot.</help>
-    <label>Nombre de défaillances</label>
-  </fields>
-  <fields>
-    <name>Number_of_Successes__c</name>
-    <help>Nombre de dons récurrents dont la mise à jour a réussi lors de la dernière exécution par lot.</help>
-    <label>Nombre de réussites</label>
-  </fields>
-  <fields>
-    <name>Open_Opportunity_Behavior__c</name>
-    <help>Détermine le comportement de toutes les opportunités ouvertes restantes lorsqu’un don récurrent sans date de fin passe à un statut fermé.</help>
-    <label>Comp. opp. ouv. fermeture don récurrent</label>
-  </fields>
-  <fields>
-    <name>Opportunity_Forecast_Months__c</name>
-    <help>Nombre de mois futurs pour lesquels des opportunités ouvertes sont créées avec les dons récurrents sans date de fin. AVERTISSEMENT : Réduire cette valeur supprime les opportunités supplémentaires. L’augmenter lance un processus par lot d’ajout d’opp.</help>
-    <label>Mois de prévision des opportunités</label>
-  </fields>
-  <fields>
-    <name>Record_Type__c</name>
-    <help>Type d’enregistrement d’opportunité utilisé lorsque des opportunités de dons récurrents sont créées.</help>
-    <label>Type d’enregistrement d’opportunité</label>
-  </fields>
-  <fields>
-    <name>Update_Check_Interval__c</name>
-    <help>DÉPRÉCIÉ. Les nouvelles versions de Nonprofit Success Pack seront automatiquement installées.</help>
-    <label>DÉPRÉCIÉ-Mettre à jour intervalle vérif.</label>
-  </fields>
-  <gender>Masculine</gender>
-  <startsWith>Consonant</startsWith>
-  <caseValues>
-    <plural>false</plural>
-    <value>Paramètre de dons récurrents</value>
-  </caseValues>
-  <caseValues>
-    <plural>true</plural>
-    <value>Paramètres de dons récurrents</value>
-  </caseValues>
+    <caseValues>
+        <plural>false</plural>
+        <value>Paramètre de dons récurrents</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Paramètres de dons récurrents</value>
+    </caseValues>
+    <fields>
+        <help>Si cette option est sélectionnée, toutes les opportunités pour les dons récurrents utiliseront la campagne sur le don récurrent. Sinon, seule la première opportunité utilisera la campagne.</help>
+        <label>Ajouter la campagne à toutes les opport.</label>
+        <name>Add_Campaign_to_All_Opportunites__c</name>
+    </fields>
+    <fields>
+        <help>DÉPRÉCIÉ. Le comportement du déclencheur est désormais contrôlé dans la page Configuration de déclencheur des paramètres NPSP.</help>
+        <label>DEPRECATED-Disable_Donations_trigger</label>
+        <name>DISABLE_Donations_trigger__c</name>
+    </fields>
+    <fields>
+        <help>DÉPRÉCIÉ. Le comportement du déclencheur est désormais contrôlé dans la page Configuration de déclencheur des paramètres NPSP.</help>
+        <label>DEPRECATED-Disable_RD_trigger</label>
+        <name>DISABLE_RecurringDonations_trigger__c</name>
+    </fields>
+    <fields>
+        <help>DÉPRÉCIÉ. Les nouvelles versions de Nonprofit Success Pack seront automatiquement installées.</help>
+        <label>DÉPRÉCIÉ-Activer vérif. de mise à jour</label>
+        <name>Enable_Update_Check__c</name>
+    </fields>
+    <fields>
+        <help>DÉPRÉCIÉ. Remplacé par les paramètres de notification dans le panneau des paramètres Erreur système.</help>
+        <label>DÉPRÉCIÉ-Erreur notification par e-mail</label>
+        <name>Error_Email_Notifications__c</name>
+    </fields>
+    <fields>
+        <help>Date et heure de la dernière mise à jour par lot des dons récurrents.</help>
+        <label>Dernière exécution de lot</label>
+        <name>Last_Batch_Run__c</name>
+    </fields>
+    <fields>
+        <help>Restreint le nombre total de dons créés pour les dons récurrents avec date de fin. La valeur par défaut est de 50. Des valeurs plus élevées peuvent provoquer des erreurs DML.</help>
+        <label>Nombre maximum de dons</label>
+        <name>Maximum_Donations__c</name>
+    </fields>
+    <fields>
+        <help>Nombre de dons récurrents dont la mise à jour a échoué lors de la dernière opération par lot.</help>
+        <label>Nombre de défaillances</label>
+        <name>Number_of_Failures__c</name>
+    </fields>
+    <fields>
+        <help>Nombre de dons récurrents dont la mise à jour a réussi lors de la dernière exécution par lot.</help>
+        <label>Nombre de réussites</label>
+        <name>Number_of_Successes__c</name>
+    </fields>
+    <fields>
+        <help>Détermine le comportement de toutes les opportunités ouvertes restantes lorsqu’un don récurrent sans date de fin passe à un statut fermé.</help>
+        <label>Comp. opp. ouv. fermeture don récurrent</label>
+        <name>Open_Opportunity_Behavior__c</name>
+    </fields>
+    <fields>
+        <help>Nombre de mois futurs pour lesquels des opportunités ouvertes sont créées avec les dons récurrents sans date de fin. AVERTISSEMENT : Réduire cette valeur supprime les opportunités supplémentaires. L’augmenter lance un processus par lot d’ajout d’opp.</help>
+        <label>Mois de prévision des opportunités</label>
+        <name>Opportunity_Forecast_Months__c</name>
+    </fields>
+    <fields>
+        <help>Type d’enregistrement d’opportunité utilisé lorsque des opportunités de dons récurrents sont créées.</help>
+        <label>Type d’enregistrement d’opportunité</label>
+        <name>Record_Type__c</name>
+    </fields>
+    <fields>
+        <help>DÉPRÉCIÉ. Les nouvelles versions de Nonprofit Success Pack seront automatiquement installées.</help>
+        <label>DÉPRÉCIÉ-Mettre à jour intervalle vérif.</label>
+        <name>Update_Check_Interval__c</name>
+    </fields>
+    <gender>Masculine</gender>
+    <startsWith>Consonant</startsWith>
 </CustomObjectTranslation>

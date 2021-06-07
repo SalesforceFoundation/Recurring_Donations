@@ -1,17 +1,17 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version="1.0" encoding="UTF-8"?>
 <CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
-  <fields>
-    <name>Increment__c</name>
-    <help>カスタム間隔の対象となる間隔の種類。</help>
-    <label>期間の種類</label>
-  </fields>
-  <fields>
-    <name>Value__c</name>
-    <help>カスタム間隔の対象となる時間。</help>
-    <label>期間頻度</label>
-  </fields>
-  <caseValues>
-    <plural>false</plural>
-    <value>カスタム割賦設定</value>
-  </caseValues>
+    <caseValues>
+        <plural>false</plural>
+        <value>カスタム割賦設定</value>
+    </caseValues>
+    <fields>
+        <help>カスタム間隔の対象となる間隔の種類。</help>
+        <label>期間の種類</label>
+        <name>Increment__c</name>
+    </fields>
+    <fields>
+        <help>カスタム間隔の対象となる時間。</help>
+        <label>期間頻度</label>
+        <name>Value__c</name>
+    </fields>
 </CustomObjectTranslation>
