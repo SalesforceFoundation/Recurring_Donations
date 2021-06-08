@@ -1,51 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Translations xmlns="http://soap.sforce.com/2006/04/metadata">
     <customLabels>
-        <name>RecurringDonationBadFieldMapping</name>
         <label>Fields must be of compatible datatypes. Please edit your field choices and try again.</label>
+        <name>RecurringDonationBadFieldMapping</name>
     </customLabels>
     <customLabels>
-        <name>RecurringDonationBadLabelWarning</name>
         <label>Your custom label for closed lost Opportunities does not correspond to an active closed/lost Opportunity Stage Name. This can cause unwanted results when marking Recurring Donations closed and having the Open Opportunity Behavior setting set to: Mark_Opportunities_Closed_Lost.  Please check your stage names and RecurringDonationClosedLostOpportunityStage custom label.</label>
+        <name>RecurringDonationBadLabelWarning</name>
     </customLabels>
     <customLabels>
-        <name>RecurringDonationCantDeleteError</name>
         <label>You must delete the related Donations before you can delete this recurring donation</label>
+        <name>RecurringDonationCantDeleteError</name>
     </customLabels>
     <customLabels>
-        <name>RecurringDonationCustomValidationWarning</name>
         <label>Fields on your Opportunity object have Custom Validation Rules that may cause issues with your Recurring Donations package:</label>
+        <name>RecurringDonationCustomValidationWarning</name>
     </customLabels>
     <customLabels>
-        <name>RecurringDonationErrorEmailBody</name>
         <label>Errors were encountered when trying to insert new Opportunities for your open-ended Recurring Donations. This can adversely affect your forecasting and functionality of your Salesforce.com instance. Addressing these errors as soon as possible can prevent bad data from entering your system.  The Recurring Donation and associated Opportunity insert error are listed below, and can be found in the NPSP Settings tab under System, Error Log.</label>
+        <name>RecurringDonationErrorEmailBody</name>
     </customLabels>
     <customLabels>
-        <name>RecurringDonationInvalidCustomInstallment</name>
         <label>All Custom Installments must have a Name, positive Frequency and Time Period Type.</label>
+        <name>RecurringDonationInvalidCustomInstallment</name>
     </customLabels>
     <customLabels>
-        <name>RecurringDonationMissingDataError</name>
         <label>You must select an Organisation or Contact</label>
+        <name>RecurringDonationMissingDataError</name>
     </customLabels>
     <customLabels>
-        <name>RecurringDonationPrefix</name>
         <label>Donation</label>
+        <name>RecurringDonationPrefix</name>
     </customLabels>
     <customLabels>
-        <name>RecurringDonationRequiredFieldsWarning</name>
         <label>The following required fields on your Opportunity object may cause issues with your Recurring Donations package:</label>
+        <name>RecurringDonationRequiredFieldsWarning</name>
     </customLabels>
     <customLabels>
-        <name>RecurringDonationSchedulingError</name>
         <label>There was an error in scheduling your nightly Recurring Donations update.</label>
+        <name>RecurringDonationSchedulingError</name>
     </customLabels>
     <customLabels>
-        <name>RecurringDonationSettingsDescription</name>
         <label>These settings control how Recurring Donations behave in the Nonprofit Success Pack. See the &lt;a href=&quot;https://powerofus.force.com/NPSP_Recurring_Donations&quot; target=&quot;_blank&quot;&gt;NPSP Documentation&lt;/a&gt; for more information.</label>
+        <name>RecurringDonationSettingsDescription</name>
     </customLabels>
     <customLabels>
-        <name>RecurringDonationTooManyInstallmentsError</name>
         <label>You must specify fewer than 50 installments.  (This error message is no longer used).</label>
+        <name>RecurringDonationTooManyInstallmentsError</name>
     </customLabels>
     </Translations>
