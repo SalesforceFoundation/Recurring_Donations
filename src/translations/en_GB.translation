@@ -48,4 +48,4 @@
         <label>You must specify fewer than 50 installments.  (This error message is no longer used).</label>
         <name>RecurringDonationTooManyInstallmentsError</name>
     </customLabels>
-    </Translations>
+</Translations>
