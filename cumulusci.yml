@@ -26,10 +26,3 @@ tasks:
                   xpath: //ns:quickActions
                 - path: src/translations/**.translation
                   xpath: //ns:reportTypes[ns:name='screen_flows_prebuilt_crt']
-
-flows:
-    release_beta:
-        tasks:
-            # Ignore failures on release notes generation
-            3:
-                ignore_failure: True
