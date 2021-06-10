@@ -2,11 +2,11 @@
 <CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
     <caseValues>
         <plural>false</plural>
-        <value><!-- Recurring Donations Settings --></value>
+        <value>Paramètre de dons récurrents</value>
     </caseValues>
     <caseValues>
         <plural>true</plural>
-        <value><!-- Recurring Donations Settings --></value>
+        <value>Paramètres de dons récurrents</value>
     </caseValues>
     <fields>
         <help>Si cette option est sélectionnée, toutes les opportunités pour les dons récurrents utiliseront la campagne sur le don récurrent. Sinon, seule la première opportunité utilisera la campagne.</help>
@@ -73,6 +73,6 @@
         <label>DÉPRÉCIÉ-Mettre à jour intervalle vérif.</label>
         <name>Update_Check_Interval__c</name>
     </fields>
-    <gender><!-- Masculine --></gender>
-    <startsWith><!-- Consonant --></startsWith>
+    <gender>Masculine</gender>
+    <startsWith>Consonant</startsWith>
 </CustomObjectTranslation>

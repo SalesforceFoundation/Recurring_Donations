@@ -2,11 +2,11 @@
 <CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
     <caseValues>
         <plural>false</plural>
-        <value><!-- Custom Field Mapping --></value>
+        <value>Mappage de champs personnalisés</value>
     </caseValues>
     <caseValues>
         <plural>true</plural>
-        <value><!-- Custom Field Mapping --></value>
+        <value>Mappages de champs personnalisés</value>
     </caseValues>
     <fields>
         <help>Le champ Opportunité qui reçoit la valeur du champ Don récurrent. Notez que ces champs doivent avoir le même type de données.</help>
@@ -18,6 +18,6 @@
         <label>Champ Don récurrent</label>
         <name>Recurring_Donation_Field__c</name>
     </fields>
-    <gender><!-- Masculine --></gender>
-    <startsWith><!-- Consonant --></startsWith>
+    <gender>Masculine</gender>
+    <startsWith>Consonant</startsWith>
 </CustomObjectTranslation>
