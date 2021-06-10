@@ -2,11 +2,11 @@
 <CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
     <caseValues>
         <plural>false</plural>
-        <value><!-- Recurring Donations Settings --></value>
+        <value>Configuración de Donaciones recurrentes</value>
     </caseValues>
     <caseValues>
         <plural>true</plural>
-        <value><!-- Recurring Donations Settings --></value>
+        <value>Configuración de Donaciones recurrentes</value>
     </caseValues>
     <fields>
         <help>Si se selecciona, todas las oportunidades para donaciones recurrentes usarán la campaña en Donación recurrente. En caso contrario, solo la primera oportunidad tendrá la campaña.</help>
@@ -73,5 +73,5 @@
         <label>DESUSADO-Actualizar intervalo comprobac.</label>
         <name>Update_Check_Interval__c</name>
     </fields>
-    <gender><!-- Feminine --></gender>
+    <gender>Feminine</gender>
 </CustomObjectTranslation>

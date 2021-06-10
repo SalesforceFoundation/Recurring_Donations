@@ -2,11 +2,11 @@
 <CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
     <caseValues>
         <plural>false</plural>
-        <value><!-- Custom Installment Settings --></value>
+        <value>Instelling voor aangepaste termijn</value>
     </caseValues>
     <caseValues>
         <plural>true</plural>
-        <value><!-- Custom Installment Settings --></value>
+        <value>Instellingen voor aangepaste termijn</value>
     </caseValues>
     <fields>
         <help>Het type tijdsbestek, dat Aangepaste termijnperiode bestrijkt.</help>
@@ -18,5 +18,5 @@
         <label>Frequentie van tijdsbestek</label>
         <name>Value__c</name>
     </fields>
-    <gender><!-- Neuter --></gender>
+    <gender>Feminine</gender>
 </CustomObjectTranslation>
