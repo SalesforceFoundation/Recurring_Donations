@@ -3,42 +3,42 @@
     <caseValues>
         <caseType>Nominative</caseType>
         <plural>false</plural>
-        <value><!-- Recurring Donations Settings --></value>
+        <value>Einstellung für wiederkehrende Spenden</value>
     </caseValues>
     <caseValues>
         <caseType>Nominative</caseType>
         <plural>true</plural>
-        <value><!-- Recurring Donations Settings --></value>
+        <value>Einstellungen für wiederkehrende Spenden</value>
     </caseValues>
     <caseValues>
         <caseType>Accusative</caseType>
         <plural>false</plural>
-        <value><!-- Recurring Donations Settings --></value>
+        <value>Einstellung für wiederkehrende Spenden</value>
     </caseValues>
     <caseValues>
         <caseType>Accusative</caseType>
         <plural>true</plural>
-        <value><!-- Recurring Donations Settings --></value>
+        <value>Einstellungen für wiederkehrende Spenden</value>
     </caseValues>
     <caseValues>
         <caseType>Genitive</caseType>
         <plural>false</plural>
-        <value><!-- Recurring Donations Settings --></value>
+        <value>Einstellung für wiederkehrende Spenden</value>
     </caseValues>
     <caseValues>
         <caseType>Genitive</caseType>
         <plural>true</plural>
-        <value><!-- Recurring Donations Settings --></value>
+        <value>Einstellungen für wiederkehrende Spenden</value>
     </caseValues>
     <caseValues>
         <caseType>Dative</caseType>
         <plural>false</plural>
-        <value><!-- Recurring Donations Settings --></value>
+        <value>Einstellung für wiederkehrende Spenden</value>
     </caseValues>
     <caseValues>
         <caseType>Dative</caseType>
         <plural>true</plural>
-        <value><!-- Recurring Donations Settings --></value>
+        <value>Einstellungen für wiederkehrende Spenden</value>
     </caseValues>
     <fields>
         <help>Bei Auswahl dieser Option wird die Kampagne für die wiederkehrende Spende bei allen Opportunities für wiederkehrende Spenden verwendet. Andernfalls wird die Kampagne nur für die erste Opportunity verwendet.</help>
@@ -105,5 +105,5 @@
         <label>ERSETZT-Update-Check-Intervall</label>
         <name>Update_Check_Interval__c</name>
     </fields>
-    <gender><!-- Neuter --></gender>
+    <gender>Feminine</gender>
 </CustomObjectTranslation>

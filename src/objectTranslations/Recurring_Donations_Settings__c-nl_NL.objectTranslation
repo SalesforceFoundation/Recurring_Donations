@@ -2,11 +2,11 @@
 <CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
     <caseValues>
         <plural>false</plural>
-        <value><!-- Recurring Donations Settings --></value>
+        <value>Instelling voor terugkerende donatie</value>
     </caseValues>
     <caseValues>
         <plural>true</plural>
-        <value><!-- Recurring Donations Settings --></value>
+        <value>Instellingen voor terugkerende donaties</value>
     </caseValues>
     <fields>
         <help>Indien geselecteerd, gebruiken alle opportunities voor terugkerende donaties de campagne voor de terugkerende donatie. Anders heeft alleen de eerste opportunity een campagne.</help>
@@ -73,5 +73,5 @@
         <label>VEROUDERD-Interval voor updatecontroles</label>
         <name>Update_Check_Interval__c</name>
     </fields>
-    <gender><!-- Neuter --></gender>
+    <gender>Feminine</gender>
 </CustomObjectTranslation>

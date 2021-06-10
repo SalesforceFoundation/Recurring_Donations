@@ -91,6 +91,7 @@
     </types>
     <types>
         <members>Custom_Field_Mapping__c-de</members>
+        <members>Custom_Field_Mapping__c-en_GB</members>
         <members>Custom_Field_Mapping__c-en_US</members>
         <members>Custom_Field_Mapping__c-es</members>
         <members>Custom_Field_Mapping__c-fr</members>
@@ -98,6 +99,7 @@
         <members>Custom_Field_Mapping__c-ja</members>
         <members>Custom_Field_Mapping__c-nl_NL</members>
         <members>Custom_Installment_Settings__c-de</members>
+        <members>Custom_Installment_Settings__c-en_GB</members>
         <members>Custom_Installment_Settings__c-en_US</members>
         <members>Custom_Installment_Settings__c-es</members>
         <members>Custom_Installment_Settings__c-fr</members>
@@ -105,12 +107,14 @@
         <members>Custom_Installment_Settings__c-ja</members>
         <members>Custom_Installment_Settings__c-nl_NL</members>
         <members>Opportunity-de</members>
+        <members>Opportunity-en_GB</members>
         <members>Opportunity-es</members>
         <members>Opportunity-fr</members>
         <members>Opportunity-iw</members>
         <members>Opportunity-ja</members>
         <members>Opportunity-nl_NL</members>
         <members>Recurring_Donation__c-de</members>
+        <members>Recurring_Donation__c-en_GB</members>
         <members>Recurring_Donation__c-en_US</members>
         <members>Recurring_Donation__c-es</members>
         <members>Recurring_Donation__c-fr</members>
@@ -118,6 +122,7 @@
         <members>Recurring_Donation__c-ja</members>
         <members>Recurring_Donation__c-nl_NL</members>
         <members>Recurring_Donations_Settings__c-de</members>
+        <members>Recurring_Donations_Settings__c-en_GB</members>
         <members>Recurring_Donations_Settings__c-en_US</members>
         <members>Recurring_Donations_Settings__c-es</members>
         <members>Recurring_Donations_Settings__c-fr</members>
@@ -143,6 +148,7 @@
     </types>
     <types>
         <members>de</members>
+        <members>en_GB</members>
         <members>es</members>
         <members>fr</members>
         <members>iw</members>
