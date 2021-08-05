@@ -6,6 +6,7 @@ project:
         api_version: 36.0
     git:
         prefix_release: rel/
+        default_branch: main
     dependency_resolutions:
         preproduction: include_beta
 
