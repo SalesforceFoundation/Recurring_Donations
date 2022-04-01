@@ -16,7 +16,7 @@ How do I log an issue?
 
 Issue logging for the Nonprofit Success Pack has moved!  All issues for the Recurring Donations package should now be logged [here](https://github.com/SalesforceFoundation/Cumulus/issues/new).  All existing open issues have been moved to the [new location](https://github.com/SalesforceFoundation/Cumulus/issues?labels=npe03&page=1&state=open).
 
-If your issue applies to older versions of the stand-alone Affiliations package, please post them directly to the [Power of Us Hub](powerofus.force.com/PUBlogin)
+If your issue applies to older versions of the stand-alone Affiliations package, please post them in the [Nonprofit Success Pack Group](https://powerofus.force.com/HUB_NPSP_Group)
 
 Installation
 ---
