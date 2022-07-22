@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Translations xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customLabels>
+        <name>RecurringDonationBadFieldMapping</name>
+        <label>Os campos precisam ter tipos de dados compatíveis. Edite suas escolhas de campo e tente novamente.</label>
+    </customLabels>
+    <customLabels>
+        <name>RecurringDonationBadLabelWarning</name>
+        <label>Seu rótulo personalizado para Oportunidades fechadas e perdidas não corresponde a um nome de fase de oportunidade fechada/perdida ativa. Isso pode causar resultados indesejados ao marcar doações recorrentes como fechadas e ter a configuração de Comportamento de oportunidade aberta definida como: Mark_Opportunities_Closed_Lost. Verifique seus nomes de fase e rótulo personalizado RecurringDonationClosedLostOpportunityStage.</label>
+    </customLabels>
+    <customLabels>
+        <name>RecurringDonationCantDeleteError</name>
+        <label>Você precisa excluir as doações relacionadas antes de poder excluir esta doação recorrente</label>
+    </customLabels>
+    <customLabels>
+        <name>RecurringDonationClosedLostOpportunityStage</name>
+        <label>Fechado perdido</label>
+    </customLabels>
+    <customLabels>
+        <name>RecurringDonationClosedStatus</name>
+        <label>Fechado</label>
+    </customLabels>
+    <customLabels>
+        <name>RecurringDonationContactRole</name>
+        <label>Doador</label>
+    </customLabels>
+    <customLabels>
+        <name>RecurringDonationCustomValidationWarning</name>
+        <label>Os campos em seu objeto Oportunidade têm regras de validação personalizadas que podem causar problemas com seu pacote Doações recorrentes:</label>
+    </customLabels>
+    <customLabels>
+        <name>RecurringDonationDivideValue</name>
+        <label>Dividir por</label>
+    </customLabels>
+    <customLabels>
+        <name>RecurringDonationErrorEmailBody</name>
+        <label>Erros foram encontrados ao tentar inserir novas oportunidades em suas doações recorrentes de prazo indeterminado. Isso pode afetar negativamente sua previsão e a funcionalidade da instância do Salesforce.com. Lidar com esses erros o mais rápido possível pode impedir que dados inválidos entrem no sistema. O erro de inserção de doação recorrente e de oportunidade associada estão listados abaixo e podem ser encontrados na guia Configurações do NPSP em Sistema, Log de erros.</label>
+    </customLabels>
+    <customLabels>
+        <name>RecurringDonationInstallmentPeriod1stand15th</name>
+        <label>1º e 15º</label>
+    </customLabels>
+    <customLabels>
+        <name>RecurringDonationInstallmentPeriodMonthly</name>
+        <label>Mensal</label>
+    </customLabels>
+    <customLabels>
+        <name>RecurringDonationInstallmentPeriodQuarterly</name>
+        <label>Trimestral</label>
+    </customLabels>
+    <customLabels>
+        <name>RecurringDonationInstallmentPeriodWeekly</name>
+        <label>Semanal</label>
+    </customLabels>
+    <customLabels>
+        <name>RecurringDonationInstallmentPeriodYearly</name>
+        <label>Anual</label>
+    </customLabels>
+    <customLabels>
+        <name>RecurringDonationInvalidCustomInstallment</name>
+        <label>Todas as parcelas personalizadas precisam ter um nome, uma frequência positiva e tipo de período de tempo.</label>
+    </customLabels>
+    <customLabels>
+        <name>RecurringDonationMissingDataError</name>
+        <label>Você precisa selecionar uma Organização ou um Contato</label>
+    </customLabels>
+    <customLabels>
+        <name>RecurringDonationMultiplyValue</name>
+        <label>Multiplicar por</label>
+    </customLabels>
+    <customLabels>
+        <name>RecurringDonationOpenStatus</name>
+        <label>Aberto</label>
+    </customLabels>
+    <customLabels>
+        <name>RecurringDonationPrefix</name>
+        <label>Doação</label>
+    </customLabels>
+    <customLabels>
+        <name>RecurringDonationRequiredFieldsWarning</name>
+        <label>Os seguintes campos obrigatórios em seu objeto Oportunidade podem causar problemas com seu pacote Doações recorrentes:</label>
+    </customLabels>
+    <customLabels>
+        <name>RecurringDonationSchedulingError</name>
+        <label>Houve um erro no agendamento da atualização noturna de doações recorrentes.</label>
+    </customLabels>
+    <customLabels>
+        <name>RecurringDonationSettingsDescription</name>
+        <label>Essas configurações controlam como as doações recorrentes se comportam no Pacote de sucesso para organizações sem fins lucrativos. Consulte a &lt;a href="https://powerofus.force.com/NPSP_Recurring_Donations" target="_blank"&gt;Documentação do NPSP&lt;/a&gt; para obter mais informações.</label>
+    </customLabels>
+    <customLabels>
+        <name>RecurringDonationStageName</name>
+        <label>Comprometida</label>
+    </customLabels>
+    <customLabels>
+        <name>RecurringDonationTooManyInstallmentsError</name>
+        <label>Você deve especificar menos de 50 parcelas. (Esta mensagem de erro não é mais usada.)</label>
+    </customLabels>
+    <quickActions>
+        <name>Recurring_Donation__c.Quick_Update</name>
+        <label>Atualização rápida</label>
+    </quickActions>
+    <quickActions>
+        <name>Recurring_Donation__c.New_Opportunity</name>
+        <label>Nova oportunidade</label>
+    </quickActions>
+</Translations>
