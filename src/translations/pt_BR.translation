@@ -13,48 +13,12 @@
         <label>Você precisa excluir as doações relacionadas antes de poder excluir esta doação recorrente</label>
     </customLabels>
     <customLabels>
-        <name>RecurringDonationClosedLostOpportunityStage</name>
-        <label>Fechado perdido</label>
-    </customLabels>
-    <customLabels>
-        <name>RecurringDonationClosedStatus</name>
-        <label>Fechado</label>
-    </customLabels>
-    <customLabels>
-        <name>RecurringDonationContactRole</name>
-        <label>Doador</label>
-    </customLabels>
-    <customLabels>
         <name>RecurringDonationCustomValidationWarning</name>
         <label>Os campos em seu objeto Oportunidade têm regras de validação personalizadas que podem causar problemas com seu pacote Doações recorrentes:</label>
     </customLabels>
     <customLabels>
-        <name>RecurringDonationDivideValue</name>
-        <label>Dividir por</label>
-    </customLabels>
-    <customLabels>
         <name>RecurringDonationErrorEmailBody</name>
         <label>Erros foram encontrados ao tentar inserir novas oportunidades em suas doações recorrentes de prazo indeterminado. Isso pode afetar negativamente sua previsão e a funcionalidade da instância do Salesforce.com. Lidar com esses erros o mais rápido possível pode impedir que dados inválidos entrem no sistema. O erro de inserção de doação recorrente e de oportunidade associada estão listados abaixo e podem ser encontrados na guia Configurações do NPSP em Sistema, Log de erros.</label>
-    </customLabels>
-    <customLabels>
-        <name>RecurringDonationInstallmentPeriod1stand15th</name>
-        <label>1º e 15º</label>
-    </customLabels>
-    <customLabels>
-        <name>RecurringDonationInstallmentPeriodMonthly</name>
-        <label>Mensal</label>
-    </customLabels>
-    <customLabels>
-        <name>RecurringDonationInstallmentPeriodQuarterly</name>
-        <label>Trimestral</label>
-    </customLabels>
-    <customLabels>
-        <name>RecurringDonationInstallmentPeriodWeekly</name>
-        <label>Semanal</label>
-    </customLabels>
-    <customLabels>
-        <name>RecurringDonationInstallmentPeriodYearly</name>
-        <label>Anual</label>
     </customLabels>
     <customLabels>
         <name>RecurringDonationInvalidCustomInstallment</name>
@@ -63,14 +27,6 @@
     <customLabels>
         <name>RecurringDonationMissingDataError</name>
         <label>Você precisa selecionar uma Organização ou um Contato</label>
-    </customLabels>
-    <customLabels>
-        <name>RecurringDonationMultiplyValue</name>
-        <label>Multiplicar por</label>
-    </customLabels>
-    <customLabels>
-        <name>RecurringDonationOpenStatus</name>
-        <label>Aberto</label>
     </customLabels>
     <customLabels>
         <name>RecurringDonationPrefix</name>
@@ -86,22 +42,10 @@
     </customLabels>
     <customLabels>
         <name>RecurringDonationSettingsDescription</name>
-        <label>Essas configurações controlam como as doações recorrentes se comportam no Pacote de sucesso para organizações sem fins lucrativos. Consulte a &lt;a href="https://powerofus.force.com/NPSP_Recurring_Donations" target="_blank"&gt;Documentação do NPSP&lt;/a&gt; para obter mais informações.</label>
-    </customLabels>
-    <customLabels>
-        <name>RecurringDonationStageName</name>
-        <label>Comprometida</label>
+        <label>Essas configurações controlam como as doações recorrentes se comportam no Pacote de sucesso para organizações sem fins lucrativos. Consulte a &lt;a href=&quot;https://powerofus.force.com/NPSP_Recurring_Donations&quot; target=&quot;_blank&quot;&gt;Documentação do NPSP&lt;/a&gt; para obter mais informações.</label>
     </customLabels>
     <customLabels>
         <name>RecurringDonationTooManyInstallmentsError</name>
         <label>Você deve especificar menos de 50 parcelas. (Esta mensagem de erro não é mais usada.)</label>
     </customLabels>
-    <quickActions>
-        <name>Recurring_Donation__c.Quick_Update</name>
-        <label>Atualização rápida</label>
-    </quickActions>
-    <quickActions>
-        <name>Recurring_Donation__c.New_Opportunity</name>
-        <label>Nova oportunidade</label>
-    </quickActions>
-</Translations>
+    </Translations>
