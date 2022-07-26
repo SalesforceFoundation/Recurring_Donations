@@ -1,0 +1,22 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+  <fields>
+    <name>Increment__c</name>
+    <help>O tipo de período de tempo que o Período de parcelamento personalizado cobre.</help>
+    <label>Tipo de período de tempo</label>
+  </fields>
+  <fields>
+    <name>Value__c</name>
+    <help>O período de tempo que o Período de parcelamento personalizado cobre.</help>
+    <label>Frequência de período de tempo</label>
+  </fields>
+  <gender>Feminine</gender>
+  <caseValues>
+    <plural>false</plural>
+    <value>Configuração de pagamento personalizada</value>
+  </caseValues>
+  <caseValues>
+    <plural>true</plural>
+    <value>Configurações de pagamento personalizadas</value>
+  </caseValues>
+</CustomObjectTranslation>
