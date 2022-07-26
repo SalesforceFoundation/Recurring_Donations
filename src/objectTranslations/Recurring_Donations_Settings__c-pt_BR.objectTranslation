@@ -1,0 +1,77 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+  <fields>
+    <name>Add_Campaign_to_All_Opportunites__c</name>
+    <help>Se selecionado, todas as oportunidades de doações recorrentes usarão a campanha na doação recorrente. Caso contrário, apenas a primeira oportunidade terá a campanha.</help>
+    <label>Adicionar camp. a todas as oport.</label>
+  </fields>
+  <fields>
+    <name>DISABLE_Donations_trigger__c</name>
+    <help>OBSOLETO. O comportamento do acionador agora controlado na página Configuração de acionador das Configurações do NPSP.</help>
+    <label>OBSOLETO-Disable_Donations_trigger</label>
+  </fields>
+  <fields>
+    <name>DISABLE_RecurringDonations_trigger__c</name>
+    <help>OBSOLETO. O comportamento do acionador agora controlado na página Configuração de acionador das Configurações do NPSP.</help>
+    <label>OBSOLETO-Disable_RD_trigger</label>
+  </fields>
+  <fields>
+    <name>Enable_Update_Check__c</name>
+    <help>OBSOLETO. Novas versões do Pacote de Sucesso para organizações sem fins lucrativos serão instaladas automaticamente.</help>
+    <label>OBSOLETO-Ativar verif. de atualização</label>
+  </fields>
+  <fields>
+    <name>Error_Email_Notifications__c</name>
+    <help>OBSOLETO. Substituído pelas configurações de notificação no painel de configurações Erro do sistema.</help>
+    <label>OBSOLETO-Notif. de erros por email</label>
+  </fields>
+  <fields>
+    <name>Last_Batch_Run__c</name>
+    <help>A data e a hora da última atualização em lote de Doações recorrentes.</help>
+    <label>Última execução em lote</label>
+  </fields>
+  <fields>
+    <name>Maximum_Donations__c</name>
+    <help>Restringe o número total de doações criadas para doações recorrentes de prazo determinado. O padrão é 50. Valores maiores podem resultar em erros de DML.</help>
+    <label>Máximo de doações</label>
+  </fields>
+  <fields>
+    <name>Number_of_Failures__c</name>
+    <help>Número de doações recorrentes não atualizadas com sucesso na última execução em lote.</help>
+    <label>Número de falhas</label>
+  </fields>
+  <fields>
+    <name>Number_of_Successes__c</name>
+    <help>Número de doações recorrentes atualizadas com sucesso na última execução em lote.</help>
+    <label>Número de sucessos</label>
+  </fields>
+  <fields>
+    <name>Open_Opportunity_Behavior__c</name>
+    <help>Determina o comportamento de oportunidades abertas restantes quando uma doação recorrente de prazo indeterminado é movida para um status fechado.</help>
+    <label>Comp. da oport. aberta fechamento de DR</label>
+  </fields>
+  <fields>
+    <name>Opportunity_Forecast_Months__c</name>
+    <help>Número de meses a partir de hoje com oport. abertas a serem criadas com o uso de doações recorrentes de prazo indet. AVISO: a redução desse valor resultará na exclusão de mais oport.. O aumento iniciará um processo de lote para adicionar oportunidades</help>
+    <label>Previsão de meses da oportunidade</label>
+  </fields>
+  <fields>
+    <name>Record_Type__c</name>
+    <help>Tipo de registro de oportunidade usado quando as oportunidades de doação recorrente são criadas.</help>
+    <label>Tipo de registro da oportunidade</label>
+  </fields>
+  <fields>
+    <name>Update_Check_Interval__c</name>
+    <help>OBSOLETO. Novas versões do Pacote de Sucesso para organizações sem fins lucrativos serão instaladas automaticamente.</help>
+    <label>OBSOLETO-Intervalo de verif. de atualiz.</label>
+  </fields>
+  <gender>Feminine</gender>
+  <caseValues>
+    <plural>false</plural>
+    <value>Configuração de doações recorrentes</value>
+  </caseValues>
+  <caseValues>
+    <plural>true</plural>
+    <value>Configurações de doações recorrentes</value>
+  </caseValues>
+</CustomObjectTranslation>
