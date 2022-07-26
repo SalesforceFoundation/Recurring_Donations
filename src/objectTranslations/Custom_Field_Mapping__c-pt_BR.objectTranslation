@@ -1,0 +1,22 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+  <fields>
+    <name>Opportunity_Field__c</name>
+    <help>O campo de oportunidade a receber o valor do campo de doação recorrente. Observe que esses campos devem ter o mesmo tipo de dados.</help>
+    <label>Campo de oportunidade</label>
+  </fields>
+  <fields>
+    <name>Recurring_Donation_Field__c</name>
+    <help>O campo de doação recorrente a ser copiado para o campo de oportunidade. Observe que esses campos devem ter o mesmo tipo de dados.</help>
+    <label>Campo de doação recorrente</label>
+  </fields>
+  <gender>Masculine</gender>
+  <caseValues>
+    <plural>false</plural>
+    <value>Mapeamento de campo personalizado</value>
+  </caseValues>
+  <caseValues>
+    <plural>true</plural>
+    <value>Mapeamentos de campos personalizados</value>
+  </caseValues>
+</CustomObjectTranslation>
