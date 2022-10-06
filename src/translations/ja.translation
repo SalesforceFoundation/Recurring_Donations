@@ -41,7 +41,7 @@
         <name>RecurringDonationSchedulingError</name>
     </customLabels>
     <customLabels>
-        <label>これらの設定で Nonprofit Success Pack の継続支援の動作を制御します。詳細は、&lt;a href=&quot;https://powerofus.force.com/NPSP_Recurring_Donations&quot; target=&quot;_blank&quot;&gt;NPSP ドキュメント&lt;/a&gt;を参照してください。</label>
+        <label>これらの設定で Nonprofit Success Pack の継続支援の動作を制御します。</label>
         <name>RecurringDonationSettingsDescription</name>
     </customLabels>
     <customLabels>
