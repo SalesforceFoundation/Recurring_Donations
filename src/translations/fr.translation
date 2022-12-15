@@ -41,7 +41,7 @@
         <name>RecurringDonationSchedulingError</name>
     </customLabels>
     <customLabels>
-        <label>Ces paramètres contrôlent la manière dont les dons récurrents fonctionnent dans le pack NPSP. Consultez la &lt;a href=&quot;https://powerofus.force.com/NPSP_Recurring_Donations&quot; target=&quot;_blank&quot;&gt;documentation de NPSP&lt;/a&gt; pour plus d’informations.</label>
+        <label>Ces paramètres contrôlent la manière dont les dons récurrents fonctionnent dans le pack NPSP.</label>
         <name>RecurringDonationSettingsDescription</name>
     </customLabels>
     <customLabels>

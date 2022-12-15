@@ -42,7 +42,7 @@
     </customLabels>
     <customLabels>
         <name>RecurringDonationSettingsDescription</name>
-        <label>Essas configurações controlam como as doações recorrentes se comportam no Pacote de sucesso para organizações sem fins lucrativos. Consulte a &lt;a href=&quot;https://powerofus.force.com/NPSP_Recurring_Donations&quot; target=&quot;_blank&quot;&gt;Documentação do NPSP&lt;/a&gt; para obter mais informações.</label>
+        <label>Essas configurações controlam como as doações recorrentes se comportam no Pacote de sucesso para organizações sem fins lucrativos.</label>
     </customLabels>
     <customLabels>
         <name>RecurringDonationTooManyInstallmentsError</name>
